@@ -3,7 +3,9 @@ unique_ids:
     standard-page.html: FWNBRYTQ5FYKRMFR5TQCDTKGH36EROKJ
     theme.css: 4XELZEEUTVXOLQDXMJPQ3IRQPNKSRQ3I
   forms:
-    Form1: 6LHPGAY352WAAF56DS4UD744L2O457UK
+    Aktivitet: 6LHPGAY352WAAF56DS4UD744L2O457UK
+    Aktivitet.Form2: '1741206122014695898164765.3148'
+    Aktivitet.RowTemplate1: '1741206518436455442504611.0171'
   modules: {}
   scripts: {}
   server_modules: {}

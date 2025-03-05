@@ -1,0 +1,18 @@
+components:
+- components:
+  - name: edit_button
+    properties: {icon: 'fa:pencil', text: ''}
+    type: Button
+  - name: delete_button
+    properties: {icon: 'fa:trash', text: ''}
+    type: Button
+  layout_properties: {column: XGBOCP}
+  name: flow_panel_1
+  properties: {}
+  type: FlowPanel
+container:
+  data_bindings:
+  - {code: '', property: item, writeback: false}
+  properties: {align: center}
+  type: DataRowPanel
+is_package: true
