@@ -1,0 +1,37 @@
+components:
+- layout_properties: {grid_position: 'RGLUPF,HEEHSM'}
+  name: label_1
+  properties: {text: Dato}
+  type: Label
+- data_bindings:
+  - {code: '', property: placeholder, writeback: false}
+  - {code: 'self.item[''dato'']', property: date, writeback: true}
+  - {code: '', property: min_date, writeback: false}
+  layout_properties: {grid_position: 'RGLUPF,KEEGWF'}
+  name: date_picker_1
+  properties: {}
+  type: DatePicker
+- layout_properties: {grid_position: 'JITKCD,CZVVHU'}
+  name: label_2
+  properties: {text: Aktivitet}
+  type: Label
+- data_bindings:
+  - {code: '', property: placeholder, writeback: false}
+  - {code: 'self.item[''aktivitet'']', property: text, writeback: true}
+  layout_properties: {grid_position: 'JITKCD,ZNXFGM'}
+  name: aktivitet_box
+  properties: {}
+  type: TextBox
+- layout_properties: {grid_position: 'AWBFQI,VXLNLP'}
+  name: label_3
+  properties: {text: Poeng}
+  type: Label
+- data_bindings:
+  - {code: '', property: placeholder, writeback: false}
+  - {code: 'self.item[''poeng'']', property: text, writeback: false}
+  layout_properties: {grid_position: 'AWBFQI,QEMLPL'}
+  name: poeng_box
+  properties: {type: number}
+  type: TextBox
+container: {type: ColumnPanel}
+is_package: true
