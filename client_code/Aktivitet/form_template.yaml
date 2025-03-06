@@ -36,7 +36,7 @@ components:
   properties: {}
   type: FlowPanel
 - layout_properties: {slot: title}
-  name: registrere_aktivitet
+  name: bruker_label
   properties: {text: Registrere aktivitet}
   type: Label
 - components:

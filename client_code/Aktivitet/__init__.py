@@ -19,6 +19,7 @@ class Aktivitet(AktivitetTemplate):
     #self.repeating_panel_1.items = app_tables.aktivitet.search()
     self.repeating_panel_1.add_event_handler('x-edit-aktivitet', self.edit_aktivitet)
     self.repeating_panel_1.add_event_handler('x-delete-aktivitet', self.delete_aktivitet)
+    
 
     # Any code you write here will run before the form opens.
 
@@ -48,6 +49,7 @@ class Aktivitet(AktivitetTemplate):
   def login_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     user = anvil.users.login_with_form(allow_remembered=30, allow_cancel=True)
+    self.bruker_label.text = user['email']
     self.repeating_panel_1.items = app_tables.aktivitet.search(deltager = anvil.users.get_user()  )
     if anvil.users.get_user(allow_remembered=30) is not None:
       self.login_button.visible = False
