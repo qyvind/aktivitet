@@ -23,3 +23,23 @@ def update_aktivitet(aktivitet, aktivitet_data):
 @anvil.server.callable
 def delete_aktivitet(aktivitet):
   aktivitet.delete()
+
+'''
+@anvil.server.callable
+def batch_create_users(user_list):
+    for user in user_list:
+        email, password = user["email"], user["password"]
+
+        # Sjekk om brukeren allerede finnes
+        existing_users = app_tables.users.search(email=email)
+        if len(existing_users) > 0:
+            print(f"Bruker {email} finnes allerede, hopper over.")
+            continue  # Hopp over eksisterende brukere
+
+        # Opprett ny bruker med Anvils innebygde metode
+        anvil.users.signup_with_email(email, password)
+
+        print(f"Bruker {email} opprettet.")
+
+    return "Alle brukere er lagt til!"
+'''

@@ -9,12 +9,14 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.users
 from ..Edit_Aktivitet import Edit_Aktivitet
+from datetime import datetime
 
 
 class Aktivitet(AktivitetTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    # anvil.users.logout()
     self.aktivitet_card.visible=False
     #self.repeating_panel_1.items = app_tables.aktivitet.search()
     self.repeating_panel_1.add_event_handler('x-edit-aktivitet', self.edit_aktivitet)
@@ -61,4 +63,20 @@ class Aktivitet(AktivitetTemplate):
     self.login_button.visible = True
     self.Logout_button.visible = False
     self.aktivitet_card.visible = False
-    
+
+'''  
+  def button_1_click(self, **event_args):
+    """This method is called when the button is clicked"""
+users = [
+{"email":"maal@framo.no","password":"41506309"},
+{"email":"inal@framo.no","password":"48266889"},
+{"email":"kma@framo.no","password":"91546872"},
+{"email":"pan@framo.no","password":"90979935"},
+{"email":"susanneris@gmail.com","password":"40247497"},
+{"email":"svan@framo.no","password":"41104043"}]
+anvil.server.call('batch_create_users', users)
+'''
+def format_date(date):
+    if date:
+        return date.strftime("%d.%m.%Y")  # Eks: 06.03.2025
+    return ""

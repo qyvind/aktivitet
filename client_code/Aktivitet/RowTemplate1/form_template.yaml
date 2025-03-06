@@ -15,6 +15,6 @@ components:
 container:
   data_bindings:
   - {code: '', property: item, writeback: false}
-  properties: {align: center}
+  properties: {align: left}
   type: DataRowPanel
 is_package: true
