@@ -9,10 +9,16 @@ import anvil.server
 
 @anvil.server.callable
 def add_aktivitet(aktivitet):
+  aktivitet_data['deltager'] = anvil.users.get_user()
   if aktivitet.get('dato') and aktivitet.get('aktivitet') and aktivitet.get('poeng') :
     app_tables.aktivitet.add_row(**aktivitet)
 
 @anvil.server.callable
-def update_aktivitet(aktivitet)
-  if movie_data['director'] and movie_data['movie_name'] and movie_data['summary'] and movie_data['year']:
-    movie.update(**movie_data)
+def update_aktivitet(aktivitet, aktivitet_data):
+  
+  if aktivitet_data['dato'] and aktivitet_data['aktivitet'] and aktivitet_data['poeng']: 
+    aktivitet.update(**aktivitet_data)
+
+@anvil.server.callable
+def delete_aktivitet(aktivitet):
+  aktivitet.delete()

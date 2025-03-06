@@ -1,9 +1,11 @@
 components:
 - components:
-  - name: edit_button
+  - event_bindings: {click: edit_button_click}
+    name: edit_button
     properties: {icon: 'fa:pencil', text: ''}
     type: Button
-  - name: delete_button
+  - event_bindings: {click: delete_button_click}
+    name: delete_button
     properties: {icon: 'fa:trash', text: ''}
     type: Button
   layout_properties: {column: XGBOCP}
