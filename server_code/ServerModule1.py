@@ -9,7 +9,7 @@ import anvil.server
 
 @anvil.server.callable
 def add_aktivitet(aktivitet):
-  aktivitet_data['deltager'] = anvil.users.get_user()
+  
   if aktivitet.get('dato') and aktivitet.get('aktivitet') and aktivitet.get('poeng') :
     app_tables.aktivitet.add_row(**aktivitet)
 

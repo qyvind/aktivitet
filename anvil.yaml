@@ -54,6 +54,9 @@ db_schema:
     - admin_ui: {order: 6, width: 200}
       name: signed_up
       type: datetime
+    - admin_ui: {order: 7, width: 200}
+      name: remembered_logins
+      type: simpleObject
     server: full
     title: Users
 dependencies: []
@@ -70,8 +73,12 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/tables.yml
-- client_config: {allow_signup: true, confirm_email: true, enable_automatically: true, use_email: true, use_facebook: true, use_google: true}
-  server_config: {user_table: users}
+- client_config: {allow_remember_me: true, allow_signup: true, confirm_email: true, enable_automatically: true, remember_me_days: 365, use_email: true, use_facebook: true, use_google: true, use_token: true}
+  server_config:
+    email_content:
+      reset_password: {html: '<p>Hei du</p><p>Her kan du nullstille passordet til aktivitetskonkurransen til Framo BIL. Klikk linken under for å lage nytt passord.</p><p>{{reset_link}}</p><p>Linken virker i ti minutter.</p>', subject: Reset passord til aktivitetskonkurransen i Framo Bedriftsidrettslag}
+    email_from_address: qf@simba.no
+    user_table: users
   source: /runtime/services/anvil/users.yml
 - client_config: {}
   server_config: {}
