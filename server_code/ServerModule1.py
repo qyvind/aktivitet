@@ -11,4 +11,4 @@ import anvil.server
 def add_aktivitet(aktivitet):
   print('server called')
   if aktivitet.get('dato') and aktivitet.get('aktivitet') and aktivitet.get('poeng') :
-      app_tables.aktivitet(**aktivitet)
+     app_tables.aktivitet.add_row(**aktivitet)

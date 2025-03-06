@@ -22,8 +22,7 @@ class Aktivitet(AktivitetTemplate):
   def add_aktivitet_button_click(self, **event_args):
     item = {}
     editing_form = Edit_Aktivitet(item=item)
-    alert(content=editing_form, large=True)
-    
+      
     if alert(content=editing_form, large=True):
       anvil.server.call('add_aktivitet', item)
       self.repeating_panel_1.items = app_tables.aktivitet.search()

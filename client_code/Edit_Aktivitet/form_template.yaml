@@ -28,7 +28,7 @@ components:
   type: Label
 - data_bindings:
   - {code: '', property: placeholder, writeback: false}
-  - {code: 'self.item[''poeng'']', property: text, writeback: false}
+  - {code: 'self.item[''poeng'']', property: text, writeback: true}
   layout_properties: {grid_position: 'AWBFQI,QEMLPL'}
   name: poeng_box
   properties: {type: number}
