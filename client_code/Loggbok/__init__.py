@@ -17,39 +17,55 @@ class Loggbok(LoggbokTemplate):
 
     # Any code you write here will run before the form opens.
 
+
+  def update_button_state(self, button):
+    """Oppdaterer knappens tekst og farge basert på nåværende tilstand"""
+    states = {
+        "0": ("1", "RED"),
+        "1": ("2", "ORANGE"),
+        "2": ("3", "GREEN"),
+        "3": ("0", "BLACK"),
+    }
+    
+    if button.text in states:
+      print(f"Oppdaterer {button} fra {button.text} til {states[button.text]}")
+      button.text, button.foreground = states[button.text]
+    else:
+      print("button not in states")
+
   def son_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    if self.son_0.text == "S":
-      self.son_0.text = "S1"
-      self.son_0.foreground = "RED"
-    elif self.son_0.text == "S1":
-      self.son_0.text = "S2"
-      self.son_0.foreground = "ORANGE"
-    elif self.son_0.text == "S2":
-      self.son_0.text = "S3"
-      self.son_0.foreground = "GREEN"
-    elif self.son_0.text == "S3":
-      self.son_0.text = "S"
-      self.son_0.foreground = "BLACK"
+    self.update_button_state(self.son_button)
   
-
   def man_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    self.man_0.visible=False
-    self.man_1.visible=True
+    self.update_button_state(self.man_button)
 
-  def man_1_click(self, **event_args):
+  def tir_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    self.man_1.visible=False
-    self.man_2.visible=True
+    self.update_button_state(self.tir_button)
 
-  def man_2_click(self, **event_args):
+  def ons_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    self.man_2.visible=False
-    self.man_3.visible=True
+    self.update_button_state(self.ons_button)
 
-  def man_3_click(self, **event_args):
+  def tor_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    self.man_3.visible=False
-    self.man_0.visible=True
+    self.update_button_state(self.tor_button)
+
+  def fre_button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.update_button_state(self.fre_button)
+
+  def lor_button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.update_button_state(self.lor_button)
+
+
+
+
+
+  
+
+
 
