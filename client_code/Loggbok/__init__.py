@@ -17,10 +17,23 @@ class Loggbok(LoggbokTemplate):
 
     # Any code you write here will run before the form opens.
 
-  def son_0_click(self, **event_args):
+  def son_button_click(self, **event_args):
     """This method is called when the button is clicked"""
+    if self.son_0.text == "S":
+      self.son_0.text = "S1"
+      self.son_0.foreground = "RED"
+    elif self.son_0.text == "S1":
+      self.son_0.text = "S2"
+      self.son_0.foreground = "ORANGE"
+    elif self.son_0.text == "S2":
+      self.son_0.text = "S3"
+      self.son_0.foreground = "GREEN"
+    elif self.son_0.text == "S3":
+      self.son_0.text = "S"
+      self.son_0.foreground = "BLACK"
+  
 
-  def man_0_click(self, **event_args):
+  def man_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     self.man_0.visible=False
     self.man_1.visible=True
