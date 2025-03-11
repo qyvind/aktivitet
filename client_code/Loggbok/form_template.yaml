@@ -1,0 +1,60 @@
+components:
+- components:
+  - event_bindings: {click: son_0_click}
+    layout_properties: {}
+    name: son_0
+    properties: {font_size: 25, foreground: black, text: S}
+    type: Button
+  - layout_properties: {}
+    name: son_1
+    properties: {font_size: 25, foreground: red, text: S1, visible: false}
+    type: Button
+  - layout_properties: {}
+    name: son_2
+    properties: {font_size: 25, foreground: orange, text: S2, visible: false}
+    type: Button
+  - layout_properties: {}
+    name: son_3
+    properties: {font_size: 25, foreground: green, text: S3, visible: false}
+    type: Button
+  - event_bindings: {click: man_0_click}
+    layout_properties: {}
+    name: man_0
+    properties: {font_size: 25, foreground: black, text: M}
+    type: Button
+  - event_bindings: {click: man_1_click}
+    layout_properties: {}
+    name: man_1
+    properties: {font_size: 25, foreground: red, text: M1, visible: false}
+    type: Button
+  - event_bindings: {click: man_2_click}
+    layout_properties: {}
+    name: man_2
+    properties: {font_size: 25, foreground: orange, text: M2, visible: false}
+    type: Button
+  - event_bindings: {click: man_3_click}
+    layout_properties: {}
+    name: man_3
+    properties: {font_size: 25, foreground: green, text: M3, visible: false}
+    type: Button
+  - name: tir_0
+    properties: {font_size: 25, foreground: black, text: T}
+    type: Button
+  - layout_properties: {}
+    name: tir_1
+    properties: {font_size: 25, foreground: red, text: T1, visible: false}
+    type: Button
+  - layout_properties: {}
+    name: tir_2
+    properties: {font_size: 25, foreground: orange, text: T2, visible: false}
+    type: Button
+  - layout_properties: {}
+    name: tir_3
+    properties: {font_size: 25, foreground: green, text: T3, visible: false}
+    type: Button
+  layout_properties: {grid_position: 'TQDTNN,CLZCJH'}
+  name: flow_panel_1
+  properties: {background: light grey, border: black}
+  type: FlowPanel
+container: {type: ColumnPanel}
+is_package: true
