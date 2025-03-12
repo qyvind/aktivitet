@@ -359,19 +359,22 @@ components:
       name: veil_button
       properties: {role: outlined-button, text: Brukerveiledning}
       type: Button
-    - layout_properties: {}
+    - event_bindings: {click: individuell_button_click}
+      layout_properties: {}
       name: individuell_button
       properties:
         role: outlined-button
         text: |
           Individuell
       type: Button
-    - layout_properties: {}
+    - event_bindings: {click: team_button_click}
+      layout_properties: {}
       name: team_button
       properties: {role: outlined-button, text: Team}
       type: Button
-    - layout_properties: {}
-      name: button_3
+    - event_bindings: {click: trekning_button_click}
+      layout_properties: {}
+      name: trekning_button
       properties: {role: outlined-button, text: Trekningsliste}
       type: Button
     - event_bindings: {click: logout_click}

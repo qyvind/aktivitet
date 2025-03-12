@@ -16,9 +16,15 @@ class Loggbok(LoggbokTemplate):
         self.week_offset_label.text = 0
         self.initier_uke(self.week_offset_label.text)
 
-        # print(f"Ukenummer: {week_active['week_number']}")
-        # print(f"Mandag: {week_active['monday']}")
-        # print(f"Søndag: {week_active['sunday']}")
+        user = anvil.users.get_user()
+        if user:
+            # Brukeren er logget inn
+            self.loggbok_card.visible = True
+            self.login_card.visible = False
+        else:
+            # Ingen bruker er logget inn
+            self.loggbok_card.visible = False
+            self.login_card.visible = True
 
 
     def initier_uke(self,week_offset):
@@ -297,3 +303,15 @@ class Loggbok(LoggbokTemplate):
     def veil_button_click(self, **event_args):
       """This method is called when the button is clicked"""
       open_form("Brukerveiledning")
+
+    def individuell_button_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      open_form("Resultat_individuell")
+
+    def team_button_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      open_form("Resultat_team")
+
+    def trekning_button_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      open_form("Trekninger")
