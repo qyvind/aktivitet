@@ -103,7 +103,7 @@ components:
           text: ''
         type: Label
       layout_properties: {}
-      name: column_panel_1_copy
+      name: man_column_panel
       properties:
         role: outlined-card
         spacing:
