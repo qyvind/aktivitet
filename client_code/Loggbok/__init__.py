@@ -49,7 +49,7 @@ class Loggbok(LoggbokTemplate):
         text_box = type('Dummy', (object,), {"text": ""})()  # Oppretter et objekt med et tomt text-attributt
         if button.text == "1":
             """Viser en popup for å spørre om tekst og oppdaterer en label"""
-            text_box = TextBox(placeholder="Skriv her...")
+            text_box = TextBox(placeholder="Skriv her...",text=label.text)
     
             result = anvil.alert(
                 content=text_box,
