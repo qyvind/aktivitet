@@ -27,6 +27,7 @@ class Loggbok(LoggbokTemplate):
         print(f"Ukenummer: {week_active['week_number']}")
         print(f"Mandag: {week_active['monday']}")
         print(f"Søndag: {week_active['sunday']}")
+        print(self.get_activities_for_week())
       
     def update_button_state(self, button, label):
         """Oppdaterer knappens tekst og farge basert på nåværende tilstand"""
@@ -150,3 +151,35 @@ class Loggbok(LoggbokTemplate):
       """This method is called when the button is clicked"""
       self.week_offset_label.text -=1
       self.initier_uke(self.week_offset_label.text)
+
+
+    def get_activities_for_week(self):
+        # Få den påloggede brukeren
+        user = anvil.users.get_user()
+        if not user:
+            return {}  # Returner en tom dictionary hvis ingen er pålogget
+    
+        # Få datoene for den aktive uken (mandag til søndag)
+        week_info = self.get_week_info(self.week_offset_label.text)
+        start_of_week = week_info['monday']  # Mandag
+        end_of_week = week_info['sunday']  # Søndag
+    
+        # Hent aktivitetene kun for påloggede bruker innenfor ukens datoer
+        activities = app_tables.aktivitet.search(
+            q.deltager == user,  # Filtrer på innlogget bruker
+            q.dato >= start_of_week,
+            q.dato <= end_of_week
+        )
+    
+        # Organisere aktivitetene i en liste med 7 dager (0=Mandag, 6=Søndag)
+        week_activities = {day: [] for day in range(7)}
+    
+        for activity in activities:
+            activity_date = activity['dato']
+            day_of_week = activity_date.weekday()  # Mandag = 0, Søndag = 6
+            week_activities[day_of_week].append({
+                'aktivitet': activity['aktivitet'],
+                'poeng': activity['poeng']
+            })
+    
+        return week_activities  # Returner aktiviteter for hver dag i uken
