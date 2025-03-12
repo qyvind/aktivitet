@@ -45,7 +45,8 @@ class Loggbok(LoggbokTemplate):
             button.text, button.foreground = states[button.text]
         else:
             print("button not in states")
-      
+              # Initialiser text_box med en default-verdi
+        text_box = type('Dummy', (object,), {"text": ""})()  # Oppretter et objekt med et tomt text-attributt
         if button.text == "1":
             """Viser en popup for å spørre om tekst og oppdaterer en label"""
             text_box = TextBox(placeholder="Skriv her...")
@@ -59,7 +60,8 @@ class Loggbok(LoggbokTemplate):
             if result == "OK":  # Hvis brukeren trykket "OK"
                 label.text = text_box.text  # Hent tekst fra TextBox og sett den i riktig label
                 # Lagre aktiviteten med riktig dato
-                self.lagre_aktivitet(dato, text_box.text, int(button.text))
+        
+        self.lagre_aktivitet(dato, text_box.text, int(button.text))
     
         # if button.text in states:
         #     button.text, button.foreground = states[button.text]
