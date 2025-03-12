@@ -13,6 +13,7 @@ from datetime import datetime, timedelta
 class Loggbok(LoggbokTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
+        week_offset = 0
         week_active = self.get_week_info()
         self.uke_label.text = self.get_week_range(week_active["monday"])
 
