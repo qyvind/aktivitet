@@ -24,6 +24,13 @@ class Loggbok(LoggbokTemplate):
         else:
             self.login_card.visible = False
             self.loggbok_card.visible = True
+            self.loggbok_card.visible = True
+            self.login_card.visible = False
+        else:
+            # Ingen bruker er logget inn
+            self.loggbok_card.visible = False
+            self.login_card.visible = True
+
 
     def initier_uke(self,week_offset):
         week_active = self.get_week_info(week_offset)
@@ -297,3 +304,15 @@ class Loggbok(LoggbokTemplate):
     def veil_button_click(self, **event_args):
       """This method is called when the button is clicked"""
       open_form("Brukerveiledning")
+
+    def individuell_button_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      open_form("Resultat_individuell")
+
+    def team_button_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      open_form("Resultat_team")
+
+    def trekning_button_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      open_form("Trekninger")

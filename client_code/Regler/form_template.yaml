@@ -9,7 +9,7 @@ components:
     layout_properties: {grid_position: 'WHMDOQ,MGWKZE'}
     name: rich_text_1
     properties:
-      align: center
+      align: left
       content: |-
         <!DOCTYPE html>
         <html lang="no">
@@ -73,7 +73,26 @@ components:
             <h3>Konkurranseformer</h3>
             <p><strong>Individuell konkurranse:</strong> Resultatlisten føres for hver deltaker.</p>
             <p>
-              <strong>Lagkonkurranse:</strong> Det er mulig å melde seg på som lag (minimum 4 persone
+              <strong>Lagkonkurranse:</strong> Det er mulig å melde seg på som lag (minimum 3 personer). Lagene føres på en egen resultatliste.
+            </p>
+
+            <h2>Dokumentasjon</h2>
+            <p>
+              For å kunne motta premie, må alle aktiviteter dokumenteres. Eksempler på dokumentasjon er:
+            </p>
+            <ul>
+              <li>Skritteller</li>
+              <li>Mobiltelefon</li>
+              <li>Treningsklokke</li>
+            </ul>
+            <p>
+              Annen form for vanntett dokumentasjon kan også bli vurdert. Siden det er pengepremier involvert, vil vi kontrollere dokumentasjonen nøye samt verifisere at vinnerne var registrerte medlemmer på vinnerdagen.
+            </p>
+
+            <p>Lykke til med konkurransen!</p>
+          </div>
+        </body>
+        </html>
       format: restricted_html
     type: RichText
   layout_properties: {grid_position: 'JKCUTA,SPCTSY'}

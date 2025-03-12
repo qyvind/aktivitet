@@ -2,7 +2,7 @@ components:
 - components:
   - layout_properties: {grid_position: 'MTSGUN,FHFTBQ'}
     name: label_1
-    properties: {align: center, text: Dette er de som frem til nå har kvalifisert seg til neste trekning}
+    properties: {align: center, text: Individuell resultatliste}
     type: Label
   - event_bindings: {click: lukk_button_click}
     layout_properties: {grid_position: 'FACYFA,RKQROA'}
