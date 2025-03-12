@@ -27,9 +27,12 @@ class Loggbok(LoggbokTemplate):
         print(f"Ukenummer: {week_active['week_number']}")
         print(f"Mandag: {week_active['monday']}")
         print(f"Søndag: {week_active['sunday']}")
-        print(self.get_activities_for_week())
+        week_activities = self.get_activities_for_week()
+        print(week_activities)
+        self.fyll_skjermen(week_activities)
+        
       
-    def update_button_state(self, button, label):
+    def update_button_state(self, button, label, dato):
         """Oppdaterer knappens tekst og farge basert på nåværende tilstand"""
         states = {
             "0": ("1", "RED"),
@@ -38,51 +41,72 @@ class Loggbok(LoggbokTemplate):
             "3": ("0", "BLACK"),
         }
 
-        if button.text == "0":
+        if button.text in states:
+            button.text, button.foreground = states[button.text]
+        else:
+            print("button not in states")
+      
+        if button.text == "1":
             """Viser en popup for å spørre om tekst og oppdaterer en label"""
             text_box = TextBox(placeholder="Skriv her...")
-
+    
             result = anvil.alert(
                 content=text_box,
                 title="Skriv inn type aktivitet",
                 buttons=["OK", "Avbryt"]
             )
-
+    
             if result == "OK":  # Hvis brukeren trykket "OK"
                 label.text = text_box.text  # Hent tekst fra TextBox og sett den i riktig label
-
-        if button.text in states:
-            button.text, button.foreground = states[button.text]
-        else:
-            print("button not in states")
-
-    def son_button_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        self.update_button_state(self.son_button, self.son_akt_label)
+                # Lagre aktiviteten med riktig dato
+                self.lagre_aktivitet(dato, text_box.text, int(button.text))
+    
+        # if button.text in states:
+        #     button.text, button.foreground = states[button.text]
+        # else:
+        #     print("button not in states")
 
     def man_button_click(self, **event_args):
         """This method is called when the button is clicked"""
-        self.update_button_state(self.man_button, self.man_akt_label)
+        week_info = self.get_week_info(self.week_offset_label.text)
+        mandag_dato = week_info['monday_date']
+        self.update_button_state(self.man_button, self.man_akt_label, mandag_dato)
 
     def tir_button_click(self, **event_args):
         """This method is called when the button is clicked"""
-        self.update_button_state(self.tir_button, self.tir_akt_label)
+        week_info = self.get_week_info(self.week_offset_label.text)
+        tirsdag_dato = week_info['monday_date'] + timedelta(days=1)
+        self.update_button_state(self.tir_button, self.tir_akt_label, tirsdag_dato)
 
     def ons_button_click(self, **event_args):
         """This method is called when the button is clicked"""
-        self.update_button_state(self.ons_button, self.ons_akt_label)
-
+        week_info = self.get_week_info(self.week_offset_label.text)
+        onsdag_dato = week_info['monday_date'] + timedelta(days=2)
+        self.update_button_state(self.ons_button, self.ons_akt_label, onsdag_dato)
+    
     def tor_button_click(self, **event_args):
         """This method is called when the button is clicked"""
-        self.update_button_state(self.tor_button, self.tor_akt_label)
-
+        week_info = self.get_week_info(self.week_offset_label.text)
+        torsdag_dato = week_info['monday_date'] + timedelta(days=3)
+        self.update_button_state(self.tor_button, self.tor_akt_label, torsdag_dato)
+    
     def fre_button_click(self, **event_args):
         """This method is called when the button is clicked"""
-        self.update_button_state(self.fre_button, self.fre_akt_label)
-
+        week_info = self.get_week_info(self.week_offset_label.text)
+        fredag_dato = week_info['monday_date'] + timedelta(days=4)
+        self.update_button_state(self.fre_button, self.fre_akt_label, fredag_dato)
+    
     def lor_button_click(self, **event_args):
         """This method is called when the button is clicked"""
-        self.update_button_state(self.lor_button, self.lor_akt_label)
+        week_info = self.get_week_info(self.week_offset_label.text)
+        lordag_dato = week_info['monday_date'] + timedelta(days=5)
+        self.update_button_state(self.lor_button, self.lor_akt_label, lordag_dato)
+      
+    def son_button_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        week_info = self.get_week_info(self.week_offset_label.text)
+        sondag_dato = week_info['monday_date'] + timedelta(days=6)
+        self.update_button_state(self.son_button, self.son_akt_label, sondag_dato)
 
     def login_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -117,9 +141,12 @@ class Loggbok(LoggbokTemplate):
     
         return {
             "week_number": week_number,
-            "monday": monday.strftime("%Y-%m-%d"),  # Mandagen
-            "sunday": sunday.strftime("%Y-%m-%d")  # Søndagen
-        }  
+            "monday": monday.strftime("%Y-%m-%d"),  # Mandag som string
+            "sunday": sunday.strftime("%Y-%m-%d"),  # Søndag som string
+            "monday_date": monday.date(),  # Mandag som date-objekt
+            "sunday_date": sunday.date()   # Søndag som date-objekt
+        }
+
 
     def get_week_range(self, week_offset):
       # Dagens dato
@@ -153,27 +180,32 @@ class Loggbok(LoggbokTemplate):
       self.initier_uke(self.week_offset_label.text)
 
 
+
     def get_activities_for_week(self):
         # Få den påloggede brukeren
         user = anvil.users.get_user()
         if not user:
             return {}  # Returner en tom dictionary hvis ingen er pålogget
-    
+        
         # Få datoene for den aktive uken (mandag til søndag)
         week_info = self.get_week_info(self.week_offset_label.text)
-        start_of_week = week_info['monday']  # Mandag
-        end_of_week = week_info['sunday']  # Søndag
-    
-        # Hent aktivitetene kun for påloggede bruker innenfor ukens datoer
-        activities = app_tables.aktivitet.search(
-            q.deltager == user,  # Filtrer på innlogget bruker
-            q.dato >= start_of_week,
-            q.dato <= end_of_week
-        )
-    
+        start_of_week = week_info['monday_date']  # Mandag som date-objekt
+        end_of_week = week_info['sunday_date']  # Søndag som date-objekt
+        
+        try:
+            # Hent aktivitetene kun for påloggede bruker innenfor ukens datoer
+            activities = app_tables.aktivitet.search(
+                tables.order_by('dato'),
+                deltager=user,  # Filtrer på innlogget bruker
+                dato=q.between(start_of_week, end_of_week + timedelta(days=1))  # Filtrer på datoer
+            )
+        except Exception as e:
+            print(f"Error fetching activities: {e}")
+            return {}
+        
         # Organisere aktivitetene i en liste med 7 dager (0=Mandag, 6=Søndag)
         week_activities = {day: [] for day in range(7)}
-    
+        
         for activity in activities:
             activity_date = activity['dato']
             day_of_week = activity_date.weekday()  # Mandag = 0, Søndag = 6
@@ -181,5 +213,66 @@ class Loggbok(LoggbokTemplate):
                 'aktivitet': activity['aktivitet'],
                 'poeng': activity['poeng']
             })
-    
+        
         return week_activities  # Returner aktiviteter for hver dag i uken
+                
+    def fyll_skjermen(self, week_activities):
+
+        if week_activities[0]:
+            self.man_button.text = str(week_activities[0][0]['poeng'])
+            self.man_akt_label.text = week_activities[0][0]['aktivitet']
+        else:
+            self.man_button.text = "0"
+            self.man_akt_label.text = ""
+    
+        if week_activities[1]:
+            self.tir_button.text = str(week_activities[1][0]['poeng'])
+            self.tir_akt_label.text = week_activities[1][0]['aktivitet']
+        else:
+            self.tir_button.text = "0"
+            self.tir_akt_label.text = ""
+    
+        if week_activities[2]:
+            self.ons_button.text = str(week_activities[2][0]['poeng'])
+            self.ons_akt_label.text = week_activities[2][0]['aktivitet']
+        else:
+            self.ons_button.text = "0"
+            self.ons_akt_label.text = ""
+    
+        if week_activities[3]:
+            self.tor_button.text = str(week_activities[3][0]['poeng'])
+            self.tor_akt_label.text = week_activities[3][0]['aktivitet']
+        else:
+            self.tor_button.text = "0"
+            self.tor_akt_label.text = ""
+    
+        if week_activities[4]:
+            self.fre_button.text = str(week_activities[4][0]['poeng'])
+            self.fre_akt_label.text = week_activities[4][0]['aktivitet']
+        else:
+            self.fre_button.text = "0"
+            self.fre_akt_label.text = ""
+    
+        if week_activities[5]:
+            self.lor_button.text = str(week_activities[5][0]['poeng'])
+            self.lor_akt_label.text = week_activities[5][0]['aktivitet']
+        else:
+            self.lor_button.text = "0"
+            self.lor_akt_label.text = ""
+    
+        if week_activities[6]:
+            print('søndag:',week_activities[6])
+            self.son_button.text = str(week_activities[6][0]['poeng'])
+            self.son_akt_label.text = week_activities[6][0]['aktivitet']
+        else:
+            self.son_button.text = "0"
+            self.son_akt_label.text = ""
+
+          
+    def lagre_aktivitet(self, dato, aktivitet, poeng):
+        try:
+            result = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng)
+            print(result)
+        except Exception as e:
+            print(f"Error saving activity: {e}")
+  
