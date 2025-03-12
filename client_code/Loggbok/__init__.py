@@ -69,4 +69,19 @@ class Loggbok(LoggbokTemplate):
     """This method is called when the button is clicked"""
     self.update_button_state(self.lor_button, self.lor_akt_label)
 
+  def login_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    user = anvil.users.login_with_form(allow_remembered=30, allow_cancel=True)
+    if user:
+      self.deltager_label.text = user['email']
+      self.loggbok_card.visible = True
+      self.login_card.visible = False
+      anvil.server.session["deltager"] = user
+
+  def logout_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    anvil.users.logout()
+    self.login_card.visible = True
+    self.loggbok_card.visible = False
+
 
