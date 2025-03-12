@@ -19,21 +19,16 @@ class Loggbok(LoggbokTemplate):
         user = anvil.users.get_user()
         if user:
             # Brukeren er logget inn
-            self.login_card.visible = True
-            self.loggbok_card.visible = False
-        else:
             self.login_card.visible = False
             self.loggbok_card.visible = True
-            self.loggbok_card.visible = True
-            self.login_card.visible = False
         else:
-            # Ingen bruker er logget inn
             self.loggbok_card.visible = False
             self.login_card.visible = True
+
 
 
     def initier_uke(self,week_offset):
-        week_active = self.get_week_info(week_offset)
+        self.get_week_info(week_offset)
         self.uke_label.text = self.get_week_range(week_offset)
         week_activities = self.get_activities_for_week()
         self.fyll_skjermen(week_activities)
