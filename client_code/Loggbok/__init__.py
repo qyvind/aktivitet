@@ -13,8 +13,8 @@ from datetime import datetime, timedelta
 class Loggbok(LoggbokTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
-        week_offset = 0
-        self.initier_uke(week_offset)
+        self.week_offset_label.text = 0
+        self.initier_uke(self.week_offset_label.text)
 
         # print(f"Ukenummer: {week_active['week_number']}")
         # print(f"Mandag: {week_active['monday']}")
@@ -143,5 +143,10 @@ class Loggbok(LoggbokTemplate):
 
     def button_1_click(self, **event_args):
       """This method is called when the button is clicked"""
-      week_offset +=1
-      self.initier_uke(week_offset)
+      self.week_offset_label.text +=1
+      self.initier_uke(self.week_offset_label.text)
+
+    def button_2_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      self.week_offset_label.text -=1
+      self.initier_uke(self.week_offset_label.text)
