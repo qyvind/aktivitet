@@ -40,8 +40,13 @@ class Loggbok(LoggbokTemplate):
             "2": ("3", "GREEN"),
             "3": ("0", "BLACK"),
         }
-    
-        if button.text == "0":
+
+        if button.text in states:
+            button.text, button.foreground = states[button.text]
+        else:
+            print("button not in states")
+      
+        if button.text == "1":
             """Viser en popup for å spørre om tekst og oppdaterer en label"""
             text_box = TextBox(placeholder="Skriv her...")
     
@@ -56,10 +61,10 @@ class Loggbok(LoggbokTemplate):
                 # Lagre aktiviteten med riktig dato
                 self.lagre_aktivitet(dato, text_box.text, int(button.text))
     
-        if button.text in states:
-            button.text, button.foreground = states[button.text]
-        else:
-            print("button not in states")
+        # if button.text in states:
+        #     button.text, button.foreground = states[button.text]
+        # else:
+        #     print("button not in states")
 
     def man_button_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -192,7 +197,7 @@ class Loggbok(LoggbokTemplate):
             activities = app_tables.aktivitet.search(
                 tables.order_by('dato'),
                 deltager=user,  # Filtrer på innlogget bruker
-                dato=q.between(start_of_week, end_of_week)  # Filtrer på datoer
+                dato=q.between(start_of_week, end_of_week + timedelta(days=1))  # Filtrer på datoer
             )
         except Exception as e:
             print(f"Error fetching activities: {e}")
@@ -256,6 +261,7 @@ class Loggbok(LoggbokTemplate):
             self.lor_akt_label.text = ""
     
         if week_activities[6]:
+            print('søndag:',week_activities[6])
             self.son_button.text = str(week_activities[6][0]['poeng'])
             self.son_akt_label.text = week_activities[6][0]['aktivitet']
         else:
