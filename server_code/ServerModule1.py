@@ -43,3 +43,27 @@ def batch_create_users(user_list):
 
     return "Alle brukere er lagt til!"
 '''
+
+
+@anvil.server.callable
+def lagre_aktivitet(dato, aktivitet, poeng):
+    user = anvil.users.get_user()
+    if not user:
+        raise Exception("Ingen bruker er pålogget")
+    
+    # Sjekk om det allerede finnes en post for den aktuelle datoen og brukeren
+    existing_activity = app_tables.aktivitet.get(deltager=user, dato=dato)
+    
+    if existing_activity:
+        # Oppdater den eksisterende posten
+        existing_activity.update(aktivitet=aktivitet, poeng=poeng)
+        return "Aktivitet oppdatert"
+    else:
+        # Lagre ny post i tabellen aktivitet
+        app_tables.aktivitet.add_row(
+            deltager=user,
+            dato=dato,
+            aktivitet=aktivitet,
+            poeng=poeng
+        )
+        return "Aktivitet lagret"
