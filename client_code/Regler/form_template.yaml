@@ -1,0 +1,84 @@
+components:
+- components:
+  - components:
+    - event_bindings: {click: button_1_click}
+      layout_properties: {}
+      name: lukk_button
+      properties: {align: center, role: outlined-button, text: Lukk}
+      type: Button
+    layout_properties: {grid_position: 'WHMDOQ,MGWKZE'}
+    name: rich_text_1
+    properties:
+      align: center
+      content: |-
+        <!DOCTYPE html>
+        <html lang="no">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Framskritt – Framo Bedriftsidrettslags Aktivitetskonkurranse</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              margin: 2rem;
+              background-color: #f5f5f5;
+            }
+            .container {
+              background-color: #fff;
+              padding: 1.5rem;
+              border-radius: 8px;
+              max-width: 800px;
+              margin: auto;
+              box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            }
+            h2, h3 {
+              text-align: center;
+              color: #333;
+            }
+            h3 {
+              margin-top: 1.5rem;
+              font-size: 1.25em;
+            }
+            ul {
+              list-style: disc;
+              padding-left: 1.5rem;
+            }
+            p {
+              line-height: 1.6;
+              color: #666;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <h2>Velkommen til Framskritt</h2><h3> Framo Bedriftsidrettslags aktivitetskonkurranse!</h3>
+
+            <h3>Hvem kan delta?</h3>
+            <p>Alle medlemmer i Framo BIL er invitert til å delta.</p>
+
+            <h3>Premier</h3>
+            <p>Hver uke blir det trukket ut tre premier, hver på 1000 kroner.</p>
+
+            <h3>Poengsystem</h3>
+            <p>
+              Alle dokumenterbare idrettsaktiviteter teller. Deltakerne logger poeng via vårt program, med mulighet til å opptjene inntil 3 poeng per dag. Poeng gis etter følgende kriterier:
+            </p>
+            <ul>
+              <li><strong>1 poeng:</strong> 0,5 time aktiv trening eller 8000 skritt</li>
+              <li><strong>2 poeng:</strong> 1 time aktiv trening</li>
+              <li><strong>3 poeng:</strong> 1,5 time aktiv trening</li>
+            </ul>
+            <p>Det er tilstrekkelig med 1 poeng per dag for å være med i trekningen.</p>
+
+            <h3>Konkurranseformer</h3>
+            <p><strong>Individuell konkurranse:</strong> Resultatlisten føres for hver deltaker.</p>
+            <p>
+              <strong>Lagkonkurranse:</strong> Det er mulig å melde seg på som lag (minimum 4 persone
+      format: restricted_html
+    type: RichText
+  layout_properties: {grid_position: 'JKCUTA,SPCTSY'}
+  name: column_panel_1
+  properties: {role: elevated-card}
+  type: ColumnPanel
+container: {type: ColumnPanel}
+is_package: true

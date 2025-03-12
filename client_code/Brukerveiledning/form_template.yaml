@@ -1,0 +1,64 @@
+components:
+- components:
+  - components:
+    - event_bindings: {click: lukk_button_click}
+      layout_properties: {}
+      name: lukk_button
+      properties: {role: outlined-button, text: Lukk}
+      type: Button
+    layout_properties: {grid_position: 'HUGURA,MMKZMD'}
+    name: rich_text_1
+    properties:
+      align: center
+      content: |
+        <!DOCTYPE html>
+        <html lang="no">
+        <head>
+          <meta charset="UTF-8">
+          <title>Brukerveiledning</title>
+          <style>
+            body {
+              font-family: "Helvetica Neue", Arial, sans-serif;
+              background-color: #f9f9f9;
+              margin: 0;
+              padding: 20px;
+              color: #444;
+              line-height: 1.6;
+            }
+            .container {
+              max-width: 600px;
+              margin: 40px auto;
+              padding: 20px 30px;
+              background-color: #fff;
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+              text-align: center;
+              color: #333;
+              margin-bottom: 20px;
+            }
+            p {
+              margin-bottom: 15px;
+              text-align: justify;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <h1>Brukerveiledning</h1>
+            <p>Loggbildet viser innværende uke, når konkurransen er i gang.</p>
+            <p>Du kan hoppe fra uke til uke med pilene til høyre og venstre.</p>
+            <p>Det er en knapp for hver dag. Du registrerer et poeng på en dag ved å klikke på knappen.</p>
+            <p>Ved første poeng på en dag blir du bedt om å beskrive aktiviteten – bruk stikkord.</p>
+          </div>
+        </body>
+        </html>
+      format: restricted_html
+    type: RichText
+  layout_properties: {grid_position: 'BHNSXP,ZYWMYS'}
+  name: column_panel_1
+  properties: {role: elevated-card}
+  type: ColumnPanel
+container: {type: ColumnPanel}
+is_package: true

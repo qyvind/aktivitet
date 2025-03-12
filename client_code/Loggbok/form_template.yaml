@@ -5,6 +5,18 @@ components:
     name: login
     properties: {role: outlined-button, text: Logg inn}
     type: Button
+  - components:
+    - layout_properties: {grid_position: 'TOXTWG,VUTPIB'}
+      name: rich_text_1
+      properties:
+        align: center
+        content: "<h2>Velkommen til Framskritt</h2>\nDu kan logge deg inn med email og bli med. \n"
+        format: restricted_html
+      type: RichText
+    layout_properties: {grid_position: 'BGVMVX,UMSRPL'}
+    name: column_panel_2
+    properties: {}
+    type: ColumnPanel
   - layout_properties: {grid_position: 'OHFFZP,NXAFKM'}
     name: week_offset_label
     properties: {visible: false}
@@ -337,6 +349,16 @@ components:
     properties: {align: center}
     type: FlowPanel
   - components:
+    - event_bindings: {click: regler_button_click}
+      layout_properties: {}
+      name: regler_button
+      properties: {role: outlined-button, text: Regler}
+      type: Button
+    - event_bindings: {click: veil_button_click}
+      layout_properties: {}
+      name: veil_button
+      properties: {role: outlined-button, text: Brukerveiledning}
+      type: Button
     - layout_properties: {}
       name: individuell_button
       properties:

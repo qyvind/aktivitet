@@ -187,7 +187,7 @@ class Loggbok(LoggbokTemplate):
         # Få den påloggede brukeren
         user = anvil.users.get_user()
         if not user:
-            return {}  # Returner en tom dictionary hvis ingen er pålogget
+            return {day: [] for day in range(7)}  # Returner en dictionary med alle dager
         
         # Få datoene for den aktive uken (mandag til søndag)
         week_info = self.get_week_info(self.week_offset_label.text)
@@ -289,3 +289,11 @@ class Loggbok(LoggbokTemplate):
           "3": "GREEN"
       }
       return farge_mapping.get(poeng_verdi, "BLACK")
+
+    def regler_button_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      open_form("Regler")
+
+    def veil_button_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      open_form("Brukerveiledning")
