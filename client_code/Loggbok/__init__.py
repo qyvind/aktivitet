@@ -220,9 +220,11 @@ class Loggbok(LoggbokTemplate):
 
         if week_activities[0]:
             self.man_button.text = str(week_activities[0][0]['poeng'])
+            self.man_button.foreground = self.get_farge(self.man_button.text)
             self.man_akt_label.text = week_activities[0][0]['aktivitet']
         else:
             self.man_button.text = "0"
+            self.man_button.foreground = self.get_farge("0")
             self.man_akt_label.text = ""
     
         if week_activities[1]:
@@ -275,4 +277,13 @@ class Loggbok(LoggbokTemplate):
             print(result)
         except Exception as e:
             print(f"Error saving activity: {e}")
-  
+          
+    def get_farge(self, poeng_verdi):
+      # Definerer farge for hver verdi
+      farge_mapping = {
+          "0": "BLACK",
+          "1": "RED",
+          "2": "ORANGE",
+          "3": "GREEN"
+      }
+      return farge_mapping.get(poeng_verdi, "BLACK")
