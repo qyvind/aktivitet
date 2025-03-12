@@ -43,7 +43,8 @@ components:
     - name: uke_label
       properties: {align: center, bold: true, role: title, text: 'Uke 20: 12 - 18 mai'}
       type: Label
-    - layout_properties: {}
+    - event_bindings: {click: button_1_click}
+      layout_properties: {}
       name: button_1
       properties: {icon: 'fa:long-arrow-right', text: ''}
       type: Button

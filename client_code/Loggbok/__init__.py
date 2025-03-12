@@ -14,13 +14,20 @@ class Loggbok(LoggbokTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
         week_offset = 0
-        week_active = self.get_week_info()
-        self.uke_label.text = self.get_week_range(week_active["monday"])
+        self.initier_uke(week_offset)
 
+        # print(f"Ukenummer: {week_active['week_number']}")
+        # print(f"Mandag: {week_active['monday']}")
+        # print(f"Søndag: {week_active['sunday']}")
+
+
+    def initier_uke(self,week_offset):
+        week_active = self.get_week_info(week_offset)
+        self.uke_label.text = self.get_week_range(week_offset)
         print(f"Ukenummer: {week_active['week_number']}")
         print(f"Mandag: {week_active['monday']}")
         print(f"Søndag: {week_active['sunday']}")
-
+      
     def update_button_state(self, button, label):
         """Oppdaterer knappens tekst og farge basert på nåværende tilstand"""
         states = {
@@ -90,43 +97,51 @@ class Loggbok(LoggbokTemplate):
         self.login_card.visible = True
         self.loggbok_card.visible = False
 
-    def get_week_info(self):
-        today = datetime.today()
 
+    def get_week_info(self, week_offset):
+        today = datetime.today()
+    
         # Finn mandagen i denne uken (første dag i uken)
         days_since_monday = today.weekday()  # Mandag = 0, Søndag = 6
         monday = today - timedelta(days=days_since_monday)
-
+    
+        # Juster mandagen basert på week_offset
+        monday += timedelta(weeks=week_offset)
+    
         # Finn søndagen i denne uken (siste dag i uken)
         sunday = monday + timedelta(days=6)
-
-        # Hent ukenummer basert på datoen, slik at det ikke blir neste uke
-        week_number = today.isocalendar()[1]  # Her bruker vi isocalendar() for å få det riktige ukenummeret.
-
+    
+        # Hent ukenummer basert på mandagen etter week_offset
+        week_number = monday.isocalendar()[1]  # Ukenummer basert på den justerte mandagen
+    
         return {
             "week_number": week_number,
             "monday": monday.strftime("%Y-%m-%d"),  # Mandagen
             "sunday": sunday.strftime("%Y-%m-%d")  # Søndagen
-        }
+        }  
 
-    def get_week_range(self, monday):
-        # Hvis år ikke er spesifisert, bruk inneværende år
-        year = datetime.today().year
+    def get_week_range(self, week_offset):
+      # Dagens dato
+      today = datetime.today()
+    
+      # Finn mandagen i den nåværende uken
+      start_of_week = today - timedelta(days=today.weekday())
+    
+      # Juster mandagen basert på week_offset
+      monday_date = start_of_week + timedelta(weeks=week_offset)
+    
+      # Finn søndagen i samme uke
+      sunday_date = monday_date + timedelta(days=6)
+    
+      # Formater datoene
+      month_names = {
+          1: "jan", 2: "feb", 3: "mars", 4: "april", 5: "mai", 6: "juni",
+          7: "juli", 8: "aug", 9: "sep", 10: "okt", 11: "nov", 12: "des"
+      }
+      result = f"{monday_date.day} - {sunday_date.day} {month_names[monday_date.month]}"
+      return result
 
-        # Finn mandagen i den ønskede uken (denne mandagen)
-        first_day_of_year = datetime(year, 1, 1)
-        first_monday = first_day_of_year + timedelta(days=(7 - first_day_of_year.weekday()))
-
-        # Finn mandagen i uken vi ønsker
-        monday_date = datetime.strptime(monday, "%Y-%m-%d")
-
-        # Finn søndagen samme uke
-        sunday_date = monday_date + timedelta(days=6)
-
-        # Formater datoene
-        month_names = {
-            1: "jan", 2: "feb", 3: "mars", 4: "april", 5: "mai", 6: "juni",
-            7: "juli", 8: "aug", 9: "sep", 10: "okt", 11: "nov", 12: "des"
-        }
-        result = f"{monday_date.day} - {sunday_date.day} {month_names[monday_date.month]}"
-        return result
+    def button_1_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      week_offset +=1
+      self.initier_uke(week_offset)
