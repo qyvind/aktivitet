@@ -18,6 +18,7 @@ class Loggbok(LoggbokTemplate):
 
         user = anvil.users.get_user()
         if user:
+            self.deltager_label.text = user['email']
             # Brukeren er logget inn
             self.login_card.visible = False
             self.loggbok_card.visible = True

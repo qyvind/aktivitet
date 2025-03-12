@@ -34,7 +34,7 @@ components:
         type: Label
       - layout_properties: {}
         name: deltager_label
-        properties: {text: ''}
+        properties: {text: Donald Duck}
         type: Label
       name: flow_panel_4
       properties: {}
@@ -42,7 +42,7 @@ components:
     - components:
       - layout_properties: {}
         name: label_2
-        properties: {text: 'Team: '}
+        properties: {text: 'Team: Andeby '}
         type: Label
       name: flow_panel_5
       properties: {}
