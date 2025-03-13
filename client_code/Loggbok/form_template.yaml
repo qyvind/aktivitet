@@ -396,8 +396,16 @@ components:
         name: rich_text_2
         properties:
           align: left
-          content: "- **1 poeng**  \n    800 skritt eller 1/2 time aktiv trening\n- **2 poeng**  \n    1 time aktiv trening\n- **3 poeng**  \n    1 1/2 time aktiv trening"
-          format: markdown
+          content: |2-
+                <ul>
+                  <li><strong>1 poeng:</strong> 0,5 time aktiv trening eller 8000 skritt</li>
+                  <li><strong>2 poeng:</strong> 1 time aktiv trening</li>
+                  <li><strong>3 poeng:</strong> 1,5 time aktiv trening</li>
+                </ul>
+          format: restricted_html
+          spacing:
+            margin: ['0', null, '0', null]
+            padding: ['0', null, '0', null]
         type: RichText
       layout_properties: {grid_position: 'RHFXDS,SKNNKF'}
       name: flow_panel_8
