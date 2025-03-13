@@ -2,6 +2,17 @@
  This CSS implements the Material Design 3 look and feel for Anvil apps.
  **/
 
+/** denne har ØF lagt til for å få farge bak dagene **/
+.background-panel {
+    position: absolute; /* Plasserer panelet absolutt i forhold til den nærmeste posisjonerte forelderen */
+    left: 0;
+    bottom: 0;        /* Plasserer det nederst i containeren */
+    width: 100%;
+    height: 33%;      /* Setter høyden til ca. 1/3 av containeren */
+    background-color: green; /* Eller et bilde, om ønskelig */
+    z-index: 0;       /* Sørger for at dette panelet ligger bak de andre elementene */
+}
+
 /* Stop panel-cols cutting off drop shadows */
 .anvil-panel-col {
   padding-bottom: 10px;
