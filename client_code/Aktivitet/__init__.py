@@ -70,8 +70,13 @@ class Aktivitet(AktivitetTemplate):
   def button_1_click(self, **event_args):
     """This method is called when the button is clicked"""
 users = [
-{"email":"nily@framo.no","password":"138138"},
-{"email":"pan@framo.no","password":"138138"}]
+{"email":"amj@framo.no","password":"styret"},
+{"email":"brno@framo.no","password":"styret"},
+{"email":"emdy@framo.no","password":"styret"},
+{"email":"brno@framo.no","password":"styret"},
+{"email":"fj@framo.no","password":"styret"},
+{"email":"reps@framo.no","password":"styret"},
+{"email":"veol@framo.no","password":"styret"}]
 anvil.server.call('batch_create_users', users)
 
 def format_date(date):
