@@ -81,7 +81,7 @@ services:
   server_config:
     email_content:
       reset_password: {html: '<p>Hei du</p><p>Her kan du nullstille passordet til aktivitetskonkurransen til Framo BIL. Klikk linken under for å lage nytt passord.</p><p>{{reset_link}}</p><p>Linken virker i ti minutter.</p>', subject: Reset passord til aktivitetskonkurransen i Framo Bedriftsidrettslag}
-    email_from_address: qf@simba.no
+    email_from_address: qyvindf@gmail.com
     user_table: users
   source: /runtime/services/anvil/users.yml
 - client_config: {}

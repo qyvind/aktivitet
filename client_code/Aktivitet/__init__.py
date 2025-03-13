@@ -64,18 +64,16 @@ class Aktivitet(AktivitetTemplate):
     self.Logout_button.visible = False
     self.aktivitet_card.visible = False
 
-'''  
+
+
+  
   def button_1_click(self, **event_args):
     """This method is called when the button is clicked"""
 users = [
-{"email":"maal@framo.no","password":"41506309"},
-{"email":"inal@framo.no","password":"48266889"},
-{"email":"kma@framo.no","password":"91546872"},
-{"email":"pan@framo.no","password":"90979935"},
-{"email":"susanneris@gmail.com","password":"40247497"},
-{"email":"svan@framo.no","password":"41104043"}]
+{"email":"nily@framo.no","password":"138138"},
+{"email":"pan@framo.no","password":"138138"}]
 anvil.server.call('batch_create_users', users)
-'''
+
 def format_date(date):
     if date:
         return date.strftime("%d.%m.%Y")  # Eks: 06.03.2025

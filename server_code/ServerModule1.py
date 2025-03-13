@@ -24,7 +24,7 @@ def update_aktivitet(aktivitet, aktivitet_data):
 def delete_aktivitet(aktivitet):
   aktivitet.delete()
 
-'''
+
 @anvil.server.callable
 def batch_create_users(user_list):
     for user in user_list:
@@ -42,7 +42,6 @@ def batch_create_users(user_list):
         print(f"Bruker {email} opprettet.")
 
     return "Alle brukere er lagt til!"
-'''
 
 
 @anvil.server.callable
