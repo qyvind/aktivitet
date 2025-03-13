@@ -390,6 +390,23 @@ components:
     name: flow_panel_7
     properties: {align: center}
     type: FlowPanel
+  - components:
+    - components:
+      - layout_properties: {}
+        name: rich_text_2
+        properties:
+          align: left
+          content: "- **1 poeng**  \n    800 skritt eller 1/2 time aktiv trening\n- **2 poeng**  \n    1 time aktiv trening\n- **3 poeng**  \n    1 1/2 time aktiv trening"
+          format: markdown
+        type: RichText
+      layout_properties: {grid_position: 'RHFXDS,SKNNKF'}
+      name: flow_panel_8
+      properties: {align: center}
+      type: FlowPanel
+    layout_properties: {grid_position: 'FDXMTZ,NCSNWW'}
+    name: outlined_card_1
+    properties: {background: 'theme:Secondary Container', role: outlined-card}
+    type: ColumnPanel
   layout_properties: {grid_position: 'LRHKJM,PNXCFA', row_background: ''}
   name: loggbok_card
   properties: {background: 'theme:Tertiary Container', role: outlined-card, visible: false}
