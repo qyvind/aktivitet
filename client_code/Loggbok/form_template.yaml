@@ -3,7 +3,7 @@ components:
   - event_bindings: {click: login_click}
     layout_properties: {grid_position: 'MPVRLL,VGDAAJ'}
     name: login
-    properties: {role: outlined-button, text: Logg inn}
+    properties: {background: 'theme:Tertiary Container', role: outlined-button, text: Logg inn}
     type: Button
   - components:
     - layout_properties: {grid_position: 'TOXTWG,VUTPIB'}
@@ -13,7 +13,7 @@ components:
         content: |-
           <h2>Velkommen til Framskritt</h2>
           Du kan logge deg inn med email og bli med. <br>Første gangen må du klikke Sign up for a new account - eller Sign in with Google.<br><br>
-          OBS: hvis du bruker Framo email: melding med link for å resette passord går rett i mappen Junk Emails. Husk å sjekke der.
+          OBS: Når du bruker Framo email: Melding med link for å resette passord går i Junk Emails. Husk å sjekke der.
         format: restricted_html
       type: RichText
     layout_properties: {grid_position: 'BGVMVX,UMSRPL'}
@@ -26,7 +26,7 @@ components:
     type: Label
   layout_properties: {grid_position: 'ACRWCP,DAEMHS'}
   name: login_card
-  properties: {role: outlined-card}
+  properties: {background: 'theme:Secondary Container', role: outlined-card}
   type: ColumnPanel
 - components:
   - components:
