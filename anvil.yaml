@@ -77,7 +77,7 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/tables.yml
-- client_config: {allow_remember_me: true, allow_signup: true, confirm_email: true, enable_automatically: true, remember_me_days: 365, use_email: true, use_facebook: false, use_google: true, use_token: false}
+- client_config: {allow_remember_me: true, allow_signup: true, confirm_email: false, enable_automatically: true, remember_me_days: 365, use_email: true, use_facebook: false, use_google: true, use_token: false}
   server_config:
     email_content:
       reset_password: {html: '<p>Hei du</p><p>Her kan du nullstille passordet til aktivitetskonkurransen til Framo BIL. Klikk linken under for å lage nytt passord.</p><p>{{reset_link}}</p><p>Linken virker i ti minutter.</p>', subject: Reset passord til aktivitetskonkurransen i Framo Bedriftsidrettslag}
