@@ -35,17 +35,17 @@ class Loggbok(LoggbokTemplate):
         self.fyll_skjermen(week_activities)
         
       
-    def update_button_state(self, button, label, dato):
+    def update_button_state(self, button, label, dato,columnpanel):
         """Oppdaterer knappens tekst og farge basert på nåværende tilstand"""
         states = {
-            "0": ("1", "RED"),
-            "1": ("2", "ORANGE"),
-            "2": ("3", "GREEN"),
-            "3": ("0", "BLACK"),
+            "0": ("1", "BLACK","LIGHTGREEN"),
+            "1": ("2", "BLACK","GREEN"),
+            "2": ("3", "BLACK","DARKGREEN"),
+            "3": ("0", "BLACK","WHITE"),
         }
 
         if button.text in states:
-            button.text, button.foreground = states[button.text]
+            button.text, button.foreground, columnpanel.background = states[button.text]
         else:
             print("button not in states")
               # Initialiser text_box med en default-verdi
@@ -75,43 +75,43 @@ class Loggbok(LoggbokTemplate):
         """This method is called when the button is clicked"""
         week_info = self.get_week_info(self.week_offset_label.text)
         mandag_dato = week_info['monday_date']
-        self.update_button_state(self.man_button, self.man_akt_label, mandag_dato)
+        self.update_button_state(self.man_button, self.man_akt_label, mandag_dato,self.man_column_panel)
 
     def tir_button_click(self, **event_args):
         """This method is called when the button is clicked"""
         week_info = self.get_week_info(self.week_offset_label.text)
         tirsdag_dato = week_info['monday_date'] + timedelta(days=1)
-        self.update_button_state(self.tir_button, self.tir_akt_label, tirsdag_dato)
+        self.update_button_state(self.tir_button, self.tir_akt_label, tirsdag_dato,self.tir_column_panel)
 
     def ons_button_click(self, **event_args):
         """This method is called when the button is clicked"""
         week_info = self.get_week_info(self.week_offset_label.text)
         onsdag_dato = week_info['monday_date'] + timedelta(days=2)
-        self.update_button_state(self.ons_button, self.ons_akt_label, onsdag_dato)
+        self.update_button_state(self.ons_button, self.ons_akt_label, onsdag_dato,self.ons_column_panel)
     
     def tor_button_click(self, **event_args):
         """This method is called when the button is clicked"""
         week_info = self.get_week_info(self.week_offset_label.text)
         torsdag_dato = week_info['monday_date'] + timedelta(days=3)
-        self.update_button_state(self.tor_button, self.tor_akt_label, torsdag_dato)
+        self.update_button_state(self.tor_button, self.tor_akt_label, torsdag_dato,self.tor_column_panel)
     
     def fre_button_click(self, **event_args):
         """This method is called when the button is clicked"""
         week_info = self.get_week_info(self.week_offset_label.text)
         fredag_dato = week_info['monday_date'] + timedelta(days=4)
-        self.update_button_state(self.fre_button, self.fre_akt_label, fredag_dato)
+        self.update_button_state(self.fre_button, self.fre_akt_label, fredag_dato,self.fre_column_panel)
     
     def lor_button_click(self, **event_args):
         """This method is called when the button is clicked"""
         week_info = self.get_week_info(self.week_offset_label.text)
         lordag_dato = week_info['monday_date'] + timedelta(days=5)
-        self.update_button_state(self.lor_button, self.lor_akt_label, lordag_dato)
+        self.update_button_state(self.lor_button, self.lor_akt_label, lordag_dato,self.lor_column_panel)
       
     def son_button_click(self, **event_args):
         """This method is called when the button is clicked"""
         week_info = self.get_week_info(self.week_offset_label.text)
         sondag_dato = week_info['monday_date'] + timedelta(days=6)
-        self.update_button_state(self.son_button, self.son_akt_label, sondag_dato)
+        self.update_button_state(self.son_button, self.son_akt_label, sondag_dato,self.son_column_panel)
 
     def login_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -225,54 +225,66 @@ class Loggbok(LoggbokTemplate):
 
         if week_activities[0]:
             self.man_button.text = str(week_activities[0][0]['poeng'])
-            self.man_button.foreground = self.get_farge(self.man_button.text)
+            self.man_column_panel.background = self.get_farge(self.man_button.text)
             self.man_akt_label.text = week_activities[0][0]['aktivitet']
         else:
             self.man_button.text = "0"
-            self.man_button.foreground = self.get_farge("0")
+            self.man_column_panel.background =  self.get_farge("0")
             self.man_akt_label.text = ""
     
         if week_activities[1]:
             self.tir_button.text = str(week_activities[1][0]['poeng'])
+            self.tir_column_panel.background = self.get_farge(self.tir_button.text)
             self.tir_akt_label.text = week_activities[1][0]['aktivitet']
         else:
             self.tir_button.text = "0"
+            self.tir_column_panel.background =  self.get_farge("0")
             self.tir_akt_label.text = ""
     
         if week_activities[2]:
             self.ons_button.text = str(week_activities[2][0]['poeng'])
+            self.ons_column_panel.background = self.get_farge(self.ons_button.text)
             self.ons_akt_label.text = week_activities[2][0]['aktivitet']
         else:
             self.ons_button.text = "0"
+            self.ons_column_panel.background =  self.get_farge("0")
             self.ons_akt_label.text = ""
     
         if week_activities[3]:
             self.tor_button.text = str(week_activities[3][0]['poeng'])
+            self.tor_column_panel.background = self.get_farge(self.tor_button.text)
             self.tor_akt_label.text = week_activities[3][0]['aktivitet']
         else:
             self.tor_button.text = "0"
+            self.tor_column_panel.background =  self.get_farge("0")
             self.tor_akt_label.text = ""
     
         if week_activities[4]:
             self.fre_button.text = str(week_activities[4][0]['poeng'])
+            self.fre_column_panel.background = self.get_farge(self.fre_button.text)
             self.fre_akt_label.text = week_activities[4][0]['aktivitet']
         else:
             self.fre_button.text = "0"
+            self.fre_column_panel.background =  self.get_farge("0")
             self.fre_akt_label.text = ""
     
         if week_activities[5]:
             self.lor_button.text = str(week_activities[5][0]['poeng'])
+            self.lor_column_panel.background = self.get_farge(self.lor_button.text)
             self.lor_akt_label.text = week_activities[5][0]['aktivitet']
         else:
             self.lor_button.text = "0"
+            self.lor_column_panel.background =  self.get_farge("0")
             self.lor_akt_label.text = ""
     
         if week_activities[6]:
             print('søndag:',week_activities[6])
             self.son_button.text = str(week_activities[6][0]['poeng'])
+            self.son_column_panel.background = self.get_farge(self.son_button.text)
             self.son_akt_label.text = week_activities[6][0]['aktivitet']
         else:
             self.son_button.text = "0"
+            self.son_column_panel.background =  self.get_farge("0")
             self.son_akt_label.text = ""
 
           
@@ -286,12 +298,12 @@ class Loggbok(LoggbokTemplate):
     def get_farge(self, poeng_verdi):
       # Definerer farge for hver verdi
       farge_mapping = {
-          "0": "BLACK",
-          "1": "RED",
-          "2": "ORANGE",
-          "3": "GREEN"
+          "0": "WHITE",
+          "1": "LIGHTGREEN",
+          "2": "GREEN",
+          "3": "DARKGREEN"
       }
-      return farge_mapping.get(poeng_verdi, "BLACK")
+      return farge_mapping.get(poeng_verdi, "WHITE")
 
     def regler_button_click(self, **event_args):
       """This method is called when the button is clicked"""

@@ -145,7 +145,7 @@ components:
           text: ''
         type: Label
       layout_properties: {}
-      name: column_panel_1_copy_2
+      name: tir_column_panel
       properties:
         role: outlined-card
         spacing:
@@ -184,7 +184,7 @@ components:
           text: ''
         type: Label
       layout_properties: {}
-      name: column_panel_1_copy_3
+      name: ons_column_panel
       properties:
         role: outlined-card
         spacing:
@@ -222,7 +222,7 @@ components:
             padding: ['0', null, null, null]
           text: ''
         type: Label
-      name: column_panel_1_copy_4
+      name: tor_column_panel
       properties:
         role: outlined-card
         spacing:
@@ -265,7 +265,7 @@ components:
             padding: ['0', null, null, null]
           text: ''
         type: Label
-      name: column_panel_1_copy_5
+      name: fre_column_panel
       properties:
         role: outlined-card
         spacing:
@@ -303,7 +303,7 @@ components:
             padding: ['0', null, null, null]
           text: ''
         type: Label
-      name: column_panel_1_copy_6
+      name: lor_column_panel
       properties:
         role: outlined-card
         spacing:
@@ -341,7 +341,7 @@ components:
             padding: ['0', null, null, null]
           text: ''
         type: Label
-      name: column_panel_1
+      name: son_column_panel
       properties:
         role: outlined-card
         spacing:
