@@ -22,6 +22,7 @@ class Loggbok(LoggbokTemplate):
             # Brukeren er logget inn
             self.login_card.visible = False
             self.loggbok_card.visible = True
+            self.konkurransenavn.text,self.fradato.text, self.tildato.text = self.hent_konkurranse_info()
         else:
             self.loggbok_card.visible = False
             self.login_card.visible = True
@@ -222,70 +223,114 @@ class Loggbok(LoggbokTemplate):
         return week_activities  # Returner aktiviteter for hver dag i uken
                 
     def fyll_skjermen(self, week_activities):
-
-        if week_activities[0]:
-            self.man_button.text = str(week_activities[0][0]['poeng'])
-            self.man_column_panel.background = self.get_farge(self.man_button.text)
-            self.man_akt_label.text = week_activities[0][0]['aktivitet']
-        else:
-            self.man_button.text = "0"
-            self.man_column_panel.background =  self.get_farge("0")
-            self.man_akt_label.text = ""
-    
-        if week_activities[1]:
-            self.tir_button.text = str(week_activities[1][0]['poeng'])
-            self.tir_column_panel.background = self.get_farge(self.tir_button.text)
-            self.tir_akt_label.text = week_activities[1][0]['aktivitet']
-        else:
-            self.tir_button.text = "0"
-            self.tir_column_panel.background =  self.get_farge("0")
-            self.tir_akt_label.text = ""
-    
-        if week_activities[2]:
-            self.ons_button.text = str(week_activities[2][0]['poeng'])
-            self.ons_column_panel.background = self.get_farge(self.ons_button.text)
-            self.ons_akt_label.text = week_activities[2][0]['aktivitet']
-        else:
-            self.ons_button.text = "0"
-            self.ons_column_panel.background =  self.get_farge("0")
-            self.ons_akt_label.text = ""
-    
-        if week_activities[3]:
-            self.tor_button.text = str(week_activities[3][0]['poeng'])
-            self.tor_column_panel.background = self.get_farge(self.tor_button.text)
-            self.tor_akt_label.text = week_activities[3][0]['aktivitet']
-        else:
-            self.tor_button.text = "0"
-            self.tor_column_panel.background =  self.get_farge("0")
-            self.tor_akt_label.text = ""
-    
-        if week_activities[4]:
-            self.fre_button.text = str(week_activities[4][0]['poeng'])
-            self.fre_column_panel.background = self.get_farge(self.fre_button.text)
-            self.fre_akt_label.text = week_activities[4][0]['aktivitet']
-        else:
-            self.fre_button.text = "0"
-            self.fre_column_panel.background =  self.get_farge("0")
-            self.fre_akt_label.text = ""
-    
-        if week_activities[5]:
-            self.lor_button.text = str(week_activities[5][0]['poeng'])
-            self.lor_column_panel.background = self.get_farge(self.lor_button.text)
-            self.lor_akt_label.text = week_activities[5][0]['aktivitet']
-        else:
-            self.lor_button.text = "0"
-            self.lor_column_panel.background =  self.get_farge("0")
-            self.lor_akt_label.text = ""
-    
-        if week_activities[6]:
-            print('søndag:',week_activities[6])
-            self.son_button.text = str(week_activities[6][0]['poeng'])
-            self.son_column_panel.background = self.get_farge(self.son_button.text)
-            self.son_akt_label.text = week_activities[6][0]['aktivitet']
-        else:
-            self.son_button.text = "0"
-            self.son_column_panel.background =  self.get_farge("0")
-            self.son_akt_label.text = ""
+      # Hent ukens info og konkurranseinfo
+      week_info = self.get_week_info(self.week_offset_label.text)
+      mandag_dato = week_info['monday_date']
+      _, konkurranse_fradato, konkurranse_tildato = self.hent_konkurranse_info()
+      today_date = datetime.today().date()
+      
+      # Først sjekker vi om uken ligger utenfor konkurranseintervallet
+      if not self.er_dato_i_interval(mandag_dato, konkurranse_fradato, konkurranse_tildato):
+          # Utenfor intervallet: sett alle kolonnepaneler til rød og deaktiver knappene
+          self.man_column_panel.background = "RED"
+          self.tir_column_panel.background = "RED"
+          self.ons_column_panel.background = "RED"
+          self.tor_column_panel.background = "RED"
+          self.fre_column_panel.background = "RED"
+          self.lor_column_panel.background = "RED"
+          self.son_column_panel.background = "RED"
+          self.man_button.enabled = False
+          self.tir_button.enabled = False
+          self.ons_button.enabled = False
+          self.tor_button.enabled = False
+          self.fre_button.enabled = False
+          self.lor_button.enabled = False
+          self.son_button.enabled = False
+      else:
+          # Uken er innenfor konkurranseintervallet, oppdater hver dag og sjekk for fremtid
+          # Mandag (offset 0)
+          if week_activities[0]:
+              self.man_button.text = str(week_activities[0][0]['poeng'])
+              self.man_column_panel.background = self.get_farge(self.man_button.text)
+              self.man_akt_label.text = week_activities[0][0]['aktivitet']
+          else:
+              self.man_button.text = "0"
+              self.man_column_panel.background = self.get_farge("0")
+              self.man_akt_label.text = ""
+          # Sjekk om mandag er en fremtidig dato
+          self.man_button.enabled = not (mandag_dato > today_date)
+      
+          # Tirsdag (offset 1)
+          tirsdag_dato = mandag_dato + timedelta(days=1)
+          if week_activities[1]:
+              self.tir_button.text = str(week_activities[1][0]['poeng'])
+              self.tir_column_panel.background = self.get_farge(self.tir_button.text)
+              self.tir_akt_label.text = week_activities[1][0]['aktivitet']
+          else:
+              self.tir_button.text = "0"
+              self.tir_column_panel.background = self.get_farge("0")
+              self.tir_akt_label.text = ""
+          self.tir_button.enabled = not (tirsdag_dato > today_date)
+      
+          # Onsdag (offset 2)
+          onsdag_dato = mandag_dato + timedelta(days=2)
+          if week_activities[2]:
+              self.ons_button.text = str(week_activities[2][0]['poeng'])
+              self.ons_column_panel.background = self.get_farge(self.ons_button.text)
+              self.ons_akt_label.text = week_activities[2][0]['aktivitet']
+          else:
+              self.ons_button.text = "0"
+              self.ons_column_panel.background = self.get_farge("0")
+              self.ons_akt_label.text = ""
+          self.ons_button.enabled = not (onsdag_dato > today_date)
+      
+          # Torsdag (offset 3)
+          torsdag_dato = mandag_dato + timedelta(days=3)
+          if week_activities[3]:
+              self.tor_button.text = str(week_activities[3][0]['poeng'])
+              self.tor_column_panel.background = self.get_farge(self.tor_button.text)
+              self.tor_akt_label.text = week_activities[3][0]['aktivitet']
+          else:
+              self.tor_button.text = "0"
+              self.tor_column_panel.background = self.get_farge("0")
+              self.tor_akt_label.text = ""
+          self.tor_button.enabled = not (torsdag_dato > today_date)
+      
+          # Fredag (offset 4)
+          fredag_dato = mandag_dato + timedelta(days=4)
+          if week_activities[4]:
+              self.fre_button.text = str(week_activities[4][0]['poeng'])
+              self.fre_column_panel.background = self.get_farge(self.fre_button.text)
+              self.fre_akt_label.text = week_activities[4][0]['aktivitet']
+          else:
+              self.fre_button.text = "0"
+              self.fre_column_panel.background = self.get_farge("0")
+              self.fre_akt_label.text = ""
+          self.fre_button.enabled = not (fredag_dato > today_date)
+      
+          # Lørdag (offset 5)
+          lordag_dato = mandag_dato + timedelta(days=5)
+          if week_activities[5]:
+              self.lor_button.text = str(week_activities[5][0]['poeng'])
+              self.lor_column_panel.background = self.get_farge(self.lor_button.text)
+              self.lor_akt_label.text = week_activities[5][0]['aktivitet']
+          else:
+              self.lor_button.text = "0"
+              self.lor_column_panel.background = self.get_farge("0")
+              self.lor_akt_label.text = ""
+          self.lor_button.enabled = not (lordag_dato > today_date)
+      
+          # Søndag (offset 6)
+          sondag_dato = mandag_dato + timedelta(days=6)
+          if week_activities[6]:
+              self.son_button.text = str(week_activities[6][0]['poeng'])
+              self.son_column_panel.background = self.get_farge(self.son_button.text)
+              self.son_akt_label.text = week_activities[6][0]['aktivitet']
+          else:
+              self.son_button.text = "0"
+              self.son_column_panel.background = self.get_farge("0")
+              self.son_akt_label.text = ""
+          self.son_button.enabled = not (sondag_dato > today_date)
 
           
     def lagre_aktivitet(self, dato, aktivitet, poeng):
@@ -324,3 +369,21 @@ class Loggbok(LoggbokTemplate):
     def trekning_button_click(self, **event_args):
       """This method is called when the button is clicked"""
       open_form("Trekninger")
+      
+    def hent_konkurranse_info(self):
+        # Kall serverfunksjonen for å hente den første posten
+        record = anvil.server.call('hent_konkurranse')
+        # Dersom record finnes, trekk ut feltene og returner dem
+        if record:
+            konkurransenavn = record['konkurransenavn']
+            fradato = record['fradato']
+            tildato = record['tildato']
+            return konkurransenavn, fradato, tildato
+        else:
+            return None, None, None
+    def er_dato_i_interval(self, dato, fradato, tildato):
+        """
+        Returnerer True dersom 'dato' er innenfor intervallet [fradato, tildato] (inkludert endepunktene),
+        ellers False.
+        """
+        return fradato <= dato <= tildato

@@ -66,3 +66,11 @@ def lagre_aktivitet(dato, aktivitet, poeng):
             poeng=poeng
         )
         return "Aktivitet lagret"
+
+
+@anvil.server.callable
+def hent_konkurranse():
+    # Hent alle poster med record lik 1
+    konkurranse_records = app_tables.konkurranse.search(record=1)
+    # Returner den første posten dersom den finnes, ellers None
+    return konkurranse_records[0] if konkurranse_records else None

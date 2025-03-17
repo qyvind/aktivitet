@@ -30,6 +30,29 @@ components:
   type: ColumnPanel
 - components:
   - components:
+    - layout_properties: {}
+      name: konkurransenavn
+      properties: {align: center}
+      type: Label
+    - layout_properties: {}
+      name: label_3
+      properties: {text: fra}
+      type: Label
+    - name: fradato
+      properties: {}
+      type: Label
+    - layout_properties: {}
+      name: label_4
+      properties: {text: til}
+      type: Label
+    - name: tildato
+      properties: {}
+      type: Label
+    layout_properties: {grid_position: 'LBOGKI,BNEKSN'}
+    name: flow_panel_9
+    properties: {align: center, role: null}
+    type: FlowPanel
+  - components:
     - components:
       - layout_properties: {}
         name: label_1
