@@ -18,6 +18,20 @@ db_schema:
       type: link_single
     server: full
     title: Aktivitet
+  konkurranse:
+    client: full
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: navn
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: fradato
+      type: date
+    - admin_ui: {order: 2, width: 200}
+      name: tildato
+      type: date
+    server: full
+    title: Konkurranse
   lag:
     client: search
     columns:
