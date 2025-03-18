@@ -6,7 +6,12 @@ components:
     properties: {background: 'theme:Tertiary Container', role: outlined-button, text: Logg inn}
     type: Button
   - components:
-    - layout_properties: {grid_position: 'TOXTWG,VUTPIB'}
+    - components:
+      - layout_properties: {}
+        name: label_5
+        properties: {align: center, text: Denne siden kan brukes på telefon og på PC}
+        type: Label
+      layout_properties: {grid_position: 'TOXTWG,VUTPIB'}
       name: rich_text_1
       properties:
         align: center
