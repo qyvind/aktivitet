@@ -23,17 +23,17 @@ class Loggbok(LoggbokTemplate):
             deltagernavn = user['navn']
             # Brukeren er logget inn
             
-            if not deltagernavn :
+            if (deltagernavn or "").strip() == "":
                 # Feltet 'navn' er tomt
                 self.spor_om_navn()
                 user = anvil.users.get_user()
             self.deltager_label.text = user['navn']
-            print("navn:",user['navn'])
             self.login_card.visible = False
             self.loggbok_card.visible = True
             #self.konkurransenavn.text,self.fradato.text, self.tildato.text = self.hent_konkurranse_info()
 
             konkurransenavn, fradato, tildato = self.hent_konkurranse_info()
+            
             if fradato:
                 fradato = fradato.strftime("%d.%m.%Y")
             if tildato:
