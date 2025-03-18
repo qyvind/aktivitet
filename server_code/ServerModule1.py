@@ -116,7 +116,7 @@ def oppdater_brukernavn(nytt_navn):
     user['navn'] = nytt_navn
     
     # Lagre endringen i brukerens record
-    anvil.users.save_user(user)
+    # anvil.users.save_user(user)
     
     return "Navn oppdatert"
 

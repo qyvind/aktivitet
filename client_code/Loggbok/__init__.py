@@ -19,19 +19,16 @@ class Loggbok(LoggbokTemplate):
         user = anvil.users.get_user()
         if user:
             
-            self.deltager_label.text = user['email']
+            
             deltagernavn = user['navn']
             # Brukeren er logget inn
             
             if not deltagernavn :
                 # Feltet 'navn' er tomt
                 self.spor_om_navn()
-
-
-
-
-          
-
+                user = anvil.users.get_user()
+            self.deltager_label.text = user['navn']
+            print("navn:",user['navn'])
             self.login_card.visible = False
             self.loggbok_card.visible = True
             #self.konkurransenavn.text,self.fradato.text, self.tildato.text = self.hent_konkurranse_info()
@@ -457,7 +454,7 @@ class Loggbok(LoggbokTemplate):
         # Vis en alert med TextBox-en
         resultat = anvil.alert(
             content=navn_box,
-            title="Oppgi navn for å delta i konkurransen",
+            title="Oppgi ekte navn for å delta i konkurransen",
             buttons=["OK", "Avbryt"]
         )
         
@@ -466,8 +463,9 @@ class Loggbok(LoggbokTemplate):
             navn = navn_box.text.strip()
             if navn:
                 # Oppdater labelen for deltager
-                self.deltager_label.text = navn
+                
                 # Eventuelt kan du kalle en serverfunksjon for å lagre navnet:
                 anvil.server.call("oppdater_brukernavn", navn)
+                
             else:
-                anvil.alert("Du må skrive inn et navn.")
+                anvil.alert("Du må skrive inn navn.")
