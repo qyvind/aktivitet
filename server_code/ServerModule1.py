@@ -112,12 +112,31 @@ def oppdater_brukernavn(nytt_navn):
     if not user:
         raise Exception("Bruker ikke logget inn")
     
-    # Oppdater feltet 'navn'
-    user['navn'] = nytt_navn
+    # Søk etter en eksisterende record i UserInfo for denne brukeren
+    record = app_tables.userinfo.get(user=user)
     
-    # Lagre endringen i brukerens record
-    # anvil.users.save_user(user)
+    if record:
+        # Oppdater feltet 'navn' i den eksisterende recorden
+        record['navn'] = nytt_navn
+    else:
+        # Opprett en ny record i tabellen UserInfo for denne brukeren
+        app_tables.userinfo.add_row(user=user, navn=nytt_navn)
     
     return "Navn oppdatert"
 
+
+@anvil.server.callable
+def hent_brukernavn():
+    user = anvil.users.get_user()
+    if not user:
+        raise Exception("Bruker ikke logget inn")
+    
+    record = app_tables.userinfo.get(user=user)
+    if record is None:
+        return ""  # Returnerer tom streng hvis ingen record finnes
+    
+    return record['navn']
+
+
+      
 
