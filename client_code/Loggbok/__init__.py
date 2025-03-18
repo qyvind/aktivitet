@@ -23,7 +23,7 @@ class Loggbok(LoggbokTemplate):
             deltagernavn = user['navn']
             # Brukeren er logget inn
             
-            if not deltagernavn :
+            if (deltagernavn or "").strip() == "":
                 # Feltet 'navn' er tomt
                 self.spor_om_navn()
                 user = anvil.users.get_user()
