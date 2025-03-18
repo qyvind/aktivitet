@@ -104,3 +104,20 @@ def slett_trekning(uke_mandag):
     for row in eksisterende:
         row.delete()
     return ()
+
+@anvil.server.callable
+def oppdater_brukernavn(nytt_navn):
+    # Hent den påloggede brukeren
+    user = anvil.users.get_user()
+    if not user:
+        raise Exception("Bruker ikke logget inn")
+    
+    # Oppdater feltet 'navn'
+    user['navn'] = nytt_navn
+    
+    # Lagre endringen i brukerens record
+    # anvil.users.save_user(user)
+    
+    return "Navn oppdatert"
+
+
