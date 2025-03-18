@@ -53,6 +53,10 @@ components:
     properties: {align: center, role: null}
     type: FlowPanel
   - components:
+    - layout_properties: {}
+      name: lykkehjul
+      properties: {height: 50.79998779296875, source: _/theme/lykkehjul.jpg}
+      type: Image
     - components:
       - layout_properties: {}
         name: label_1

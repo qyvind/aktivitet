@@ -22,7 +22,17 @@ class Loggbok(LoggbokTemplate):
             # Brukeren er logget inn
             self.login_card.visible = False
             self.loggbok_card.visible = True
-            self.konkurransenavn.text,self.fradato.text, self.tildato.text = self.hent_konkurranse_info()
+            #self.konkurransenavn.text,self.fradato.text, self.tildato.text = self.hent_konkurranse_info()
+
+            konkurransenavn, fradato, tildato = self.hent_konkurranse_info()
+            if fradato:
+                fradato = fradato.strftime("%d.%m.%Y")
+            if tildato:
+                tildato = tildato.strftime("%d.%m.%Y")
+            self.konkurransenavn.text = konkurransenavn
+            self.fradato.text = fradato
+            self.tildato.text = tildato
+
         else:
             self.loggbok_card.visible = False
             self.login_card.visible = True
@@ -44,6 +54,8 @@ class Loggbok(LoggbokTemplate):
             "2": ("3", "BLACK","DARKGREEN"),
             "3": ("0", "BLACK","WHITE"),
         }
+      
+        previous_state = button.text
 
         if button.text in states:
             button.text, button.foreground, columnpanel.background = states[button.text]
@@ -66,11 +78,21 @@ class Loggbok(LoggbokTemplate):
                 # Lagre aktiviteten med riktig dato
         
         self.lagre_aktivitet(dato, text_box.text, int(button.text))
-    
-        # if button.text in states:
-        #     button.text, button.foreground = states[button.text]
-        # else:
-        #     print("button not in states")
+            # Hvis knappens tilstand gikk fra 0 til 1, kall sjekken
+        if previous_state == "0" and button.text == "1":
+            if self.sjekk_lykkehjul():
+              self.lykkehjul.visible = True
+              week_info = self.get_week_info(self.week_offset_label.text)
+              mandag_dato = week_info['monday_date']
+              anvil.server.call('lagre_trekning', mandag_dato)
+        elif previous_state=="3" and button.text=="0":
+            if not self.sjekk_lykkehjul():
+              self.lykkehjul.visible = False
+              week_info = self.get_week_info(self.week_offset_label.text)
+              mandag_dato = week_info['monday_date']
+              anvil.server.call('slett_trekning', mandag_dato)
+            
+
 
     def man_button_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -155,25 +177,32 @@ class Loggbok(LoggbokTemplate):
 
 
     def get_week_range(self, week_offset):
-      # Dagens dato
-      today = datetime.today()
-    
-      # Finn mandagen i den nåværende uken
-      start_of_week = today - timedelta(days=today.weekday())
-    
-      # Juster mandagen basert på week_offset
-      monday_date = start_of_week + timedelta(weeks=week_offset)
-    
-      # Finn søndagen i samme uke
-      sunday_date = monday_date + timedelta(days=6)
-    
-      # Formater datoene
-      month_names = {
-          1: "jan", 2: "feb", 3: "mars", 4: "april", 5: "mai", 6: "juni",
-          7: "juli", 8: "aug", 9: "sep", 10: "okt", 11: "nov", 12: "des"
-      }
-      result = f"{monday_date.day} - {sunday_date.day} {month_names[monday_date.month]}"
-      return result
+        # Dagens dato
+        today = datetime.today()
+        
+        # Finn mandagen i den nåværende uken
+        start_of_week = today - timedelta(days=today.weekday())
+        
+        # Juster mandagen basert på week_offset
+        monday_date = start_of_week + timedelta(weeks=week_offset)
+        
+        # Finn søndagen i samme uke
+        sunday_date = monday_date + timedelta(days=6)
+        
+        # Definer månednavn
+        month_names = {
+            1: "jan", 2: "feb", 3: "mars", 4: "april", 5: "mai", 6: "juni",
+            7: "juli", 8: "aug", 9: "sep", 10: "okt", 11: "nov", 12: "des"
+        }
+        
+        # Sjekk om mandag og søndag er i samme måned
+        if monday_date.month == sunday_date.month:
+            result = f"{monday_date.day} - {sunday_date.day} {month_names[monday_date.month]}"
+        else:
+            result = f"{monday_date.day} {month_names[monday_date.month]} - {sunday_date.day} {month_names[sunday_date.month]}"
+        
+        return result
+
 
     def button_1_click(self, **event_args):
       """This method is called when the button is clicked"""
@@ -331,6 +360,8 @@ class Loggbok(LoggbokTemplate):
               self.son_column_panel.background = self.get_farge("0")
               self.son_akt_label.text = ""
           self.son_button.enabled = not (sondag_dato > today_date)
+      self.lykkehjul.visible =   self.sjekk_lykkehjul()      
+      
 
           
     def lagre_aktivitet(self, dato, aktivitet, poeng):
@@ -387,3 +418,22 @@ class Loggbok(LoggbokTemplate):
         ellers False.
         """
         return fradato <= dato <= tildato
+      
+    def sjekk_lykkehjul(self):
+      """
+      Sjekker om den påloggede brukeren har aktiviteter med minst ett poeng på fem
+      forskjellige dager i inneværende uke.
+      
+      Returnerer True hvis brukeren har aktiviteter med poeng ≥ 1 på fem eller flere dager,
+      ellers False.
+      """
+      # Hent aktivitetene for uken, en dictionary med nøkler 0 (mandag) til 6 (søndag)
+      week_activities = self.get_activities_for_week()
+      
+      count_days = 0  # Teller antall dager med minst ett poeng
+      for day in range(7):
+          # Sjekk om det finnes minst én aktivitet for dagen med poeng ≥ 1.
+          # Her antas det at feltet 'poeng' er et tall, eventuelt konvertert til int.
+          if any(int(activity['poeng']) >= 1 for activity in week_activities.get(day, [])):
+              count_days += 1
+      return count_days >= 5

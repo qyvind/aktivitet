@@ -47,6 +47,18 @@ db_schema:
       type: link_multiple
     server: full
     title: Lag
+  trekning:
+    client: search
+    columns:
+    - admin_ui: {order: 1, width: 200}
+      name: deltager
+      target: users
+      type: link_single
+    - admin_ui: {order: 2, width: 200}
+      name: uke_mandag
+      type: date
+    server: full
+    title: Trekning
   users:
     client: none
     columns:

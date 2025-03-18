@@ -74,3 +74,33 @@ def hent_konkurranse():
     konkurranse_records = app_tables.konkurranse.search(record=1)
     # Returner den første posten dersom den finnes, ellers None
     return konkurranse_records[0] if konkurranse_records else None
+
+@anvil.server.callable
+def lagre_trekning(uke_mandag):
+    # Hent den påloggede brukeren
+    user = anvil.users.get_user()
+    if not user:
+        raise Exception("Bruker ikke logget inn")
+    
+    # Sjekk om en record med samme uke og bruker allerede finnes
+    eksisterende = list(app_tables.trekning.search(uke_mandag=uke_mandag, deltager=user))
+    if eksisterende:
+        pass
+    else:
+        # Legg til ny record i tabellen 'trekning'
+        app_tables.trekning.add_row(uke_mandag=uke_mandag, deltager=user)
+    return ()
+
+@anvil.server.callable
+def slett_trekning(uke_mandag):
+    # Hent den påloggede brukeren
+    user = anvil.users.get_user()
+    if not user:
+        raise Exception("Bruker ikke logget inn")
+    
+    # Sjekk om en record med samme uke og bruker allerede finnes
+    eksisterende = list(app_tables.trekning.search(uke_mandag=uke_mandag, deltager=user))
+    # Dersom record finnes, slett den(e)
+    for row in eksisterende:
+        row.delete()
+    return ()
