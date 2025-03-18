@@ -65,7 +65,7 @@ components:
       - layout_properties: {}
         name: deltager_label
         properties: {text: Donald Duck}
-        type: Label
+        type: Link
       name: flow_panel_4
       properties: {}
       type: FlowPanel
