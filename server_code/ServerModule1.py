@@ -132,10 +132,29 @@ def hent_brukernavn():
         raise Exception("Bruker ikke logget inn")
     
     record = app_tables.userinfo.get(user=user)
-    if record is None:
-        return ""  # Returnerer tom streng hvis ingen record finnes
     
-    return record['navn']
+    if record is None:
+        # print("❌ Fant ingen userinfo-rad for brukeren.")
+        return {"navn": "", "team": ""}
+    
+    # Konverter record til en dictionary for å unngå LiveObject-problemer
+    record_dict = dict(record)
+    # print(f"✅ Fant userinfo-rad: {record_dict}")  # Debugging
+
+    # Hent 'navn' eksplisitt
+    navn = record_dict.get('navn', "")  # Bruker .get() for sikkerhet
+    # print(f"📝 Navn hentet fra userinfo: {navn}")
+
+    # Hent 'team' eksplisitt
+    team_navn = ""
+    if 'team' in record_dict and record_dict['team']:  # Sjekker at team ikke er None
+        team_record = dict(record_dict['team'])  # Konverterer også team-raden til dict
+        # print(f"🔍 Fant team-rad: {team_record}")  # Debugging
+        team_navn = team_record.get('team', "")  # Henter team-navn
+
+    # print(f"🏆 Endelig resultat: Navn = {navn}, Team = {team_navn}")
+
+    return {"navn": navn, "team": team_navn}
 
 
       
@@ -172,17 +191,17 @@ def hent_poengsummer():
 
     return resultat
 
+
 @anvil.server.callable
-def hent_ukens_premietrekning():
+def hent_ukens_premietrekning(mandag):
     import datetime
 
-    # Finn dagens dato
-    idag = datetime.date.today()
+    # Sørg for at mandag er en date-type (dersom det blir sendt som en datetime)
+    if isinstance(mandag, datetime.datetime):
+        mandag = mandag.date()
 
-    # Finn mandagen i inneværende uke
-    mandag = idag - datetime.timedelta(days=idag.weekday())  # Mandag = weekday() == 0
-    søndag = mandag + datetime.timedelta(days=6)
-
+    søndag = mandag + datetime.timedelta(days=6)  # Beregn søndag i samme uke
+    
     # Dictionary for å holde styr på dager med poeng for hver deltaker
     deltager_dager = {}
 
@@ -190,7 +209,7 @@ def hent_ukens_premietrekning():
         deltager = rad['deltager']
         dato = rad['dato']  # Antar at 'dato' er en kolonne i 'aktivitet'
 
-        # Sjekk om datoen er innenfor inneværende uke
+        # Sjekk om datoen er innenfor den uken vi skal hente
         if mandag <= dato <= søndag:
             if deltager:
                 if deltager not in deltager_dager:
@@ -207,5 +226,55 @@ def hent_ukens_premietrekning():
         navn = userinfo_rad['navn'] if userinfo_rad else None
 
         resultat.append(navn if navn else deltager['email'])
+
+    return resultat
+
+@anvil.server.callable
+def hent_teammedlemmer(team_navn):
+    # Finn team-raden basert på navn
+    team_record = app_tables.team.get(team=team_navn)
+
+    if not team_record:
+        # print(f"❌ Fant ikke team med navn: {team_navn}")
+        return []
+
+    # print(f"✅ Fant team: {dict(team_record)}")  # Debugging
+
+    # Hent alle brukere i userinfo-tabellen som er tilknyttet dette teamet
+    medlemmer = app_tables.userinfo.search(team=team_record)
+
+    # Lag en liste med navnene på teammedlemmene
+    team_liste = [member['navn'] for member in medlemmer if member['navn']]
+
+    # print(f"🏆 Teammedlemmer i {team_navn}: {team_liste}")
+
+    return team_liste
+
+@anvil.server.callable
+def hent_team_poengsummer():
+    # Dictionary for å holde styr på poeng per team
+    team_poeng = {}
+
+    # Hent alle brukere med tilhørende team
+    for userinfo in app_tables.userinfo.search():
+        team = userinfo['team']  # Henter team-raden
+        bruker = userinfo['user']  # Henter bruker-raden
+
+        if team and bruker:  # Sjekk at begge eksisterer
+            team_navn = team['team']  # Hent team-navn fra team-tabellen
+
+            # Initialiser teamet i dictionary hvis det ikke finnes
+            if team_navn not in team_poeng:
+                team_poeng[team_navn] = 0
+
+            # Hent brukerens totale poengsum fra aktivitet-tabellen
+            bruker_poeng = sum(rad['poeng'] for rad in app_tables.aktivitet.search(deltager=bruker))
+            team_poeng[team_navn] += bruker_poeng  # Legg til poengene for teamet
+
+    # Konverter dictionary til en sortert liste (høyest poengsum først)
+    resultat = [{"team": team, "poengsum": poeng} for team, poeng in team_poeng.items()]
+    resultat.sort(key=lambda x: x["poengsum"], reverse=True)
+
+    print(f"🏆 Totale poengsummer per team: {resultat}")  # Debugging
 
     return resultat

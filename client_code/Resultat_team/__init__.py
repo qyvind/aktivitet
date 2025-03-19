@@ -14,7 +14,9 @@ class Resultat_team(Resultat_teamTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-
+    team_resultater = anvil.server.call('hent_team_poengsummer')
+    self.team_resultat_repeating_panel.items = team_resultater
+    
     # Any code you write here will run before the form opens.
 
   def lukk_button_click(self, **event_args):

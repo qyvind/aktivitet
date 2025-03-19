@@ -19,7 +19,7 @@ components:
   - event_bindings: {click: lukk_button_click}
     layout_properties: {grid_position: 'FACYFA,RKQROA'}
     name: lukk_button
-    properties: {align: center, role: outlined-button, text: Lukk}
+    properties: {align: center, role: tonal-button, text: Lukk}
     type: Button
   layout_properties: {grid_position: 'VHIKZP,ZCJBQF'}
   name: outlined_card_1

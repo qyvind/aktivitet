@@ -1,0 +1,7 @@
+components:
+- layout_properties: {column: JKSDUP}
+  name: navn_label
+  properties: {}
+  type: Label
+container: {type: DataRowPanel}
+is_package: true

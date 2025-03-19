@@ -1,0 +1,11 @@
+components:
+- layout_properties: {column: JKSDUP}
+  name: team_label
+  properties: {}
+  type: Label
+- layout_properties: {column: VJQQOR}
+  name: poeng_label
+  properties: {}
+  type: Label
+container: {type: DataRowPanel}
+is_package: true

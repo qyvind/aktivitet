@@ -16,33 +16,7 @@ class Loggbok(LoggbokTemplate):
         self.week_offset_label.text = 0
         self.initier_uke(self.week_offset_label.text)
         self.sjekk_bruker()
-        # user = anvil.users.get_user()
-      
-        # if user:
-        #     deltagernavn = anvil.server.call("hent_bruker_record")
 
-        #     if ( deltagernavn or "").strip() == "":
-        #         # Feltet 'navn' er tomt
-        #         deltagernavn =self.spor_om_navn()
-                
-        #     self.deltager_label.text = deltagernavn
-        #     self.login_card.visible = False
-        #     self.loggbok_card.visible = True
-        #     #self.konkurransenavn.text,self.fradato.text, self.tildato.text = self.hent_konkurranse_info()
-
-        #     konkurransenavn, fradato, tildato = self.hent_konkurranse_info()
-            
-        #     if fradato:
-        #         fradato = fradato.strftime("%d.%m.%Y")
-        #     if tildato:
-        #         tildato = tildato.strftime("%d.%m.%Y")
-        #     self.konkurransenavn.text = konkurransenavn
-        #     self.fradato.text = fradato
-        #     self.tildato.text = tildato
-
-        # else:
-        #     self.loggbok_card.visible = False
-        #     self.login_card.visible = True
 
 
 
@@ -406,7 +380,9 @@ class Loggbok(LoggbokTemplate):
 
     def trekning_button_click(self, **event_args):
       """This method is called when the button is clicked"""
-      open_form("Trekninger")
+      week_info = self.get_week_info(self.week_offset_label.text)
+      print(week_info)
+      open_form("Trekninger", week_info['monday_date'])
       
     def hent_konkurranse_info(self):
         # Kall serverfunksjonen for å hente den første posten
@@ -475,15 +451,19 @@ class Loggbok(LoggbokTemplate):
         
         if user:
             # Hent oppdaterte brukerdata fra UserInfo-tabellen
-            navn = anvil.server.call("hent_brukernavn")
+            deltagerdata= anvil.server.call("hent_brukernavn")
+            # print(deltagerdata)
+            navn=deltagerdata['navn']
+            team=deltagerdata['team']
+            # print(navn, team)
             
     
             if not navn or navn.strip() == "":  # Forhindrer at None eller tom streng trigger navnespørsmål
                 # Feltet 'navn' er tomt – spør om navn
                 navn = self.spor_om_navn()
-                print('Navn etter spørsmål:', navn)
     
-            self.deltager_label.text = navn
+            self.deltager_label.text = deltagerdata['navn']
+            self.team_label.text = deltagerdata['team']
             self.login_card.visible = False
             self.loggbok_card.visible = True
     
@@ -506,3 +486,7 @@ class Loggbok(LoggbokTemplate):
         user = anvil.users.login_with_form(allow_remembered=30, allow_cancel=True)
         if user:
             self.sjekk_bruker()  # Oppdater UI med riktig navn fra UserInfo
+
+    def team_label_click(self,  **event_args):
+      """This method is called when the button is clicked"""
+      open_form('team_medlemmer',teamnavn=self.team_label.text)
