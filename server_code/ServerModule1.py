@@ -140,3 +140,72 @@ def hent_brukernavn():
 
       
 
+
+
+@anvil.server.callable
+def hent_poengsummer():
+    poeng_dict = {}
+
+    for rad in app_tables.aktivitet.search():
+        deltager = rad['deltager']  # Link til user-tabellen
+        poeng = rad['poeng']
+
+        if deltager:
+            if deltager not in poeng_dict:
+                poeng_dict[deltager] = 0
+            poeng_dict[deltager] += poeng
+
+    # Konverter til liste med navn hvis tilgjengelig, ellers e-post
+    resultat = []
+    for deltager, poeng in poeng_dict.items():
+        userinfo_rad = app_tables.userinfo.get(user=deltager)  # Hent userinfo basert på user-link
+        navn = userinfo_rad['navn'] if userinfo_rad else None  # Hent navn hvis tilgjengelig
+
+        # Fall tilbake til e-post hvis navn ikke finnes
+        resultat.append({
+            "deltager": navn if navn else deltager['email'],
+            "poeng": poeng
+        })
+
+    # Sorter etter poeng, høyest først
+    resultat.sort(key=lambda x: x["poeng"], reverse=True)
+
+    return resultat
+
+@anvil.server.callable
+def hent_ukens_premietrekning():
+    import datetime
+
+    # Finn dagens dato
+    idag = datetime.date.today()
+
+    # Finn mandagen i inneværende uke
+    mandag = idag - datetime.timedelta(days=idag.weekday())  # Mandag = weekday() == 0
+    søndag = mandag + datetime.timedelta(days=6)
+
+    # Dictionary for å holde styr på dager med poeng for hver deltaker
+    deltager_dager = {}
+
+    for rad in app_tables.aktivitet.search():
+        deltager = rad['deltager']
+        dato = rad['dato']  # Antar at 'dato' er en kolonne i 'aktivitet'
+
+        # Sjekk om datoen er innenfor inneværende uke
+        if mandag <= dato <= søndag:
+            if deltager:
+                if deltager not in deltager_dager:
+                    deltager_dager[deltager] = set()
+                deltager_dager[deltager].add(dato)  # Legg til unike datoer
+
+    # Filtrer ut deltakere med minst 5 ulike dager
+    kvalifiserte = [deltager for deltager, dager in deltager_dager.items() if len(dager) >= 5]
+
+    # Hent navn eller e-post for hver kvalifiserte deltaker
+    resultat = []
+    for deltager in kvalifiserte:
+        userinfo_rad = app_tables.userinfo.get(user=deltager)
+        navn = userinfo_rad['navn'] if userinfo_rad else None
+
+        resultat.append(navn if navn else deltager['email'])
+
+    return resultat

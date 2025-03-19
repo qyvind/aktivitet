@@ -1,21 +1,16 @@
-from ._anvil_designer import TrekningerTemplate
-from anvil import *
-import anvil.server
-import anvil.facebook.auth
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
-import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
-
-
 class Trekninger(TrekningerTemplate):
-  def __init__(self, **properties):
+  def __init__(self, aktiv_mandag=None, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
-    # Any code you write here will run before the form opens.
+    # Hvis ikke mandag er sendt inn, bruk dagens uke
+    if aktiv_mandag is None:
+      idag = datetime.date.today()
+      aktiv_mandag = idag - datetime.timedelta(days=idag.weekday())  # Finn mandagen i uken
+
+    # Kall serverfunksjonen med aktiv mandag
+    liste = anvil.server.call('hent_ukens_premietrekning', aktiv_mandag)
+    print(liste)
 
   def lukk_button_click(self, **event_args):
     """This method is called when the button is clicked"""
