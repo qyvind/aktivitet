@@ -15,6 +15,7 @@ components:
       columns:
       - {data_key: column_1, id: JKSDUP, title: Deltager}
       - {data_key: column_2, id: VJQQOR, title: Poeng}
+      - {data_key: column_1, id: LSHEHV, title: Team}
     type: DataGrid
   - event_bindings: {click: lukk_button_click}
     layout_properties: {grid_position: 'FACYFA,RKQROA'}

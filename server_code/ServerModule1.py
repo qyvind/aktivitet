@@ -201,37 +201,50 @@ def hent_brukernavn():
 
 
 
+
+
 @anvil.server.callable
 def hent_poengsummer():
     print('hent_poengsummer')
     poeng_dict = {}
 
+    # Hent alle brukere og initialiser dem med 0 poeng
+    for userinfo_rad in app_tables.userinfo.search():
+        deltager = userinfo_rad['user']
+        if deltager:
+            poeng_dict[deltager] = 0  # Start med 0 poeng
+
+    # Hent alle aktiviteter og summer poeng
     for rad in app_tables.aktivitet.search():
         deltager = rad['deltager']  # Link til user-tabellen
         poeng = rad['poeng']
 
         if deltager:
-            if deltager not in poeng_dict:
-                poeng_dict[deltager] = 0
             poeng_dict[deltager] += poeng
 
-    # Konverter til liste med navn hvis tilgjengelig, ellers e-post
+    # Konverter til liste med navn, e-post og team
     resultat = []
     for deltager, poeng in poeng_dict.items():
         userinfo_rad = app_tables.userinfo.get(user=deltager)  # Hent userinfo basert på user-link
         navn = userinfo_rad['navn'] if userinfo_rad else None  # Hent navn hvis tilgjengelig
+        email = deltager['email']  # Hent e-post direkte fra brukeren
+        
+        # Hent team hvis brukeren er knyttet til et
+        team = userinfo_rad['team']['team'] if userinfo_rad and userinfo_rad['team'] else "Ingen team"
 
-        # Fall tilbake til e-post hvis navn ikke finnes
+        # Fall tilbake til e-post hvis navn ikke finnes for deltager-feltet
         resultat.append({
-            "deltager": navn if navn else deltager['email'],
-            "poeng": poeng
+            "deltager": navn if navn else email,
+            "navn": navn,
+            "email": email,
+            "poeng": poeng,
+            "team": team
         })
 
     # Sorter etter poeng, høyest først
     resultat.sort(key=lambda x: x["poeng"], reverse=True)
 
     return resultat
-
 
 @anvil.server.callable
 def hent_ukens_premietrekning(mandag):

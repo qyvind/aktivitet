@@ -22,3 +22,4 @@ class RowTemplate6(RowTemplate6Template):
   def slett_team_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     anvil.server.call('slett_team',self.team_label.text)
+    open_form('admin')

@@ -30,10 +30,12 @@ class admin(adminTemplate):
     if self.enkeltbruker_card.visible==True:
       self.enkeltbruker_card.visible = False
       self.team_card.visible=False
+      self.bruker_card.visible = False 
     else:
       self.enkeltbruker_card.visible = True
       self.import_mang_card.visible = False
       self.team_card.visible=False
+      self.bruker_card.visible = False 
 
   def button_2_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -45,10 +47,12 @@ class admin(adminTemplate):
     if self.import_mang_card.visible == True:
       self.import_mang_card.visible = False
       self.team_card.visible=False
+      self.bruker_card.visible = False 
     else:
       self.import_mang_card.visible = True
       self.enkeltbruker_card.visible = False
       self.team_card.visible=False
+      self.bruker_card.visible = False 
 
   def button_4_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -59,14 +63,16 @@ class admin(adminTemplate):
     """This method is called when the button is clicked"""
     team_resultater = anvil.server.call('hent_team_poengsummer')
     self.team_repeating_panel.items = team_resultater
-    if self.team_card.visible == False:
-      self.team_card.visible=True
-      self.import_mang_card.visible = False
-      self.enkeltbruker_card.visible = False
-    else:
+    if self.team_card.visible == True:
       self.team_card.visible=False
       self.import_mang_card.visible = False
       self.enkeltbruker_card.visible = False
+      self.bruker_card.visible = False 
+    else:
+      self.team_card.visible=True
+      self.import_mang_card.visible = False
+      self.enkeltbruker_card.visible = False
+      self.bruker_card.visible = False 
 
   def label1_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -74,11 +80,26 @@ class admin(adminTemplate):
 
   def Opprett_team_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    anvil.server.call('opprett_nytt_team',self.nytt_team_box.text)
-    self.nytt_team_box.text = ""
-    team_resultater = anvil.server.call('hent_team_poengsummer')
-    self.team_repeating_panel.items = team_resultater
-    
+    if self.nytt_team_box.text != "":
+      anvil.server.call('opprett_nytt_team',self.nytt_team_box.text)
+      self.nytt_team_box.text = ""
+      team_resultater = anvil.server.call('hent_team_poengsummer')
+      self.team_repeating_panel.items = team_resultater
+
+  def brukere_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    if self.bruker_card.visible == True:
+      self.bruker_card.visible = False
+      self.team_card.visible=False
+      self.import_mang_card.visible = False
+      self.enkeltbruker_card.visible = False
+    else:
+      self.bruker_card.visible = True
+      self.team_card.visible=False
+      self.import_mang_card.visible = False
+      self.enkeltbruker_card.visible = False
+    liste = anvil.server.call('hent_poengsummer')
+    self.bruker_repeating_panel.items = liste
     
       
 
