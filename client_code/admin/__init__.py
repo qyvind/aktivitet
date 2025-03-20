@@ -27,7 +27,7 @@ class admin(adminTemplate):
 
   def button_3_click(self, **event_args):
     """This method is called when the button is clicked"""
-    if self.enkeltbruker_card.visible==True:
+    if self.enkeltbruker_card.visible:
       self.enkeltbruker_card.visible = False
       self.team_card.visible=False
       self.bruker_card.visible = False 
@@ -39,6 +39,7 @@ class admin(adminTemplate):
       self.bruker_card.visible = False 
       self.konk_card.visible=False
 
+
   def button_2_click(self, **event_args):
     """This method is called when the button is clicked"""
     
@@ -46,7 +47,7 @@ class admin(adminTemplate):
 
   def import_mang_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    if self.import_mang_card.visible == True:
+    if self.import_mang_card.visible:
       self.import_mang_card.visible = False
       self.team_card.visible=False
       self.bruker_card.visible = False 
@@ -67,7 +68,7 @@ class admin(adminTemplate):
     """This method is called when the button is clicked"""
     team_resultater = anvil.server.call('hent_team_poengsummer')
     self.team_repeating_panel.items = team_resultater
-    if self.team_card.visible == True:
+    if self.team_card.visible:
       self.team_card.visible=False
       self.import_mang_card.visible = False
       self.enkeltbruker_card.visible = False
@@ -94,7 +95,7 @@ class admin(adminTemplate):
 
   def brukere_click(self, **event_args):
     """This method is called when the button is clicked"""
-    if self.bruker_card.visible == True:
+    if self.bruker_card.visible:
       self.bruker_card.visible = False
       self.team_card.visible=False
       self.import_mang_card.visible = False
@@ -108,6 +109,7 @@ class admin(adminTemplate):
       self.konk_card.visible=False
     liste = anvil.server.call('hent_poengsummer')
     self.bruker_repeating_panel.items = liste
+    
 
   def konk_button_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -117,9 +119,9 @@ class admin(adminTemplate):
     self.til_date_picker.date = konkurranse_tildato
     self.fra_date_picker.format = "%d/%m-%y"
     self.til_date_picker.format = "%d/%m-%y"
-    if self.konk_card.visible==True:
+    if self.konk_card.visible:
       self.konk_card.visible=False
-      self.bruker_card.visible == False
+      self.bruker_card.visible = False
       self.team_card.visible=False
       self.import_mang_card.visible = False
       self.enkeltbruker_card.visible = False
