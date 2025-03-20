@@ -4,7 +4,7 @@ components:
     - event_bindings: {click: button_1_click}
       layout_properties: {}
       name: lukk_button
-      properties: {align: center, role: outlined-button, text: Lukk}
+      properties: {align: center, role: filled-button, text: Lukk}
       type: Button
     layout_properties: {grid_position: 'WHMDOQ,MGWKZE'}
     name: rich_text_1
@@ -97,7 +97,7 @@ components:
     type: RichText
   layout_properties: {grid_position: 'JKCUTA,SPCTSY'}
   name: column_panel_1
-  properties: {role: elevated-card}
+  properties: {role: tonal-card}
   type: ColumnPanel
 container: {type: ColumnPanel}
 is_package: true
