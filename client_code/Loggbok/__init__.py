@@ -456,14 +456,15 @@ class Loggbok(LoggbokTemplate):
             navn=deltagerdata['navn']
             team=deltagerdata['team']
             # print(navn, team)
-            
+            self.deltager_label.text = deltagerdata['navn']
+            self.team_label.text = deltagerdata['team']
     
             if not navn or navn.strip() == "":  # Forhindrer at None eller tom streng trigger navnespørsmål
                 # Feltet 'navn' er tomt – spør om navn
                 navn = self.spor_om_navn()
+                self.deltager_label.text = navn
     
-            self.deltager_label.text = deltagerdata['navn']
-            self.team_label.text = deltagerdata['team']
+            
             self.login_card.visible = False
             self.loggbok_card.visible = True
     
