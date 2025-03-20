@@ -68,6 +68,7 @@ components:
         properties: {text: 'Deltager:'}
         type: Label
       - components: []
+        event_bindings: {click: deltager_label_click}
         layout_properties: {}
         name: deltager_label
         properties: {text: Donald Duck}
@@ -451,11 +452,6 @@ components:
     name: outlined_card_1
     properties: {background: 'theme:Secondary Container', role: outlined-card}
     type: ColumnPanel
-  - event_bindings: {click: admin_button_click}
-    layout_properties: {grid_position: 'UVTCQS,LEMPRV'}
-    name: admin_button
-    properties: {icon: 'fa:adn', text: '', visible: false}
-    type: Button
   layout_properties: {grid_position: 'LRHKJM,PNXCFA', row_background: ''}
   name: loggbok_card
   properties: {background: 'theme:Tertiary Container', role: outlined-card, visible: true}
