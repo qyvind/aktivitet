@@ -13,6 +13,10 @@ components:
       margin: ['2', null, '2', null]
       padding: ['2', null, '2', null]
   type: Label
+- layout_properties: {column: LSHEHV}
+  name: team_label
+  properties: {}
+  type: Label
 container:
   properties: {font_size: 10}
   type: DataRowPanel

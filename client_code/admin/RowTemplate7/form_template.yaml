@@ -1,0 +1,19 @@
+components:
+- layout_properties: {column: JKSDUP}
+  name: email_label
+  properties: {}
+  type: Label
+- layout_properties: {column: VJQQOR}
+  name: navn_label
+  properties: {}
+  type: Label
+- layout_properties: {column: OJLQEN}
+  name: poeng_label
+  properties: {text: ''}
+  type: Label
+- layout_properties: {column: PJMSOR}
+  name: team_label
+  properties: {text: ''}
+  type: Label
+container: {type: DataRowPanel}
+is_package: true

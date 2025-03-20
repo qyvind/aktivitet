@@ -1,0 +1,16 @@
+components:
+- layout_properties: {column: JKSDUP}
+  name: team_label
+  properties: {}
+  type: Label
+- layout_properties: {column: OJLQEN}
+  name: poeng_label
+  properties: {}
+  type: Label
+- event_bindings: {click: slett_team_button_click}
+  layout_properties: {column: KFHMOZ}
+  name: slett_team_button
+  properties: {foreground: 'theme:Error', icon: 'fa:trash', text: ''}
+  type: Button
+container: {type: DataRowPanel}
+is_package: true
