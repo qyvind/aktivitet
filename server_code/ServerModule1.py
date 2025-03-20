@@ -10,23 +10,27 @@ import anvil.server
 
 @anvil.server.callable
 def add_aktivitet(aktivitet):
+  print('add_aktivitet')
   
   if aktivitet.get('dato') and aktivitet.get('aktivitet') and aktivitet.get('poeng') :
     app_tables.aktivitet.add_row(**aktivitet)
 
 @anvil.server.callable
 def update_aktivitet(aktivitet, aktivitet_data):
+  print('update_aktivitet')
   
   if aktivitet_data['dato'] and aktivitet_data['aktivitet'] and aktivitet_data['poeng']: 
     aktivitet.update(**aktivitet_data)
 
 @anvil.server.callable
 def delete_aktivitet(aktivitet):
+  print('delete_aktivitet')
   aktivitet.delete()
 
 
 @anvil.server.callable
 def batch_create_users(user_list):
+    print('batch_create_users')
     for user in user_list:
         email, password = user["email"], user["password"]
 
@@ -46,6 +50,7 @@ def batch_create_users(user_list):
 
 @anvil.server.callable
 def lagre_aktivitet(dato, aktivitet, poeng):
+    print('lagre_aktivitet')
     user = anvil.users.get_user()
     if not user:
         raise Exception("Ingen bruker er pålogget")
@@ -70,6 +75,7 @@ def lagre_aktivitet(dato, aktivitet, poeng):
 
 @anvil.server.callable
 def hent_konkurranse():
+    print('hent_konkurranse')
     # Hent alle poster med record lik 1
     konkurranse_records = app_tables.konkurranse.search(record=1)
     # Returner den første posten dersom den finnes, ellers None
@@ -77,6 +83,7 @@ def hent_konkurranse():
 
 @anvil.server.callable
 def lagre_trekning(uke_mandag):
+    print('lagre_trekning')
     # Hent den påloggede brukeren
     user = anvil.users.get_user()
     if not user:
@@ -93,6 +100,7 @@ def lagre_trekning(uke_mandag):
 
 @anvil.server.callable
 def slett_trekning(uke_mandag):
+    print('slett_trekning')
     # Hent den påloggede brukeren
     user = anvil.users.get_user()
     if not user:
@@ -107,6 +115,7 @@ def slett_trekning(uke_mandag):
 
 @anvil.server.callable
 def oppdater_brukernavn(nytt_navn):
+    print('oppdater_brukernavn')
     # Hent den påloggede brukeren
     user = anvil.users.get_user()
     if not user:
@@ -127,6 +136,7 @@ def oppdater_brukernavn(nytt_navn):
 
 @anvil.server.callable
 def hent_brukernavn():
+    print('hent_brukernavn')
     user = anvil.users.get_user()
     if not user:
         raise Exception("Bruker ikke logget inn")
@@ -163,6 +173,7 @@ def hent_brukernavn():
 
 @anvil.server.callable
 def hent_poengsummer():
+    print('hent_poengsummer')
     poeng_dict = {}
 
     for rad in app_tables.aktivitet.search():
@@ -194,6 +205,7 @@ def hent_poengsummer():
 
 @anvil.server.callable
 def hent_ukens_premietrekning(mandag):
+    print('hent_ukens_premietrekning')
     import datetime
 
     # Sørg for at mandag er en date-type (dersom det blir sendt som en datetime)
@@ -231,6 +243,7 @@ def hent_ukens_premietrekning(mandag):
 
 @anvil.server.callable
 def hent_teammedlemmer(team_navn):
+    print('hent_teammedlemmer')
     # Finn team-raden basert på navn
     team_record = app_tables.team.get(team=team_navn)
 
@@ -252,6 +265,7 @@ def hent_teammedlemmer(team_navn):
 
 @anvil.server.callable
 def hent_team_poengsummer():
+    print('hent_team_poengsummer')
     # Dictionary for å holde styr på poeng per team
     team_poeng = {}
 

@@ -68,6 +68,7 @@ components:
         properties: {text: 'Deltager:'}
         type: Label
       - components: []
+        event_bindings: {click: deltager_label_click}
         layout_properties: {}
         name: deltager_label
         properties: {text: Donald Duck}
