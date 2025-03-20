@@ -23,14 +23,14 @@ components:
       - {data_key: column_1, id: JKSDUP, title: Teammedlemmer}
       - {data_key: column_1, id: MHDFRT, title: Poeng}
     type: DataGrid
+  - event_bindings: {click: button_1_click}
+    layout_properties: {grid_position: 'XNTNUE,WCTYOF'}
+    name: button_1
+    properties: {role: filled-button, text: Lukk}
+    type: Button
   layout_properties: {grid_position: 'JGWVRR,GGHDGL'}
   name: outlined_card_1
   properties: {role: tonal-card}
   type: ColumnPanel
-- event_bindings: {click: button_1_click}
-  layout_properties: {grid_position: 'PKLWMN,DWPJOY'}
-  name: button_1
-  properties: {role: tonal-button, text: Lukk}
-  type: Button
 container: {type: ColumnPanel}
 is_package: true
