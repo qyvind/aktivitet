@@ -31,11 +31,13 @@ class admin(adminTemplate):
       self.enkeltbruker_card.visible = False
       self.team_card.visible=False
       self.bruker_card.visible = False 
+      self.konk_card.visible=False
     else:
       self.enkeltbruker_card.visible = True
       self.import_mang_card.visible = False
       self.team_card.visible=False
       self.bruker_card.visible = False 
+      self.konk_card.visible=False
 
   def button_2_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -48,11 +50,13 @@ class admin(adminTemplate):
       self.import_mang_card.visible = False
       self.team_card.visible=False
       self.bruker_card.visible = False 
+      self.konk_card.visible=False
     else:
       self.import_mang_card.visible = True
       self.enkeltbruker_card.visible = False
       self.team_card.visible=False
       self.bruker_card.visible = False 
+      self.konk_card.visible=False
 
   def button_4_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -68,11 +72,13 @@ class admin(adminTemplate):
       self.import_mang_card.visible = False
       self.enkeltbruker_card.visible = False
       self.bruker_card.visible = False 
+      self.konk_card.visible=False
     else:
       self.team_card.visible=True
       self.import_mang_card.visible = False
       self.enkeltbruker_card.visible = False
       self.bruker_card.visible = False 
+      self.konk_card.visible=False
 
   def label1_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -93,11 +99,13 @@ class admin(adminTemplate):
       self.team_card.visible=False
       self.import_mang_card.visible = False
       self.enkeltbruker_card.visible = False
+      self.konk_card.visible=False
     else:
       self.bruker_card.visible = True
       self.team_card.visible=False
       self.import_mang_card.visible = False
       self.enkeltbruker_card.visible = False
+      self.konk_card.visible=False
     liste = anvil.server.call('hent_poengsummer')
     self.bruker_repeating_panel.items = liste
 
@@ -107,6 +115,20 @@ class admin(adminTemplate):
     self.konkurransenavn_label.text = konkurransenavn
     self.fra_date_picker.date = konkurranse_fradato
     self.til_date_picker.date = konkurranse_tildato
+    self.fra_date_picker.format = "%d/%m-%y"
+    self.til_date_picker.format = "%d/%m-%y"
+    if self.konk_card.visible==True:
+      self.konk_card.visible=False
+      self.bruker_card.visible == False
+      self.team_card.visible=False
+      self.import_mang_card.visible = False
+      self.enkeltbruker_card.visible = False
+    else:
+      self.konk_card.visible=True
+      self.bruker_card.visible = False
+      self.team_card.visible=False
+      self.import_mang_card.visible = False
+      self.enkeltbruker_card.visible = False
 
   def hent_konkurranse_info(self):
       # Kall serverfunksjonen for å hente den første posten
@@ -119,6 +141,10 @@ class admin(adminTemplate):
           return konkurransenavn, fradato, tildato
       else:
           return None, None, None
+
+  def lagre_konkurranse_button_click(self, **event_args):
+    anvil.server.call('lagre_konkurranse',self.konkurransenavn_label.text,self.fra_date_picker.date,self.til_date_picker.date)
+    
 
       
 

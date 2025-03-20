@@ -453,3 +453,30 @@ def slett_team(team_navn):
     team.delete()
     print(f"Team {team_navn} er slettet.")
     return "Team slettet!"
+
+@anvil.server.callable
+def lagre_konkurranse(konkurransenavn, fradato, tildato):
+    print(f'Lagrer konkurranse: {konkurransenavn}, {fradato}, {tildato}')
+    
+    # Sjekk om konkurransen allerede finnes
+    konkurranse_record = app_tables.konkurranse.get(record=1)
+    
+    if konkurranse_record:
+        # Oppdater eksisterende rekord
+        konkurranse_record.update(
+            konkurransenavn=konkurransenavn,
+            fradato=fradato,
+            tildato=tildato
+        )
+        print("Eksisterende konkurranse oppdatert.")
+    else:
+        # Opprett ny rekord
+        app_tables.konkurranse.add_row(
+            record=1,
+            konkurransenavn=konkurransenavn,
+            fradato=fradato,
+            tildato=tildato
+        )
+        print("Ny konkurranse opprettet.")
+    
+    return "Konkurranse lagret!"
