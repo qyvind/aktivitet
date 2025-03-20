@@ -56,8 +56,9 @@ components:
       - name: label_6
         properties: {text: 'Navn:'}
         type: Label
-      - name: navn_box
-        properties: {align: center}
+      - layout_properties: {}
+        name: navn_box
+        properties: {align: left}
         type: TextBox
       layout_properties: {grid_position: 'JYOBJZ,NHVYHH'}
       name: flow_panel_6
@@ -67,8 +68,9 @@ components:
       - name: label_7
         properties: {text: 'Passord:'}
         type: Label
-      - name: passord_box
-        properties: {align: center}
+      - layout_properties: {}
+        name: passord_box
+        properties: {align: left}
         type: TextBox
       layout_properties: {grid_position: 'OOITBL,ZLMYUH'}
       name: flow_panel_7

@@ -41,9 +41,9 @@ class Loggbok(LoggbokTemplate):
         if button.text in states:
             button.text, button.foreground, columnpanel.background = states[button.text]
         else:
-            print("button not in states")
+            #print("button not in states")
               # Initialiser text_box med en default-verdi
-        text_box = type('Dummy', (object,), {"text": ""})()  # Oppretter et objekt med et tomt text-attributt
+          text_box = type('Dummy', (object,), {"text": ""})()  # Oppretter et objekt med et tomt text-attributt
         if button.text == "1":
             """Viser en popup for å spørre om tekst og oppdaterer en label"""
             text_box = TextBox(placeholder="Skriv her...",text=label.text)
@@ -216,7 +216,7 @@ class Loggbok(LoggbokTemplate):
                 dato=q.between(start_of_week, end_of_week + timedelta(days=1))  # Filtrer på datoer
             )
         except Exception as e:
-            print(f"Error fetching activities: {e}")
+            #print(f"Error fetching activities: {e}")
             return {}
         
         # Organisere aktivitetene i en liste med 7 dager (0=Mandag, 6=Søndag)
@@ -348,9 +348,11 @@ class Loggbok(LoggbokTemplate):
     def lagre_aktivitet(self, dato, aktivitet, poeng):
         try:
             result = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng)
-            print(result)
+            #print(result)
         except Exception as e:
             print(f"Error saving activity: {e}")
+            
+          
           
     def get_farge(self, poeng_verdi):
       # Definerer farge for hver verdi
@@ -381,7 +383,7 @@ class Loggbok(LoggbokTemplate):
     def trekning_button_click(self, **event_args):
       """This method is called when the button is clicked"""
       week_info = self.get_week_info(self.week_offset_label.text)
-      print(week_info)
+      #print(week_info)
       open_form("Trekninger", week_info['monday_date'])
       
     def hent_konkurranse_info(self):

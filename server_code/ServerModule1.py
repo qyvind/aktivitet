@@ -10,21 +10,21 @@ import anvil.server
 
 @anvil.server.callable
 def add_aktivitet(aktivitet):
-  print('add_aktivitet')
+  #print('add_aktivitet')
   
   if aktivitet.get('dato') and aktivitet.get('aktivitet') and aktivitet.get('poeng') :
     app_tables.aktivitet.add_row(**aktivitet)
 
 @anvil.server.callable
 def update_aktivitet(aktivitet, aktivitet_data):
-  print('update_aktivitet')
+  #print('update_aktivitet')
   
   if aktivitet_data['dato'] and aktivitet_data['aktivitet'] and aktivitet_data['poeng']: 
     aktivitet.update(**aktivitet_data)
 
 @anvil.server.callable
 def delete_aktivitet(aktivitet):
-  print('delete_aktivitet')
+  #print('delete_aktivitet')
   aktivitet.delete()
 
 
@@ -36,10 +36,10 @@ import anvil.users
 
 @anvil.server.callable
 def batch_create_users(user_list):
-    print('batch_create_users')
+    #print('batch_create_users')
 
     if not isinstance(user_list, list):
-        print("Feil: Forventet en liste over brukere, men fikk noe annet.")
+        #print("Feil: Forventet en liste over brukere, men fikk noe annet.")
         return "Feil: Dataformat er ikke gyldig."
 
     for user in user_list:
@@ -53,18 +53,18 @@ def batch_create_users(user_list):
             matching_users = [u for u in existing_users if u['email'].strip().lower() == email]
 
             if matching_users:
-                print(f"Bruker {email} finnes allerede, hopper over.")
+                #print(f"Bruker {email} finnes allerede, hopper over.")
                 continue
 
             # Opprett ny bruker
             anvil.users.signup_with_email(email, password)
-            print(f"Bruker {email} opprettet.")
+            #print(f"Bruker {email} opprettet.")
 
             # Hent den opprettede brukeren igjen
             created_user = app_tables.users.get(email=email)
             if created_user:
                 app_tables.userinfo.add_row(user=created_user, navn=navn)
-                print(f"Bruker {email} opprettet med navn {navn}.")
+                #print(f"Bruker {email} opprettet med navn {navn}.")
             else:
                 print(f"Kunne ikke finne brukeren {email} etter opprettelse.")
 
@@ -80,7 +80,7 @@ def batch_create_users(user_list):
 
 @anvil.server.callable
 def lagre_aktivitet(dato, aktivitet, poeng):
-    print('lagre_aktivitet')
+    #print('lagre_aktivitet')
     user = anvil.users.get_user()
     if not user:
         raise Exception("Ingen bruker er pålogget")
@@ -105,7 +105,7 @@ def lagre_aktivitet(dato, aktivitet, poeng):
 
 @anvil.server.callable
 def hent_konkurranse():
-    print('hent_konkurranse')
+    #print('hent_konkurranse')
     # Hent alle poster med record lik 1
     konkurranse_records = app_tables.konkurranse.search(record=1)
     # Returner den første posten dersom den finnes, ellers None
@@ -130,7 +130,7 @@ def lagre_trekning(uke_mandag):
 
 @anvil.server.callable
 def slett_trekning(uke_mandag):
-    print('slett_trekning')
+    #print('slett_trekning')
     # Hent den påloggede brukeren
     user = anvil.users.get_user()
     if not user:
@@ -145,7 +145,7 @@ def slett_trekning(uke_mandag):
 
 @anvil.server.callable
 def oppdater_brukernavn(nytt_navn):
-    print('oppdater_brukernavn')
+    #print('oppdater_brukernavn')
     # Hent den påloggede brukeren
     user = anvil.users.get_user()
     if not user:
@@ -166,7 +166,7 @@ def oppdater_brukernavn(nytt_navn):
 
 @anvil.server.callable
 def hent_brukernavn():
-    print('hent_brukernavn')
+    #print('hent_brukernavn')
     user = anvil.users.get_user()
     if not user:
         raise Exception("Bruker ikke logget inn")
@@ -207,7 +207,7 @@ import anvil.server
 
 @anvil.server.callable
 def hent_poengsummer():
-    print('hent_poengsummer')
+    #print('hent_poengsummer')
     poeng_dict = {}
 
     # Hent alle brukere og initialiser dem med 0 poeng
@@ -253,7 +253,7 @@ def hent_poengsummer():
 
 @anvil.server.callable
 def hent_ukens_premietrekning(mandag):
-    print('hent_ukens_premietrekning')
+    #print('hent_ukens_premietrekning')
     import datetime
 
     # Sørg for at mandag er en date-type (dersom det blir sendt som en datetime)
@@ -291,41 +291,11 @@ def hent_ukens_premietrekning(mandag):
 
 
 
-# @anvil.server.callable
-# def hent_team_poengsummer():
-#     print('hent_team_poengsummer')
-#     # Dictionary for å holde styr på poeng per team
-#     team_poeng = {}
 
-#     # Hent alle brukere med tilhørende team
-#     for userinfo in app_tables.userinfo.search():
-#         team = userinfo['team']  # Henter team-raden
-#         bruker = userinfo['user']  # Henter bruker-raden
-
-#         if team and bruker:  # Sjekk at begge eksisterer
-#             team_navn = team['team']  # Hent team-navn fra team-tabellen
-
-#             # Initialiser teamet i dictionary hvis det ikke finnes
-#             if team_navn not in team_poeng:
-#                 team_poeng[team_navn] = 0
-
-#             # Hent brukerens totale poengsum fra aktivitet-tabellen
-#             bruker_poeng = sum(rad['poeng'] for rad in app_tables.aktivitet.search(deltager=bruker))
-#             team_poeng[team_navn] += bruker_poeng  # Legg til poengene for teamet
-
-#     # Konverter dictionary til en sortert liste (høyest poengsum først)
-#     resultat = [{"team": team, "poengsum": poeng} for team, poeng in team_poeng.items()]
-#     resultat.sort(key=lambda x: x["poengsum"], reverse=True)
-
-#     print(f"🏆 Totale poengsummer per team: {resultat}")  # Debugging
-
-#     return resultat
-
-import anvil.server
 
 @anvil.server.callable
 def hent_team_poengsummer():
-    print('hent_team_poengsummer')
+    #print('hent_team_poengsummer')
     # Dictionary for å holde styr på poeng per team
     team_poeng = {}
 
@@ -358,12 +328,12 @@ def hent_team_poengsummer():
 
 @anvil.server.callable
 def create_user(email, name, password, team_name=None):
-    print(f"Oppretter bruker: {email}")
+   # print(f"Oppretter bruker: {email}")
 
     # Sjekk om brukeren allerede finnes
     existing_users = app_tables.users.search(email=email)
     if len(existing_users) > 0:
-        print(f"Bruker {email} finnes allerede.")
+        #print(f"Bruker {email} finnes allerede.")
         return "Bruker finnes allerede."
 
     # Opprett ny bruker med Anvils innebygde metode
@@ -388,13 +358,13 @@ def create_user(email, name, password, team_name=None):
 
 @anvil.server.callable
 def hent_teammedlemmer(team_navn):
-    print(f"Henter medlemmer og poeng for team: {team_navn}")
+    #print(f"Henter medlemmer og poeng for team: {team_navn}")
     
     # Finn team-raden basert på navn
     team_record = app_tables.team.get(team=team_navn)
 
     if not team_record:
-        print(f"❌ Fant ikke team med navn: {team_navn}")
+        #print(f"❌ Fant ikke team med navn: {team_navn}")
         return []
 
     # Hent alle brukere i userinfo-tabellen som er tilknyttet dette teamet
@@ -415,48 +385,48 @@ def hent_teammedlemmer(team_navn):
         # Legg til i listen
         team_liste.append({"navn": navn, "poeng": poengsum})
 
-    print(f"🏆 Teammedlemmer i {team_navn}: {team_liste}")
+    #print(f"🏆 Teammedlemmer i {team_navn}: {team_liste}")
     return team_liste
 
 @anvil.server.callable
 def opprett_nytt_team(team_navn):
-    print(f'Oppretter nytt team: {team_navn}')
+    #print(f'Oppretter nytt team: {team_navn}')
     
     # Sjekk om teamet allerede finnes
     eksisterende_team = app_tables.team.get(team=team_navn)
     if eksisterende_team:
-        print(f"Team {team_navn} finnes allerede.")
+        #print(f"Team {team_navn} finnes allerede.")
         return "Teamet finnes allerede!"
     
     # Opprett nytt team
     app_tables.team.add_row(team=team_navn)
-    print(f"Team {team_navn} opprettet!")
+    #print(f"Team {team_navn} opprettet!")
     return "Team opprettet!"
 
 @anvil.server.callable
 def slett_team(team_navn):
-    print(f'Forsøker å slette team: {team_navn}')
+    #print(f'Forsøker å slette team: {team_navn}')
     
     # Finn teamet i databasen
     team = app_tables.team.get(team=team_navn)
     if not team:
-        print(f"Team {team_navn} finnes ikke.")
+        #print(f"Team {team_navn} finnes ikke.")
         return "Teamet finnes ikke!"
     
     # Sjekk om det finnes brukere i dette teamet
     medlemmer = app_tables.userinfo.search(team=team)
     if len(medlemmer) > 0:
-        print(f"Kan ikke slette {team_navn}, det har medlemmer.")
+        #print(f"Kan ikke slette {team_navn}, det har medlemmer.")
         return "Kan ikke slette teamet, det har medlemmer!"
     
     # Slett teamet
     team.delete()
-    print(f"Team {team_navn} er slettet.")
+    #print(f"Team {team_navn} er slettet.")
     return "Team slettet!"
 
 @anvil.server.callable
 def lagre_konkurranse(konkurransenavn, fradato, tildato):
-    print(f'Lagrer konkurranse: {konkurransenavn}, {fradato}, {tildato}')
+    #print(f'Lagrer konkurranse: {konkurransenavn}, {fradato}, {tildato}')
     
     # Sjekk om konkurransen allerede finnes
     konkurranse_record = app_tables.konkurranse.get(record=1)
@@ -468,7 +438,7 @@ def lagre_konkurranse(konkurransenavn, fradato, tildato):
             fradato=fradato,
             tildato=tildato
         )
-        print("Eksisterende konkurranse oppdatert.")
+        #print("Eksisterende konkurranse oppdatert.")
     else:
         # Opprett ny rekord
         app_tables.konkurranse.add_row(
@@ -477,7 +447,7 @@ def lagre_konkurranse(konkurransenavn, fradato, tildato):
             fradato=fradato,
             tildato=tildato
         )
-        print("Ny konkurranse opprettet.")
+        #print("Ny konkurranse opprettet.")
     
     return "Konkurranse lagret!"
 
