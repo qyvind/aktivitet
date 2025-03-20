@@ -1,36 +1,137 @@
 components:
 - components:
-  - layout_properties: {}
-    name: label_1
-    properties: {align: center, text: Lag enkeltbruker}
-    type: Label
-  layout_properties: {grid_position: 'SERAST,LDLZWP'}
-  name: flow_panel_1
-  properties: {align: center}
-  type: FlowPanel
+  - components:
+    - event_bindings: {click: button_3_click}
+      layout_properties: {}
+      name: button_3
+      properties: {text: Lag enkeltbruker}
+      type: Button
+    layout_properties: {grid_position: 'PDOHFX,TLMROV'}
+    name: flow_panel_1
+    properties: {align: center}
+    type: FlowPanel
+  - components:
+    - components:
+      - layout_properties: {}
+        name: label_5
+        properties: {text: 'epost:'}
+        type: Label
+      - layout_properties: {width: 173.428822265625}
+        name: epost_box
+        properties: {}
+        type: TextBox
+      layout_properties: {grid_position: 'DRKIIO,EHSVQD'}
+      name: flow_panel_5
+      properties: {align: center}
+      type: FlowPanel
+    - components:
+      - name: label_6
+        properties: {text: 'Navn:'}
+        type: Label
+      - name: navn_box
+        properties: {align: center}
+        type: TextBox
+      layout_properties: {grid_position: 'JYOBJZ,NHVYHH'}
+      name: flow_panel_6
+      properties: {align: center}
+      type: FlowPanel
+    - components:
+      - name: label_7
+        properties: {text: 'Passord:'}
+        type: Label
+      - name: passord_box
+        properties: {align: center}
+        type: TextBox
+      layout_properties: {grid_position: 'OOITBL,ZLMYUH'}
+      name: flow_panel_7
+      properties: {align: center}
+      type: FlowPanel
+    - components:
+      - name: team_label
+        properties: {}
+        type: Label
+      - name: team_drop
+        properties: {}
+        type: DropDown
+      layout_properties: {grid_position: 'DLEEJM,DVCZEV'}
+      name: flow_panel_8
+      properties: {align: center}
+      type: FlowPanel
+    - event_bindings: {click: button_2_click}
+      layout_properties: {grid_position: 'OCPVSN,WTZQKK'}
+      name: button_2
+      properties: {role: tonal-button, text: Lag bruker, visible: true}
+      type: Button
+    layout_properties: {grid_position: 'SYZSGX,SXLCKE'}
+    name: enkeltbruker_card
+    properties: {role: outlined-card, visible: false}
+    type: ColumnPanel
+  layout_properties: {grid_position: 'DJZTTS,OKSYEP'}
+  name: outlined_card_1
+  properties: {role: outlined-card}
+  type: ColumnPanel
 - components:
-  - layout_properties: {}
-    name: label_3
-    properties: {text: Importere mange brukere}
-    type: Label
-  layout_properties: {grid_position: 'BROAJC,EYDHUK'}
-  name: flow_panel_3
-  properties: {align: center}
-  type: FlowPanel
+  - components:
+    - event_bindings: {click: import_mang_button_click}
+      layout_properties: {}
+      name: import_mang_button
+      properties: {text: Importer mange brukere}
+      type: Button
+    layout_properties: {grid_position: 'HSPDKX,EBLVIB'}
+    name: flow_panel_9
+    properties: {align: center}
+    type: FlowPanel
+  - components:
+    - components:
+      - layout_properties: {}
+        name: label_1
+        properties:
+          text: "Paste inn en brukerliste på dette formatet:\n[\n{\"email\":\"abc@framo.no\",\"navn\":\"Ole Olsen\",password\":\"123123\"},\n{\"email\":\"def@framo.no\",,\"navn\":\"Hans Hansen\",\"password\":\"345345\"}\n] "
+        type: Label
+      layout_properties: {grid_position: 'JQQQJK,TMVFDG'}
+      name: flow_panel_3
+      properties: {}
+      type: FlowPanel
+    - layout_properties: {grid_position: 'XZJZNR,CIEUFV'}
+      name: text_box_1
+      properties: {}
+      type: TextBox
+    - layout_properties: {grid_position: 'KXWUJW,LUZKXG'}
+      name: button_4
+      properties: {role: tonal-button, text: Opprett mange på en gang}
+      type: Button
+    layout_properties: {grid_position: 'UMEOVY,JQZGGS'}
+    name: import_mang_card
+    properties: {role: outlined-card, visible: false}
+    type: ColumnPanel
+  layout_properties: {grid_position: 'GJXLVI,ATHCGL'}
+  name: outlined_card_2
+  properties: {role: outlined-card}
+  type: ColumnPanel
 - components:
-  - layout_properties: {}
-    name: label_2
-    properties: {text: Admin teams}
-    type: Label
-  layout_properties: {grid_position: 'IKOJKH,IPZMZK'}
-  name: flow_panel_2
-  properties: {align: center}
-  type: FlowPanel
+  - components:
+    - layout_properties: {}
+      name: label_2
+      properties: {text: Admin teams}
+      type: Label
+    layout_properties: {grid_position: 'FXAIQJ,MLADYY'}
+    name: flow_panel_2
+    properties: {align: center}
+    type: FlowPanel
+  layout_properties: {grid_position: 'TDUQMG,HKEXGO'}
+  name: outlined_card_3
+  properties: {role: outlined-card}
+  type: ColumnPanel
 - components:
-  - layout_properties: {}
+  - layout_properties: {grid_position: 'KANHKC,BHDHHN'}
     name: label_4
-    properties: {text: Sjekk bruker}
+    properties: {align: center, text: Admin brukere}
     type: Label
+  layout_properties: {grid_position: 'CFDFNB,AHWBTU'}
+  name: outlined_card_4
+  properties: {role: outlined-card}
+  type: ColumnPanel
+- components: []
   layout_properties: {grid_position: 'MTZIQU,FXVUGJ'}
   name: flow_panel_4
   properties: {align: center}

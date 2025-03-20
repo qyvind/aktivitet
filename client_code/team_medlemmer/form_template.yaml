@@ -20,6 +20,7 @@ components:
   properties:
     columns:
     - {data_key: column_1, id: JKSDUP, title: Teammedlemmer}
+    - {data_key: column_1, id: MHDFRT, title: Poeng}
   type: DataGrid
 - event_bindings: {click: button_1_click}
   layout_properties: {grid_position: 'PKLWMN,DWPJOY'}
