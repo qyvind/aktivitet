@@ -13,12 +13,24 @@ components:
   type: Label
 - components:
   - event_bindings: {click: save_team_button_click}
+    layout_properties: {}
     name: save_team_button
-    properties: {foreground: blue, icon: 'fa:save', text: ''}
+    properties:
+      foreground: blue
+      icon: fa:save
+      spacing:
+        padding: [null, '2', null, '2']
+      text: ''
     type: Button
   - event_bindings: {click: slett_bruker_click}
+    layout_properties: {}
     name: slett_bruker
-    properties: {foreground: 'theme:Error', icon: 'fa:trash', text: ''}
+    properties:
+      foreground: theme:Error
+      icon: fa:trash
+      spacing:
+        padding: [null, '2', null, '2']
+      text: ''
     type: Button
   layout_properties: {column: TTMEJE}
   name: flow_panel_1
