@@ -451,10 +451,10 @@ components:
     name: outlined_card_1
     properties: {background: 'theme:Secondary Container', role: outlined-card}
     type: ColumnPanel
-  - event_bindings: {click: button_3_click}
+  - event_bindings: {click: admin_button_click}
     layout_properties: {grid_position: 'UVTCQS,LEMPRV'}
-    name: button_3
-    properties: {icon: 'fa:adn', text: '', visible: true}
+    name: admin_button
+    properties: {icon: 'fa:adn', text: '', visible: false}
     type: Button
   layout_properties: {grid_position: 'LRHKJM,PNXCFA', row_background: ''}
   name: loggbok_card
