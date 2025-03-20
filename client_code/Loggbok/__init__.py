@@ -491,3 +491,10 @@ class Loggbok(LoggbokTemplate):
     def team_label_click(self,  **event_args):
       """This method is called when the button is clicked"""
       open_form('team_medlemmer',teamnavn=self.team_label.text)
+
+    def button_3_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      
+      user = anvil.users.get_user()
+      print(user)
+      open_form('admin')

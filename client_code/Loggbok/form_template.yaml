@@ -451,6 +451,11 @@ components:
     name: outlined_card_1
     properties: {background: 'theme:Secondary Container', role: outlined-card}
     type: ColumnPanel
+  - event_bindings: {click: button_3_click}
+    layout_properties: {grid_position: 'UVTCQS,LEMPRV'}
+    name: button_3
+    properties: {icon: 'fa:adn', text: '', visible: true}
+    type: Button
   layout_properties: {grid_position: 'LRHKJM,PNXCFA', row_background: ''}
   name: loggbok_card
   properties: {background: 'theme:Tertiary Container', role: outlined-card, visible: true}
