@@ -11,14 +11,22 @@ components:
   name: poeng_label
   properties: {text: ''}
   type: Label
-- layout_properties: {column: PJMSOR}
-  name: team_label
-  properties: {text: ''}
-  type: Label
-- event_bindings: {click: slett_bruker_click}
+- components:
+  - event_bindings: {click: save_team_button_click}
+    name: save_team_button
+    properties: {foreground: blue, icon: 'fa:save', text: ''}
+    type: Button
+  - event_bindings: {click: slett_bruker_click}
+    name: slett_bruker
+    properties: {foreground: 'theme:Error', icon: 'fa:trash', text: ''}
+    type: Button
   layout_properties: {column: TTMEJE}
-  name: slett_bruker
-  properties: {foreground: 'theme:Error', icon: 'fa:trash', text: ''}
-  type: Button
+  name: flow_panel_1
+  properties: {}
+  type: FlowPanel
+- layout_properties: {column: PJMSOR}
+  name: team_drop
+  properties: {}
+  type: DropDown
 container: {type: DataRowPanel}
 is_package: true

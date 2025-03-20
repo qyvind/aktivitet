@@ -504,3 +504,35 @@ def delete_user_by_email(email):
     user.delete()
     
     return f"Bruker med e-post {email} og tilhørende data er slettet."
+
+import anvil.server
+import anvil.tables.query as q
+from anvil.tables import app_tables
+
+@anvil.server.callable
+def update_user_team(email, team_name):
+    """Oppdaterer en brukers team i userinfo-tabellen eller fjerner teamet hvis team_name er tomt."""
+
+    # Finn brukeren basert på e-post
+    user = app_tables.users.get(email=email)
+    if not user:
+        raise ValueError(f"Ingen bruker funnet med e-post: {email}")
+    
+    # Finn eller opprett brukerens info-post i userinfo-tabellen
+    user_info = app_tables.userinfo.get(user=user)
+
+    if team_name:  # Hvis team_name er oppgitt, sett brukeren til dette teamet
+        team = app_tables.team.get(team=team_name)
+        if not team:
+            raise ValueError(f"Ingen team funnet med navn: {team_name}")
+        
+        if user_info:
+            user_info['team'] = team  # Oppdater teamet i eksisterende userinfo
+        else:
+            app_tables.userinfo.add_row(user=user, team=team)  # Opprett ny userinfo med team
+
+    else:  # Hvis team_name er tomt, fjern brukeren fra teamet (hvis userinfo eksisterer)
+        if user_info:
+            user_info['team'] = None
+
+    return f"Bruker {email} er nå i team '{team_name}'" if team_name else f"Bruker {email} er fjernet fra team."
