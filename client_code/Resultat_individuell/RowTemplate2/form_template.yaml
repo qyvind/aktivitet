@@ -1,11 +1,19 @@
 components:
 - layout_properties: {column: JKSDUP}
   name: Deltager_label
-  properties: {}
+  properties:
+    spacing:
+      margin: ['2', null, '2', null]
+      padding: ['2', null, '2', null]
   type: Label
 - layout_properties: {column: VJQQOR}
   name: Poeng_label
-  properties: {}
+  properties:
+    spacing:
+      margin: ['2', null, '2', null]
+      padding: ['2', null, '2', null]
   type: Label
-container: {type: DataRowPanel}
+container:
+  properties: {font_size: 10}
+  type: DataRowPanel
 is_package: true

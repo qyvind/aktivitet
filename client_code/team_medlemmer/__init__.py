@@ -18,10 +18,10 @@ class team_medlemmer(team_medlemmerTemplate):
 
     # Kall serverfunksjonen med riktig teamnavn
     team_medl = anvil.server.call('hent_teammedlemmer', teamnavn)
-    #  print(f"🏆 Medlemmer i {teamnavn}: {team_medl}")
+    #print(team_medl)
     self.team_label.text = teamnavn
     # Sett inn data i et Repeating Panel hvis du har et
-    self.team_medl_repeating_panel.items = [{"navn": navn} for navn in team_medl]
+    self.team_medl_repeating_panel.items = [{"navn": member["navn"], "poeng": member["poeng"]} for member in team_medl]
 
   def button_1_click(self, **event_args):
     """This method is called when the button is clicked"""

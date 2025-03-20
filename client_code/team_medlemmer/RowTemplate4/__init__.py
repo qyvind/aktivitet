@@ -15,5 +15,6 @@ class RowTemplate4(RowTemplate4Template):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     self.navn_label.text = self.item['navn']
+    self.poeng_label.text = self.item['poeng']
 
     # Any code you write here will run before the form opens.
