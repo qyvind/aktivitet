@@ -480,3 +480,27 @@ def lagre_konkurranse(konkurransenavn, fradato, tildato):
         print("Ny konkurranse opprettet.")
     
     return "Konkurranse lagret!"
+
+@anvil.server.callable
+def delete_user_by_email(email):
+    """Sletter en bruker og alle tilhørende data basert på e-postadresse."""
+    
+    # Finn brukeren i users-tabellen basert på e-post
+    user = app_tables.users.get(email=email)
+    if not user:
+        raise ValueError(f"Ingen bruker funnet med e-post: {email}")
+    
+    # Slett alle aktiviteter tilknyttet brukeren
+    activities = app_tables.aktivitet.search(deltager=user)
+    for activity in activities:
+        activity.delete()
+    
+    # Slett brukerinfo
+    user_info = app_tables.userinfo.get(user=user)
+    if user_info:
+        user_info.delete()
+    
+    # Slett selve brukeren
+    user.delete()
+    
+    return f"Bruker med e-post {email} og tilhørende data er slettet."

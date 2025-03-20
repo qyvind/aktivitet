@@ -18,4 +18,9 @@ class RowTemplate7(RowTemplate7Template):
     self.navn_label.text = self.item['navn']
     self.poeng_label.text = self.item['poeng']
     self.team_label.text = self.item['team']
+
+  def slett_bruker_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    anvil.server.call('delete_user_by_email', self.email_label.text)
+    open_form('admin')
     

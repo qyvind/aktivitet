@@ -179,6 +179,7 @@ components:
         - {data_key: column_2, id: VJQQOR, title: Navn}
         - {data_key: column_3, id: OJLQEN, title: Poeng}
         - {data_key: column_1, id: PJMSOR, title: Team}
+        - {data_key: column_1, id: TTMEJE, title: ''}
       type: DataGrid
     layout_properties: {grid_position: 'LUWZDT,FGYWHF'}
     name: bruker_card

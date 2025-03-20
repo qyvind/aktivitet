@@ -15,5 +15,10 @@ components:
   name: team_label
   properties: {text: ''}
   type: Label
+- event_bindings: {click: slett_bruker_click}
+  layout_properties: {column: TTMEJE}
+  name: slett_bruker
+  properties: {foreground: 'theme:Error', icon: 'fa:trash', text: ''}
+  type: Button
 container: {type: DataRowPanel}
 is_package: true
