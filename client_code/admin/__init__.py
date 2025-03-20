@@ -100,7 +100,26 @@ class admin(adminTemplate):
       self.enkeltbruker_card.visible = False
     liste = anvil.server.call('hent_poengsummer')
     self.bruker_repeating_panel.items = liste
-    
+
+  def konk_button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    konkurransenavn, konkurranse_fradato, konkurranse_tildato = self.hent_konkurranse_info()
+    self.konkurransenavn_label.text = konkurransenavn
+    self.fra_date_picker.date = konkurranse_fradato
+    self.til_date_picker.date = konkurranse_tildato
+
+  def hent_konkurranse_info(self):
+      # Kall serverfunksjonen for å hente den første posten
+      record = anvil.server.call('hent_konkurranse')
+      # Dersom record finnes, trekk ut feltene og returner dem
+      if record:
+          konkurransenavn = record['konkurransenavn']
+          fradato = record['fradato']
+          tildato = record['tildato']
+          return konkurransenavn, fradato, tildato
+      else:
+          return None, None, None
+
       
 
 

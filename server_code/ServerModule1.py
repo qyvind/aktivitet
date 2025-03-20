@@ -203,6 +203,8 @@ def hent_brukernavn():
 
 
 
+import anvil.server
+
 @anvil.server.callable
 def hent_poengsummer():
     print('hent_poengsummer')
@@ -220,6 +222,8 @@ def hent_poengsummer():
         poeng = rad['poeng']
 
         if deltager:
+            if deltager not in poeng_dict:  # Sikre at deltager er registrert i dict
+                poeng_dict[deltager] = 0  
             poeng_dict[deltager] += poeng
 
     # Konverter til liste med navn, e-post og team
@@ -245,6 +249,7 @@ def hent_poengsummer():
     resultat.sort(key=lambda x: x["poeng"], reverse=True)
 
     return resultat
+
 
 @anvil.server.callable
 def hent_ukens_premietrekning(mandag):

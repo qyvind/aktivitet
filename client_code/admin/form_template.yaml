@@ -22,12 +22,17 @@ components:
     - event_bindings: {click: button_3_click}
       layout_properties: {}
       name: button_3
-      properties: {role: tonal-button, text: Lag enkeltbruker}
+      properties: {role: tonal-button, text: Lag bruker}
       type: Button
     - event_bindings: {click: import_mang_button_click}
       layout_properties: {}
       name: import_mang_button
-      properties: {role: tonal-button, text: Lag mange brukere}
+      properties: {role: tonal-button, text: Lag brukere}
+      type: Button
+    - event_bindings: {click: konk_button_click}
+      layout_properties: {}
+      name: konk_button
+      properties: {role: tonal-button, text: Konkurranse}
       type: Button
     layout_properties: {grid_position: 'PDOHFX,TLMROV'}
     name: flow_panel_1
@@ -117,23 +122,29 @@ components:
     type: ColumnPanel
   - components:
     - components:
-      - event_bindings: {click: label1_click}
-        layout_properties: {}
-        name: label1
-        properties: {text: 'Nytt team:'}
-        type: Button
-      - name: nytt_team_box
-        properties: {}
-        type: TextBox
-      - event_bindings: {click: Opprett_team_button_click}
-        layout_properties: {}
-        name: Opprett_team_button
-        properties: {text: Opprett}
-        type: Button
-      layout_properties: {grid_position: 'KYBWJB,ZGPXOQ'}
-      name: flow_panel_10
-      properties: {}
-      type: FlowPanel
+      - components:
+        - event_bindings: {click: label1_click}
+          layout_properties: {}
+          name: label1
+          properties: {text: 'Nytt team:'}
+          type: Button
+        - layout_properties: {}
+          name: nytt_team_box
+          properties: {background: 'theme:On Secondary'}
+          type: TextBox
+        - event_bindings: {click: Opprett_team_button_click}
+          layout_properties: {}
+          name: Opprett_team_button
+          properties: {text: Opprett}
+          type: Button
+        layout_properties: {grid_position: 'POAQXO,WOYTVC'}
+        name: flow_panel_10
+        properties: {align: center}
+        type: FlowPanel
+      layout_properties: {grid_position: 'GSKBTL,EUDELP'}
+      name: outlined_card_2
+      properties: {role: outlined-card}
+      type: ColumnPanel
     - components:
       - name: label_2
         properties: {}
@@ -151,7 +162,7 @@ components:
       type: DataGrid
     data_bindings:
     - {code: '', property: border, writeback: false}
-    layout_properties: {grid_position: 'UFRYFD,KPLJLR'}
+    layout_properties: {grid_position: 'UHGLLN,TNHBNW'}
     name: team_card
     properties: {role: tonal-card, visible: false}
     type: ColumnPanel
@@ -172,6 +183,52 @@ components:
     layout_properties: {grid_position: 'LUWZDT,FGYWHF'}
     name: bruker_card
     properties: {role: tonal-card, visible: false}
+    type: ColumnPanel
+  - components:
+    - components:
+      - name: label_4
+        properties: {text: 'Konkurransenavn:'}
+        type: Label
+      - layout_properties: {width: 132}
+        name: konkurransenavn_label
+        properties: {}
+        type: TextBox
+      layout_properties: {grid_position: 'YSQUMC,ODSGRE'}
+      name: flow_panel_4
+      properties: {align: center}
+      type: FlowPanel
+    - components:
+      - name: label_9
+        properties: {text: 'Fra dato:'}
+        type: Label
+      - layout_properties: {width: 159.5}
+        name: fra_date_picker
+        properties: {}
+        type: DatePicker
+      layout_properties: {grid_position: 'WFYGWC,YFQMEW'}
+      name: flow_panel_9
+      properties: {align: center}
+      type: FlowPanel
+    - components:
+      - layout_properties: {}
+        name: label_10
+        properties: {text: 'Til dato:'}
+        type: Label
+      - layout_properties: {width: 163.5}
+        name: til_date_picker
+        properties: {}
+        type: DatePicker
+      layout_properties: {grid_position: 'YZQRRX,BUFJQM'}
+      name: flow_panel_11
+      properties: {align: center}
+      type: FlowPanel
+    - layout_properties: {grid_position: 'TAJLEY,CDJERC'}
+      name: label_8
+      properties: {}
+      type: Label
+    layout_properties: {grid_position: 'NWYMHD,ASANKT'}
+    name: outlined_card_3
+    properties: {role: tonal-card}
     type: ColumnPanel
   layout_properties: {grid_position: 'DJZTTS,OKSYEP'}
   name: outlined_card_1
