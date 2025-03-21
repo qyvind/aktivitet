@@ -28,7 +28,7 @@ class Loggbok(LoggbokTemplate):
         
     def update_button_state(self, button, label, dato, columnpanel):
         """Oppdaterer knappens tekst og farge basert på nåværende tilstand"""
-        states = {
+        states = {|
             "0": ("1", "BLACK", "LIGHTGREEN"),
             "1": ("2", "BLACK", "GREEN"),
             "2": ("3", "BLACK", "DARKGREEN"),
