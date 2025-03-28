@@ -40,5 +40,11 @@ components:
   name: team_drop
   properties: {}
   type: DropDown
+- data_bindings:
+  - {code: 'self.item[''admin'']', property: checked, writeback: false}
+  layout_properties: {column: YKRMUE}
+  name: admin_checkbox
+  properties: {background: '', checked: false, foreground: 'theme:Tertiary Container', text: ''}
+  type: CheckBox
 container: {type: DataRowPanel}
 is_package: true
