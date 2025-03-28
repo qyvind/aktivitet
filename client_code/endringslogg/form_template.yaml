@@ -8,10 +8,7 @@ components:
     name: text_area_2
     properties:
       height: 156.39999389648438
-      text: |
-        28/3-25: La inn checkboks på brukerliste i admin for å kunne gi admintilgang til brukere
-        Laget endringslogg
-        Link til innmeldingsskjema i siden med Regler
+      text: "28/3-25: La inn checkboks på brukerliste i admin for å kunne gi admintilgang til brukere\nLaget endringslogg\nLink til innmeldingsskjema i siden med Regler\nRettet feil i trekningsliste. Den inkluderte deltagere som hadde hatt fem dager og avregistrert dager sånn at de ikke skal være med likevel. \n"
     type: TextArea
   - event_bindings: {click: button_1_click}
     layout_properties: {grid_position: 'RUNMFH,GYRFVX'}
