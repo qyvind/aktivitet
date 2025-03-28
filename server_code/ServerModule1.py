@@ -254,41 +254,36 @@ def hent_poengsummer():
 
 @anvil.server.callable
 def hent_ukens_premietrekning(mandag):
-    #print('hent_ukens_premietrekning')
     import datetime
 
-    # Sørg for at mandag er en date-type (dersom det blir sendt som en datetime)
     if isinstance(mandag, datetime.datetime):
         mandag = mandag.date()
 
-    søndag = mandag + datetime.timedelta(days=6)  # Beregn søndag i samme uke
-    
-    # Dictionary for å holde styr på dager med poeng for hver deltaker
+    søndag = mandag + datetime.timedelta(days=6)
     deltager_dager = {}
 
     for rad in app_tables.aktivitet.search():
         deltager = rad['deltager']
-        dato = rad['dato']  # Antar at 'dato' er en kolonne i 'aktivitet'
+        dato = rad['dato']
+        poeng = rad['poeng']
 
-        # Sjekk om datoen er innenfor den uken vi skal hente
-        if mandag <= dato <= søndag:
+        # Sjekk om datoen er innenfor uke, og poeng er 1, 2 eller 3
+        if mandag <= dato <= søndag and 1 <= poeng :
             if deltager:
                 if deltager not in deltager_dager:
                     deltager_dager[deltager] = set()
-                deltager_dager[deltager].add(dato)  # Legg til unike datoer
+                deltager_dager[deltager].add(dato)
 
-    # Filtrer ut deltakere med minst 5 ulike dager
     kvalifiserte = [deltager for deltager, dager in deltager_dager.items() if len(dager) >= 5]
 
-    # Hent navn eller e-post for hver kvalifiserte deltaker
     resultat = []
     for deltager in kvalifiserte:
         userinfo_rad = app_tables.userinfo.get(user=deltager)
         navn = userinfo_rad['navn'] if userinfo_rad else None
-
         resultat.append(navn if navn else deltager['email'])
 
     return resultat
+
 
 
 
