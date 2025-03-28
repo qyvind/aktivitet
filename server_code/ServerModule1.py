@@ -232,6 +232,7 @@ def hent_poengsummer():
         userinfo_rad = app_tables.userinfo.get(user=deltager)  # Hent userinfo basert på user-link
         navn = userinfo_rad['navn'] if userinfo_rad else None  # Hent navn hvis tilgjengelig
         email = deltager['email']  # Hent e-post direkte fra brukeren
+        admin = userinfo_rad['admin']
         
         # Hent team hvis brukeren er knyttet til et
         team = userinfo_rad['team']['team'] if userinfo_rad and userinfo_rad['team'] else "Ingen team"
@@ -242,12 +243,12 @@ def hent_poengsummer():
             "navn": navn,
             "email": email,
             "poeng": poeng,
-            "team": team
+            "team": team,
+            "admin": admin
         })
 
     # Sorter etter poeng, høyest først
     resultat.sort(key=lambda x: x["poeng"], reverse=True)
-
     return resultat
 
 
@@ -480,7 +481,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 @anvil.server.callable
-def update_user_team(email, team_name):
+def update_user_team(email, team_name,admin):
     """Oppdaterer en brukers team i userinfo-tabellen eller fjerner teamet hvis team_name er tomt."""
 
     # Finn brukeren basert på e-post
@@ -498,11 +499,25 @@ def update_user_team(email, team_name):
         
         if user_info:
             user_info['team'] = team  # Oppdater teamet i eksisterende userinfo
+            user_info['admin'] = admin
         else:
-            app_tables.userinfo.add_row(user=user, team=team)  # Opprett ny userinfo med team
+            app_tables.userinfo.add_row(user=user, team=team, admin=admin)  # Opprett ny userinfo med team
 
     else:  # Hvis team_name er tomt, fjern brukeren fra teamet (hvis userinfo eksisterer)
         if user_info:
             user_info['team'] = None
+            user_info['admin'] = admin
 
     return f"Bruker {email} er nå i team '{team_name}'" if team_name else f"Bruker {email} er fjernet fra team."
+
+@anvil.server.callable
+def is_admin():
+    user = anvil.users.get_user()
+    if user is None:
+        return False
+    
+    # Slå opp brukerens info i userinfo-tabellen
+    userinfo = app_tables.userinfo.get(user=user)
+    if userinfo and userinfo['admin'] == True:
+        return True
+    return False

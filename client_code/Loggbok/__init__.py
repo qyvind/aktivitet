@@ -553,5 +553,5 @@ class Loggbok(LoggbokTemplate):
       """This method is called when the link is clicked"""
       user = anvil.users.get_user()
       print(user['email'])
-      if user['email'] == 'qyvindf@gmail.com' or user['email']=='sole@framo.no':
+      if anvil.server.call('is_admin'):
         open_form('admin')
