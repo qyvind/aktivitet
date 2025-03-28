@@ -95,7 +95,7 @@ components:
     - event_bindings: {click: button_2_click}
       layout_properties: {}
       name: button_2
-      properties: {background: 'theme:Secondary Container', icon: 'fa:long-arrow-left', role: outlined-button, text: ''}
+      properties: {background: 'theme:Secondary Container', icon: 'fa:long-arrow-left', role: elevated-button, text: ''}
       type: Button
     - name: uke_label
       properties: {align: center, bold: true, role: title, text: 'Uke 20: 12 - 18 mai'}
@@ -103,7 +103,7 @@ components:
     - event_bindings: {click: button_1_click}
       layout_properties: {}
       name: button_1
-      properties: {background: 'theme:Secondary Container', icon: 'fa:long-arrow-right', role: outlined-button, text: ''}
+      properties: {background: 'theme:Secondary Container', icon: 'fa:long-arrow-right', role: elevated-button, text: ''}
       type: Button
     layout_properties: {grid_position: 'JAWFBV,BDHRAR'}
     name: flow_panel_2
@@ -145,7 +145,7 @@ components:
       layout_properties: {}
       name: man_column_panel
       properties:
-        role: outlined-card
+        role: elevated-card
         spacing:
           padding: ['0', '15', '0', '15']
       type: ColumnPanel
@@ -184,7 +184,7 @@ components:
       layout_properties: {}
       name: tir_column_panel
       properties:
-        role: outlined-card
+        role: elevated-card
         spacing:
           padding: ['0', null, '0', null]
       type: ColumnPanel
@@ -223,7 +223,7 @@ components:
       layout_properties: {}
       name: ons_column_panel
       properties:
-        role: outlined-card
+        role: elevated-card
         spacing:
           padding: ['0', null, '0', null]
       type: ColumnPanel
@@ -259,9 +259,10 @@ components:
             padding: ['0', null, null, null]
           text: ''
         type: Label
+      layout_properties: {}
       name: tor_column_panel
       properties:
-        role: outlined-card
+        role: elevated-card
         spacing:
           padding: ['0', null, '0', null]
       type: ColumnPanel
@@ -302,9 +303,10 @@ components:
             padding: ['0', null, null, null]
           text: ''
         type: Label
+      layout_properties: {}
       name: fre_column_panel
       properties:
-        role: outlined-card
+        role: elevated-card
         spacing:
           padding: ['0', null, '0', null]
       type: ColumnPanel
@@ -340,9 +342,10 @@ components:
             padding: ['0', null, null, null]
           text: ''
         type: Label
+      layout_properties: {}
       name: lor_column_panel
       properties:
-        role: outlined-card
+        role: elevated-card
         spacing:
           padding: ['0', null, '0', null]
       type: ColumnPanel
@@ -378,9 +381,10 @@ components:
             padding: ['0', null, null, null]
           text: ''
         type: Label
+      layout_properties: {}
       name: son_column_panel
       properties:
-        role: outlined-card
+        role: elevated-card
         spacing:
           padding: ['0', null, '0', null]
       type: ColumnPanel
@@ -392,36 +396,36 @@ components:
     - event_bindings: {click: regler_button_click}
       layout_properties: {}
       name: regler_button
-      properties: {background: 'theme:Secondary Container', role: outlined-button, text: Regler}
+      properties: {background: 'theme:Secondary Container', role: elevated-button, text: Regler}
       type: Button
     - event_bindings: {click: veil_button_click}
       layout_properties: {}
       name: veil_button
-      properties: {background: 'theme:Secondary Container', role: outlined-button, text: Brukerveiledning}
+      properties: {background: 'theme:Secondary Container', role: elevated-button, text: Brukerveiledning}
       type: Button
     - event_bindings: {click: individuell_button_click}
       layout_properties: {}
       name: individuell_button
       properties:
         background: theme:Secondary Container
-        role: outlined-button
+        role: elevated-button
         text: |
           Individuell
       type: Button
     - event_bindings: {click: team_button_click}
       layout_properties: {}
       name: team_button
-      properties: {background: 'theme:Secondary Container', role: outlined-button, text: Team}
+      properties: {background: 'theme:Secondary Container', role: elevated-button, text: Team}
       type: Button
     - event_bindings: {click: trekning_button_click}
       layout_properties: {}
       name: trekning_button
-      properties: {background: 'theme:Secondary Container', role: outlined-button, text: Trekningsliste}
+      properties: {background: 'theme:Secondary Container', role: elevated-button, text: Trekningsliste}
       type: Button
     - event_bindings: {click: logout_click}
       layout_properties: {}
       name: logout
-      properties: {align: center, background: 'theme:Secondary Container', role: outlined-button, text: Logg ut}
+      properties: {align: center, background: 'theme:Secondary Container', role: elevated-button, text: Logg ut}
       type: Button
     layout_properties: {grid_position: 'ZPVSNA,WTSZQB'}
     name: flow_panel_7
@@ -450,7 +454,7 @@ components:
       type: FlowPanel
     layout_properties: {grid_position: 'FDXMTZ,NCSNWW'}
     name: outlined_card_1
-    properties: {background: 'theme:Secondary Container', role: outlined-card}
+    properties: {background: 'theme:Secondary Container', role: elevated-card}
     type: ColumnPanel
   layout_properties: {grid_position: 'LRHKJM,PNXCFA', row_background: ''}
   name: loggbok_card

@@ -18,7 +18,7 @@ class Loggbok(LoggbokTemplate):
         self.sjekk_bruker()
 
 
-
+  
 
     def initier_uke(self,week_offset):
         self.get_week_info(week_offset)
