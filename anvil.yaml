@@ -21,40 +21,36 @@ db_schema:
   konkurranse:
     client: full
     columns:
-    - admin_ui: {order: 0, width: 200}
+    - admin_ui: {width: 200}
       name: konkurransenavn
       type: string
-    - admin_ui: {order: 1, width: 200}
+    - admin_ui: {width: 200}
       name: fradato
       type: date
-    - admin_ui: {order: 2, width: 200}
+    - admin_ui: {width: 200}
       name: tildato
       type: date
-    - admin_ui: {order: 3, width: 200}
+    - admin_ui: {width: 200}
       name: record
       type: number
     server: full
     title: Konkurranse
-  lag:
+  team:
     client: search
     columns:
     - admin_ui: {width: 200}
-      name: lagnavn
+      name: team
       type: string
-    - admin_ui: {width: 200}
-      name: deltagere
-      target: users
-      type: link_multiple
     server: full
-    title: Lag
+    title: team
   trekning:
     client: search
     columns:
-    - admin_ui: {order: 1, width: 200}
+    - admin_ui: {width: 200}
       name: deltager
       target: users
       type: link_single
-    - admin_ui: {order: 2, width: 200}
+    - admin_ui: {width: 200}
       name: uke_mandag
       type: date
     server: full
@@ -62,15 +58,22 @@ db_schema:
   userinfo:
     client: none
     columns:
-    - admin_ui: {order: 0, width: 200}
+    - admin_ui: {width: 200}
       name: user
       target: users
       type: link_single
-    - admin_ui: {order: 1, width: 200}
+    - admin_ui: {width: 200}
       name: navn
       type: string
+    - admin_ui: {width: 200}
+      name: team
+      target: team
+      type: link_single
+    - admin_ui: {width: 200}
+      name: admin
+      type: bool
     server: full
-    title: UserInfo
+    title: userinfo
   users:
     client: none
     columns:

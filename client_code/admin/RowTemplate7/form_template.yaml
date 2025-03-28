@@ -42,6 +42,7 @@ components:
   type: DropDown
 - data_bindings:
   - {code: 'self.item[''admin'']', property: checked, writeback: false}
+  event_bindings: {change: save_team_button_click}
   layout_properties: {column: YKRMUE}
   name: admin_checkbox
   properties: {background: '', checked: false, foreground: 'theme:Tertiary Container', text: ''}
