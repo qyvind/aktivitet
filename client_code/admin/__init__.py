@@ -146,6 +146,10 @@ class admin(adminTemplate):
 
   def lagre_konkurranse_button_click(self, **event_args):
     anvil.server.call('lagre_konkurranse',self.konkurransenavn_label.text,self.fra_date_picker.date,self.til_date_picker.date)
+
+  def button_5_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('endringslogg')
     
 
       
