@@ -236,12 +236,12 @@ class Loggbok(LoggbokTemplate):
         return result
 
 
-    def button_1_click(self, **event_args):
+    def right_week_button_click(self, **event_args):
       """This method is called when the button is clicked"""
       self.week_offset_label.text +=1
       self.initier_uke(self.week_offset_label.text)
 
-    def button_2_click(self, **event_args):
+    def left_week_button_click(self, **event_args):
       """This method is called when the button is clicked"""
       self.week_offset_label.text -=1
       self.initier_uke(self.week_offset_label.text)
@@ -267,7 +267,7 @@ class Loggbok(LoggbokTemplate):
                 dato=q.between(start_of_week, end_of_week + timedelta(days=1))  # Filtrer på datoer
             )
         except Exception as e:
-            #print(f"Error fetching activities: {e}")
+            print(f"Error fetching activities: {e}")
             return {}
         
         # Organisere aktivitetene i en liste med 7 dager (0=Mandag, 6=Søndag)
@@ -331,7 +331,7 @@ class Loggbok(LoggbokTemplate):
           
     def lagre_aktivitet(self, dato, aktivitet, poeng):
         try:
-            result = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng)
+            anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng)
             #print(result)
         except Exception as e:
             print(f"Error saving activity: {e}")
@@ -442,7 +442,7 @@ class Loggbok(LoggbokTemplate):
             deltagerdata= anvil.server.call("hent_brukernavn")
             # print(deltagerdata)
             navn=deltagerdata['navn']
-            team=deltagerdata['team']
+            #team=deltagerdata['team']
             # print(navn, team)
             self.deltager_label.text = deltagerdata['navn']
             self.team_label.text = deltagerdata['team']

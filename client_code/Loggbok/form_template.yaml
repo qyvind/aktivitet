@@ -93,17 +93,17 @@ components:
     type: FlowPanel
   - components:
     - components:
-      - event_bindings: {click: button_2_click}
+      - event_bindings: {click: left_week_button_click}
         layout_properties: {}
-        name: button_2
+        name: left_week_button
         properties: {background: 'theme:Secondary Container', icon: 'fa:long-arrow-left', role: elevated-button, text: ''}
         type: Button
       - name: uke_label
         properties: {align: center, bold: true, role: title, text: 'Uke 20: 12 - 18 mai'}
         type: Label
-      - event_bindings: {click: button_1_click}
+      - event_bindings: {click: right_week_button_click}
         layout_properties: {}
-        name: button_1
+        name: right_week_button
         properties: {background: 'theme:Secondary Container', icon: 'fa:long-arrow-right', role: elevated-button, text: ''}
         type: Button
       layout_properties: {}
