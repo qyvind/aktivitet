@@ -104,21 +104,41 @@ class Loggbok(LoggbokTemplate):
     
     
     def åpne_poengvelger_for_dag(self, dag_index, knapp, label, ukedag_label):
-        valgt_poeng = int(knapp.text or 0)
-        aktivitet = label.text
+      valgt_poeng = int(knapp.text or 0)
+      aktivitet = label.text
+  
+      def mottak_fra_poengvelger(poeng, aktivitet, ikon):
+          print("Valgt poeng:", poeng)
+          print("Aktivitet:", aktivitet)
+          print("Ikon:", ikon)
+          
+          week_info = self.get_week_info(self.week_offset_label.text)
+          valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
+  
+          # Oppdater GUI: Bruk ikon hvis valgt, ellers vis tekst
+          if ikon:
+              label.icon = ikon
+              label.text = ""
+          else:
+              label.icon = None
+              label.text = aktivitet
+  
+          knapp.text = str(poeng)
+          self.lagre_aktivitet(valgt_dato, aktivitet, poeng)
+  
+      # Lag ny instans av PoengVelger
+      velger = PoengVelger(valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text)
 
-        def mottak_fra_poengvelger(poeng, aktivitet):
-            print("Valgt poeng:", poeng)
-            print("Aktivitet:", aktivitet)
-            week_info = self.get_week_info(self.week_offset_label.text)
-            valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
-    
-            # Oppdater GUI
-            knapp.text = str(poeng)
-            label.text = aktivitet
-            self.lagre_aktivitet(valgt_dato, aktivitet, poeng)
+    # Når brukeren trykker "Lagre" inne i PoengVelger
+    def on_close(evt, **event_args):
+        result = event_args.get("value")
+        if result:
+            mottak_fra_poengvelger(result["poeng"], result["aktivitet"], result.get("ikon"))
 
-        open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text, callback=mottak_fra_poengvelger)
+    velger.add_event_handler("x-close", on_close)
+
+    # Åpne modalt vindu
+    alert(velger, title="Velg poeng og aktivitet", buttons=None)
 
 
   

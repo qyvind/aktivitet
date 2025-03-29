@@ -143,16 +143,29 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - layout_properties: {grid_position: 'EBOSPB,PRGYBS'}
-          name: man_akt_label
-          properties:
-            align: center
-            font_size: 8
-            spacing:
-              margin: ['0', null, null, null]
-              padding: ['0', null, null, null]
-            text: ''
-          type: Label
+        - components:
+          - layout_properties: {}
+            name: man_ikon
+            properties:
+              icon: fa:adjust
+              spacing:
+                margin: ['0', null, '0', null]
+                padding: ['0', '0', '0', '0']
+              text: ''
+            type: Button
+          - name: man_akt_label
+            properties:
+              align: center
+              font_size: 8
+              spacing:
+                margin: ['0', null, null, null]
+                padding: ['0', null, null, null]
+              text: ''
+            type: Label
+          layout_properties: {grid_position: 'JXAXGP,CHZXIP'}
+          name: flow_panel_5
+          properties: {align: center}
+          type: FlowPanel
         layout_properties: {}
         name: man_column_panel
         properties:

@@ -11,34 +11,41 @@ from anvil.tables import app_tables
 
 
 class PoengVelger(PoengVelgerTemplate):
-  def __init__(self, valgt_poeng=1, aktivitet="",ukedag="", callback=None, **properties):
+  def __init__(self, valgt_poeng=0, aktivitet="", ukedag="", callback=None, **properties):
     self.init_components(**properties)
-    self.ukedag_label.text = ukedag
-    
+    self.callback = callback
+
     self.poeng_drop.items = [
-      ("0 poeng",0),
+      ("= poeng", 0),
       ("1 poeng", 1),
       ("2 poeng", 2),
       ("3 poeng", 3)
     ]
     self.poeng_drop.selected_value = valgt_poeng
     self.aktivitet_box.text = aktivitet
-    self.callback = callback  # 👈 Dette tar vare på funksjonen
+    self.ukedag_label.text = ukedag
+
+    self.ikon_dropdown.items = [
+      ("⚽ Fotball", "fa:futbol"),
+      ("🏀 Basketball", "fa:basketball"),
+      ("⚾ Baseball", "fa:baseball"),
+      ("🏐 Volleyball", "fa:volleyball"),
+      ("🎾 Tennis", "fa:table-tennis"),
+      ("🚴‍♂️ Sykling", "fa:bicycle"),
+      ("🏊 Svømming", "fa:swimmer"),
+      ("🏋️‍♂️ Styrke", "fa:dumbbell"),
+      ("🥊 Boksing", "fa:boxing-glove"),
+      ("🏃‍♂️ Jogging", "fa:person-running"),
+      ("Ingen ikon", None)
+    ]
+    self.ikon_dropdown.selected_value = None  # Start uten ikon
 
   def lagre_button_click(self, **event_args):
-    poeng = self.poeng_drop.selected_value
-    aktivitet = self.aktivitet_box.text
+    self.raise_event("x-close", value={
+      "poeng": self.poeng_drop.selected_value,
+      "aktivitet": self.aktivitet_box.text,
+      "ikon": self.ikon_dropdown.selected_value
+    })
 
-    if self.callback:
-        self.callback(poeng, aktivitet)  # 👈 Send data tilbake til Loggbok
-
-    open_form('Loggbok')  # Gå tilbake til hovedform
-
-    
-  
-     
-    
-
-
-    
-
+  def avbryt_button_click(self, **event_args):
+    self.raise_event("x-close")  # Lukk uten å sende data
