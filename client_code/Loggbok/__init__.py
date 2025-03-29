@@ -102,24 +102,33 @@ class Loggbok(LoggbokTemplate):
     def son_button_click(self, **event_args):
         self.åpne_poengvelger_for_dag(6, self.son_button, self.son_akt_label, self.son_label)
     
-    
+        
     def åpne_poengvelger_for_dag(self, dag_index, knapp, label, ukedag_label):
         valgt_poeng = int(knapp.text or 0)
         aktivitet = label.text
-
-        def mottak_fra_poengvelger(poeng, aktivitet):
-            print("Valgt poeng:", poeng)
-            print("Aktivitet:", aktivitet)
+        ikon = label.icon
+    
+        # Åpne PoengVelger og få resultat tilbake
+        resultat = open_form("PoengVelger",
+                            valgt_poeng=valgt_poeng,
+                            aktivitet=aktivitet,
+                            ikon=ikon,
+                            ukedag=ukedag_label.text)
+    
+        if resultat:
+            print("Resultat:", resultat)
+            poeng = resultat['poeng']
+            aktivitet = resultat['aktivitet']
+            ikon = resultat['ikon']
+    
             week_info = self.get_week_info(self.week_offset_label.text)
             valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
     
-            # Oppdater GUI
             knapp.text = str(poeng)
             label.text = aktivitet
+            label.icon = ikon or None  # Sett eller fjern ikon
             self.lagre_aktivitet(valgt_dato, aktivitet, poeng)
-
-        open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text, callback=mottak_fra_poengvelger)
-
+    
 
   
     # def login_click(self, **event_args):
