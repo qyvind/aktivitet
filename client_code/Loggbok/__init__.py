@@ -9,6 +9,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from datetime import datetime, timedelta
+from ..PoengVelger import PoengVelger
 
 class Loggbok(LoggbokTemplate):
     def __init__(self, **properties):
@@ -126,11 +127,48 @@ class Loggbok(LoggbokTemplate):
             
 
 
+    # def man_button_click(self, **event_args):
+    #     # """This method is called when the button is clicked"""
+    #     # week_info = self.get_week_info(self.week_offset_label.text)
+    #     # mandag_dato = week_info['monday_date']
+    #     # self.update_button_state(self.man_button, self.man_akt_label, mandag_dato,self.man_column_panel)
+    #     result = alert(
+    #       content=PoengVelger(),
+    #       title="Registrer aktivitet",
+    #       large=True
+    #     )
+        
+    #     if result and isinstance(result, dict):
+    #         poeng = result["poeng"]
+    #         aktivitet = result["aktivitet"]
+    #         print("Du valgte:", poeng, aktivitet)
+    #         # Lagre eller oppdater med valgt info
+    #     else:
+    #         print("Brukeren avbrøt eller lukket vinduet")
+
+    
+    #     if result:
+    #         poeng = result["poeng"]
+    #         aktivitet = result["aktivitet"]
+    #         print("Valgt:", poeng, aktivitet)
+    #         anvil.server.call('lagre_aktivitet', valgt_dato, aktivitet, poeng)
+    
+    # I din hovedform, legg til en hendelse for å håndtere lukking av alert
     def man_button_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        week_info = self.get_week_info(self.week_offset_label.text)
-        mandag_dato = week_info['monday_date']
-        self.update_button_state(self.man_button, self.man_akt_label, mandag_dato,self.man_column_panel)
+        result = alert(
+          content=PoengVelger(),
+          title="Registrer aktivitet",
+          large=True,
+          buttons=[("Lagre", True), ("Avbryt", False)]
+        )
+        
+        if result:
+            poeng = result["poeng"]
+            aktivitet = result["aktivitet"]
+            print("Valgt:", poeng, aktivitet)
+        else:
+            print("Brukeren lukket vinduet eller avbrøt")
+
 
     def tir_button_click(self, **event_args):
         """This method is called when the button is clicked"""
