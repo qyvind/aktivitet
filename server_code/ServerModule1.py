@@ -85,7 +85,7 @@ def lagre_aktivitet(dato, aktivitet, poeng, ikon):
     
     if existing_activity:
         # Oppdater den eksisterende posten
-        existing_activity.update(aktivitet=aktivitet, poeng=poeng, )
+        existing_activity.update(aktivitet=aktivitet, poeng=poeng,ikon=ikon )
         return "Aktivitet oppdatert"
     else:
         # Lagre ny post i tabellen aktivitet
@@ -93,7 +93,8 @@ def lagre_aktivitet(dato, aktivitet, poeng, ikon):
             deltager=user,
             dato=dato,
             aktivitet=aktivitet,
-            poeng=poeng
+            poeng=poeng,
+            ikon=ikon
         )
         return "Aktivitet lagret"
 

@@ -117,7 +117,10 @@ class Loggbok(LoggbokTemplate):
             # Oppdater GUI
             knapp.text = str(poeng)
             label.text = aktivitet
-            self.lagre_aktivitet(valgt_dato, aktivitet, poeng, ikon)
+            self.man_ikon.icon = ikon
+            
+            
+            self.lagre_aktivitet(valgt_dato, aktivitet, poeng,ikon)
             
 
         open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text,ikon="", callback=mottak_fra_poengvelger)
