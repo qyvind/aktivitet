@@ -434,8 +434,10 @@ class Loggbok(LoggbokTemplate):
 
     def sjekk_bruker(self):
         user = anvil.users.get_user()
-        # if user['email'] == 'qyvindf@gmail.com':
-        #   self.admin_button.visible = True
+        if anvil.server.call('is_admin'):
+          self.admin_button.visible = True
+        else:
+          self.admin_button.visible = False
         
         if user:
             # Hent oppdaterte brukerdata fra UserInfo-tabellen
@@ -522,7 +524,8 @@ class Loggbok(LoggbokTemplate):
 
     def deltager_label_click(self, **event_args):
       """This method is called when the link is clicked"""
-      user = anvil.users.get_user()
-      print(user['email'])
-      if anvil.server.call('is_admin'):
-        open_form('admin')
+      open_form('minside')
+
+    def admin_button_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      open_form('admin')

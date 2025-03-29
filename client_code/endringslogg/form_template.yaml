@@ -4,6 +4,12 @@ components:
     name: label_1
     properties: {role: headline, text: Endringslogg}
     type: Label
+  - layout_properties: {grid_position: 'ILDDNC,ZIRYPF'}
+    name: text_area_1
+    properties:
+      height: 97.33331298828125
+      text: "29/3-25: Flyttet adminmeny til egen knapp som bare vises for adminbrukere. \nLage en side hvor bruker kan endre eget navn og team. Den kommer når bruker klikker på navnet sitt. "
+    type: TextArea
   - layout_properties: {grid_position: 'BHFXMZ,LRACXB'}
     name: text_area_2
     properties:
@@ -15,7 +21,7 @@ components:
     name: button_1
     properties: {role: filled-button, text: Lukk}
     type: Button
-  layout_properties: {grid_position: 'JKCUTA,SPCTSY'}
+  layout_properties: {grid_position: 'OOIWYI,FGCOXH'}
   name: column_panel_1
   properties: {role: tonal-card}
   type: ColumnPanel
