@@ -9,6 +9,8 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from datetime import datetime, timedelta
+from ..PoengVelger import PoengVelger
+
 
 class Loggbok(LoggbokTemplate):
     def __init__(self, **properties):
@@ -78,96 +80,48 @@ class Loggbok(LoggbokTemplate):
 
 
       
-    # def update_button_state(self, button, label, dato,columnpanel):
-    #     """Oppdaterer knappens tekst og farge basert på nåværende tilstand"""
-    #     states = {
-    #         "0": ("1", "BLACK","LIGHTGREEN"),
-    #         "1": ("2", "BLACK","GREEN"),
-    #         "2": ("3", "BLACK","DARKGREEN"),
-    #         "3": ("0", "BLACK","WHITE"),
-    #     }
-      
-    #     previous_state = button.text
-
-    #     if button.text in states:
-    #         button.text, button.foreground, columnpanel.background = states[button.text]
-    #     else:
-    #         #print("button not in states")
-    #           # Initialiser text_box med en default-verdi
-    #       text_box = type('Dummy', (object,), {"text": ""})()  # Oppretter et objekt med et tomt text-attributt
-    #     if button.text == "1":
-    #         """Viser en popup for å spørre om tekst og oppdaterer en label"""
-    #         text_box = TextBox(placeholder="Skriv her...",text=label.text)
-    
-    #         result = anvil.alert(
-    #             content=text_box,
-    #             title="Skriv inn type aktivitet",
-    #             buttons=["OK", "Avbryt"]
-    #         )
-    
-    #         if result == "OK":  # Hvis brukeren trykket "OK"
-    #             label.text = text_box.text  # Hent tekst fra TextBox og sett den i riktig label
-    #             # Lagre aktiviteten med riktig dato
-        
-    #     self.lagre_aktivitet(dato, text_box.text, int(button.text))
-    #         # Hvis knappens tilstand gikk fra 0 til 1, kall sjekken
-    #     if previous_state == "0" and button.text == "1":
-    #         if self.sjekk_lykkehjul():
-    #           self.lykkehjul.visible = True
-    #           week_info = self.get_week_info(self.week_offset_label.text)
-    #           mandag_dato = week_info['monday_date']
-    #           anvil.server.call('lagre_trekning', mandag_dato)
-    #     elif previous_state=="3" and button.text=="0":
-    #         if not self.sjekk_lykkehjul():
-    #           self.lykkehjul.visible = False
-    #           week_info = self.get_week_info(self.week_offset_label.text)
-    #           mandag_dato = week_info['monday_date']
-    #           anvil.server.call('slett_trekning', mandag_dato)
-            
-
 
     def man_button_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        week_info = self.get_week_info(self.week_offset_label.text)
-        mandag_dato = week_info['monday_date']
-        self.update_button_state(self.man_button, self.man_akt_label, mandag_dato,self.man_column_panel)
-
+        self.åpne_poengvelger_for_dag(0, self.man_button, self.man_akt_label, self.man_label)
+    
     def tir_button_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        week_info = self.get_week_info(self.week_offset_label.text)
-        tirsdag_dato = week_info['monday_date'] + timedelta(days=1)
-        self.update_button_state(self.tir_button, self.tir_akt_label, tirsdag_dato,self.tir_column_panel)
-
+        self.åpne_poengvelger_for_dag(1, self.tir_button, self.tir_akt_label, self.tir_label)
+    
     def ons_button_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        week_info = self.get_week_info(self.week_offset_label.text)
-        onsdag_dato = week_info['monday_date'] + timedelta(days=2)
-        self.update_button_state(self.ons_button, self.ons_akt_label, onsdag_dato,self.ons_column_panel)
+        self.åpne_poengvelger_for_dag(2, self.ons_button, self.ons_akt_label, self.ons_label)
     
     def tor_button_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        week_info = self.get_week_info(self.week_offset_label.text)
-        torsdag_dato = week_info['monday_date'] + timedelta(days=3)
-        self.update_button_state(self.tor_button, self.tor_akt_label, torsdag_dato,self.tor_column_panel)
+        self.åpne_poengvelger_for_dag(3, self.tor_button, self.tor_akt_label, self.tor_label)
     
     def fre_button_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        week_info = self.get_week_info(self.week_offset_label.text)
-        fredag_dato = week_info['monday_date'] + timedelta(days=4)
-        self.update_button_state(self.fre_button, self.fre_akt_label, fredag_dato,self.fre_column_panel)
+        self.åpne_poengvelger_for_dag(4, self.fre_button, self.fre_akt_label, self.fre_label)
     
     def lor_button_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        week_info = self.get_week_info(self.week_offset_label.text)
-        lordag_dato = week_info['monday_date'] + timedelta(days=5)
-        self.update_button_state(self.lor_button, self.lor_akt_label, lordag_dato,self.lor_column_panel)
-      
+        self.åpne_poengvelger_for_dag(5, self.lor_button, self.lor_akt_label, self.lor_label)
+    
     def son_button_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        week_info = self.get_week_info(self.week_offset_label.text)
-        sondag_dato = week_info['monday_date'] + timedelta(days=6)
-        self.update_button_state(self.son_button, self.son_akt_label, sondag_dato,self.son_column_panel)
+        self.åpne_poengvelger_for_dag(6, self.son_button, self.son_akt_label, self.son_label)
+    
+    
+    def åpne_poengvelger_for_dag(self, dag_index, knapp, label, ukedag_label):
+        valgt_poeng = int(knapp.text or 0)
+        aktivitet = label.text
 
+        def mottak_fra_poengvelger(poeng, aktivitet):
+            print("Valgt poeng:", poeng)
+            print("Aktivitet:", aktivitet)
+            week_info = self.get_week_info(self.week_offset_label.text)
+            valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
+    
+            # Oppdater GUI
+            knapp.text = str(poeng)
+            label.text = aktivitet
+            self.lagre_aktivitet(valgt_dato, aktivitet, poeng)
+
+        open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text, callback=mottak_fra_poengvelger)
+
+
+  
     # def login_click(self, **event_args):
     #     """This method is called when the button is clicked"""
     #     user = anvil.users.login_with_form(allow_remembered=30, allow_cancel=True)
@@ -288,25 +242,26 @@ class Loggbok(LoggbokTemplate):
       week_info = self.get_week_info(self.week_offset_label.text)
       mandag_dato = week_info['monday_date']
       _, konkurranse_fradato, konkurranse_tildato = self.hent_konkurranse_info()
-      today_date = datetime.today().date()
-      
+  
+      # 👇 Bruker JavaScript Date-objekt for å få lokal "i dag"-dato fra klientens tidssone
+      import anvil.js
+      js_now = anvil.js.window.Date() 
+      today_date = datetime.fromtimestamp(js_now.getTime() / 1000).date()
+  
       # Først sjekker vi om uken ligger utenfor konkurranseintervallet
       if not self.er_dato_i_interval(mandag_dato, konkurranse_fradato, konkurranse_tildato):
           # Utenfor intervallet: sett alle kolonnepaneler til rød og deaktiver knappene
-          self.man_column_panel.background = "RED"
-          self.tir_column_panel.background = "RED"
-          self.ons_column_panel.background = "RED"
-          self.tor_column_panel.background = "RED"
-          self.fre_column_panel.background = "RED"
-          self.lor_column_panel.background = "RED"
-          self.son_column_panel.background = "RED"
-          self.man_button.enabled = False
-          self.tir_button.enabled = False
-          self.ons_button.enabled = False
-          self.tor_button.enabled = False
-          self.fre_button.enabled = False
-          self.lor_button.enabled = False
-          self.son_button.enabled = False
+          for panel, knapp in [
+              (self.man_column_panel, self.man_button),
+              (self.tir_column_panel, self.tir_button),
+              (self.ons_column_panel, self.ons_button),
+              (self.tor_column_panel, self.tor_button),
+              (self.fre_column_panel, self.fre_button),
+              (self.lor_column_panel, self.lor_button),
+              (self.son_column_panel, self.son_button),
+          ]:
+              panel.background = "RED"
+              knapp.enabled = False
       else:
           # Uken er innenfor konkurranseintervallet, oppdater hver dag og sjekk for fremtid
           base_dato = mandag_dato
@@ -319,14 +274,12 @@ class Loggbok(LoggbokTemplate):
               (self.lor_button, self.lor_column_panel, self.lor_akt_label, week_activities[5], base_dato + timedelta(days=5)),
               (self.son_button, self.son_column_panel, self.son_akt_label, week_activities[6], base_dato + timedelta(days=6)),
           ]
-
+  
           for knapp, panel, label, akt_data, dato in komponenter:
               self.oppdater_dag(knapp, panel, label, akt_data, dato, today_date)
+  
+      self.lykkehjul.visible = self.sjekk_lykkehjul()
 
-
-        
-      self.lykkehjul.visible =   self.sjekk_lykkehjul()      
-      
 
           
     def lagre_aktivitet(self, dato, aktivitet, poeng):
@@ -483,7 +436,6 @@ class Loggbok(LoggbokTemplate):
       open_form('team_medlemmer',teamnavn=self.team_label.text)
 
 
-
     def oppdater_dag(self, knapp, panel, label, aktivitet_data, dato, today_date):
         if aktivitet_data:
             poeng = str(aktivitet_data[0]['poeng'])
@@ -495,12 +447,12 @@ class Loggbok(LoggbokTemplate):
         knapp.text = poeng
         label.text = aktivitet
     
-        fremtid = dato > today_date
+        fremtid = dato > today_date  # 💡 i dag er tillatt, kun fremtid deaktiveres
         knapp.enabled = not fremtid
     
         # 🎨 Visuell differensiering
         if fremtid:
-            panel.background = "#eeeeee"  # Lys grå bakgrunn
+            panel.background = "#eeeeee"
             knapp.foreground = "#888888"
             label.foreground = "#888888"
             panel.style = (
@@ -518,9 +470,10 @@ class Loggbok(LoggbokTemplate):
                 "padding: 8px;"
             )
     
-        # Til slutt: Fjern eventuelle gamle spesialstiler fra knapp/label
         knapp.style = ""
         label.style = ""
+
+
 
     def deltager_label_click(self, **event_args):
       """This method is called when the link is clicked"""
