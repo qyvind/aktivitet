@@ -107,18 +107,20 @@ class Loggbok(LoggbokTemplate):
         valgt_poeng = int(knapp.text or 0)
         aktivitet = label.text
 
-        def mottak_fra_poengvelger(poeng, aktivitet):
-            print("Valgt poeng:", poeng)
-            print("Aktivitet:", aktivitet)
+        def mottak_fra_poengvelger(poeng, aktivitet, ikon):
+            #print("Valgt poeng:", poeng)
+            #print("Aktivitet:", aktivitet)
+            #print(ikon)
             week_info = self.get_week_info(self.week_offset_label.text)
             valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
     
             # Oppdater GUI
             knapp.text = str(poeng)
             label.text = aktivitet
-            self.lagre_aktivitet(valgt_dato, aktivitet, poeng)
+            self.lagre_aktivitet(valgt_dato, aktivitet, poeng, ikon)
+            
 
-        open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text, callback=mottak_fra_poengvelger)
+        open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text,ikon="", callback=mottak_fra_poengvelger)
 
 
   
@@ -282,9 +284,9 @@ class Loggbok(LoggbokTemplate):
 
 
           
-    def lagre_aktivitet(self, dato, aktivitet, poeng):
+    def lagre_aktivitet(self, dato, aktivitet, poeng, ikon):
         try:
-            result = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng)
+            result = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng, ikon)
             #print(result)
         except Exception as e:
             print(f"Error saving activity: {e}")
