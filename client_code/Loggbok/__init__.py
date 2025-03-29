@@ -79,95 +79,19 @@ class Loggbok(LoggbokTemplate):
 
 
       
-    # def update_button_state(self, button, label, dato,columnpanel):
-    #     """Oppdaterer knappens tekst og farge basert på nåværende tilstand"""
-    #     states = {
-    #         "0": ("1", "BLACK","LIGHTGREEN"),
-    #         "1": ("2", "BLACK","GREEN"),
-    #         "2": ("3", "BLACK","DARKGREEN"),
-    #         "3": ("0", "BLACK","WHITE"),
-    #     }
-      
-    #     previous_state = button.text
-
-    #     if button.text in states:
-    #         button.text, button.foreground, columnpanel.background = states[button.text]
-    #     else:
-    #         #print("button not in states")
-    #           # Initialiser text_box med en default-verdi
-    #       text_box = type('Dummy', (object,), {"text": ""})()  # Oppretter et objekt med et tomt text-attributt
-    #     if button.text == "1":
-    #         """Viser en popup for å spørre om tekst og oppdaterer en label"""
-    #         text_box = TextBox(placeholder="Skriv her...",text=label.text)
-    
-    #         result = anvil.alert(
-    #             content=text_box,
-    #             title="Skriv inn type aktivitet",
-    #             buttons=["OK", "Avbryt"]
-    #         )
-    
-    #         if result == "OK":  # Hvis brukeren trykket "OK"
-    #             label.text = text_box.text  # Hent tekst fra TextBox og sett den i riktig label
-    #             # Lagre aktiviteten med riktig dato
-        
-    #     self.lagre_aktivitet(dato, text_box.text, int(button.text))
-    #         # Hvis knappens tilstand gikk fra 0 til 1, kall sjekken
-    #     if previous_state == "0" and button.text == "1":
-    #         if self.sjekk_lykkehjul():
-    #           self.lykkehjul.visible = True
-    #           week_info = self.get_week_info(self.week_offset_label.text)
-    #           mandag_dato = week_info['monday_date']
-    #           anvil.server.call('lagre_trekning', mandag_dato)
-    #     elif previous_state=="3" and button.text=="0":
-    #         if not self.sjekk_lykkehjul():
-    #           self.lykkehjul.visible = False
-    #           week_info = self.get_week_info(self.week_offset_label.text)
-    #           mandag_dato = week_info['monday_date']
-    #           anvil.server.call('slett_trekning', mandag_dato)
-            
-
-
-    # def man_button_click(self, **event_args):
-    #     # """This method is called when the button is clicked"""
-    #     # week_info = self.get_week_info(self.week_offset_label.text)
-    #     # mandag_dato = week_info['monday_date']
-    #     # self.update_button_state(self.man_button, self.man_akt_label, mandag_dato,self.man_column_panel)
-    #     result = alert(
-    #       content=PoengVelger(),
-    #       title="Registrer aktivitet",
-    #       large=True
-    #     )
-        
-    #     if result and isinstance(result, dict):
-    #         poeng = result["poeng"]
-    #         aktivitet = result["aktivitet"]
-    #         print("Du valgte:", poeng, aktivitet)
-    #         # Lagre eller oppdater med valgt info
-    #     else:
-    #         print("Brukeren avbrøt eller lukket vinduet")
 
     
-    #     if result:
-    #         poeng = result["poeng"]
-    #         aktivitet = result["aktivitet"]
-    #         print("Valgt:", poeng, aktivitet)
-    #         anvil.server.call('lagre_aktivitet', valgt_dato, aktivitet, poeng)
-    
-    # I din hovedform, legg til en hendelse for å håndtere lukking av alert
     def man_button_click(self, **event_args):
-        result = alert(
-          content=PoengVelger(),
-          title="Registrer aktivitet",
-          large=True,
-          buttons=[("Lagre", True), ("Avbryt", False)]
-        )
+        def mottak_fra_poengvelger(poeng, aktivitet):
+            print("Valgt poeng:", poeng)
+            print("Aktivitet:", aktivitet)
+            # Oppdater GUI og/eller lagre
+            week_info = self.get_week_info(self.week_offset_label.text)
+            mandag_dato = week_info['monday_date'] + timedelta(days=0)
+            self.lagre_aktivitet(mandag_dato, aktivitet, poeng)     
+            
         
-        if result:
-            poeng = result["poeng"]
-            aktivitet = result["aktivitet"]
-            print("Valgt:", poeng, aktivitet)
-        else:
-            print("Brukeren lukket vinduet eller avbrøt")
+        open_form("PoengVelger", poeng=self.man_button.text, aktivitet=self.man_akt_label.text, ukedag=self.man_label.text, callback=mottak_fra_poengvelger)
 
 
     def tir_button_click(self, **event_args):
