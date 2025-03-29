@@ -516,3 +516,21 @@ def is_admin():
     if userinfo and userinfo['admin'] == True:
         return True
     return False
+
+@anvil.server.callable
+def oppdater_brukernavn_og_team(navn, team_streng):
+    bruker = anvil.users.get_user()
+    if not bruker:
+        raise Exception("Ingen bruker er logget inn.")
+
+    # Finn raden i UserInfo for denne brukeren
+    row = app_tables.userinfo.get(user=bruker)
+    if not row:
+        # Opprett ny rad hvis den ikke finnes
+        row = app_tables.userinfo.add_row(user=bruker)
+
+    # Oppdater verdier
+    row['navn'] = navn
+    row['team'] = app_tables.team.get(team=team_streng)
+
+    return "OK"
