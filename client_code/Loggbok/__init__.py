@@ -9,13 +9,22 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from datetime import datetime, timedelta
+from anvil.js.window import document, setTimeout
+
 
 class Loggbok(LoggbokTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
+        self.week_row_panel.role="week-container"
+        self.week_row_panel.tag = {"id": "week-content", "class": "week-slide"}
+        
         self.week_offset_label.text = 0
         self.initier_uke(self.week_offset_label.text)
         self.sjekk_bruker()
+
+
+
+
 
 
   
@@ -236,15 +245,26 @@ class Loggbok(LoggbokTemplate):
         return result
 
 
-    def button_1_click(self, **event_args):
+    def week_right_click(self, **event_args):
       """This method is called when the button is clicked"""
       self.week_offset_label.text +=1
       self.initier_uke(self.week_offset_label.text)
 
-    def button_2_click(self, **event_args):
-      """This method is called when the button is clicked"""
-      self.week_offset_label.text -=1
-      self.initier_uke(self.week_offset_label.text)
+    def week_left_click(self, **event_args):
+        def run_anim():
+            content_el = document.getElementById("week-content")
+            print("Test ID inside timeout:", content_el)
+            self.animate_week_transition("left")
+    
+        setTimeout(run_anim, 50)
+    
+        self.week_offset_label.text -= 1
+        self.initier_uke(self.week_offset_label.text)
+
+ 
+
+
+
 
 
 
@@ -267,7 +287,7 @@ class Loggbok(LoggbokTemplate):
                 dato=q.between(start_of_week, end_of_week + timedelta(days=1))  # Filtrer på datoer
             )
         except Exception as e:
-            #print(f"Error fetching activities: {e}")
+            print(f"Error fetching activities: {e}")
             return {}
         
         # Organisere aktivitetene i en liste med 7 dager (0=Mandag, 6=Søndag)
@@ -331,7 +351,7 @@ class Loggbok(LoggbokTemplate):
           
     def lagre_aktivitet(self, dato, aktivitet, poeng):
         try:
-            result = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng)
+            anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng)
             #print(result)
         except Exception as e:
             print(f"Error saving activity: {e}")
@@ -442,7 +462,7 @@ class Loggbok(LoggbokTemplate):
             deltagerdata= anvil.server.call("hent_brukernavn")
             # print(deltagerdata)
             navn=deltagerdata['navn']
-            team=deltagerdata['team']
+            # team=deltagerdata['team']
             # print(navn, team)
             self.deltager_label.text = deltagerdata['navn']
             self.team_label.text = deltagerdata['team']
@@ -526,3 +546,26 @@ class Loggbok(LoggbokTemplate):
       print(user['email'])
       if anvil.server.call('is_admin'):
         open_form('admin')
+
+
+
+
+
+    def animate_week_transition(self, direction="left"):
+        content_el = document.getElementById("week-content")
+        if content_el is None:
+            print("Fant ikke 'week-content'")
+            return
+    
+        if direction == "left":
+            content_el.style.transform = "translateX(-100%)"
+        elif direction == "right":
+            content_el.style.transform = "translateX(100%)"
+    
+        def reset_position(*args):
+            content_el.style.transition = "none"
+            content_el.style.transform = "translateX(0%)"
+            content_el.offsetHeight  # Force reflow
+            content_el.style.transition = "transform 0.4s ease-in-out"
+    
+        setTimeout(reset_position, 400)
