@@ -11,6 +11,8 @@ from anvil.tables import app_tables
 from datetime import datetime, timedelta
 from ..PoengVelger import PoengVelger
 
+from m3.components import Button
+
 
 class Loggbok(LoggbokTemplate):
     def __init__(self, **properties):
@@ -117,7 +119,10 @@ class Loggbok(LoggbokTemplate):
             # Oppdater GUI
             knapp.text = str(poeng)
             label.text = aktivitet
-            self.man_ikon.icon = ikon
+            print(self.button_3.icon)
+            self.man_ikon.icon = 'fa:futbol-o'
+            
+            
             
             
             self.lagre_aktivitet(valgt_dato, aktivitet, poeng,ikon)

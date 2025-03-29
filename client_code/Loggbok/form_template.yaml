@@ -143,6 +143,14 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
+        - layout_properties: {grid_position: 'BXPCMN,MZWGKB'}
+          name: button_3
+          properties: {icon: 'fa:futbol-o', text: ''}
+          type: Button
+        - layout_properties: {grid_position: 'RJCLDG,WPYZZZ'}
+          name: man_ikon
+          properties: {text: ''}
+          type: Button
         - layout_properties: {grid_position: 'EBOSPB,PRGYBS'}
           name: man_akt_label
           properties:
@@ -403,10 +411,6 @@ components:
       name: flow_panel_6
       properties: {align: center}
       type: FlowPanel
-    - layout_properties: {column: 'null'}
-      name: man_ikon
-      properties: {text: ''}
-      type: Button
     layout_properties: {grid_position: 'LVOPXY,MUNUHX'}
     name: week_row_panel
     properties: {}
