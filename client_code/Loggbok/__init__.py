@@ -83,62 +83,50 @@ class Loggbok(LoggbokTemplate):
       
 
     def man_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(0, self.man_button, self.man_akt_label, self.man_label)
+        self.åpne_poengvelger_for_dag(0, self.man_button, self.man_akt_label, self.man_ikon, self.man_label)
+
     
     def tir_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(1, self.tir_button, self.tir_akt_label, self.tir_label)
+        self.åpne_poengvelger_for_dag(1, self.tir_button, self.tir_akt_label, self.tir_ikon,self.tir_label)
     
     def ons_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(2, self.ons_button, self.ons_akt_label, self.ons_label)
+        self.åpne_poengvelger_for_dag(2, self.ons_button, self.ons_akt_label,self.ons_ikon, self.ons_label)
     
     def tor_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(3, self.tor_button, self.tor_akt_label, self.tor_label)
+        self.åpne_poengvelger_for_dag(3, self.tor_button, self.tor_akt_label, self.tor_ikon,self.tor_label)
     
     def fre_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(4, self.fre_button, self.fre_akt_label, self.fre_label)
+        self.åpne_poengvelger_for_dag(4, self.fre_button, self.fre_akt_label,self.fre_ikon, self.fre_label)
     
     def lor_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(5, self.lor_button, self.lor_akt_label, self.lor_label)
+        self.åpne_poengvelger_for_dag(5, self.lor_button, self.lor_akt_label, self.lor_ikon,self.lor_label)
     
     def son_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(6, self.son_button, self.son_akt_label, self.son_label)
+        self.åpne_poengvelger_for_dag(6, self.son_button, self.son_akt_label,self.son_ikon, self.son_label)
     
     
-    def åpne_poengvelger_for_dag(self, dag_index, knapp, label, ukedag_label):
+    def åpne_poengvelger_for_dag(self, dag_index, knapp, label,ikon_komponent, ukedag_label):
         valgt_poeng = int(knapp.text or 0)
         aktivitet = label.text
 
-        def mottak_fra_poengvelger(poeng, aktivitet, ikon):
-            #print("Valgt poeng:", poeng)
-            #print("Aktivitet:", aktivitet)
-            #print(ikon)
+        def mottak_fra_poengvelger(poeng, aktivitet, nytt_ikon):
             week_info = self.get_week_info(self.week_offset_label.text)
             valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
     
             # Oppdater GUI
             knapp.text = str(poeng)
             label.text = aktivitet
-            print(self.button_3.icon)
-            self.man_ikon.icon = 'fa:futbol-o'
-            self.man_ikon.text = ""
+            ikon_komponent.icon = nytt_ikon
+                     
             
-            
-            
-            
-            self.lagre_aktivitet(valgt_dato, aktivitet, poeng,ikon)
             
 
-        open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text,ikon="", callback=mottak_fra_poengvelger)
+            self.lagre_aktivitet(valgt_dato, aktivitet, poeng,nytt_ikon)
+            
+
+        open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text,ikon=ikon_komponent, callback=mottak_fra_poengvelger)
 
 
-  
-    # def login_click(self, **event_args):
-    #     """This method is called when the button is clicked"""
-    #     user = anvil.users.login_with_form(allow_remembered=30, allow_cancel=True)
-    #     if user:
-    #         self.deltager_label.text = user['email']
-    #         self.loggbok_card.visible = True
-    #         self.login_card.visible = False
 
     def logout_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -203,11 +191,13 @@ class Loggbok(LoggbokTemplate):
     def button_1_click(self, **event_args):
       """This method is called when the button is clicked"""
       self.week_offset_label.text +=1
+      self.man_ikon.icon = "fa:trash"
       self.initier_uke(self.week_offset_label.text)
 
     def button_2_click(self, **event_args):
       """This method is called when the button is clicked"""
       self.week_offset_label.text -=1
+      self.man_ikon.icon = "fa:futbol-o"
       self.initier_uke(self.week_offset_label.text)
 
 
@@ -492,3 +482,10 @@ class Loggbok(LoggbokTemplate):
     def admin_button_click(self, **event_args):
       """This method is called when the button is clicked"""
       open_form('admin')
+
+    def man_ikon_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      pass
+      
+
+
