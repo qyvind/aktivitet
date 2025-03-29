@@ -11,7 +11,6 @@ from anvil.tables import app_tables
 from datetime import datetime, timedelta
 from ..PoengVelger import PoengVelger
 
-from m3.components import Button
 
 
 class Loggbok(LoggbokTemplate):
@@ -121,6 +120,7 @@ class Loggbok(LoggbokTemplate):
             label.text = aktivitet
             print(self.button_3.icon)
             self.man_ikon.icon = 'fa:futbol-o'
+            self.man_ikon.text = ""
             
             
             
