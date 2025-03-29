@@ -309,89 +309,22 @@ class Loggbok(LoggbokTemplate):
           self.son_button.enabled = False
       else:
           # Uken er innenfor konkurranseintervallet, oppdater hver dag og sjekk for fremtid
-          # Mandag (offset 0)
-          if week_activities[0]:
-              self.man_button.text = str(week_activities[0][0]['poeng'])
-              self.man_column_panel.background = self.get_farge(self.man_button.text)
-              self.man_akt_label.text = week_activities[0][0]['aktivitet']
-          else:
-              self.man_button.text = "0"
-              self.man_column_panel.background = self.get_farge("0")
-              self.man_akt_label.text = ""
-          # Sjekk om mandag er en fremtidig dato
-          self.man_button.enabled = not (mandag_dato > today_date)
-      
-          # Tirsdag (offset 1)
-          tirsdag_dato = mandag_dato + timedelta(days=1)
-          if week_activities[1]:
-              self.tir_button.text = str(week_activities[1][0]['poeng'])
-              self.tir_column_panel.background = self.get_farge(self.tir_button.text)
-              self.tir_akt_label.text = week_activities[1][0]['aktivitet']
-          else:
-              self.tir_button.text = "0"
-              self.tir_column_panel.background = self.get_farge("0")
-              self.tir_akt_label.text = ""
-          self.tir_button.enabled = not (tirsdag_dato > today_date)
-      
-          # Onsdag (offset 2)
-          onsdag_dato = mandag_dato + timedelta(days=2)
-          if week_activities[2]:
-              self.ons_button.text = str(week_activities[2][0]['poeng'])
-              self.ons_column_panel.background = self.get_farge(self.ons_button.text)
-              self.ons_akt_label.text = week_activities[2][0]['aktivitet']
-          else:
-              self.ons_button.text = "0"
-              self.ons_column_panel.background = self.get_farge("0")
-              self.ons_akt_label.text = ""
-          self.ons_button.enabled = not (onsdag_dato > today_date)
-      
-          # Torsdag (offset 3)
-          torsdag_dato = mandag_dato + timedelta(days=3)
-          if week_activities[3]:
-              self.tor_button.text = str(week_activities[3][0]['poeng'])
-              self.tor_column_panel.background = self.get_farge(self.tor_button.text)
-              self.tor_akt_label.text = week_activities[3][0]['aktivitet']
-          else:
-              self.tor_button.text = "0"
-              self.tor_column_panel.background = self.get_farge("0")
-              self.tor_akt_label.text = ""
-          self.tor_button.enabled = not (torsdag_dato > today_date)
-      
-          # Fredag (offset 4)
-          fredag_dato = mandag_dato + timedelta(days=4)
-          if week_activities[4]:
-              self.fre_button.text = str(week_activities[4][0]['poeng'])
-              self.fre_column_panel.background = self.get_farge(self.fre_button.text)
-              self.fre_akt_label.text = week_activities[4][0]['aktivitet']
-          else:
-              self.fre_button.text = "0"
-              self.fre_column_panel.background = self.get_farge("0")
-              self.fre_akt_label.text = ""
-          self.fre_button.enabled = not (fredag_dato > today_date)
-      
-          # Lørdag (offset 5)
-          lordag_dato = mandag_dato + timedelta(days=5)
-          if week_activities[5]:
-              self.lor_button.text = str(week_activities[5][0]['poeng'])
-              self.lor_column_panel.background = self.get_farge(self.lor_button.text)
-              self.lor_akt_label.text = week_activities[5][0]['aktivitet']
-          else:
-              self.lor_button.text = "0"
-              self.lor_column_panel.background = self.get_farge("0")
-              self.lor_akt_label.text = ""
-          self.lor_button.enabled = not (lordag_dato > today_date)
-      
-          # Søndag (offset 6)
-          sondag_dato = mandag_dato + timedelta(days=6)
-          if week_activities[6]:
-              self.son_button.text = str(week_activities[6][0]['poeng'])
-              self.son_column_panel.background = self.get_farge(self.son_button.text)
-              self.son_akt_label.text = week_activities[6][0]['aktivitet']
-          else:
-              self.son_button.text = "0"
-              self.son_column_panel.background = self.get_farge("0")
-              self.son_akt_label.text = ""
-          self.son_button.enabled = not (sondag_dato > today_date)
+          base_dato = mandag_dato
+          komponenter = [
+              (self.man_button, self.man_column_panel, self.man_akt_label, week_activities[0], base_dato),
+              (self.tir_button, self.tir_column_panel, self.tir_akt_label, week_activities[1], base_dato + timedelta(days=1)),
+              (self.ons_button, self.ons_column_panel, self.ons_akt_label, week_activities[2], base_dato + timedelta(days=2)),
+              (self.tor_button, self.tor_column_panel, self.tor_akt_label, week_activities[3], base_dato + timedelta(days=3)),
+              (self.fre_button, self.fre_column_panel, self.fre_akt_label, week_activities[4], base_dato + timedelta(days=4)),
+              (self.lor_button, self.lor_column_panel, self.lor_akt_label, week_activities[5], base_dato + timedelta(days=5)),
+              (self.son_button, self.son_column_panel, self.son_akt_label, week_activities[6], base_dato + timedelta(days=6)),
+          ]
+
+          for knapp, panel, label, akt_data, dato in komponenter:
+              self.oppdater_dag(knapp, panel, label, akt_data, dato, today_date)
+
+
+        
       self.lykkehjul.visible =   self.sjekk_lykkehjul()      
       
 
@@ -404,16 +337,16 @@ class Loggbok(LoggbokTemplate):
             print(f"Error saving activity: {e}")
             
           
-          
     def get_farge(self, poeng_verdi):
-      # Definerer farge for hver verdi
-      farge_mapping = {
-          "0": "WHITE",
-          "1": "LIGHTGREEN",
-          "2": "GREEN",
-          "3": "DARKGREEN"
-      }
-      return farge_mapping.get(poeng_verdi, "WHITE")
+        farge_mapping = {
+            "0": "#e0e0e0",     # Nøytral grå
+            "1": "#b2f2bb",     # Lys grønn
+            "2": "#69db7c",     # Middels grønn
+            "3": "#2b8a3e"      # Mørk grønn
+        }
+        return farge_mapping.get(poeng_verdi, "#e0e0e0")
+
+
 
     def regler_button_click(self, **event_args):
       """This method is called when the button is clicked"""
@@ -548,6 +481,44 @@ class Loggbok(LoggbokTemplate):
       open_form('team_medlemmer',teamnavn=self.team_label.text)
 
 
+
+    def oppdater_dag(self, knapp, panel, label, aktivitet_data, dato, today_date):
+        if aktivitet_data:
+            poeng = str(aktivitet_data[0]['poeng'])
+            aktivitet = aktivitet_data[0]['aktivitet']
+        else:
+            poeng = "0"
+            aktivitet = ""
+    
+        knapp.text = poeng
+        label.text = aktivitet
+    
+        fremtid = dato > today_date
+        knapp.enabled = not fremtid
+    
+        # 🎨 Visuell differensiering
+        if fremtid:
+            panel.background = "#eeeeee"  # Lys grå bakgrunn
+            knapp.foreground = "#888888"
+            label.foreground = "#888888"
+            panel.style = (
+                "border: 1px dashed #999;"
+                "border-radius: 16px;"
+                "padding: 8px;"
+            )
+        else:
+            panel.background = "#e0e0e0" if poeng == "0" else self.get_farge(poeng)
+            knapp.foreground = "black"
+            label.foreground = "black"
+            panel.style = (
+                "border: 2px dashed #0077cc;"
+                "border-radius: 16px;"
+                "padding: 8px;"
+            )
+    
+        # Til slutt: Fjern eventuelle gamle spesialstiler fra knapp/label
+        knapp.style = ""
+        label.style = ""
 
     def deltager_label_click(self, **event_args):
       """This method is called when the link is clicked"""
