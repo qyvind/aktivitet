@@ -182,7 +182,7 @@ components:
       name: data_grid_2
       properties:
         columns:
-        - {data_key: column_1, expand: false, id: JKSDUP, title: email, width: 130}
+        - {data_key: column_1, expand: false, id: JKSDUP, title: email, width: 175}
         - {data_key: column_2, expand: false, id: VJQQOR, title: Navn, width: 209}
         - {data_key: column_3, expand: false, id: OJLQEN, title: Poeng, width: 67.5}
         - {data_key: column_1, id: PJMSOR, title: Team}
