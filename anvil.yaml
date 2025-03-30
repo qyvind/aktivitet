@@ -16,16 +16,16 @@ db_schema:
       name: deltager
       target: users
       type: link_single
-    - admin_ui: {order: 4, width: 200}
-      name: ikon
-      type: string
     - admin_ui: {order: 5, width: 200}
       name: beskrivelse
       type: string
+    - admin_ui: {order: 4, width: 200}
+      name: ikon
+      type: media
     server: full
     title: Aktivitet
   files:
-    client: none
+    client: search
     columns:
     - admin_ui: {order: 0, width: 200}
       name: path

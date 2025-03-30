@@ -55,6 +55,7 @@ class Loggbok(LoggbokTemplate):
     
             if result == "OK":
                 label.text = text_box.text
+                print("linje 58")
                 self.lagre_aktivitet(dato, text_box.text, int(button.text))
             else:
                 # Hvis bruker trykket "Avbryt", sett tilbake til forrige state
@@ -110,18 +111,27 @@ class Loggbok(LoggbokTemplate):
         aktivitet = label.text
 
         def mottak_fra_poengvelger(poeng, aktivitet, nytt_ikon):
-            week_info = self.get_week_info(self.week_offset_label.text)
-            valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
-    
-            # Oppdater GUI
-            knapp.text = str(poeng)
-            label.text = aktivitet
-            ikon_komponent.icon = nytt_ikon
-                     
-            
-            
-
-            self.lagre_aktivitet(valgt_dato, aktivitet, poeng,nytt_ikon)
+          week_info = self.get_week_info(self.week_offset_label.text)
+          valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
+      
+          # Oppdater GUI
+          knapp.text = str(poeng)
+          label.text = aktivitet
+          ikon_komponent.source = nytt_ikon
+          ikon_komponent.width = 32
+          ikon_komponent.height = 32
+          ikon_komponent.visible = True
+      
+          # 🧠 Konverter LazyMedia til vanlig Media
+          if isinstance(nytt_ikon, anvil.BlobMedia) or nytt_ikon is None:
+              ikon_til_server = nytt_ikon
+          else:
+              ikon_til_server = anvil.BlobMedia(nytt_ikon.content_type, nytt_ikon.get_bytes(), name=nytt_ikon.name)
+      
+          print("lagrer med ikon-type:", type(ikon_til_server))
+      
+          self.lagre_aktivitet(valgt_dato, aktivitet, poeng, ikon_til_server)
+      
             
 
         open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text,ikon=ikon_komponent, callback=mottak_fra_poengvelger)
@@ -286,7 +296,7 @@ class Loggbok(LoggbokTemplate):
     def lagre_aktivitet(self, dato, aktivitet, poeng, ikon):
         try:
             result = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng, ikon)
-            #print(result)
+            print("til lagring",result)
         except Exception as e:
             print(f"Error saving activity: {e}")
             
@@ -448,8 +458,8 @@ class Loggbok(LoggbokTemplate):
             ikon=None
           
         if ikon_komponent is not None:
-          ikon_komponent.icon = ikon
-          print(ikon_komponent.icon)
+          ikon_komponent.source = ikon
+          print(ikon_komponent.source)
     
         knapp.text = poeng
         label.text = aktivitet
@@ -492,9 +502,9 @@ class Loggbok(LoggbokTemplate):
 
     def man_ikon_click(self, **event_args):
       """This method is called when the button is clicked"""
-      print(self.man_ikon.icon)
-      print(self.tir_ikon.icon)
-      print(self.ons_ikon.icon)
+      print(self.man_ikon.source)
+      print(self.tir_ikon.source)
+      print(self.ons_ikon.source)
       
 
 
@@ -506,4 +516,4 @@ class Loggbok(LoggbokTemplate):
 
     def button_3_click(self, **event_args):
       """This method is called when the button is clicked"""
-      self.velg_ikon()
+      self.image_1.source = app_files.swimming.png

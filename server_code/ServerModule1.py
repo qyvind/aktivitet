@@ -77,6 +77,13 @@ def batch_create_users(user_list):
 
 @anvil.server.callable
 def lagre_aktivitet(dato, aktivitet, poeng, ikon):
+    print("🧪 Lagre aktivitet:")
+    print("Dato:", dato)
+    print("Aktivitet:", aktivitet)
+    print("Poeng:", poeng)
+    print("Ikon:", ikon)
+    print("Ikon-type:", type(ikon))
+    print("LAGRER ikon type:", type(ikon), ikon.content_type)
     #print('lagre_aktivitet')
     user = anvil.users.get_user()
     if not user:

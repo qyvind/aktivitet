@@ -140,17 +140,19 @@ components:
             foreground: black
             spacing:
               margin: ['0', null, '0', null]
-              padding: ['0', '12', '0', '12']
+              padding: ['0', '0', '0', '0']
             text: '0'
           type: Button
-        - layout_properties: {grid_position: 'OCVHTB,TVVXRV'}
+        - layout_properties: {grid_position: 'BUEXBD,JKJSLR'}
           name: man_ikon
           properties:
-            align: center
-            spacing:
-              margin: ['0', null, '0', null]
-              padding: ['0', null, '0', null]
-          type: Label
+            display_mode: shrink_to_fit
+            height: '32'
+            margin: ['0', null, '0', null]
+            spacing_above: none
+            spacing_below: none
+            visible: true
+          type: Image
         - layout_properties: {grid_position: 'EBOSPB,PRGYBS'}
           name: man_akt_label
           properties:
@@ -191,19 +193,12 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - layout_properties: {grid_position: 'HYAMTZ,FEPOLN'}
+        - layout_properties: {grid_position: 'ITOHFN,CSAUSV'}
           name: tir_ikon
           properties:
-            align: center
-            background: ''
-            font_size: null
-            icon: fa:address-book
-            spacing:
-              margin: ['0', null, '0', null]
-              padding: ['0', null, '0', null]
-            spacing_above: none
-            spacing_below: none
-          type: Label
+            height: '32'
+            margin: ['0', null, '0', null]
+          type: Image
         - layout_properties: {grid_position: 'PXLERO,PKVRMB'}
           name: tir_akt_label
           properties:
@@ -244,16 +239,12 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - event_bindings: {click: man_ikon_click}
-          layout_properties: {grid_position: 'UTCIZV,TEIAUI'}
+        - layout_properties: {grid_position: 'AEDULU,BYYDDZ'}
           name: ons_ikon
           properties:
-            icon: ''
-            spacing:
-              margin: ['0', null, '0', null]
-              padding: ['0', '0', '0', '0']
-            text: ''
-          type: Button
+            height: '32'
+            margin: ['0', null, '0', null]
+          type: Image
         - layout_properties: {grid_position: 'SOIAYZ,XAITQX'}
           name: ons_akt_label
           properties:
@@ -294,16 +285,12 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - event_bindings: {click: man_ikon_click}
-          layout_properties: {grid_position: 'VWOFYB,AMHZOL'}
+        - layout_properties: {grid_position: 'NKUVYK,IJXQBK'}
           name: tor_ikon
           properties:
-            icon: ''
-            spacing:
-              margin: ['0', null, '0', null]
-              padding: ['0', '0', '0', '0']
-            text: ''
-          type: Button
+            height: '32'
+            margin: ['0', null, '0', null]
+          type: Image
         - layout_properties: {grid_position: 'JUEBES,WOMSNG'}
           name: tor_akt_label
           properties:
@@ -327,10 +314,6 @@ components:
       properties: {align: center}
       type: FlowPanel
     - components:
-      - event_bindings: {click: button_3_click}
-        name: button_3
-        properties: {text: button_3}
-        type: Button
       - components:
         - layout_properties: {grid_position: 'QZJWKR,TQRGOL'}
           name: fre_label
@@ -353,16 +336,12 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - event_bindings: {click: man_ikon_click}
-          layout_properties: {grid_position: 'XIGWNJ,CVGCSB'}
+        - layout_properties: {grid_position: 'HFGYCY,CTAMUA'}
           name: fre_ikon
           properties:
-            icon: ''
-            spacing:
-              margin: ['0', null, '0', null]
-              padding: ['0', '0', '0', '0']
-            text: ''
-          type: Button
+            height: '32'
+            margin: ['0', null, '0', null]
+          type: Image
         - layout_properties: {grid_position: 'EAQPVP,FHTBQS'}
           name: fre_akt_label
           properties:
@@ -403,16 +382,12 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - event_bindings: {click: man_ikon_click}
-          layout_properties: {grid_position: 'OZSSHY,UYPFDW'}
+        - layout_properties: {grid_position: 'MLYHRM,IXIQOA'}
           name: lor_ikon
           properties:
-            icon: ''
-            spacing:
-              margin: ['0', null, '0', null]
-              padding: ['0', '0', '0', '0']
-            text: ''
-          type: Button
+            height: '32'
+            margin: ['0', null, '0', null]
+          type: Image
         - layout_properties: {grid_position: 'ETZXYW,AGFTEO'}
           name: lor_akt_label
           properties:
@@ -453,16 +428,12 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - event_bindings: {click: man_ikon_click}
-          layout_properties: {grid_position: 'EPPJSO,CEFBDS'}
+        - layout_properties: {grid_position: 'NTOGHO,MCIKOC'}
           name: son_ikon
           properties:
-            icon: ''
-            spacing:
-              margin: ['0', null, '0', null]
-              padding: ['0', '0', '0', '0']
-            text: ''
-          type: Button
+            height: '32'
+            margin: ['0', null, '0', null]
+          type: Image
         - layout_properties: {grid_position: 'JWPLVX,KFSMCP'}
           name: son_akt_label
           properties:

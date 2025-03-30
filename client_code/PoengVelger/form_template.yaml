@@ -25,9 +25,14 @@ components:
     - name: aktivitet_box
       properties: {}
       type: TextBox
-    - name: ikon_dropdown
+    - event_bindings: {change: ikon_dropdown_change}
+      name: ikon_dropdown
       properties: {}
       type: DropDown
+    - layout_properties: {width: 64}
+      name: ikon_preview
+      properties: {height: 69.33331298828125}
+      type: Image
     layout_properties: {grid_position: 'XZDMJK,GJAVBS'}
     name: flow_panel_2
     properties: {}
