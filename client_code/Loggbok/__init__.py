@@ -16,6 +16,7 @@ from ..PoengVelger import PoengVelger
 class Loggbok(LoggbokTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
+        
         self.week_offset_label.text = 0
         self.initier_uke(self.week_offset_label.text)
         self.sjekk_bruker()
