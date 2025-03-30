@@ -9,10 +9,10 @@ class EgendefinertIkonVelger(EgendefinertIkonVelgerTemplate):
 
     # Liste med ikondata (oppdater med filnavnene du har lastet opp)
     self.ikoner = [
-      {"navn": "Fotball", "fil": app_files.fotball_png},
-      {"navn": "Basketball", "fil": app_files.basketball_png},
-      {"navn": "Løping", "fil": app_files.running_png},
-      {"navn": "Sykling", "fil": app_files.cycling_png},
+      {"navn": "crossfit", "dumbell-weight": app_files.fotball_png},
+      {"navn": "Frisbee", "fil": app_files.frisbee_png},
+      {"navn": "Orientering", "fil": app_files.map-hiking_png},
+      {"navn": "Klatring", "fil": app_files.person-climbing_png},
       {"navn": "Yoga", "fil": app_files.yoga_png},
       {"navn": "Svømming", "fil": app_files.swimming_png},
     ]
