@@ -1,3 +1,5 @@
+import anvil.files
+from anvil.files import data_files
 import anvil.email
 import anvil.facebook.auth
 import anvil.google.auth, anvil.google.drive, anvil.google.mail
@@ -7,6 +9,8 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
+
+
 
 @anvil.server.callable
 def add_aktivitet(aktivitet):
@@ -26,13 +30,6 @@ def update_aktivitet(aktivitet, aktivitet_data):
 def delete_aktivitet(aktivitet):
   #print('delete_aktivitet')
   aktivitet.delete()
-
-
-import anvil.server
-import anvil.users
-
-import anvil.server
-import anvil.users
 
 @anvil.server.callable
 def batch_create_users(user_list):
@@ -79,7 +76,14 @@ def batch_create_users(user_list):
 
 
 @anvil.server.callable
-def lagre_aktivitet(dato, aktivitet, poeng):
+def lagre_aktivitet(dato, aktivitet, poeng, ikon):
+    print("🧪 Lagre aktivitet:")
+    print("Dato:", dato)
+    print("Aktivitet:", aktivitet)
+    print("Poeng:", poeng)
+    print("Ikon:", ikon)
+    print("Ikon-type:", type(ikon))
+    print("LAGRER ikon type:", type(ikon), ikon.content_type)
     #print('lagre_aktivitet')
     user = anvil.users.get_user()
     if not user:
@@ -90,7 +94,7 @@ def lagre_aktivitet(dato, aktivitet, poeng):
     
     if existing_activity:
         # Oppdater den eksisterende posten
-        existing_activity.update(aktivitet=aktivitet, poeng=poeng)
+        existing_activity.update(aktivitet=aktivitet, poeng=poeng,ikon=ikon )
         return "Aktivitet oppdatert"
     else:
         # Lagre ny post i tabellen aktivitet
@@ -98,7 +102,8 @@ def lagre_aktivitet(dato, aktivitet, poeng):
             deltager=user,
             dato=dato,
             aktivitet=aktivitet,
-            poeng=poeng
+            poeng=poeng,
+            ikon=ikon
         )
         return "Aktivitet lagret"
 
@@ -471,9 +476,6 @@ def delete_user_by_email(email):
     
     return f"Bruker med e-post {email} og tilhørende data er slettet."
 
-import anvil.server
-import anvil.tables.query as q
-from anvil.tables import app_tables
 
 @anvil.server.callable
 def update_user_team(email, team_name,admin):
@@ -513,7 +515,7 @@ def is_admin():
     
     # Slå opp brukerens info i userinfo-tabellen
     userinfo = app_tables.userinfo.get(user=user)
-    if userinfo and userinfo['admin'] == True:
+    if userinfo and userinfo['admin'] :
         return True
     return False
 

@@ -12,6 +12,7 @@ from datetime import datetime, timedelta
 from ..PoengVelger import PoengVelger
 
 
+
 class Loggbok(LoggbokTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
@@ -54,6 +55,7 @@ class Loggbok(LoggbokTemplate):
     
             if result == "OK":
                 label.text = text_box.text
+                print("linje 58")
                 self.lagre_aktivitet(dato, text_box.text, int(button.text))
             else:
                 # Hvis bruker trykket "Avbryt", sett tilbake til forrige state
@@ -82,53 +84,59 @@ class Loggbok(LoggbokTemplate):
       
 
     def man_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(0, self.man_button, self.man_akt_label, self.man_label)
+        self.åpne_poengvelger_for_dag(0, self.man_button, self.man_akt_label, self.man_ikon, self.man_label)
+
     
     def tir_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(1, self.tir_button, self.tir_akt_label, self.tir_label)
+        self.åpne_poengvelger_for_dag(1, self.tir_button, self.tir_akt_label, self.tir_ikon,self.tir_label)
     
     def ons_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(2, self.ons_button, self.ons_akt_label, self.ons_label)
+        self.åpne_poengvelger_for_dag(2, self.ons_button, self.ons_akt_label,self.ons_ikon, self.ons_label)
     
     def tor_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(3, self.tor_button, self.tor_akt_label, self.tor_label)
+        self.åpne_poengvelger_for_dag(3, self.tor_button, self.tor_akt_label, self.tor_ikon,self.tor_label)
     
     def fre_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(4, self.fre_button, self.fre_akt_label, self.fre_label)
+        self.åpne_poengvelger_for_dag(4, self.fre_button, self.fre_akt_label,self.fre_ikon, self.fre_label)
     
     def lor_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(5, self.lor_button, self.lor_akt_label, self.lor_label)
+        self.åpne_poengvelger_for_dag(5, self.lor_button, self.lor_akt_label, self.lor_ikon,self.lor_label)
     
     def son_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(6, self.son_button, self.son_akt_label, self.son_label)
+        self.åpne_poengvelger_for_dag(6, self.son_button, self.son_akt_label,self.son_ikon, self.son_label)
     
     
-    def åpne_poengvelger_for_dag(self, dag_index, knapp, label, ukedag_label):
+    def åpne_poengvelger_for_dag(self, dag_index, knapp, label,ikon_komponent, ukedag_label):
         valgt_poeng = int(knapp.text or 0)
         aktivitet = label.text
 
-        def mottak_fra_poengvelger(poeng, aktivitet):
-            print("Valgt poeng:", poeng)
-            print("Aktivitet:", aktivitet)
-            week_info = self.get_week_info(self.week_offset_label.text)
-            valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
-    
-            # Oppdater GUI
-            knapp.text = str(poeng)
-            label.text = aktivitet
-            self.lagre_aktivitet(valgt_dato, aktivitet, poeng)
+        def mottak_fra_poengvelger(poeng, aktivitet, nytt_ikon):
+          week_info = self.get_week_info(self.week_offset_label.text)
+          valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
+      
+          # Oppdater GUI
+          knapp.text = str(poeng)
+          label.text = aktivitet
+          ikon_komponent.source = nytt_ikon
+          ikon_komponent.width = 32
+          ikon_komponent.height = 32
+          ikon_komponent.visible = True
+      
+          # 🧠 Konverter LazyMedia til vanlig Media
+          if isinstance(nytt_ikon, anvil.BlobMedia) or nytt_ikon is None:
+              ikon_til_server = nytt_ikon
+          else:
+              ikon_til_server = anvil.BlobMedia(nytt_ikon.content_type, nytt_ikon.get_bytes(), name=nytt_ikon.name)
+      
+          print("lagrer med ikon-type:", type(ikon_til_server))
+      
+          self.lagre_aktivitet(valgt_dato, aktivitet, poeng, ikon_til_server)
+      
+            
 
-        open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text, callback=mottak_fra_poengvelger)
+        open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text,ikon=ikon_komponent, callback=mottak_fra_poengvelger)
 
 
-  
-    # def login_click(self, **event_args):
-    #     """This method is called when the button is clicked"""
-    #     user = anvil.users.login_with_form(allow_remembered=30, allow_cancel=True)
-    #     if user:
-    #         self.deltager_label.text = user['email']
-    #         self.loggbok_card.visible = True
-    #         self.login_card.visible = False
 
     def logout_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -232,7 +240,8 @@ class Loggbok(LoggbokTemplate):
             day_of_week = activity_date.weekday()  # Mandag = 0, Søndag = 6
             week_activities[day_of_week].append({
                 'aktivitet': activity['aktivitet'],
-                'poeng': activity['poeng']
+                'poeng': activity['poeng'],
+                'ikon': activity['ikon']
             })
         
         return week_activities  # Returner aktiviteter for hver dag i uken
@@ -266,26 +275,28 @@ class Loggbok(LoggbokTemplate):
           # Uken er innenfor konkurranseintervallet, oppdater hver dag og sjekk for fremtid
           base_dato = mandag_dato
           komponenter = [
-              (self.man_button, self.man_column_panel, self.man_akt_label, week_activities[0], base_dato),
-              (self.tir_button, self.tir_column_panel, self.tir_akt_label, week_activities[1], base_dato + timedelta(days=1)),
-              (self.ons_button, self.ons_column_panel, self.ons_akt_label, week_activities[2], base_dato + timedelta(days=2)),
-              (self.tor_button, self.tor_column_panel, self.tor_akt_label, week_activities[3], base_dato + timedelta(days=3)),
-              (self.fre_button, self.fre_column_panel, self.fre_akt_label, week_activities[4], base_dato + timedelta(days=4)),
-              (self.lor_button, self.lor_column_panel, self.lor_akt_label, week_activities[5], base_dato + timedelta(days=5)),
-              (self.son_button, self.son_column_panel, self.son_akt_label, week_activities[6], base_dato + timedelta(days=6)),
+              (self.man_button, self.man_column_panel, self.man_akt_label, week_activities[0], base_dato, self.man_ikon),
+              (self.tir_button, self.tir_column_panel, self.tir_akt_label, week_activities[1], base_dato + timedelta(days=1), self.tir_ikon),
+              (self.ons_button, self.ons_column_panel, self.ons_akt_label, week_activities[2], base_dato + timedelta(days=2), self.ons_ikon),
+              (self.tor_button, self.tor_column_panel, self.tor_akt_label, week_activities[3], base_dato + timedelta(days=3), self.tor_ikon),
+              (self.fre_button, self.fre_column_panel, self.fre_akt_label, week_activities[4], base_dato + timedelta(days=4), self.fre_ikon),
+              (self.lor_button, self.lor_column_panel, self.lor_akt_label, week_activities[5], base_dato + timedelta(days=5), self.lor_ikon),
+              (self.son_button, self.son_column_panel, self.son_akt_label, week_activities[6], base_dato + timedelta(days=6), self.son_ikon),
           ]
-  
-          for knapp, panel, label, akt_data, dato in komponenter:
-              self.oppdater_dag(knapp, panel, label, akt_data, dato, today_date)
+          
+          
+          for knapp, panel, label, akt_data, dato, ikon_komponent in komponenter:
+              self.oppdater_dag(knapp, panel, label, akt_data, dato, today_date, ikon_komponent)
+
   
       self.lykkehjul.visible = self.sjekk_lykkehjul()
 
 
           
-    def lagre_aktivitet(self, dato, aktivitet, poeng):
+    def lagre_aktivitet(self, dato, aktivitet, poeng, ikon):
         try:
-            result = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng)
-            #print(result)
+            result = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng, ikon)
+            print("til lagring",result)
         except Exception as e:
             print(f"Error saving activity: {e}")
             
@@ -436,13 +447,19 @@ class Loggbok(LoggbokTemplate):
       open_form('team_medlemmer',teamnavn=self.team_label.text)
 
 
-    def oppdater_dag(self, knapp, panel, label, aktivitet_data, dato, today_date):
+    def oppdater_dag(self, knapp, panel, label, aktivitet_data, dato, today_date, ikon_komponent):
         if aktivitet_data:
             poeng = str(aktivitet_data[0]['poeng'])
             aktivitet = aktivitet_data[0]['aktivitet']
+            ikon=aktivitet_data[0]['ikon']
         else:
             poeng = "0"
             aktivitet = ""
+            ikon=None
+          
+        if ikon_komponent is not None:
+          ikon_komponent.source = ikon
+          print(ikon_komponent.source)
     
         knapp.text = poeng
         label.text = aktivitet
@@ -482,3 +499,21 @@ class Loggbok(LoggbokTemplate):
     def admin_button_click(self, **event_args):
       """This method is called when the button is clicked"""
       open_form('admin')
+
+    def man_ikon_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      print(self.man_ikon.source)
+      print(self.tir_ikon.source)
+      print(self.ons_ikon.source)
+      
+
+
+    def velg_ikon(self, **event_args):
+      def mottatt_ikon(source):
+        self.man_ikon.source = source  # 👈 Nå bruker du Image istedenfor .icon
+    
+      open_form("EgendefinertIkonVelger", callback=mottatt_ikon)
+
+    def button_3_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      self.image_1.source = app_files.swimming.png
