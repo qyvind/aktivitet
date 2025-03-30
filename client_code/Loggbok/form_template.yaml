@@ -143,37 +143,25 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - event_bindings: {click: man_ikon_click}
-          layout_properties: {grid_position: 'YXPEVW,RRWTYY'}
+        - layout_properties: {grid_position: 'OCVHTB,TVVXRV'}
           name: man_ikon
           properties:
-            icon: ''
+            align: center
             spacing:
               margin: ['0', null, '0', null]
-              padding: ['0', '0', '0', '0']
-            text: ''
-          type: Button
+              padding: ['0', null, '0', null]
+          type: Label
         - layout_properties: {grid_position: 'EBOSPB,PRGYBS'}
           name: man_akt_label
           properties:
             align: center
             font_size: 8
             spacing:
-              margin: ['0', null, null, null]
-              padding: ['0', null, null, null]
+              margin: ['0', null, '0', null]
+              padding: ['0', null, '0', null]
             text: ''
             visible: false
           type: Label
-        - event_bindings: {click: man_ikon_click}
-          layout_properties: {grid_position: 'EBOSPB,RGEVZC'}
-          name: man_ikon_copy
-          properties:
-            icon: ''
-            spacing:
-              margin: ['0', null, '0', null]
-              padding: ['0', '0', '0', '0']
-            text: ''
-          type: Button
         layout_properties: {}
         name: man_column_panel
         properties:
@@ -203,24 +191,27 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - event_bindings: {click: man_ikon_click}
-          layout_properties: {grid_position: 'YOVONK,MDWBNT'}
+        - layout_properties: {grid_position: 'HYAMTZ,FEPOLN'}
           name: tir_ikon
           properties:
-            icon: ''
+            align: center
+            background: ''
+            font_size: null
+            icon: fa:address-book
             spacing:
               margin: ['0', null, '0', null]
-              padding: ['0', '0', '0', '0']
-            text: ''
-          type: Button
+              padding: ['0', null, '0', null]
+            spacing_above: none
+            spacing_below: none
+          type: Label
         - layout_properties: {grid_position: 'PXLERO,PKVRMB'}
           name: tir_akt_label
           properties:
             align: center
             font_size: 8
             spacing:
-              margin: ['0', null, null, null]
-              padding: ['0', null, null, null]
+              margin: ['0', null, '0', null]
+              padding: ['0', null, '0', null]
             text: ''
             visible: false
           type: Label
@@ -269,8 +260,8 @@ components:
             align: center
             font_size: 8
             spacing:
-              margin: ['0', null, null, null]
-              padding: ['0', null, null, null]
+              margin: ['0', null, '0', null]
+              padding: ['0', null, '0', null]
             text: ''
             visible: false
           type: Label
@@ -319,8 +310,8 @@ components:
             align: center
             font_size: 8
             spacing:
-              margin: ['0', null, null, null]
-              padding: ['0', null, null, null]
+              margin: ['0', null, '0', null]
+              padding: ['0', null, '0', null]
             text: ''
             visible: false
           type: Label
@@ -374,8 +365,8 @@ components:
             align: center
             font_size: 8
             spacing:
-              margin: ['0', null, null, null]
-              padding: ['0', null, null, null]
+              margin: ['0', null, '0', null]
+              padding: ['0', null, '0', null]
             text: ''
             visible: false
           type: Label
@@ -424,8 +415,8 @@ components:
             align: center
             font_size: 8
             spacing:
-              margin: ['0', null, null, null]
-              padding: ['0', null, null, null]
+              margin: ['0', null, '0', null]
+              padding: ['0', null, '0', null]
             text: ''
             visible: false
           type: Label
@@ -474,8 +465,8 @@ components:
             align: center
             font_size: 8
             spacing:
-              margin: ['0', null, null, null]
-              padding: ['0', null, null, null]
+              margin: ['0', null, '0', null]
+              padding: ['0', null, '0', null]
             text: ''
             visible: false
           type: Label

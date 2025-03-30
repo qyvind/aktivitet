@@ -191,13 +191,11 @@ class Loggbok(LoggbokTemplate):
     def button_1_click(self, **event_args):
       """This method is called when the button is clicked"""
       self.week_offset_label.text +=1
-      self.man_ikon.icon = "fa:trash"
       self.initier_uke(self.week_offset_label.text)
 
     def button_2_click(self, **event_args):
       """This method is called when the button is clicked"""
       self.week_offset_label.text -=1
-      self.man_ikon.icon = "fa:futbol-o"
       self.initier_uke(self.week_offset_label.text)
 
 
@@ -232,7 +230,8 @@ class Loggbok(LoggbokTemplate):
             day_of_week = activity_date.weekday()  # Mandag = 0, Søndag = 6
             week_activities[day_of_week].append({
                 'aktivitet': activity['aktivitet'],
-                'poeng': activity['poeng']
+                'poeng': activity['poeng'],
+                'ikon': activity['ikon']
             })
         
         return week_activities  # Returner aktiviteter for hver dag i uken
@@ -266,17 +265,19 @@ class Loggbok(LoggbokTemplate):
           # Uken er innenfor konkurranseintervallet, oppdater hver dag og sjekk for fremtid
           base_dato = mandag_dato
           komponenter = [
-              (self.man_button, self.man_column_panel, self.man_akt_label, week_activities[0], base_dato),
-              (self.tir_button, self.tir_column_panel, self.tir_akt_label, week_activities[1], base_dato + timedelta(days=1)),
-              (self.ons_button, self.ons_column_panel, self.ons_akt_label, week_activities[2], base_dato + timedelta(days=2)),
-              (self.tor_button, self.tor_column_panel, self.tor_akt_label, week_activities[3], base_dato + timedelta(days=3)),
-              (self.fre_button, self.fre_column_panel, self.fre_akt_label, week_activities[4], base_dato + timedelta(days=4)),
-              (self.lor_button, self.lor_column_panel, self.lor_akt_label, week_activities[5], base_dato + timedelta(days=5)),
-              (self.son_button, self.son_column_panel, self.son_akt_label, week_activities[6], base_dato + timedelta(days=6)),
+              (self.man_button, self.man_column_panel, self.man_akt_label, week_activities[0], base_dato, self.man_ikon),
+              (self.tir_button, self.tir_column_panel, self.tir_akt_label, week_activities[1], base_dato + timedelta(days=1), self.tir_ikon),
+              (self.ons_button, self.ons_column_panel, self.ons_akt_label, week_activities[2], base_dato + timedelta(days=2), self.ons_ikon),
+              (self.tor_button, self.tor_column_panel, self.tor_akt_label, week_activities[3], base_dato + timedelta(days=3), self.tor_ikon),
+              (self.fre_button, self.fre_column_panel, self.fre_akt_label, week_activities[4], base_dato + timedelta(days=4), self.fre_ikon),
+              (self.lor_button, self.lor_column_panel, self.lor_akt_label, week_activities[5], base_dato + timedelta(days=5), self.lor_ikon),
+              (self.son_button, self.son_column_panel, self.son_akt_label, week_activities[6], base_dato + timedelta(days=6), self.son_ikon),
           ]
-  
-          for knapp, panel, label, akt_data, dato in komponenter:
-              self.oppdater_dag(knapp, panel, label, akt_data, dato, today_date)
+          
+          
+          for knapp, panel, label, akt_data, dato, ikon_komponent in komponenter:
+              self.oppdater_dag(knapp, panel, label, akt_data, dato, today_date, ikon_komponent)
+
   
       self.lykkehjul.visible = self.sjekk_lykkehjul()
 
@@ -436,13 +437,19 @@ class Loggbok(LoggbokTemplate):
       open_form('team_medlemmer',teamnavn=self.team_label.text)
 
 
-    def oppdater_dag(self, knapp, panel, label, aktivitet_data, dato, today_date):
+    def oppdater_dag(self, knapp, panel, label, aktivitet_data, dato, today_date, ikon_komponent):
         if aktivitet_data:
             poeng = str(aktivitet_data[0]['poeng'])
             aktivitet = aktivitet_data[0]['aktivitet']
+            ikon=aktivitet_data[0]['ikon']
         else:
             poeng = "0"
             aktivitet = ""
+            ikon=None
+          
+        if ikon_komponent is not None:
+          ikon_komponent.icon = ikon
+          print(ikon_komponent.icon)
     
         knapp.text = poeng
         label.text = aktivitet
@@ -485,7 +492,9 @@ class Loggbok(LoggbokTemplate):
 
     def man_ikon_click(self, **event_args):
       """This method is called when the button is clicked"""
-      pass
+      print(self.man_ikon.icon)
+      print(self.tir_ikon.icon)
+      print(self.ons_ikon.icon)
       
 
 
