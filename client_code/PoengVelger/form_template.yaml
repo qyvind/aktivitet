@@ -5,51 +5,101 @@ components:
     properties: {role: headline}
     type: Label
   - components:
-    - name: label_1
-      properties: {text: 'Sett poeng: '}
-      type: Label
-    - data_bindings:
-      - {code: '', property: items, writeback: false}
-      name: poeng_drop
-      properties: {}
-      type: DropDown
-    layout_properties: {grid_position: 'AIBRTF,EYISMJ'}
-    name: flow_panel_1
+    - components:
+      - components:
+        - components:
+          - name: label_1
+            properties: {text: 'Sett poeng: '}
+            type: Label
+          - data_bindings:
+            - {code: '', property: items, writeback: false}
+            name: poeng_drop
+            properties: {}
+            type: DropDown
+          name: flow_panel_1
+          properties: {}
+          type: FlowPanel
+        - layout_properties: {}
+          name: rich_text_2
+          properties:
+            align: left
+            content: |2-
+                  <ul>
+                    <li><strong>1 poeng:</strong> 0,5 time aktiv trening eller 8000 skritt</li>
+                    <li><strong>2 poeng:</strong> 1 time aktiv trening</li>
+                    <li><strong>3 poeng:</strong> 1,5 time aktiv trening</li>
+                  </ul>
+            format: restricted_html
+            spacing:
+              margin: ['0', null, '0', null]
+              padding: ['0', null, '0', null]
+          type: RichText
+        layout_properties: {grid_position: 'RHFXDS,SKNNKF'}
+        name: flow_panel_8
+        properties: {align: center}
+        type: FlowPanel
+      layout_properties: {grid_position: 'RVIUTL,JORSMI'}
+      name: outlined_card_1_copy
+      properties: {background: 'theme:Secondary Container', role: elevated-card}
+      type: ColumnPanel
+    layout_properties: {grid_position: 'RBCWIU,QASPLX'}
+    name: column_panel_1
     properties: {}
-    type: FlowPanel
+    type: ColumnPanel
   - components:
-    - layout_properties: {}
-      name: label_2
-      properties: {text: 'Aktivitet:'}
+    - layout_properties: {grid_position: 'QIMZPM,XKLNPF'}
+      name: label_3
+      properties: {text: Skriv type aktivitet eller velg et ikon som passer}
       type: Label
-    - name: aktivitet_box
+    - components:
+      - name: label_2
+        properties: {text: 'Aktivitet:'}
+        type: Label
+      - name: aktivitet_box
+        properties: {}
+        type: TextBox
+      - event_bindings: {change: ikon_dropdown_change}
+        name: ikon_dropdown
+        properties: {}
+        type: DropDown
+      - layout_properties: {width: 56}
+        name: ikon_preview
+        properties: {height: 52.33331298828125}
+        type: Image
+      layout_properties: {grid_position: 'WUZFZR,JBUQBZ'}
+      name: flow_panel_2
       properties: {}
-      type: TextBox
-    - event_bindings: {change: ikon_dropdown_change}
-      name: ikon_dropdown
-      properties: {}
-      type: DropDown
-    - layout_properties: {width: 64}
-      name: ikon_preview
-      properties: {height: 69.33331298828125}
-      type: Image
-    layout_properties: {grid_position: 'XZDMJK,GJAVBS'}
-    name: flow_panel_2
-    properties: {}
-    type: FlowPanel
+      type: FlowPanel
+    layout_properties: {grid_position: 'ERIXPL,MZZXBH'}
+    name: outlined_card_2
+    properties: {background: 'theme:Secondary Container', role: elevated-card}
+    type: ColumnPanel
+  - components:
+    - layout_properties: {grid_position: 'OMDRPU,DVZEUW'}
+      name: label_4
+      properties: {text: Her kan du skrive en lengre beskrivelse hvis du ønsker}
+      type: Label
+    - layout_properties: {grid_position: 'PCTGWS,ZZZZZE'}
+      name: beskrivelse
+      properties: {height: 77}
+      type: TextArea
+    layout_properties: {grid_position: 'UBKQHZ,LIRJYT'}
+    name: outlined_card_3
+    properties: {background: 'theme:Secondary Container', role: outlined-card}
+    type: ColumnPanel
   - components:
     - event_bindings: {click: lagre_button_click}
       layout_properties: {}
       name: lagre_button
-      properties: {text: Lagre}
+      properties: {align: right, role: filled-button, text: Lagre}
       type: Button
     layout_properties: {grid_position: 'LDAPRP,OKEEXD'}
     name: flow_panel_3
-    properties: {}
+    properties: {align: right}
     type: FlowPanel
-  layout_properties: {grid_position: 'FDQCUI,CPDGKX'}
+  layout_properties: {grid_position: 'EKYBVU,PBCROG'}
   name: outlined_card_1
-  properties: {background: 'theme:Secondary Container', role: outlined-card}
+  properties: {background: 'theme:Secondary Container', col_widths: '{"OKEEXD":30}', role: outlined-card}
   type: ColumnPanel
 container: {type: ColumnPanel}
 is_package: true

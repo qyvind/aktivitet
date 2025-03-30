@@ -11,7 +11,7 @@ from anvil.tables import app_tables
 
 
 class PoengVelger(PoengVelgerTemplate):
-  def __init__(self, valgt_poeng=1, aktivitet="", ukedag="", ikon=None, callback=None, **properties):
+  def __init__(self, valgt_poeng=1, aktivitet="", ukedag="", ikon=None, beskrivelse=None, callback=None, **properties):
     self.init_components(**properties)
     self.ukedag_label.text = ukedag
     self.callback = callback
@@ -24,6 +24,8 @@ class PoengVelger(PoengVelgerTemplate):
     ]
     self.poeng_drop.selected_value = valgt_poeng
     self.aktivitet_box.text = aktivitet
+    self.beskrivelse.text = beskrivelse
+    
 
     # Hent ikonene fra Files-tabellen (Media-objekter)
     ikon_rader = app_tables.files.search()
@@ -59,9 +61,10 @@ class PoengVelger(PoengVelgerTemplate):
     poeng = self.poeng_drop.selected_value
     aktivitet = self.aktivitet_box.text
     ikon = self.ikon_dropdown.selected_value  # Dette er nå et Media-objekt eller None
+    beskrivelse = self.beskrivelse.text
 
     if self.callback:
-      self.callback(poeng, aktivitet, ikon)
+      self.callback(poeng, aktivitet, ikon, beskrivelse)
 
     open_form('Loggbok')  # Gå tilbake til hovedform
 
