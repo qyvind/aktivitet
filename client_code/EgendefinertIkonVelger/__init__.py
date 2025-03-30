@@ -15,6 +15,8 @@ class EgendefinertIkonVelger(EgendefinertIkonVelgerTemplate):
       {"navn": "Klatring", "fil": app_files.person-climbing_png},
       {"navn": "Yoga", "fil": app_files.yoga_png},
       {"navn": "Svømming", "fil": app_files.swimming_png},
+      {"navn": "Løp", "fil": app_files.running_png},
+      {"navn": "8000 skritt", "fil": app_files.walking_png},
     ]
 
     self.vis_ikoner()

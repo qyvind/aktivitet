@@ -327,6 +327,10 @@ components:
       properties: {align: center}
       type: FlowPanel
     - components:
+      - event_bindings: {click: button_3_click}
+        name: button_3
+        properties: {text: button_3}
+        type: Button
       - components:
         - layout_properties: {grid_position: 'QZJWKR,TQRGOL'}
           name: fre_label

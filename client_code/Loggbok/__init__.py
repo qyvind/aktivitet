@@ -498,3 +498,12 @@ class Loggbok(LoggbokTemplate):
       
 
 
+    def velg_ikon(self, **event_args):
+      def mottatt_ikon(source):
+        self.man_ikon.source = source  # 👈 Nå bruker du Image istedenfor .icon
+    
+      open_form("EgendefinertIkonVelger", callback=mottatt_ikon)
+
+    def button_3_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      self.velg_ikon()

@@ -24,6 +24,20 @@ db_schema:
       type: string
     server: full
     title: Aktivitet
+  files:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: path
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: file
+      type: media
+    - admin_ui: {order: 2, width: 200}
+      name: file_version
+      type: string
+    server: full
+    title: Files
   konkurranse:
     client: full
     columns:
@@ -113,7 +127,7 @@ db_schema:
     server: full
     title: Users
 dependencies: []
-metadata: {description: For Framo BIL, logo_img: 'asset:running.svg', title: Aktivitetskonkurranse}
+metadata: {description: For Framo BIL, logo_img: 'asset:IKONS/running.svg', title: Aktivitetskonkurranse}
 name: Aktivitet
 package_name: Aktivitet
 renamed: true
@@ -143,5 +157,8 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/anvil/email.yml
+- client_config: {}
+  server_config: {file_table: files}
+  source: /runtime/services/anvil/files.yml
 startup: {module: Loggbok, type: form}
 startup_form: null
