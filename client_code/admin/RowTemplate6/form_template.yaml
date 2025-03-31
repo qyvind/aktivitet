@@ -12,5 +12,12 @@ components:
   name: slett_team_button
   properties: {foreground: 'theme:Error', icon: 'fa:trash', text: ''}
   type: Button
+- data_bindings:
+  - {code: 'self.item[''lock'']', property: checked, writeback: false}
+  event_bindings: {change: lock_check_box_change}
+  layout_properties: {column: VWDYMO}
+  name: lock_check_box
+  properties: {checked: true, text: ''}
+  type: CheckBox
 container: {type: DataRowPanel}
 is_package: true

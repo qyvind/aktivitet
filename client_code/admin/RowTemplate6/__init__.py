@@ -29,4 +29,8 @@ class RowTemplate6(RowTemplate6Template):
         # Hent nye data fra databasen
         team_resultater = anvil.server.call('hent_team_poengsummer')
         parent_form.team_repeating_panel.items = team_resultater
+
+  def lock_check_box_change(self, **event_args):
+    """This method is called when this checkbox is checked or unchecked"""
+    anvil.server.call('oppdater_team_lock', self.team_label.text, self.lock_check_box.checked)
       
