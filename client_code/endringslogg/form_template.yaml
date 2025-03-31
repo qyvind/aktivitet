@@ -4,6 +4,10 @@ components:
     name: label_1
     properties: {role: headline, text: Endringslogg}
     type: Label
+  - layout_properties: {grid_position: 'QPJPEQ,XYFIZA'}
+    name: text_area_5
+    properties: {text: '31/3: Nå kan bruker ikke velge team som er låst. Låsing er ikke med i admin brukergresesnitt enda, men må gjøres rett i basen foreløpig. Team Andeby er låst. '}
+    type: TextArea
   - layout_properties: {grid_position: 'TNZNYY,DKGSDY'}
     name: text_area_3
     properties:

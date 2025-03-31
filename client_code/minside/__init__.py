@@ -21,7 +21,8 @@ class minside(minsideTemplate):
     self.user_email_label.text = user['email']
     
     self.navn_textbox.text = navn
-    team_list = [row['team'] for row in app_tables.team.search() if row['team']]
+    team_list = [row['team'] for row in app_tables.team.search() if row['team'] and not row['lock']]
+
     self.team_drop_down.items = [("", "")] + [(team, team) for team in team_list]
     self.team_drop_down.selected_value = mitt_team
     
