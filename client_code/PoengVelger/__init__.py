@@ -11,7 +11,7 @@ from anvil.tables import app_tables
 
 
 class PoengVelger(PoengVelgerTemplate):
-  def __init__(self, valgt_poeng=1, aktivitet="", ukedag="", ikon=None, beskrivelse=None, callback=None, **properties):
+  def __init__(self, valgt_poeng=1, aktivitet="", ukedag="", ikon_path=None, beskrivelse=None, callback=None, **properties):
     self.init_components(**properties)
     self.ukedag_label.text = ukedag
     self.callback = callback
@@ -25,47 +25,42 @@ class PoengVelger(PoengVelgerTemplate):
     self.poeng_drop.selected_value = valgt_poeng
     self.aktivitet_box.text = aktivitet
     self.beskrivelse.text = beskrivelse
-    
 
-    # Hent ikonene fra Files-tabellen (Media-objekter)
+    # Hent ikonene fra Files-tabellen
     ikon_rader = app_tables.files.search()
     ikoner = [(rad['path'], rad['file']) for rad in ikon_rader if rad['file']]
-    
+
     # Legg til "Ingen ikon"-valg
     ikoner.insert(0, ("Ingen ikon", None))
-    
     self.ikon_dropdown.items = ikoner
     self.ikon_dropdown.include_placeholder = False
 
-    # Forhåndsvis valgt ikon
-    self.valgt_ikon = ikon
-    for label, media in self.ikon_dropdown.items:
-      if ikon and hasattr(ikon, "get_bytes") and media and media.get_bytes() == ikon.get_bytes():
-        self.ikon_dropdown.selected_value = media
-        self.ikon_preview.source = media
-        break
+    # Velg riktig ikon basert på ikon_path
+    self.valgt_ikon = None
+    for path, media in self.ikon_dropdown.items:
+        if path == ikon_path:
+            self.ikon_dropdown.selected_value = media
+            self.ikon_preview.source = media
+            self.valgt_ikon = media
+            break
     else:
-      self.ikon_dropdown.selected_value = None
-      self.ikon_preview.source = None
+        self.ikon_dropdown.selected_value = None
+        self.ikon_preview.source = None
 
   def ikon_dropdown_change(self, **event_args):
-    print("nå er jeg på ikon_dropdown_change")
     valgt = self.ikon_dropdown.selected_value
-    print("valgt ikon:",valgt)
     if valgt:
       self.ikon_preview.source = valgt
     else:
       self.ikon_preview.source = None
-  
+
   def lagre_button_click(self, **event_args):
     poeng = self.poeng_drop.selected_value
     aktivitet = self.aktivitet_box.text
-    ikon = self.ikon_dropdown.selected_value  # Dette er nå et Media-objekt eller None
+    ikon = self.ikon_dropdown.selected_value
     beskrivelse = self.beskrivelse.text
 
     if self.callback:
       self.callback(poeng, aktivitet, ikon, beskrivelse)
 
-    open_form('Loggbok')  # Gå tilbake til hovedform
-
-
+    open_form('Loggbok')

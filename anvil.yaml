@@ -22,6 +22,9 @@ db_schema:
     - admin_ui: {width: 200}
       name: beskrivelse
       type: string
+    - admin_ui: {order: 3.5, width: 200}
+      name: ikon_path
+      type: string
     server: full
     title: Aktivitet
   files:

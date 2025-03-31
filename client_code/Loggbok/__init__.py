@@ -81,39 +81,44 @@ class Loggbok(LoggbokTemplate):
     #             anvil.server.call('slett_trekning', mandag_dato)
 
 
-      
-
     def man_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(0, self.man_button, self.man_akt_label, self.man_ikon, self.man_label, self.man_column_panel.tooltip)
-
+        ikon_path = self._week_activities[0][0].get("ikon_path") if self._week_activities[0] else None
+        self.åpne_poengvelger_for_dag(0, self.man_button, self.man_akt_label, self.man_ikon, self.man_label, self.man_column_panel.tooltip, ikon_path)
     
     def tir_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(1, self.tir_button, self.tir_akt_label, self.tir_ikon,self.tir_label,self.tir_column_panel.tooltip)
+        ikon_path = self._week_activities[1][0].get("ikon_path") if self._week_activities[1] else None
+        self.åpne_poengvelger_for_dag(1, self.tir_button, self.tir_akt_label, self.tir_ikon, self.tir_label, self.tir_column_panel.tooltip, ikon_path)
     
     def ons_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(2, self.ons_button, self.ons_akt_label,self.ons_ikon, self.ons_label,self.ons_column_panel.tooltip)
+        ikon_path = self._week_activities[2][0].get("ikon_path") if self._week_activities[2] else None
+        self.åpne_poengvelger_for_dag(2, self.ons_button, self.ons_akt_label, self.ons_ikon, self.ons_label, self.ons_column_panel.tooltip, ikon_path)
     
     def tor_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(3, self.tor_button, self.tor_akt_label, self.tor_ikon,self.tor_label,self.tor_column_panel.tooltip)
+        ikon_path = self._week_activities[3][0].get("ikon_path") if self._week_activities[3] else None
+        self.åpne_poengvelger_for_dag(3, self.tor_button, self.tor_akt_label, self.tor_ikon, self.tor_label, self.tor_column_panel.tooltip, ikon_path)
     
     def fre_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(4, self.fre_button, self.fre_akt_label,self.fre_ikon, self.fre_label,self.fre_column_panel.tooltip)
+        ikon_path = self._week_activities[4][0].get("ikon_path") if self._week_activities[4] else None
+        self.åpne_poengvelger_for_dag(4, self.fre_button, self.fre_akt_label, self.fre_ikon, self.fre_label, self.fre_column_panel.tooltip, ikon_path)
     
     def lor_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(5, self.lor_button, self.lor_akt_label, self.lor_ikon,self.lor_label,self.lor_column_panel.tooltip)
+        ikon_path = self._week_activities[5][0].get("ikon_path") if self._week_activities[5] else None
+        self.åpne_poengvelger_for_dag(5, self.lor_button, self.lor_akt_label, self.lor_ikon, self.lor_label, self.lor_column_panel.tooltip, ikon_path)
     
     def son_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(6, self.son_button, self.son_akt_label,self.son_ikon, self.son_label,self.son_column_panel.tooltip)
-    
-    
-    def åpne_poengvelger_for_dag(self, dag_index, knapp, label,ikon_komponent, ukedag_label, beskrivelse):
-        valgt_poeng = int(knapp.text or 0)
-        aktivitet = label.text
+        ikon_path = self._week_activities[6][0].get("ikon_path") if self._week_activities[6] else None
+        self.åpne_poengvelger_for_dag(6, self.son_button, self.son_akt_label, self.son_ikon, self.son_label, self.son_column_panel.tooltip, ikon_path)
 
-        def mottak_fra_poengvelger(poeng, aktivitet, nytt_ikon,beskrivelse):
+    
+    
+    def åpne_poengvelger_for_dag(self, dag_index, knapp, label, ikon_komponent, ukedag_label, beskrivelse, ikon_path=None):
+      valgt_poeng = int(knapp.text or 0)
+      aktivitet = label.text
+  
+      def mottak_fra_poengvelger(poeng, aktivitet, nytt_ikon, beskrivelse):
           week_info = self.get_week_info(self.week_offset_label.text)
           valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
-      
+  
           # Oppdater GUI
           knapp.text = str(poeng)
           label.text = aktivitet
@@ -121,26 +126,24 @@ class Loggbok(LoggbokTemplate):
           ikon_komponent.width = 32
           ikon_komponent.height = 32
           ikon_komponent.tooltip = beskrivelse
-          if ikon_komponent == None:
-            label.visible=True
-            ikon_komponent.visible=False
+  
+          if nytt_ikon is None:
+              label.visible = True
+              ikon_komponent.visible = False
           else:
-            label.visible = False
-            ikon_komponent.visible = True
-      
-          # 🧠 Konverter LazyMedia til vanlig Media
-          if isinstance(nytt_ikon, anvil.BlobMedia) or nytt_ikon is None:
-              ikon_til_server = nytt_ikon
-          else:
-              ikon_til_server = anvil.BlobMedia(nytt_ikon.content_type, nytt_ikon.get_bytes(), name=nytt_ikon.name)
-      
-          print("lagrer med ikon-type:", type(ikon_til_server))
-      
-          self.lagre_aktivitet(valgt_dato, aktivitet, poeng, ikon_til_server,beskrivelse)
-      
-            
-
-        open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text,ikon=ikon_komponent,beskrivelse=beskrivelse, callback=mottak_fra_poengvelger)
+              label.visible = False
+              ikon_komponent.visible = True
+  
+          self.lagre_aktivitet(valgt_dato, aktivitet, poeng, nytt_ikon, beskrivelse)
+  
+      open_form("PoengVelger",
+                valgt_poeng=valgt_poeng,
+                aktivitet=aktivitet,
+                ukedag=ukedag_label.text,
+                ikon_path=ikon_path,
+                beskrivelse=beskrivelse,
+                callback=mottak_fra_poengvelger)
+  
 
 
 
@@ -254,6 +257,7 @@ class Loggbok(LoggbokTemplate):
         return week_activities  # Returner aktiviteter for hver dag i uken
                 
     def fyll_skjermen(self, week_activities):
+      self._week_activities = week_activities
       # Hent ukens info og konkurranseinfo
       week_info = self.get_week_info(self.week_offset_label.text)
       mandag_dato = week_info['monday_date']
