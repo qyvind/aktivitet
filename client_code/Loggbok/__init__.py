@@ -29,59 +29,6 @@ class Loggbok(LoggbokTemplate):
         week_activities = self.get_activities_for_week()
         self.fyll_skjermen(week_activities)
         
-    # def update_button_state(self, button, label, dato, columnpanel):
-    #     """Oppdaterer knappens tekst og farge basert på nåværende tilstand"""
-    #     states = {
-    #         "0": ("1", "BLACK", "LIGHTGREEN"),
-    #         "1": ("2", "BLACK", "GREEN"),
-    #         "2": ("3", "BLACK", "DARKGREEN"),
-    #         "3": ("0", "BLACK", "WHITE"),
-    #     }
-    
-    #     previous_state = button.text
-    
-    #     if button.text in states:
-    #         button.text, button.foreground, columnpanel.background = states[button.text]
-    
-    #     # Hvis ny state er "1", spør om tekst
-    #     if button.text == "1":
-    #         text_box = TextBox(placeholder="Skriv her...", text=label.text)
-    
-    #         result = anvil.alert(
-    #             content=text_box,
-    #             title="Skriv inn type aktivitet",
-    #             buttons=["OK", "Avbryt"]
-    #         )
-    
-    #         if result == "OK":
-    #             label.text = text_box.text
-    #             print("linje 58")
-    #             self.lagre_aktivitet(dato, text_box.text, int(button.text))
-    #         else:
-    #             # Hvis bruker trykket "Avbryt", sett tilbake til forrige state
-    #             button.text = previous_state
-    #             button.foreground, columnpanel.background = states[previous_state][1:]
-    #             return  # Ikke fortsett videre
-    #     else:
-    #         # For andre states enn "1", bruk eksisterende labeltekst
-    #         self.lagre_aktivitet(dato, label.text, int(button.text))
-    
-    #     # Håndtering av lykkehjul-logikk
-    #     if previous_state == "0" and button.text == "1":
-    #         if self.sjekk_lykkehjul():
-    #             self.lykkehjul.visible = True
-    #             week_info = self.get_week_info(self.week_offset_label.text)
-    #             mandag_dato = week_info['monday_date']
-    #             anvil.server.call('lagre_trekning', mandag_dato)
-    #     elif previous_state == "3" and button.text == "0":
-    #         if not self.sjekk_lykkehjul():
-    #             self.lykkehjul.visible = False
-    #             week_info = self.get_week_info(self.week_offset_label.text)
-    #             mandag_dato = week_info['monday_date']
-    #             anvil.server.call('slett_trekning', mandag_dato)
-
-
-      
 
     def man_button_click(self, **event_args):
         self.åpne_poengvelger_for_dag(0, self.man_button, self.man_akt_label, self.man_ikon, self.man_label, self.man_column_panel.tooltip)
@@ -140,7 +87,9 @@ class Loggbok(LoggbokTemplate):
       
             
 
-        open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text,ikon=ikon_komponent,beskrivelse=beskrivelse, callback=mottak_fra_poengvelger)
+        # open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text,ikon=ikon_komponent,beskrivelse=beskrivelse, callback=mottak_fra_poengvelger)
+        open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text, ikon=ikon_komponent.source, beskrivelse=beskrivelse, callback=mottak_fra_poengvelger)
+
 
 
 
@@ -486,7 +435,7 @@ class Loggbok(LoggbokTemplate):
           print(ikon_komponent.source)
     
         knapp.text = poeng
-        if poeng == "0" and not aktivitet and dato <= today_date:
+        if poeng == "0" and not aktivitet and dato <= today_date and ikon == None:
             label.text = "Hviledag"
             # if ikon_komponent is not None:
             #   ikon_komponent.source = app_files.relax_png
