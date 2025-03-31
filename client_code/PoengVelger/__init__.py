@@ -27,8 +27,8 @@ class PoengVelger(PoengVelgerTemplate):
     self.beskrivelse.text = beskrivelse
 
     self.ikon_dropdown.items = [(row['path'], row['file']) for row in app_tables.files.search()]
-ikon = self.ikon_dropdown.selected_value
-self.ikon_preview.source = ikon
+    ikon = self.ikon_dropdown.selected_value
+    self.ikon_preview.source = ikon
 
     
 
