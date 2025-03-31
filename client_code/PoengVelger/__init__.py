@@ -24,6 +24,8 @@ class PoengVelger(PoengVelgerTemplate):
     ]
     self.poeng_drop.selected_value = valgt_poeng
     self.aktivitet_box.text = aktivitet
+    if self.aktivitet_box.text == "Hviledag":
+      self.aktivitet_box.text= ""
     self.beskrivelse.text = beskrivelse
     
 
@@ -40,10 +42,11 @@ class PoengVelger(PoengVelgerTemplate):
     # Forhåndsvis valgt ikon
     self.valgt_ikon = ikon
     for label, media in self.ikon_dropdown.items:
-      if ikon and hasattr(ikon, "get_bytes") and media and media.get_bytes() == ikon.get_bytes():
+      if ikon and media and hasattr(ikon, "name") and ikon.name == media.name:
         self.ikon_dropdown.selected_value = media
         self.ikon_preview.source = media
         break
+
     else:
       self.ikon_dropdown.selected_value = None
       self.ikon_preview.source = None
