@@ -472,7 +472,13 @@ class Loggbok(LoggbokTemplate):
           print(ikon_komponent.source)
     
         knapp.text = poeng
-        label.text = aktivitet
+        if poeng == "0" and not aktivitet and dato <= today_date:
+            label.text = "Hviledag"
+            # if ikon_komponent is not None:
+            #   ikon_komponent.source = app_files.relax_png
+            #   ikon_komponent.visible = True
+        else:
+            label.text = aktivitet
     
         fremtid = dato > today_date  # 💡 i dag er tillatt, kun fremtid deaktiveres
         knapp.enabled = not fremtid
