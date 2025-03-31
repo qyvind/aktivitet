@@ -122,7 +122,7 @@ components:
       type: FlowPanel
     - components:
       - components:
-        - layout_properties: {grid_position: 'QZJWKR,TQRGOL'}
+        - layout_properties: {grid_position: 'LHGXGY,VWXMYV QZJWKR,TQRGOL'}
           name: man_label
           properties:
             align: center
@@ -134,7 +134,7 @@ components:
             tooltip: ''
           type: Label
         - event_bindings: {click: man_button_click}
-          layout_properties: {grid_position: 'QZTGZD,BHOIWH'}
+          layout_properties: {grid_position: 'LHGXGY,VWXMYV QZTGZD,BHOIWH'}
           name: man_button
           properties:
             font_size: 25
@@ -144,7 +144,8 @@ components:
               padding: ['0', '0', '0', '0']
             text: '0'
           type: Button
-        - layout_properties: {grid_position: 'BUEXBD,JKJSLR'}
+        - event_bindings: {}
+          layout_properties: {grid_position: 'LHGXGY,VWXMYV BUEXBD,JKJSLR'}
           name: man_ikon
           properties:
             display_mode: shrink_to_fit
@@ -154,7 +155,7 @@ components:
             spacing_below: none
             visible: true
           type: Image
-        - layout_properties: {grid_position: 'EBOSPB,PRGYBS'}
+        - layout_properties: {grid_position: 'LHGXGY,VWXMYV EBOSPB,PRGYBS'}
           name: man_akt_label
           properties:
             align: center
@@ -195,7 +196,8 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - layout_properties: {grid_position: 'ITOHFN,CSAUSV'}
+        - event_bindings: {}
+          layout_properties: {grid_position: 'ITOHFN,CSAUSV'}
           name: tir_ikon
           properties:
             height: '32'
@@ -241,7 +243,8 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - layout_properties: {grid_position: 'AEDULU,BYYDDZ'}
+        - event_bindings: {}
+          layout_properties: {grid_position: 'AEDULU,BYYDDZ'}
           name: ons_ikon
           properties:
             height: '32'
@@ -287,7 +290,8 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - layout_properties: {grid_position: 'NKUVYK,IJXQBK'}
+        - event_bindings: {}
+          layout_properties: {grid_position: 'NKUVYK,IJXQBK'}
           name: tor_ikon
           properties:
             height: '32'
@@ -338,7 +342,8 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - layout_properties: {grid_position: 'HFGYCY,CTAMUA'}
+        - event_bindings: {}
+          layout_properties: {grid_position: 'HFGYCY,CTAMUA'}
           name: fre_ikon
           properties:
             height: '32'
@@ -384,7 +389,8 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - layout_properties: {grid_position: 'MLYHRM,IXIQOA'}
+        - event_bindings: {}
+          layout_properties: {grid_position: 'MLYHRM,IXIQOA'}
           name: lor_ikon
           properties:
             height: '32'
@@ -430,7 +436,8 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - layout_properties: {grid_position: 'NTOGHO,MCIKOC'}
+        - event_bindings: {}
+          layout_properties: {grid_position: 'NTOGHO,MCIKOC'}
           name: son_ikon
           properties:
             height: '32'

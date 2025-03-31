@@ -476,6 +476,7 @@ class Loggbok(LoggbokTemplate):
     
         fremtid = dato > today_date  # 💡 i dag er tillatt, kun fremtid deaktiveres
         knapp.enabled = not fremtid
+        
     
         # 🎨 Visuell differensiering
         if fremtid:
@@ -527,3 +528,9 @@ class Loggbok(LoggbokTemplate):
     def button_3_click(self, **event_args):
       """This method is called when the button is clicked"""
       self.image_1.source = app_files.swimming.png
+
+    def man_click_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      print("klikk")
+
+
