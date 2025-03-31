@@ -17,7 +17,12 @@ class admin(adminTemplate):
     self.init_components(**properties)
     team_list = [row['team'] for row in app_tables.team.search() if row['team']]
     self.team_drop.items = [("", "")] + [(team, team) for team in team_list]
-    self.team_drop.selected_value = "" 
+    self.team_drop.selected_value = ""
+    self.team_card.visible=False
+    self.import_mang_card.visible = False
+    self.enkeltbruker_card.visible = False
+    self.bruker_card.visible = False 
+    self.konk_card.visible=False
 
     # Any code you write here will run before the form opens.
 
@@ -67,6 +72,7 @@ class admin(adminTemplate):
   def teams_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     team_resultater = anvil.server.call('hent_team_poengsummer')
+    print("teams:",team_resultater)
     self.team_repeating_panel.items = team_resultater
     if self.team_card.visible:
       self.team_card.visible=False

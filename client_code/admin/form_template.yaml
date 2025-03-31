@@ -99,7 +99,7 @@ components:
       type: Button
     layout_properties: {grid_position: 'SYZSGX,SXLCKE'}
     name: enkeltbruker_card
-    properties: {role: tonal-card, visible: false}
+    properties: {role: tonal-card, visible: true}
     type: ColumnPanel
   - components:
     - components:
@@ -125,7 +125,7 @@ components:
       type: Button
     layout_properties: {grid_position: 'LDOKBZ,TKAIJG'}
     name: import_mang_card
-    properties: {role: tonal-card, visible: false}
+    properties: {role: tonal-card, visible: true}
     type: ColumnPanel
   - components:
     - components:
@@ -146,16 +146,16 @@ components:
           type: Button
         layout_properties: {grid_position: 'POAQXO,WOYTVC'}
         name: flow_panel_10
-        properties: {align: center}
+        properties:
+          align: center
+          spacing:
+            margin: ['0', null, '0', null]
         type: FlowPanel
       layout_properties: {grid_position: 'GSKBTL,EUDELP'}
       name: outlined_card_2
       properties: {role: outlined-card}
       type: ColumnPanel
     - components:
-      - name: label_2
-        properties: {}
-        type: Label
       - name: team_repeating_panel
         properties: {item_template: admin.RowTemplate6}
         type: RepeatingPanel
@@ -163,15 +163,16 @@ components:
       name: data_grid_1
       properties:
         columns:
-        - {data_key: column_1, id: JKSDUP, title: Team}
-        - {data_key: column_3, expand: false, id: OJLQEN, title: Poeng, width: 226.5714111328125}
+        - {data_key: column_1, expand: false, id: JKSDUP, title: Team, width: 241.99996948242188}
+        - {data_key: column_3, expand: false, id: OJLQEN, title: Poeng, width: 77.71426391601562}
+        - {data_key: column_1, expand: false, id: VWDYMO, title: Låst, width: 76}
         - {data_key: column_1, id: KFHMOZ, title: ''}
       type: DataGrid
     data_bindings:
     - {code: '', property: border, writeback: false}
     layout_properties: {grid_position: 'UHGLLN,TNHBNW'}
     name: team_card
-    properties: {role: tonal-card, visible: false}
+    properties: {role: tonal-card, visible: true}
     type: ColumnPanel
   - components:
     - components:
@@ -191,7 +192,7 @@ components:
       type: DataGrid
     layout_properties: {grid_position: 'LUWZDT,FGYWHF'}
     name: bruker_card
-    properties: {role: tonal-card, visible: false}
+    properties: {role: tonal-card, visible: true}
     type: ColumnPanel
   - components:
     - components:
@@ -238,7 +239,7 @@ components:
       type: Button
     layout_properties: {grid_position: 'NWYMHD,ASANKT'}
     name: konk_card
-    properties: {role: tonal-card, visible: false}
+    properties: {role: tonal-card, visible: true}
     type: ColumnPanel
   layout_properties: {grid_position: 'DJZTTS,OKSYEP'}
   name: outlined_card_1

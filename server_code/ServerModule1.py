@@ -291,33 +291,34 @@ def hent_ukens_premietrekning(mandag):
 
 @anvil.server.callable
 def hent_team_poengsummer():
-    #print('hent_team_poengsummer')
-    # Dictionary for å holde styr på poeng per team
     team_poeng = {}
+    team_lock_map = {}  # Ny dict for å lagre lock-status for hvert team
 
-    # Hent alle team fra team-tabellen for å sikre at alle vises
     for team in app_tables.team.search():
-        team_navn = team['team']  # Hent team-navn
-        team_poeng[team_navn] = 0  # Initialiser med 0 poeng
+        team_navn = team['team']
+        team_poeng[team_navn] = 0
+        team_lock_map[team_navn] = team['lock']  # Lagre lock-status
 
-    # Hent alle brukere med tilhørende team
     for userinfo in app_tables.userinfo.search():
-        team = userinfo['team']  # Henter team-raden
-        bruker = userinfo['user']  # Henter bruker-raden
+        team = userinfo['team']
+        bruker = userinfo['user']
 
-        if team and bruker:  # Sjekk at begge eksisterer
-            team_navn = team['team']  # Hent team-navn fra team-tabellen
-            
-            # Hent brukerens totale poengsum fra aktivitet-tabellen
+        if team and bruker:
+            team_navn = team['team']
             bruker_poeng = sum(rad['poeng'] for rad in app_tables.aktivitet.search(deltager=bruker))
-            team_poeng[team_navn] += bruker_poeng  # Legg til poengene for teamet
+            team_poeng[team_navn] += bruker_poeng
 
-    # Konverter dictionary til en sortert liste (høyest poengsum først)
-    resultat = [{"team": team, "poengsum": poeng} for team, poeng in team_poeng.items()]
+    resultat = [
+        {
+            "team": team,
+            "poengsum": poeng,
+            "lock": team_lock_map.get(team, False)
+        }
+        for team, poeng in team_poeng.items()
+    ]
     resultat.sort(key=lambda x: x["poengsum"], reverse=True)
 
-    print(f"🏆 Totale poengsummer per team: {resultat}")  # Debugging
-
+    print(f"🏆 Totale poengsummer per team: {resultat}")
     return resultat
 
 
@@ -531,3 +532,12 @@ def oppdater_brukernavn_og_team(navn, team_streng):
     row['team'] = app_tables.team.get(team=team_streng)
 
     return "OK"
+
+@anvil.server.callable
+def oppdater_team_lock(team_navn, lock_status):
+    team_rad = app_tables.team.get(team=team_navn)
+    if team_rad:
+        team_rad['lock'] = lock_status
+        return f"✅ Team '{team_navn}' ble oppdatert med lock={lock_status}"
+    else:
+        return f"❌ Fant ikke team med navn '{team_navn}'"

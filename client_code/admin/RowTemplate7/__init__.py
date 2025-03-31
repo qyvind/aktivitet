@@ -47,5 +47,9 @@ class RowTemplate7(RowTemplate7Template):
     """This method is called when the button is clicked"""
     anvil.server.call('update_user_team',self.email_label.text,self.team_drop.selected_value, self.admin_checkbox.checked)
 
+  def team_drop_change(self, **event_args):
+    """This method is called when an item is selected"""
+    pass
+
 
     
