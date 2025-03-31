@@ -15,6 +15,7 @@ class PoengVelger(PoengVelgerTemplate):
     self.init_components(**properties)
     self.ukedag_label.text = ukedag
     self.callback = callback
+    
 
     self.poeng_drop.items = [
       ("0 poeng", 0),
@@ -25,6 +26,10 @@ class PoengVelger(PoengVelgerTemplate):
     self.poeng_drop.selected_value = valgt_poeng
     self.aktivitet_box.text = aktivitet
     self.beskrivelse.text = beskrivelse
+    print("poengvelger her")
+    
+
+
 
     # Hent ikonene fra Files-tabellen (Media-objekter)
     ikon_rader = app_tables.files.search()
@@ -36,7 +41,9 @@ class PoengVelger(PoengVelgerTemplate):
     self.ikon_dropdown.items = ikoner
     self.ikon_dropdown.include_placeholder = False
 
+    
     # Forhåndsvis valgt ikon
+    print("ikon:", ikon)
     self.valgt_ikon = ikon
     for label, media in self.ikon_dropdown.items:
       if ikon and hasattr(ikon, "get_bytes") and media and media.get_bytes() == ikon.get_bytes():
@@ -51,7 +58,6 @@ class PoengVelger(PoengVelgerTemplate):
   def ikon_dropdown_change(self, **event_args):
     
     valgt = self.ikon_dropdown.selected_value
-    print("valgt ikon:",valgt)
     if valgt:
       self.ikon_preview.source = valgt
     else:

@@ -141,7 +141,16 @@ class Loggbok(LoggbokTemplate):
       
             
 
-        open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text,ikon=ikon_komponent,beskrivelse=beskrivelse, callback=mottak_fra_poengvelger)
+        open_form(
+            "PoengVelger",
+            valgt_poeng=valgt_poeng,
+            aktivitet=aktivitet,
+            ukedag=ukedag_label.text,
+            ikon=ikon_komponent.source,
+            beskrivelse=ikon_komponent.tooltip,
+            callback=mottak_fra_poengvelger
+        )
+
 
 
 
