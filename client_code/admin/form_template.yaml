@@ -163,9 +163,9 @@ components:
       name: data_grid_1
       properties:
         columns:
-        - {data_key: column_1, expand: false, id: JKSDUP, title: Team, width: 241.99996948242188}
-        - {data_key: column_3, expand: false, id: OJLQEN, title: Poeng, width: 77.71426391601562}
-        - {data_key: column_1, expand: false, id: VWDYMO, title: Låst, width: 76}
+        - {data_key: column_1, expand: false, id: JKSDUP, title: Team, width: 194.5714111328125}
+        - {data_key: column_3, expand: false, id: OJLQEN, title: Poeng, width: 92.85711669921875}
+        - {data_key: column_1, expand: false, id: VWDYMO, title: Låst, width: 81}
         - {data_key: column_1, id: KFHMOZ, title: ''}
       type: DataGrid
     data_bindings:
@@ -183,8 +183,8 @@ components:
       name: data_grid_2
       properties:
         columns:
-        - {data_key: column_1, expand: false, id: JKSDUP, title: email, width: 175}
-        - {data_key: column_2, expand: false, id: VJQQOR, title: Navn, width: 209}
+        - {data_key: column_1, expand: false, id: JKSDUP, title: email, width: 135.5714111328125}
+        - {data_key: column_2, expand: false, id: VJQQOR, title: Navn, width: 176.42855834960938}
         - {data_key: column_3, expand: false, id: OJLQEN, title: Poeng, width: 67.5}
         - {data_key: column_1, id: PJMSOR, title: Team}
         - {data_key: column_4, expand: false, id: YKRMUE, title: Admin, width: 86.20001220703125}
@@ -199,7 +199,7 @@ components:
       - name: label_4
         properties: {text: 'Konkurransenavn:'}
         type: Label
-      - layout_properties: {width: 132}
+      - layout_properties: {width: 222.142822265625}
         name: konkurransenavn_label
         properties: {}
         type: TextBox

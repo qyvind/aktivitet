@@ -7,11 +7,6 @@ components:
   name: poeng_label
   properties: {}
   type: Label
-- event_bindings: {click: slett_team_button_click}
-  layout_properties: {column: KFHMOZ}
-  name: slett_team_button
-  properties: {foreground: 'theme:Error', icon: 'fa:trash', text: ''}
-  type: Button
 - data_bindings:
   - {code: 'self.item[''lock'']', property: checked, writeback: false}
   event_bindings: {change: lock_check_box_change}
@@ -19,5 +14,14 @@ components:
   name: lock_check_box
   properties: {checked: true, text: ''}
   type: CheckBox
+- components:
+  - event_bindings: {click: slett_team_button_click}
+    name: slett_team_button
+    properties: {foreground: 'theme:Error', icon: 'fa:trash', text: ''}
+    type: Button
+  layout_properties: {column: KFHMOZ}
+  name: flow_panel_1
+  properties: {align: left}
+  type: FlowPanel
 container: {type: DataRowPanel}
 is_package: true
