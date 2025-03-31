@@ -7,8 +7,8 @@ components:
   - layout_properties: {grid_position: 'QPJPEQ,XYFIZA'}
     name: text_area_5
     properties:
-      height: 104.18182373046875
-      text: "31/3: Nå kan bruker ikke velge team som er låst. Låsing er ikke med i admin brukergresesnitt enda, men må gjøres rett i basen foreløpig. Team Andeby er låst. \nLa til tekst \"Hviledag\" på passive dager"
+      height: 165.85711669921875
+      text: "31/3: Nå kan bruker ikke velge team som er låst. Låsing uteføres i teams-bildet i admin. \nLa til tekst \"Hviledag\" på passive dager\nFjernet ukepiler hvis man er på første eller siste uke i konkurransen, for å ikke kunne vise uker utenfor konkurransen. \n"
     type: TextArea
   - layout_properties: {grid_position: 'TNZNYY,DKGSDY'}
     name: text_area_3
@@ -35,7 +35,7 @@ components:
     name: text_area_4
     properties:
       height: 174.63641357421875
-      text: "Nå man redigerer en dag som har ikon må ikonet velges på nytt, ellers forsvinner det. Poeng og tekster bevares.\nTrenger en liste over eget lag med meldemmer og deres poeng. \nMå kunne låse et lag for påmelding av flere\nTrenger å finne flere og riktigere ikoner\nBør kunne redigere en dag ved å klikke hvor som helst i dagen, ikek bare på poengtallet\nHeadingen kan designes bedre, med navn og tid for konkurransen."
+      text: "Nå man redigerer en dag som har ikon må ikonet velges på nytt, ellers forsvinner det. Poeng og tekster bevares.\nTrenger en liste over eget lag med meldemmer og deres poeng. \nTrenger å finne flere og riktigere ikoner\nBør kunne redigere en dag ved å klikke hvor som helst i dagen, ikek bare på poengtallet\nHeadingen kan designes bedre, med navn og tid for konkurransen."
     type: TextArea
   - event_bindings: {click: button_1_click}
     layout_properties: {grid_position: 'RUNMFH,GYRFVX'}

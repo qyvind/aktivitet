@@ -258,7 +258,21 @@ class Loggbok(LoggbokTemplate):
       week_info = self.get_week_info(self.week_offset_label.text)
       mandag_dato = week_info['monday_date']
       _, konkurranse_fradato, konkurranse_tildato = self.hent_konkurranse_info()
-  
+
+      # Sjekk om vi er på første uke i konkurransen
+      if mandag_dato == konkurranse_fradato:
+          self.prev_week_button.visible = False  # Skjul pil til forrige uke
+      else:
+          self.prev_week_button.visible = True  # Vis pil ellers
+
+      # Sjekk om vi er på siste uke i konkurransen
+      sondag_dato = mandag_dato + timedelta(days=6)
+      if sondag_dato == konkurranse_tildato:
+          self.next_week_button.visible = False  # Skjul pil til neste uke
+      else:
+          self.next_week_button.visible = True   # Vis pil ellers
+
+      
       # 👇 Bruker JavaScript Date-objekt for å få lokal "i dag"-dato fra klientens tidssone
       import anvil.js
       js_now = anvil.js.window.Date() 
