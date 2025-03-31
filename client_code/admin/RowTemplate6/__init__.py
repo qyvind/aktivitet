@@ -16,6 +16,7 @@ class RowTemplate6(RowTemplate6Template):
     self.init_components(**properties)
     self.team_label.text = self.item['team']
     self.poeng_label.text = self.item['poengsum']
+    self.lock.checked = self.item['lock']
 
     # Any code you write here will run before the form opens.
 

@@ -4,6 +4,12 @@ components:
     name: label_1
     properties: {role: headline, text: Endringslogg}
     type: Label
+  - layout_properties: {grid_position: 'FVBBQR,WEXAMM'}
+    name: text_area_3
+    properties:
+      height: 73.27273559570312
+      text: "30/3-25: La til ikon for aktivitet. \nLa til beskrivelse av aktivitet. Den vises i tootip når musen hover over en dag. Men ikke på telefon. "
+    type: TextArea
   - layout_properties: {grid_position: 'ILDDNC,ZIRYPF'}
     name: text_area_1
     properties:
@@ -15,6 +21,15 @@ components:
     properties:
       height: 156.39999389648438
       text: "28/3-25: La inn checkboks på brukerliste i admin for å kunne gi admintilgang til brukere\nLaget endringslogg\nLink til innmeldingsskjema i siden med Regler\nRettet feil i trekningsliste. Den inkluderte deltagere som hadde hatt fem dager og avregistrert dager sånn at de ikke skal være med likevel. \nVisuelle enringer\n"
+    type: TextArea
+  - layout_properties: {grid_position: 'EGMXBT,JOSATY'}
+    name: label_2
+    properties: {role: headline, text: Kjente mangler}
+    type: Label
+  - layout_properties: {grid_position: 'KMSNJC,JBVAJE'}
+    name: text_area_4
+    properties:
+      text: "Man må klikke på tallet i dagen for å åpne redigering av dag. Det burde vært hele boksen.\nNår man redigerer en dag som har ikon må ikonet velges på nytt, ellers forsvinner det. Poeng og tekster bevares. \nTrenger en liste over eget lag med medlemmer og deres poeng.\nBør kunne låse enkeltlag for å hindre at folk melder seg på andres lag nilly willy."
     type: TextArea
   - event_bindings: {click: button_1_click}
     layout_properties: {grid_position: 'RUNMFH,GYRFVX'}

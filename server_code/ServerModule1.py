@@ -299,6 +299,7 @@ def hent_team_poengsummer():
     for team in app_tables.team.search():
         team_navn = team['team']  # Hent team-navn
         team_poeng[team_navn] = 0  # Initialiser med 0 poeng
+        
 
     # Hent alle brukere med tilhørende team
     for userinfo in app_tables.userinfo.search():

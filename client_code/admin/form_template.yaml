@@ -156,22 +156,24 @@ components:
       - name: label_2
         properties: {}
         type: Label
-      - name: team_repeating_panel
-        properties: {item_template: admin.RowTemplate6}
+      - layout_properties: {}
+        name: team_repeating_panel
+        properties: {item_template: admin.RowTemplate6, visible: true}
         type: RepeatingPanel
       layout_properties: {grid_position: 'POGSJB,RPVVVR'}
       name: data_grid_1
       properties:
         columns:
-        - {data_key: column_1, id: JKSDUP, title: Team}
+        - {data_key: column_1, expand: false, id: JKSDUP, title: Team, width: 403.63641357421875}
         - {data_key: column_3, expand: false, id: OJLQEN, title: Poeng, width: 226.5714111328125}
+        - {data_key: column_1, expand: false, id: FNIWUT, title: Låst, width: 93.8182373046875}
         - {data_key: column_1, id: KFHMOZ, title: ''}
       type: DataGrid
     data_bindings:
     - {code: '', property: border, writeback: false}
     layout_properties: {grid_position: 'UHGLLN,TNHBNW'}
     name: team_card
-    properties: {role: tonal-card, visible: false}
+    properties: {role: tonal-card, visible: true}
     type: ColumnPanel
   - components:
     - components:

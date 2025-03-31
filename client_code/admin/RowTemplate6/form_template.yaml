@@ -12,5 +12,9 @@ components:
   name: slett_team_button
   properties: {foreground: 'theme:Error', icon: 'fa:trash', text: ''}
   type: Button
+- layout_properties: {column: FNIWUT}
+  name: lock
+  properties: {text: ''}
+  type: CheckBox
 container: {type: DataRowPanel}
 is_package: true
