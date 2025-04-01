@@ -417,57 +417,47 @@ class Loggbok(LoggbokTemplate):
       open_form('team_medlemmer',teamnavn=self.team_label.text)
 
 
-    def oppdater_dag(self, knapp, panel, label, aktivitet_data, dato, today_date, ikon_komponent,column_panel):
+    def oppdater_dag(self, knapp, panel, label, aktivitet_data, dato, today_date, ikon_komponent, column_panel):
         if aktivitet_data:
             poeng = str(aktivitet_data[0]['poeng'])
             aktivitet = aktivitet_data[0]['aktivitet']
-            ikon=aktivitet_data[0]['ikon']
+            ikon = aktivitet_data[0]['ikon']
             column_panel.tooltip = aktivitet_data[0]['beskrivelse']
-            
         else:
             poeng = "0"
             aktivitet = ""
-            ikon=None
+            ikon = None
             column_panel.tooltip = ""
-          
+    
         if ikon_komponent is not None:
-          ikon_komponent.source = ikon
-          print(ikon_komponent.source)
+            ikon_komponent.source = ikon
     
         knapp.text = poeng
-        if poeng == "0" and not aktivitet and dato <= today_date and ikon == None:
-            label.text = "Hviledag"
-            # if ikon_komponent is not None:
-            #   ikon_komponent.source = app_files.relax_png
-            #   ikon_komponent.visible = True
-        else:
-            label.text = aktivitet
+        label.text = aktivitet if aktivitet or ikon else "Hviledag"
     
-        fremtid = dato > today_date  # 💡 i dag er tillatt, kun fremtid deaktiveres
+        fremtid = dato > today_date
         knapp.enabled = not fremtid
     
-        # 🎨 Visuell differensiering
-        if fremtid:
-            panel.background = "#eeeeee"
-            knapp.foreground = "#888888"
-            label.foreground = "#888888"
-            panel.style = (
-                "border: 1px dashed #999;"
-                "border-radius: 16px;"
-                "padding: 8px;"
-            )
-        else:
-            panel.background = "#e0e0e0" if poeng == "0" else self.get_farge(poeng)
-            knapp.foreground = "black"
-            label.foreground = "black"
-            panel.style = (
-                "border: 2px dashed #0077cc;"
-                "border-radius: 16px;"
-                "padding: 8px;"
-            )
+        # ✅ Dette legger til riktige data- attributter som CSS bruker
+        panel.tag.dag_kort = True
+        panel.tag.poeng = poeng
+        panel.tag.fremtidig_dag = fremtid
     
+        # 👇 Ikke sett .background – la CSS bestemme ut fra data-poeng
+        # if not fremtid:
+        #     farge = self.get_farge(poeng)
+        #     panel.background = farge
+    
+        # Tekstfarge hvis fremtidig
+        knapp.foreground = "#888" if fremtid else "black"
+        label.foreground = "#888" if fremtid else "black"
+    
+        # Fjern stil og rolle som kan forstyrre CSS
+        panel.role = ""
+        panel.style = ""
         knapp.style = ""
         label.style = ""
+    
 
 
 

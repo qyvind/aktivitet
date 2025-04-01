@@ -1063,3 +1063,29 @@ div.plot-container.plotly svg.main-svg {
   border-radius: 16px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
+
+[data-dag_kort="true"] {
+  border-radius: 16px;
+  padding: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-dag_kort="true"]:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+[data-dag_kort="true"][data-poeng="0"] { background-color: #e0e0e0; }
+[data-dag_kort="true"][data-poeng="1"] { background-color: #b2f2bb; }
+[data-dag_kort="true"][data-poeng="2"] { background-color: #69db7c; }
+[data-dag_kort="true"][data-poeng="3"] { background-color: #2b8a3e; }
+
+[data-dag_kort="true"] {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border-radius: 16px;
+}
+
+[data-dag_kort="true"]:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
