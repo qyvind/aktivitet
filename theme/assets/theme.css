@@ -1142,3 +1142,13 @@ body {
   margin-bottom: 16px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
+
+.dag-kort {
+  background-color: red !important;
+}
+
+.hviledag {
+  font-size: 24px !important;
+  color: magenta !important;
+  font-weight: bold !important;
+}

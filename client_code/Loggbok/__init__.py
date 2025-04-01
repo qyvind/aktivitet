@@ -20,6 +20,8 @@ class Loggbok(LoggbokTemplate):
         self.week_offset_label.text = 0
         self.initier_uke(self.week_offset_label.text)
         self.sjekk_bruker()
+
+
       
 
 
@@ -37,9 +39,7 @@ class Loggbok(LoggbokTemplate):
         
         for navn, panel, ukedag_label, poeng_button, akt_label in dager:
             panel.classes = ["dag-kort"]
-            ukedag_label.classes = ["ukedag"]
-            poeng_button.classes = ["poeng"]
-            akt_label.classes = ["hviledag"]
+
 
   
 
@@ -516,3 +516,4 @@ class Loggbok(LoggbokTemplate):
     def button_3_click(self, **event_args):
       """This method is called when the button is clicked"""
       self.image_1.source = app_files.swimming.png
+
