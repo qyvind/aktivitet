@@ -49,8 +49,8 @@ components:
             <h1>Brukerveiledning</h1>
             <p>Loggbildet viser innværende uke, når konkurransen er i gang.</p>
             <p>Du kan hoppe fra uke til uke med pilene til høyre og venstre.</p>
-            <p>Det er en knapp for hver dag. Du registrerer et poeng på en dag ved å klikke på knappen.</p>
-            <p>Ved første poeng på en dag blir du bedt om å beskrive aktiviteten – bruk stikkord.</p>
+            <p>Det er en knapp for hver dag. Du registrerer poeng på en dag ved å klikke på knappen.</p>
+            <p>Da kan du også velge et ikon, en tekst eller begge deler. Du kan også skrive en lengre beskrivelse av økten, for din egen del. </p>
           </div>
         </body>
         </html>
