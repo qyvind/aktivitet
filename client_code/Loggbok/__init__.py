@@ -16,10 +16,30 @@ from ..PoengVelger import PoengVelger
 class Loggbok(LoggbokTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
+        self.sett_dag_styling()
         self.week_offset_label.text = 0
         self.initier_uke(self.week_offset_label.text)
         self.sjekk_bruker()
+      
 
+
+
+    def sett_dag_styling(self):
+        dager = [
+            ("man", self.man_column_panel, self.man_label, self.man_button, self.man_akt_label),
+            ("tir", self.tir_column_panel, self.tir_label, self.tir_button, self.tir_akt_label),
+            ("ons", self.ons_column_panel, self.ons_label, self.ons_button, self.ons_akt_label),
+            ("tor", self.tor_column_panel, self.tor_label, self.tor_button, self.tor_akt_label),
+            ("fre", self.fre_column_panel, self.fre_label, self.fre_button, self.fre_akt_label),
+            ("lor", self.lor_column_panel, self.lor_label, self.lor_button, self.lor_akt_label),
+            ("son", self.son_column_panel, self.son_label, self.son_button, self.son_akt_label),
+        ]
+        
+        for navn, panel, ukedag_label, poeng_button, akt_label in dager:
+            panel.classes = ["dag-kort"]
+            ukedag_label.classes = ["ukedag"]
+            poeng_button.classes = ["poeng"]
+            akt_label.classes = ["hviledag"]
 
   
 
