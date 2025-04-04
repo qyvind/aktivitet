@@ -67,6 +67,11 @@ components:
           name: ikon_preview
           properties: {height: 61.714263916015625}
           type: Image
+        - event_bindings: {click: button_choose_icon_click}
+          layout_properties: {}
+          name: velg_ikon_button
+          properties: {text: Velg ikon}
+          type: Button
         layout_properties: {grid_position: 'ZFFFAT,TWLSIX'}
         name: flow_panel_4
         properties: {align: center}
