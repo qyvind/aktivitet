@@ -21,14 +21,18 @@ class Loggbok(LoggbokTemplate):
         self.sjekk_bruker()
 
 
-  
+
+
 
     def initier_uke(self,week_offset):
         self.get_week_info(week_offset)
         self.uke_label.text = self.get_week_range(week_offset)
         week_activities = self.get_activities_for_week()
         self.fyll_skjermen(week_activities)
-        
+
+
+
+  
 
     def man_button_click(self, **event_args):
         self.åpne_poengvelger_for_dag(0, self.man_button, self.man_akt_label, self.man_ikon, self.man_label, self.man_column_panel.tooltip)
