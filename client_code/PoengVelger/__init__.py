@@ -8,6 +8,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from .IconPickerForm import IconPickerForm
 
 
 class PoengVelger(PoengVelgerTemplate):
@@ -72,3 +73,23 @@ class PoengVelger(PoengVelgerTemplate):
     open_form('Loggbok')  # Gå tilbake til hovedform
 
 
+    def __init__(self, **properties):
+        self.init_components(**properties)
+        self.selected_icon = None
+        self.image_preview.visible = False
+
+    def button_choose_icon_click(self, **event_args):
+        icon = alert(
+            content=IconPickerForm(),
+            title="Velg ikon",
+            large=True,
+            buttons=[],
+        )
+        if icon:
+            self.selected_icon = icon
+            self.image_preview.source = icon
+            self.image_preview.visible = True
+
+  def velg_ikon_button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    pass
