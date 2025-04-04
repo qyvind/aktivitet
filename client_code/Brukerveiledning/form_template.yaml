@@ -9,51 +9,8 @@ components:
     layout_properties: {grid_position: 'HUGURA,MMKZMD'}
     name: rich_text_1
     properties:
-      align: center
-      content: |
-        <!DOCTYPE html>
-        <html lang="no">
-        <head>
-          <meta charset="UTF-8">
-          <title>Brukerveiledning</title>
-          <style>
-            body {
-              font-family: "Helvetica Neue", Arial, sans-serif;
-              background-color: #f9f9f9;
-              margin: 0;
-              padding: 20px;
-              color: #444;
-              line-height: 1.6;
-            }
-            .container {
-              max-width: 600px;
-              margin: 40px auto;
-              padding: 20px 30px;
-              background-color: #fff;
-              border-radius: 8px;
-              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            }
-            h1 {
-              text-align: center;
-              color: #333;
-              margin-bottom: 20px;
-            }
-            p {
-              margin-bottom: 15px;
-              text-align: justify;
-            }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <h1>Brukerveiledning</h1>
-            <p>Loggbildet viser innværende uke, når konkurransen er i gang.</p>
-            <p>Du kan hoppe fra uke til uke med pilene til høyre og venstre.</p>
-            <p>Det er en knapp for hver dag. Du registrerer poeng på en dag ved å klikke på knappen.</p>
-            <p>Da kan du også velge et ikon, en tekst eller begge deler. Du kan også skrive en lengre beskrivelse av økten, for din egen del. </p>
-          </div>
-        </body>
-        </html>
+      align: left
+      content: "<!DOCTYPE html>\n<html lang=\"no\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Brukerveiledning</title>\n  <style>\n    body {\n      font-family: \"Helvetica Neue\", Arial, sans-serif;\n      background-color: #f9f9f9;\n      margin: 0;\n      padding: 20px;\n      color: #444;\n      line-height: 1.6;\n    }\n    .container {\n      max-width: 600px;\n      margin: 40px auto;\n      padding: 20px 30px;\n      background-color: #fff;\n      border-radius: 8px;\n      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);\n    }\n    h1 {\n      text-align: center;\n      color: #333;\n      margin-bottom: 20px;\n    }\n    p {\n      margin-bottom: 15px;\n      text-align: justify;\n    }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Brukerveiledning</h1>\n    <p>Loggbildet viser innværende uke, når konkurransen er i gang.</p>\n    <p>Du kan hoppe fra uke til uke med pilene til høyre og venstre.</p>\n    <p>Det er en knapp for hver dag. Du registrerer poeng på en dag ved å klikke på knappen.</p>\n    <p>Da kan du også velge et ikon, en tekst eller begge deler. Du kan også skrive en lengre beskrivelse av økten, for din egen del. </p>\n\t<p>Du kan klikke på navnet ditt og komme inn i et bilde der du kan korrigere navnet og melde deg inn i et team. Foreløpig må team opprettes ved at du mailer til framobil@framo.no Du kan også be om å få låst teamet for nye medlemmer. </p>\n  </div>\n</body>\n</html>\n"
       format: restricted_html
     type: RichText
   layout_properties: {grid_position: 'BHNSXP,ZYWMYS'}
