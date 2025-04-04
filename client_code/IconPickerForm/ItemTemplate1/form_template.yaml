@@ -1,0 +1,8 @@
+components:
+- event_bindings: {mouse_down: image_1_mouse_down}
+  layout_properties: {grid_position: 'JIWGHK,XDLJCW'}
+  name: image_1
+  properties: {height: '50'}
+  type: Image
+container: {type: ColumnPanel}
+is_package: true
