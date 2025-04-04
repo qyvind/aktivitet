@@ -8,14 +8,16 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from .IconPickerForm import IconPickerForm
-
+from .IconPickerForm import IconPickerFOrm
 
 class PoengVelger(PoengVelgerTemplate):
   def __init__(self, valgt_poeng=1, aktivitet="", ukedag="", ikon=None, beskrivelse=None, callback=None, **properties):
     self.init_components(**properties)
     self.ukedag_label.text = ukedag
     self.callback = callback
+    self.selected_icon = None
+    self.image_preview.visible = False
+
 
     self.poeng_drop.items = [
       ("0 poeng", 0),
@@ -73,12 +75,8 @@ class PoengVelger(PoengVelgerTemplate):
     open_form('Loggbok')  # Gå tilbake til hovedform
 
 
-    def __init__(self, **properties):
-        self.init_components(**properties)
-        self.selected_icon = None
-        self.image_preview.visible = False
-
-    def button_choose_icon_click(self, **event_args):
+  
+  def button_choose_icon_click(self, **event_args):
         icon = alert(
             content=IconPickerForm(),
             title="Velg ikon",

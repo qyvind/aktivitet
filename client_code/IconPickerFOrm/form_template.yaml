@@ -1,0 +1,7 @@
+components:
+- layout_properties: {grid_position: 'YICEOC,MRWFQG'}
+  name: repeating_panel_1
+  properties: {item_template: IconPickerFOrm.ItemTemplate1}
+  type: RepeatingPanel
+container: {type: ColumnPanel}
+is_package: true

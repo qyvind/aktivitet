@@ -1,6 +1,5 @@
 components:
-- event_bindings: {mouse_down: image_1_mouse_down}
-  layout_properties: {grid_position: 'JIWGHK,XDLJCW'}
+- layout_properties: {grid_position: 'ZGQCON,NUJGMU'}
   name: image_1
   properties: {height: '50'}
   type: Image
