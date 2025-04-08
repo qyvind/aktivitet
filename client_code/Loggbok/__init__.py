@@ -17,6 +17,7 @@ class Loggbok(LoggbokTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
         self.week_offset_label.text = 0
+        self.hent_week_offset() 
         self.initier_uke(self.week_offset_label.text)
         self.sjekk_bruker()
         # anvil.users.set_user_info(week_offset=7)
@@ -157,11 +158,13 @@ class Loggbok(LoggbokTemplate):
     def next_week_button_click(self, **event_args):
       """This method is called when the button is clicked"""
       self.week_offset_label.text +=1
+      self.lagre_week_offset()
       self.initier_uke(self.week_offset_label.text)
 
     def prev_week_button_click(self, **event_args):
       """This method is called when the button is clicked"""
       self.week_offset_label.text -=1
+      self.lagre_week_offset() 
       self.initier_uke(self.week_offset_label.text)
 
 
@@ -497,3 +500,18 @@ class Loggbok(LoggbokTemplate):
     def button_3_click(self, **event_args):
       """This method is called when the button is clicked"""
       self.image_1.source = app_files.swimming.png
+
+
+    def hent_week_offset(self):
+        user = anvil.users.get_user()
+        if user:
+            userinfo = app_tables.userinfo.get(user=user)
+            if userinfo and userinfo['week_offset'] is not None:
+                self.week_offset_label.text = userinfo['week_offset']
+    
+    def lagre_week_offset(self):
+        user = anvil.users.get_user()
+        if user:
+            userinfo = app_tables.userinfo.get(user=user)
+            if userinfo:
+                userinfo['week_offset'] = self.week_offset_label.text
