@@ -22,6 +22,9 @@ db_schema:
     - admin_ui: {width: 200}
       name: beskrivelse
       type: string
+    - admin_ui: {width: 200}
+      name: ikon_path
+      type: string
     server: full
     title: Aktivitet
   files:
@@ -79,7 +82,7 @@ db_schema:
     server: full
     title: Trekning
   userinfo:
-    client: none
+    client: search
     columns:
     - admin_ui: {width: 200}
       name: user
@@ -95,6 +98,9 @@ db_schema:
     - admin_ui: {width: 200}
       name: admin
       type: bool
+    - admin_ui: {order: 4, width: 107}
+      name: week_offset
+      type: number
     server: full
     title: userinfo
   users:
