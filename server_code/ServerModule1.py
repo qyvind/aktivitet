@@ -541,3 +541,17 @@ def oppdater_team_lock(team_navn, lock_status):
         return f"✅ Team '{team_navn}' ble oppdatert med lock={lock_status}"
     else:
         return f"❌ Fant ikke team med navn '{team_navn}'"
+
+@anvil.server.callable
+def lagre_week_offset(offset):
+    print('server lagrer offset:', offset)
+    user = anvil.users.get_user()
+    if not user:
+        raise Exception("Ingen bruker er logget inn.")
+
+    userinfo = app_tables.userinfo.get(user=user)
+    if userinfo:
+        print('lagrer')
+        userinfo['week_offset'] = offset
+    else:
+        app_tables.userinfo.add_row(user=user, week_offset=offset)

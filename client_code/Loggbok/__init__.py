@@ -510,8 +510,7 @@ class Loggbok(LoggbokTemplate):
                 self.week_offset_label.text = userinfo['week_offset']
     
     def lagre_week_offset(self):
-        user = anvil.users.get_user()
-        if user:
-            userinfo = app_tables.userinfo.get(user=user)
-            if userinfo:
-                userinfo['week_offset'] = self.week_offset_label.text
+        try:
+            anvil.server.call("lagre_week_offset", self.week_offset_label.text)
+        except Exception as e:
+            print(f"Feil ved lagring av ukevalg: {e}")
