@@ -19,6 +19,7 @@ class Loggbok(LoggbokTemplate):
         self.week_offset_label.text = 0
         self.initier_uke(self.week_offset_label.text)
         self.sjekk_bruker()
+        # anvil.users.set_user_info(week_offset=7)
 
 
   
