@@ -71,4 +71,8 @@ class PoengVelger(PoengVelgerTemplate):
 
     open_form('Loggbok')  # Gå tilbake til hovedform
 
+  def ikon_preview_mouse_down(self, x, y, button, keys, **event_args):
+    """This method is called when a mouse button is pressed on this component"""
+    open_form('VelgIkon')
+
 
