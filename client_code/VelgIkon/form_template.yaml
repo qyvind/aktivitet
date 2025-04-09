@@ -1,13 +1,11 @@
 components:
 - components:
   - components:
-    - data_bindings:
-      - {code: 'self.item[''file'']', property: source, writeback: false}
-      layout_properties: {col_xs: 1, row: SBCWDD, width_xs: 2}
-      name: image_1
-      properties: {height: 106.80000305175781}
+    - layout_properties: {col_xs: 1, row: TAAHSE, width_xs: 2}
+      name: ikon_image
+      properties: {height: 104.19999694824219}
       type: Image
-    layout_properties: {grid_position: 'PIPOVX,GFOBCP'}
+    layout_properties: {grid_position: 'YXSBNU,QDIAJK'}
     name: ikon_grid
     properties: {}
     type: GridPanel
