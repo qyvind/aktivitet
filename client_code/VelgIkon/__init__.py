@@ -33,12 +33,13 @@ class VelgIkon(VelgIkonTemplate):
 
         # Legg til hendelsesbehandler for klikkhendelser
         self.ikon_repeating_panel.set_event_handler('x-image-clicked', self.image_clicked)
-        print("Event handler set for x-image-clicked")
+        print("!Event handler set for x-image-clicked")
 
     def image_clicked(self, **event_args):
-        print("Image clicked event received:", event_args['image'])
+        print("!Image clicked event received:", event_args['image'])
         # Hent bildet som ble klikket
         clicked_image = event_args['image']
+        self.image_1.source = clicked_image
         
         # Bruk callback-funksjonen for å returnere bildet
         self.callback(clicked_image)

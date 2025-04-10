@@ -25,12 +25,13 @@ class ItemTemplate1(ItemTemplate1Template):
         self.image_2.set_event_handler('mouse_down', self.image_click)
         self.image_3.set_event_handler('mouse_down', self.image_click)
         self.image_4.set_event_handler('mouse_down', self.image_click)
-        print("Event handlers set for images")
+        print("!!Event handlers set for images")
 
     def image_click(self, **event_args):
-        print("Image clicked:", event_args['sender'].source)
+        print("!!Image clicked:", event_args['sender'].source)
         # Hent bildet som ble klikket
         clicked_image = event_args['sender']
+        
         
         # Send bildet tilbake til hovedskjemaet
         self.raise_event('x-image-clicked', image=clicked_image.source)
