@@ -9,15 +9,14 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-
 class VelgIkon(VelgIkonTemplate):
-    def __init__(self, callback, **properties):
+    # Remove callback from __init__
+    def __init__(self, **properties):
         self.init_components(**properties)
-        self.callback = callback
+        # Remove self.callback = callback
 
         ikoner = app_tables.files.search()
-        
-        # Organiser ikonene i grupper på fire
+
         grupperte_ikoner = []
         for i in range(0, len(ikoner), 4):
             gruppe = {
@@ -27,20 +26,18 @@ class VelgIkon(VelgIkonTemplate):
                 'file4': ikoner[i+3]['file'] if i+3 < len(ikoner) else None,
             }
             grupperte_ikoner.append(gruppe)
-        
-        # Sett elementene i RepeatingPanel
+
         self.ikon_repeating_panel.items = grupperte_ikoner
 
-        # Legg til hendelsesbehandler for klikkhendelser
-        self.ikon_repeating_panel.set_event_handler('x-image-clicked', self.image_clicked)
-        print("!Event handler set for x-image-clicked")
+        # --- Explicitly set the handler ---
+        # The first argument is the event name as raised ('x-select')
+        # The second argument is the actual handler method
+        self.ikon_repeating_panel.set_event_handler('x-select', self.ikon_repeating_panel_x_select)
+        print("! Explicit handler set for x-select") # Add this to confirm it runs
 
-    def image_clicked(self, **event_args):
-        print("!Image clicked event received:", event_args['image'])
-        # Hent bildet som ble klikket
-        clicked_image = event_args['image']
-        self.image_1.source = clicked_image
-        
-        # Bruk callback-funksjonen for å returnere bildet
-        self.callback(clicked_image)
-        open_form('PoengVelger')
+
+    # Rename the handler method
+    def ikon_repeating_panel_x_select(self, icon, **event_args): # Match key 'icon'
+        """Handler for x-select event"""
+        print("! x-select event received in VelgIkon:", icon)
+        self.raise_event('x-close_alert', value=icon)
