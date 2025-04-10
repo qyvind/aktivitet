@@ -1,0 +1,12 @@
+components:
+- components:
+  - layout_properties: {grid_position: 'LCVHKF,UYMYRR'}
+    name: ikon_repeating_panel
+    properties: {item_template: VelgIkon.ItemTemplate1}
+    type: RepeatingPanel
+  layout_properties: {grid_position: 'CCMKDV,VYVOAL'}
+  name: outlined_card_1
+  properties: {role: outlined-card}
+  type: ColumnPanel
+container: {type: ColumnPanel}
+is_package: true

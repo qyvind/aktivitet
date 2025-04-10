@@ -63,7 +63,8 @@ components:
           name: column_panel_2
           properties: {}
           type: ColumnPanel
-        - layout_properties: {width: 71.85711669921875}
+        - event_bindings: {mouse_down: ikon_preview_mouse_down}
+          layout_properties: {width: 71.85711669921875}
           name: ikon_preview
           properties: {height: 61.714263916015625}
           type: Image
