@@ -22,14 +22,17 @@ class ItemTemplate1(ItemTemplate1Template):
     self.image_4.source = self.item['file4']
 
         # Legg til klikkhendelser
-  #   self.image_1.set_event_handler('click', self.image_click)
+    self.image_1.set_event_handler('click', self.image_click)
   #   self.image_2.set_event_handler('click', self.image_click)
   #   self.image_3.set_event_handler('click', self.image_click)
   #   self.image_4.set_event_handler('click', self.image_click)
 
-  # def image_click(self, **event_args):
-  #     # Hent bildet som ble klikket
-  #     clicked_image = event_args['sender']
+  def image_click(self, **event_args):
+      # Hent bildet som ble klikket
+      clicked_image = event_args['sender']
       
-  #     # Send bildet tilbake til hovedskjemaet
-  #     self.raise_event('x-image-clicked', image=clicked_image.source)
+      # Send bildet tilbake til hovedskjemaet
+      self.raise_event('x-image-clicked', image=clicked_image.source)
+
+
+    

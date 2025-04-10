@@ -39,4 +39,4 @@ class VelgIkon(VelgIkonTemplate):
       clicked_image = event_args['image']
       
       # Håndter klikket bilde (for eksempel, vis det i hovedskjemaet)
-      self.selected_image.source = clicked_image
+      return(clicked_image)

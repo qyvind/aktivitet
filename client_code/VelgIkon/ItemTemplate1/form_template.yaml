@@ -1,6 +1,7 @@
 components:
 - components:
-  - layout_properties: {width: 60}
+  - event_bindings: {}
+    layout_properties: {width: 60}
     name: image_1
     properties: {height: '60'}
     type: Image
