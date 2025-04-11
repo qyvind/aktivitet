@@ -19,16 +19,6 @@ components:
       name: teams_button
       properties: {role: tonal-button, text: Teams}
       type: Button
-    - event_bindings: {click: button_3_click}
-      layout_properties: {}
-      name: button_3
-      properties: {role: tonal-button, text: Lag bruker}
-      type: Button
-    - event_bindings: {click: import_mang_button_click}
-      layout_properties: {}
-      name: import_mang_button
-      properties: {role: tonal-button, text: Lag brukere}
-      type: Button
     - event_bindings: {click: konk_button_click}
       layout_properties: {}
       name: konk_button
