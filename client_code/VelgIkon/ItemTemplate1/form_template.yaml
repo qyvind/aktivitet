@@ -1,0 +1,28 @@
+components:
+- components:
+  - event_bindings: {mouse_down: image_click}
+    layout_properties: {width: 60.6666259765625}
+    name: image_1
+    properties: {height: '60'}
+    type: Image
+  - event_bindings: {mouse_down: image_click}
+    layout_properties: {width: 60}
+    name: image_2
+    properties: {height: '60'}
+    type: Image
+  - event_bindings: {mouse_down: image_click}
+    layout_properties: {width: 60}
+    name: image_3
+    properties: {height: '60'}
+    type: Image
+  - event_bindings: {mouse_down: image_click}
+    layout_properties: {width: 60}
+    name: image_4
+    properties: {height: '60'}
+    type: Image
+  layout_properties: {grid_position: 'OJOPHW,AWTDIT'}
+  name: flow_panel_1
+  properties: {align: center}
+  type: FlowPanel
+container: {type: ColumnPanel}
+is_package: true

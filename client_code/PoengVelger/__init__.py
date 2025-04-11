@@ -1,74 +1,75 @@
 from ._anvil_designer import PoengVelgerTemplate
 from anvil import *
 import anvil.server
-import anvil.facebook.auth
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
-import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-
+# Make sure the import path is correct for your project structure
+from ..VelgIkon import VelgIkon
 
 class PoengVelger(PoengVelgerTemplate):
-  def __init__(self, valgt_poeng=1, aktivitet="", ukedag="", ikon=None, beskrivelse=None, callback=None, **properties):
-    self.init_components(**properties)
-    self.ukedag_label.text = ukedag
-    self.callback = callback
+    def __init__(self, valgt_poeng=1, aktivitet="", ukedag="", ikon=None, beskrivelse=None, callback=None, **properties):
+        # Set Form properties and Data Bindings.
+        self.init_components(**properties)
 
-    self.poeng_drop.items = [
-      ("0 poeng", 0),
-      ("1 poeng", 1),
-      ("2 poeng", 2),
-      ("3 poeng", 3)
-    ]
-    self.poeng_drop.selected_value = valgt_poeng
-    self.aktivitet_box.text = aktivitet
-    if self.aktivitet_box.text == "Hviledag":
-      self.aktivitet_box.text= ""
-    self.beskrivelse.text = beskrivelse
-    
+        # Store the callback if this form itself is used modally
+        self.callback = callback
 
-    # Hent ikonene fra Files-tabellen (Media-objekter)
-    ikon_rader = app_tables.files.search()
-    ikoner = [(rad['path'], rad['file']) for rad in ikon_rader if rad['file']]
-    
-    # Legg til "Ingen ikon"-valg
-    ikoner.insert(0, ("Ingen ikon", None))
-    
-    self.ikon_dropdown.items = ikoner
-    self.ikon_dropdown.include_placeholder = False
+        # Store the currently selected icon Media object
+        # Initialize with the 'ikon' passed in (could be None)
+        self.selected_ikon_media = ikon
 
-    # Forhåndsvis valgt ikon
-    self.valgt_ikon = ikon
-    for label, media in self.ikon_dropdown.items:
-      if ikon and media and hasattr(ikon, "name") and ikon.name == media.name:
-        self.ikon_dropdown.selected_value = media
-        self.ikon_preview.source = media
-        break
+        # Set up other fields based on passed parameters
+        self.ukedag_label.text = ukedag
+        self.poeng_drop.items = [("0 poeng", 0), ("1 poeng", 1), ("2 poeng", 2), ("3 poeng", 3)]
+        self.poeng_drop.selected_value = valgt_poeng
+        self.aktivitet_box.text = aktivitet
+        if self.aktivitet_box.text == "Hviledag":
+            self.aktivitet_box.text = ""
+        self.beskrivelse.text = beskrivelse
 
-    else:
-      self.ikon_dropdown.selected_value = None
-      self.ikon_preview.source = None
+        # Set the initial icon preview
+        self.ikon_preview.source = self.selected_ikon_media
 
-  def ikon_dropdown_change(self, **event_args):
-    print("nå er jeg på ikon_dropdown_change")
-    valgt = self.ikon_dropdown.selected_value
-    print("valgt ikon:",valgt)
-    if valgt:
-      self.ikon_preview.source = valgt
-    else:
-      self.ikon_preview.source = None
-  
-  def lagre_button_click(self, **event_args):
-    poeng = self.poeng_drop.selected_value
-    aktivitet = self.aktivitet_box.text
-    ikon = self.ikon_dropdown.selected_value  # Dette er nå et Media-objekt eller None
-    beskrivelse = self.beskrivelse.text
+        # Any code you write here will run when the form opens.
 
-    if self.callback:
-      self.callback(poeng, aktivitet, ikon, beskrivelse)
+    def ikon_preview_click(self, **event_args):
+        """This method is called when the ikon_preview Image is clicked."""
+        # Create an instance of the icon selection form
+        icon_selector_form = VelgIkon()
 
-    open_form('Loggbok')  # Gå tilbake til hovedform
+        # Open the form as a modal dialog using alert()
+        # Execution pauses here until the alert is closed
+        selected_icon = alert(
+            content=icon_selector_form,
+            title="Velg Ikon",
+            large=True,       # Optional: Adjust size as needed
+            buttons=[]        # No default buttons, we close via events
+        )
+
+        # Code resumes here after VelgIkon closes
+
+        # Check if the user selected an icon (didn't cancel)
+        if selected_icon is not None:
+            # Store the selected Media object
+            self.selected_ikon_media = selected_icon
+            # Update the preview image
+            self.ikon_preview.source = self.selected_ikon_media
+            print(f"Icon selected: {self.selected_ikon_media.name if self.selected_ikon_media else 'None'}")
+        else:
+            print("Icon selection cancelled.")
+
+    def lagre_button_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        poeng = self.poeng_drop.selected_value
+        aktivitet = self.aktivitet_box.text
+        # Use the icon Media object stored in self.selected_ikon_media
+        ikon = self.selected_ikon_media
+        beskrivelse = self.beskrivelse.text
 
 
+        # If PoengVelger was opened with a callback, call it now
+        if self.callback:
+            self.callback(poeng, aktivitet, ikon, beskrivelse)
+
+        open_form('Loggbok') # Change 'Loggbok' if needed
