@@ -35,3 +35,10 @@ class minside(minsideTemplate):
     """This method is called when the button is clicked"""
     anvil.server.call('oppdater_brukernavn_og_team',self.navn_textbox.text,self.team_drop_down.selected_value)
     open_form('Loggbok')
+
+  def nytt_team_pressed_enter(self, **event_args):
+    """This method is called when the user presses Enter in this text box"""
+    self.nytt_team.text = anvil.server.call('opprett_nytt_team',self.nytt_team.text)
+    team_list = [row['team'] for row in app_tables.team.search() if row['team'] and not row['lock']]
+    self.team_drop_down.items = [("", "")] + [(team, team) for team in team_list]
+    
