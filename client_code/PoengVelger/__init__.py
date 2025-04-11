@@ -58,9 +58,6 @@ class PoengVelger(PoengVelgerTemplate):
             print(f"Icon selected: {self.selected_ikon_media.name if self.selected_ikon_media else 'None'}")
         else:
             print("Icon selection cancelled.")
-            # Optionally, you could set the icon back to None if cancelled
-            # self.selected_ikon_media = None
-            # self.ikon_preview.source = None
 
     def lagre_button_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -70,17 +67,9 @@ class PoengVelger(PoengVelgerTemplate):
         ikon = self.selected_ikon_media
         beskrivelse = self.beskrivelse.text
 
-        print(f"Saving: Poeng={poeng}, Aktivitet='{aktivitet}', Ikon='{ikon.name if ikon else None}', Beskrivelse='{beskrivelse}'")
 
         # If PoengVelger was opened with a callback, call it now
         if self.callback:
             self.callback(poeng, aktivitet, ikon, beskrivelse)
 
-        # Navigate back or close the form appropriately
-        # If PoengVelger is a main form, navigate elsewhere:
         open_form('Loggbok') # Change 'Loggbok' if needed
-
-        # If PoengVelger was opened via alert(), use this instead:
-        # self.raise_event('x_close_alert', value=True) # Or return collected data
-
- 

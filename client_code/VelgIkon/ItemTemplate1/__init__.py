@@ -35,13 +35,15 @@ class ItemTemplate1(ItemTemplate1Template):
         # Get the media object assigned to the clicked image's source
         selected_media_object = clicked_image_component.source
 
-        # Only raise the event if a valid media object was clicked (not an empty slot)
         if selected_media_object:
-            print(f"!! Image clicked in ItemTemplate1: {selected_media_object.name}")
-            # Raise a custom event named 'x_icon_selected' on this item template instance.
-            # This event will bubble up to the parent RepeatingPanel (ikon_repeating_panel).
-            # Pass the selected media object as a keyword argument.
-            self.raise_event('x-icon_selected', icon_media=selected_media_object)
-            print("!! Event 'x-icon_selected' raised from ItemTemplate1")
+
+            if self.parent: # Sjekk at parent finnes
+                # Bruk et nytt, rent eventnavn, f.eks. 'x-icon-click'
+                # Send data med et argumentnavn, f.eks. 'icon_media'
+                self.parent.raise_event('x-icon-click', icon_media=selected_media_object)
+                
+            else:
+                print("ItemTemplate1 (Ikon) FEIL: Kunne ikke finne self.parent!")
+
         else:
-            print("!! Clicked on an empty image slot.")
+            print("ItemTemplate1 (Ikon): Klikket på en tom bildeplass.")

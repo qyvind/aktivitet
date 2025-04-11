@@ -483,11 +483,11 @@ class Loggbok(LoggbokTemplate):
       """This method is called when the button is clicked"""
       open_form('admin')
 
-    def man_ikon_click(self, **event_args):
-      """This method is called when the button is clicked"""
-      print(self.man_ikon.source)
-      print(self.tir_ikon.source)
-      print(self.ons_ikon.source)
+    # def man_ikon_click(self, **event_args):
+    #   """This method is called when the button is clicked"""
+    #   print(self.man_ikon.source)
+    #   print(self.tir_ikon.source)
+    #   print(self.ons_ikon.source)
       
 
 

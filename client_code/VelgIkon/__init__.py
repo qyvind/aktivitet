@@ -31,19 +31,10 @@ class VelgIkon(VelgIkonTemplate):
             }
             grouped_icons.append(row_data)
 
-        # Set the items for the repeating panel
         self.ikon_repeating_panel.items = grouped_icons
-        # --- Explicitly set the handler USING HYPHENATED EVENT NAME ---
-        # The first argument is the event name string as raised ('x-icon-selected')
-        # The second argument is the actual handler method
-        self.ikon_repeating_panel.set_event_handler('x-icon-selected', self.ikon_repeating_panel_x_icon_selected)
-        print("! Explicit handler set for 'x-icon-selected'")
+        self.ikon_repeating_panel.add_event_handler('x-icon-click', self.icon_selected)
+        
 
-        # Any code you write here will run when the form opens.
-
-    # In VelgIkon class
-    # *** KEEP THIS HANDLER NAME THE SAME (with underscores) ***
-    def ikon_repeating_panel_x_icon_selected(self, icon_media, **event_args):
-        """This method is called when the 'x-icon-selected' event is raised by ItemTemplate1"""
-        print(f"! Event 'x-icon-selected' received in VelgIkon. Icon: {icon_media.name if icon_media else 'None'}")
-        self.raise_event('x_close_alert', value=icon_media)
+    def icon_selected(self, icon_media, **event_args):
+        self.raise_event('x-close-alert', value=icon_media)
+        
