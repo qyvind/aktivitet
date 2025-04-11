@@ -4,6 +4,10 @@ components:
     name: label_1
     properties: {role: headline, text: Endringslogg}
     type: Label
+  - layout_properties: {grid_position: 'MOGSQP,UEYVNV'}
+    name: text_area_7
+    properties: {text: 11/4 Fikk endelig til å lage bilde som viser alle ikonene på en gang}
+    type: TextArea
   - layout_properties: {grid_position: 'JFAYHJ,EVWNIP'}
     name: text_area_6
     properties: {text: '4/4: La inn mer hjelpetekst om team. '}
