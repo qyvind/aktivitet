@@ -25,11 +25,20 @@ components:
   - components:
     - layout_properties: {}
       name: label_3
-      properties: {text: 'Team:'}
+      properties: {text: 'Medlem av team:', visible: true}
       type: Label
     - name: team_drop_down
       properties: {}
       type: DropDown
+    - layout_properties: {}
+      name: label_4
+      properties: {text: 'Opprett nytt team:'}
+      type: Label
+    - event_bindings: {pressed_enter: nytt_team_pressed_enter}
+      layout_properties: {}
+      name: nytt_team
+      properties: {placeholder: Skriv teamnavn + Enter, text: ''}
+      type: TextBox
     layout_properties: {grid_position: 'CDNJYV,CMKKAD'}
     name: flow_panel_3
     properties: {align: center}
