@@ -59,11 +59,16 @@ components:
           name: column_panel_2
           properties: {}
           type: ColumnPanel
-        - event_bindings: {mouse_down: ikon_preview_click}
+        - components:
+          - event_bindings: {mouse_down: ikon_preview_click}
+            layout_properties: {grid_position: 'VJBWVC,KSQHVW'}
+            name: ikon_preview
+            properties: {height: 78.63638305664062}
+            type: Image
           layout_properties: {width: 120}
-          name: ikon_preview
-          properties: {height: '120'}
-          type: Image
+          name: outlined_card_2
+          properties: {role: outlined-card}
+          type: ColumnPanel
         layout_properties: {grid_position: 'ZFFFAT,TWLSIX'}
         name: flow_panel_4
         properties: {align: center}
