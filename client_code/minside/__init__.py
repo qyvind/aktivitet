@@ -16,15 +16,24 @@ class minside(minsideTemplate):
     self.init_components(**properties)
     user = anvil.users.get_user()
     deltagerdata= anvil.server.call("hent_brukernavn")
+    
     navn=deltagerdata['navn']
     mitt_team=deltagerdata['team']
     self.user_email_label.text = user['email']
-    
     self.navn_textbox.text = navn
-    team_list = [row['team'] for row in app_tables.team.search() if row['team'] and not row['lock']]
-
-    self.team_drop_down.items = [("", "")] + [(team, team) for team in team_list]
-    self.team_drop_down.selected_value = mitt_team
+    if deltagerdata['lock']:
+      self.locked.icon = 'fa:lock'
+      self.team_medlem.text = mitt_team
+      self.team_medlem.visible = True
+      self.team_drop_down.visible = False
+    else:
+      self.locked.icon = 'fa:unlock'
+      team_list = [row['team'] for row in app_tables.team.search() if row['team'] and not row['lock']]
+      self.team_drop_down.items = [("", "")] + [(team, team) for team in team_list]
+      self.team_drop_down.selected_value = mitt_team
+      self.team_medlem.visible = False
+      self.team_drop_down.visible = True
+    
     
 
   def angre_button_click(self, **event_args):

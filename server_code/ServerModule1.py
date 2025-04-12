@@ -166,7 +166,6 @@ def oppdater_brukernavn(nytt_navn):
 
 @anvil.server.callable
 def hent_brukernavn():
-    #print('hent_brukernavn')
     user = anvil.users.get_user()
     if not user:
         raise Exception("Bruker ikke logget inn")
@@ -174,27 +173,26 @@ def hent_brukernavn():
     record = app_tables.userinfo.get(user=user)
     
     if record is None:
-        # print("❌ Fant ingen userinfo-rad for brukeren.")
-        return {"navn": "", "team": ""}
+        return {"navn": "", "team": "", "lock": False}
     
-    # Konverter record til en dictionary for å unngå LiveObject-problemer
     record_dict = dict(record)
-    # print(f"✅ Fant userinfo-rad: {record_dict}")  # Debugging
+    navn = record_dict.get('navn', "")
 
-    # Hent 'navn' eksplisitt
-    navn = record_dict.get('navn', "")  # Bruker .get() for sikkerhet
-    # print(f"📝 Navn hentet fra userinfo: {navn}")
-
-    # Hent 'team' eksplisitt
     team_navn = ""
-    if 'team' in record_dict and record_dict['team']:  # Sjekker at team ikke er None
-        team_record = dict(record_dict['team'])  # Konverterer også team-raden til dict
-        # print(f"🔍 Fant team-rad: {team_record}")  # Debugging
-        team_navn = team_record.get('team', "")  # Henter team-navn
+    lock_status = False
 
-    # print(f"🏆 Endelig resultat: Navn = {navn}, Team = {team_navn}")
+    if 'team' in record_dict and record_dict['team']:
+        team_row = record['team']  # bruker LiveObject direkte her
+        team_navn = team_row['team']
+        lock_status = team_row['lock']  # dette vil være True/False
 
-    return {"navn": navn, "team": team_navn}
+    return {
+        "navn": navn,
+        "team": team_navn,
+        "lock": lock_status
+    }
+
+
 
 
       
