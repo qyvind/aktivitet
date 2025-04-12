@@ -6,7 +6,12 @@ components:
     type: Label
   - layout_properties: {grid_position: 'LGAFYI,CCOHUH'}
     name: text_area_8
-    properties: {text: 12/4 Mulighet til å opprette team selv}
+    properties:
+      height: 143.99996948242188
+      text: |-
+        12/4 Mulighet til å opprette team selv
+        popup-melding når team slettes eller når team ikke slettes fordi det ikke var tomt for medlemmer
+        popup-melding når bruker slettes
     type: TextArea
   - layout_properties: {grid_position: 'MOGSQP,UEYVNV'}
     name: text_area_7
@@ -41,15 +46,24 @@ components:
     type: TextArea
   - layout_properties: {grid_position: 'LAFSXU,NDNNGT'}
     name: label_2
-    properties: {role: headline, text: Kjente feil og mangler}
+    properties: {role: headline, text: Kjente feil og planlagte endringer}
     type: Label
   - layout_properties: {grid_position: 'ZHCDTP,UZQHEX'}
     name: text_area_4
     properties:
-      height: 174.63641357421875
+      height: 355
       text: |-
         Bør kunne redigere en dag ved å klikke hvor som helst i dagen, ikke bare på poengtallet.
-        Bør vi kunne se alle ikonene på en gang i stedet for en drop down?
+        Ta med tekst fra ikon hvis det står tomt
+        Notat til bruker
+        Slette tomme team hver natt
+        Slette team med færre enn tre hver helg
+        Hva skjer om vi sletter et team ute å ta bruker ut?
+        Lagre trekninger
+        Lage liste over de som er med i alle trekningene
+        Markere vinnere i trekningene
+        Bruker låse eget team?
+        La bruker slå opp andres aktivitet
     type: TextArea
   - event_bindings: {click: button_1_click}
     layout_properties: {grid_position: 'RUNMFH,GYRFVX'}
