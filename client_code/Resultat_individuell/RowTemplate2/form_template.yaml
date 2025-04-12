@@ -17,7 +17,21 @@ components:
   name: team_label
   properties: {}
   type: Label
+- components:
+  - event_bindings: {click: button_1_click}
+    layout_properties: {}
+    name: button_1
+    properties: {align: left, icon: 'fa:eye', text: ''}
+    type: Button
+  - layout_properties: {}
+    name: email
+    properties: {visible: false}
+    type: Label
+  layout_properties: {column: VUDOQL}
+  name: flow_panel_1
+  properties: {}
+  type: FlowPanel
 container:
-  properties: {font_size: 10}
+  properties: {align: left, font_size: 10}
   type: DataRowPanel
 is_package: true

@@ -13,9 +13,10 @@ components:
     name: data_grid_1
     properties:
       columns:
-      - {data_key: column_1, id: JKSDUP, title: Deltager}
+      - {data_key: column_1, expand: false, id: JKSDUP, title: Deltager, width: 364.20001220703125}
       - {data_key: column_2, id: VJQQOR, title: Poeng}
-      - {data_key: column_1, id: LSHEHV, title: Team}
+      - {data_key: column_1, expand: false, id: LSHEHV, title: Team, width: 278.5999755859375}
+      - {data_key: column_1, id: VUDOQL, title: Kikk}
     type: DataGrid
   - event_bindings: {click: lukk_button_click}
     layout_properties: {grid_position: 'FACYFA,RKQROA'}

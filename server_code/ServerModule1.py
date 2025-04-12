@@ -376,9 +376,9 @@ def hent_teammedlemmer(team_navn):
 
         # Finn og summer poeng fra aktivitet-tabellen hvor brukeren er deltager
         poengsum = sum(rad['poeng'] for rad in app_tables.aktivitet.search(deltager=bruker))
-
+        user = member['user']
         # Legg til i listen
-        team_liste.append({"navn": navn, "poeng": poengsum})
+        team_liste.append({"navn": navn, "poeng": poengsum, "user":user})
 
     #print(f"🏆 Teammedlemmer i {team_navn}: {team_liste}")
     return team_liste
@@ -589,3 +589,11 @@ def laas_eget_team():
     # Lås teamet
     team['lock'] = True
     return f"Teamet '{team['team']}' er nå låst for påmeldinger."
+
+
+@anvil.server.callable
+def hent_user_fra_email(email):
+    bruker = app_tables.users.get(email=email)
+    if not bruker:
+        raise Exception(f"Ingen bruker funnet med e-post: {email}")
+    return bruker

@@ -16,5 +16,12 @@ class RowTemplate4(RowTemplate4Template):
     self.init_components(**properties)
     self.navn_label.text = self.item['navn']
     self.poeng_label.text = self.item['poeng']
+    
 
     # Any code you write here will run before the form opens.
+
+  def button_1_click(self, **event_args):
+    user = self.item['user'] 
+              
+    open_form("BrukerLoggbok", enuser=user)
+    
