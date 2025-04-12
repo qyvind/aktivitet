@@ -36,7 +36,7 @@ components:
   name: flow_panel_1
   properties: {}
   type: FlowPanel
-- event_bindings: {change: team_drop_change}
+- event_bindings: {change: save_team_button_click}
   layout_properties: {column: PJMSOR}
   name: team_drop
   properties: {}
