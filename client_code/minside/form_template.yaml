@@ -47,8 +47,12 @@ components:
       - name: team_drop_down
         properties: {}
         type: DropDown
-      - name: locked
-        properties: {icon: 'fa:unlock', text: ''}
+      - name: team_medlem
+        properties: {}
+        type: Label
+      - layout_properties: {}
+        name: locked
+        properties: {icon: 'fa:unlock', text: '', tooltip: Låsing for nye medlemmer}
         type: Button
       layout_properties: {grid_position: 'SANPSV,EBHPOG'}
       name: flow_panel_5

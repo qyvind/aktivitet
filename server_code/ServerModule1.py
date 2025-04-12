@@ -176,15 +176,15 @@ def hent_brukernavn():
         return {"navn": "", "team": "", "lock": False}
     
     record_dict = dict(record)
-
     navn = record_dict.get('navn', "")
+
     team_navn = ""
     lock_status = False
 
     if 'team' in record_dict and record_dict['team']:
-        team_record = dict(record_dict['team'])
-        team_navn = team_record.get('team', "")
-        lock_status = team_record.get('låst', False)
+        team_row = record['team']  # bruker LiveObject direkte her
+        team_navn = team_row['team']
+        lock_status = team_row['lock']  # dette vil være True/False
 
     return {
         "navn": navn,

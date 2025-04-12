@@ -13,6 +13,7 @@ components:
         popup-melding når team slettes eller når team ikke slettes fordi det ikke var tomt for medlemmer
         popup-melding når bruker slettes
         Knapp i admin for å slette tomme team. (Vurderer å gjøre den automatisk daglig)
+        Lagt til hengelås som viser om team er låst, for å gjøre klart for at bruker kan låse team selv
     type: TextArea
   - layout_properties: {grid_position: 'MOGSQP,UEYVNV'}
     name: text_area_7
