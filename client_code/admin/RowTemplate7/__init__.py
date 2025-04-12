@@ -29,8 +29,8 @@ class RowTemplate7(RowTemplate7Template):
 
   def slett_bruker_click(self, **event_args):
     """This method is called when the button is clicked"""
-    anvil.server.call('delete_user_by_email', self.email_label.text)
-
+    melding = anvil.server.call('delete_user_by_email', self.email_label.text)
+    alert(melding)
     parent_form = self.parent
     while parent_form and not hasattr(parent_form, 'bruker_repeating_panel'):
         parent_form = parent_form.parent  # Gå oppover i UI-hierarkiet
