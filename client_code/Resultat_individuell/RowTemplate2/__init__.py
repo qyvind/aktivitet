@@ -17,5 +17,16 @@ class RowTemplate2(RowTemplate2Template):
     self.Deltager_label.text = self.item['deltager']
     self.Poeng_label.text = self.item['poeng']
     self.team_label.text = self.item['team']
+    self.email.text = self.item['email']
+    
 
     # Any code you write here will run before the form opens.
+
+  def button_1_click(self, **event_args):
+    email = self.email.text
+    try:
+        bruker_rad = anvil.server.call("hent_user_fra_email", email)
+        open_form("BrukerLoggbok", enuser=bruker_rad)
+    except Exception as e:
+        alert(f"Feil: {e}")
+

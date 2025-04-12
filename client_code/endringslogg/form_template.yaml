@@ -8,7 +8,7 @@ components:
     name: text_area_8
     properties:
       height: 166.60000610351562
-      text: "12/4 Mulighet til å opprette team selv\npopup-melding når team slettes eller når team ikke slettes fordi det ikke var tomt for medlemmer\npopup-melding når bruker slettes\nKnapp i admin for å slette tomme team. (Vurderer å gjøre den automatisk daglig)\nLagt til hengelås som viser om team er låst. Bruker kan klikke på låsen og låse selv. Dette kan bare gjøre når det er minst tre deltagere på teamet. "
+      text: "12/4 Mulighet til å opprette team selv\npopup-melding når team slettes eller når team ikke slettes fordi det ikke var tomt for medlemmer\npopup-melding når bruker slettes\nKnapp i admin for å slette tomme team. (Vurderer å gjøre den automatisk daglig)\nLagt til hengelås som viser om team er låst. Bruker kan klikke på låsen og låse selv. Dette kan bare gjøre når det er minst tre deltagere på teamet. \nNå kan slå opp alle detaljene for alle via individuell resultatliste."
     type: TextArea
   - layout_properties: {grid_position: 'MOGSQP,UEYVNV'}
     name: text_area_7
@@ -55,12 +55,9 @@ components:
         Notat til bruker
         Slette tomme team hver natt
         Slette team med færre enn tre hver helg
-        Hva skjer om vi sletter et team ute å ta bruker ut?
         Lagre trekninger
         Lage liste over de som er med i alle trekningene
         Markere vinnere i trekningene
-        Bruker låse eget team?
-        La bruker slå opp andres aktivitet
     type: TextArea
   - event_bindings: {click: button_1_click}
     layout_properties: {grid_position: 'RUNMFH,GYRFVX'}
