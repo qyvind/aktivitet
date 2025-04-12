@@ -7,13 +7,8 @@ components:
   - layout_properties: {grid_position: 'LGAFYI,CCOHUH'}
     name: text_area_8
     properties:
-      height: 143.99996948242188
-      text: |-
-        12/4 Mulighet til å opprette team selv
-        popup-melding når team slettes eller når team ikke slettes fordi det ikke var tomt for medlemmer
-        popup-melding når bruker slettes
-        Knapp i admin for å slette tomme team. (Vurderer å gjøre den automatisk daglig)
-        Lagt til hengelås som viser om team er låst, for å gjøre klart for at bruker kan låse team selv
+      height: 166.60000610351562
+      text: "12/4 Mulighet til å opprette team selv\npopup-melding når team slettes eller når team ikke slettes fordi det ikke var tomt for medlemmer\npopup-melding når bruker slettes\nKnapp i admin for å slette tomme team. (Vurderer å gjøre den automatisk daglig)\nLagt til hengelås som viser om team er låst. Bruker kan klikke på låsen og låse selv. Dette kan bare gjøre når det er minst tre deltagere på teamet. "
     type: TextArea
   - layout_properties: {grid_position: 'MOGSQP,UEYVNV'}
     name: text_area_7

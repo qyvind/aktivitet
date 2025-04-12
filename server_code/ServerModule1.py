@@ -563,3 +563,29 @@ def slett_tomme_team():
         if len(medlemmer) == 0:
             print(f"Sletter tomt lag: {lag['team']}")
             anvil.server.call('slett_team',lag['team'])
+
+@anvil.server.callable
+def laas_eget_team():
+    user = anvil.users.get_user()
+    if not user:
+        return "Du må være logget inn."
+
+    userinfo = app_tables.userinfo.get(user=user)
+    if not userinfo or not userinfo['team']:
+        return "Du er ikke medlem av noe team."
+
+    team = userinfo['team']
+
+    if team['lock']:
+        return f"Teamet '{team['team']}' er allerede låst."
+
+    # Tell hvor mange medlemmer teamet har
+    medlemmer = app_tables.userinfo.search(team=team)
+    antall_medlemmer = len(list(medlemmer))
+
+    if antall_medlemmer < 3:
+        return f"Teamet '{team['team']}' har bare {antall_medlemmer} medlem(mer). Minst 3 kreves for å låse."
+
+    # Lås teamet
+    team['lock'] = True
+    return f"Teamet '{team['team']}' er nå låst for påmeldinger."

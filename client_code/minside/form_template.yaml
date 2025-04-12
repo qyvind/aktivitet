@@ -50,7 +50,8 @@ components:
       - name: team_medlem
         properties: {}
         type: Label
-      - layout_properties: {}
+      - event_bindings: {click: locked_click}
+        layout_properties: {}
         name: locked
         properties: {icon: 'fa:unlock', text: '', tooltip: Låsing for nye medlemmer}
         type: Button
