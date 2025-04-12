@@ -7,18 +7,5 @@ components:
   name: poeng_label
   properties: {}
   type: Label
-- components:
-  - event_bindings: {click: button_1_click}
-    layout_properties: {}
-    name: button_1
-    properties: {icon: 'fa:eye', text: ''}
-    type: Button
-  - name: email
-    properties: {}
-    type: Label
-  layout_properties: {column: XDQVNT}
-  name: flow_panel_1
-  properties: {}
-  type: FlowPanel
 container: {type: DataRowPanel}
 is_package: true

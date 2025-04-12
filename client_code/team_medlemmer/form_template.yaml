@@ -22,7 +22,6 @@ components:
       columns:
       - {data_key: column_1, id: JKSDUP, title: Teammedlemmer}
       - {data_key: column_1, id: MHDFRT, title: Poeng}
-      - {data_key: column_1, id: XDQVNT, title: Kikk}
     type: DataGrid
   - event_bindings: {click: button_1_click}
     layout_properties: {grid_position: 'XNTNUE,WCTYOF'}
