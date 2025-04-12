@@ -29,6 +29,10 @@ components:
       name: button_5
       properties: {role: tonal-button, text: Endringslogg}
       type: Button
+    - event_bindings: {click: button_1_click}
+      name: button_1
+      properties: {role: tonal-button, text: Lukk}
+      type: Button
     layout_properties: {grid_position: 'PDOHFX,TLMROV'}
     name: flow_panel_1
     properties: {align: center}
@@ -235,10 +239,5 @@ components:
   name: outlined_card_1
   properties: {role: outlined-card}
   type: ColumnPanel
-- event_bindings: {click: button_1_click}
-  layout_properties: {grid_position: 'RVEJTU,CURSMD'}
-  name: button_1
-  properties: {role: tonal-button, text: Lukk}
-  type: Button
 container: {type: ColumnPanel}
 is_package: true

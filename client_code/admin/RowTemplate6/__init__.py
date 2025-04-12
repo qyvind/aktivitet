@@ -21,7 +21,8 @@ class RowTemplate6(RowTemplate6Template):
 
   def slett_team_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    anvil.server.call('slett_team',self.team_label.text)
+    melding = anvil.server.call('slett_team',self.team_label.text)
+    alert(melding)
     parent_form = self.parent
     while parent_form and not hasattr(parent_form, 'team_repeating_panel'):
         parent_form = parent_form.parent  # Gå oppover i UI-hierarkiet
