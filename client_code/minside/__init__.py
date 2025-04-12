@@ -14,6 +14,10 @@ class minside(minsideTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    
+    self.fyll_minside()
+
+  def fyll_minside(self, **properties): 
     user = anvil.users.get_user()
     deltagerdata= anvil.server.call("hent_brukernavn")
     
@@ -50,4 +54,11 @@ class minside(minsideTemplate):
     self.nytt_team.text = anvil.server.call('opprett_nytt_team',self.nytt_team.text)
     team_list = [row['team'] for row in app_tables.team.search() if row['team'] and not row['lock']]
     self.team_drop_down.items = [("", "")] + [(team, team) for team in team_list]
+
+  def locked_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    if self.locked.icon != 'fa:lock':
+      resultat = anvil.server.call('laas_eget_team')
+      alert(resultat)
+      self.fyll_minside()
     
