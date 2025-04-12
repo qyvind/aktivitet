@@ -12,6 +12,7 @@ components:
         12/4 Mulighet til å opprette team selv
         popup-melding når team slettes eller når team ikke slettes fordi det ikke var tomt for medlemmer
         popup-melding når bruker slettes
+        Knapp i admin for å slette tomme team. (Vurderer å gjøre den automatisk daglig)
     type: TextArea
   - layout_properties: {grid_position: 'MOGSQP,UEYVNV'}
     name: text_area_7

@@ -555,3 +555,13 @@ def lagre_week_offset(offset):
         userinfo['week_offset'] = offset
     else:
         app_tables.userinfo.add_row(user=user, week_offset=offset)
+
+@anvil.server.callable
+def slett_tomme_team():
+    for lag in app_tables.team.search():
+        # Finn brukere som tilhører dette laget
+        medlemmer = app_tables.userinfo.search(team=lag)
+        
+        if len(medlemmer) == 0:
+            print(f"Sletter tomt lag: {lag['team']}")
+            anvil.server.call('slett_team',lag['team'])

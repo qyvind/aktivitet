@@ -30,7 +30,7 @@ class admin(adminTemplate):
     """This method is called when the button is clicked"""
     open_form("Loggbok")
 
-  def button_3_click(self, **event_args):
+  def enkeltbruker_click(self, **event_args):
     """This method is called when the button is clicked"""
     if self.enkeltbruker_card.visible:
       self.enkeltbruker_card.visible = False
@@ -159,7 +159,10 @@ class admin(adminTemplate):
     
 
       
-
+  def autoslett_click(self, **event_args):
+    anvil.server.call('slett_tomme_team')
+    team_resultater = anvil.server.call('hent_team_poengsummer')
+    self.team_repeating_panel.items = team_resultater
 
 
   
