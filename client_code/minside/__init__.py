@@ -16,6 +16,7 @@ class minside(minsideTemplate):
     self.init_components(**properties)
     user = anvil.users.get_user()
     deltagerdata= anvil.server.call("hent_brukernavn")
+    print(deltagerdata)
     navn=deltagerdata['navn']
     mitt_team=deltagerdata['team']
     self.user_email_label.text = user['email']
