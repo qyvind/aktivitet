@@ -136,7 +136,11 @@ components:
         - event_bindings: {click: Opprett_team_button_click}
           layout_properties: {}
           name: Opprett_team_button
-          properties: {text: Opprett}
+          properties: {role: tonal-button, text: Opprett}
+          type: Button
+        - event_bindings: {click: autoslett_click}
+          name: autoslett
+          properties: {role: tonal-button, text: Slett tomme team}
           type: Button
         layout_properties: {grid_position: 'POAQXO,WOYTVC'}
         name: flow_panel_10

@@ -1,7 +1,0 @@
-components:
-- layout_properties: {grid_position: 'QBVYAQ,TUBWOB'}
-  name: ikon_flowpanel
-  properties: {}
-  type: FlowPanel
-container: {type: ColumnPanel}
-is_package: true
