@@ -15,26 +15,33 @@ class VelgIkon(VelgIkonTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
-        # Load all icons from the 'files' table
-        # Ensure you only get rows where 'file' actually exists
-        all_icons = [r['file'] for r in app_tables.files.search() if r['file']]
+        # --- MODIFISERT DEL START ---
+        # Load all icons with their paths from the 'files' table
+        # Fetch rows that have both 'file' and 'path' populated
+        all_icon_data = [{'media': r['file'], 'path': r['path']}
+                         for r in app_tables.files.search()
+                         if r['file'] and r['path']] # Sørg for at begge feltene finnes
 
-        # Group icons into lists of 4 for the repeating panel
-        grouped_icons = []
-        for i in range(0, len(all_icons), 4):
+        # Group icon data into lists of 4 for the repeating panel
+        grouped_icon_data = []
+        for i in range(0, len(all_icon_data), 4):
             # Create a dictionary for each row in the repeating panel
+            # Hver 'icon_x' inneholder nå en dictionary med 'media' og 'path'
             row_data = {
-                'icon_1': all_icons[i]   if i < len(all_icons) else None,
-                'icon_2': all_icons[i+1] if i+1 < len(all_icons) else None,
-                'icon_3': all_icons[i+2] if i+2 < len(all_icons) else None,
-                'icon_4': all_icons[i+3] if i+3 < len(all_icons) else None,
+                'icon_1': all_icon_data[i]   if i < len(all_icon_data) else None,
+                'icon_2': all_icon_data[i+1] if i+1 < len(all_icon_data) else None,
+                'icon_3': all_icon_data[i+2] if i+2 < len(all_icon_data) else None,
+                'icon_4': all_icon_data[i+3] if i+3 < len(all_icon_data) else None,
             }
-            grouped_icons.append(row_data)
+            grouped_icon_data.append(row_data)
 
-        self.ikon_repeating_panel.items = grouped_icons
+        self.ikon_repeating_panel.items = grouped_icon_data
+        # --- MODIFISERT DEL SLUTT ---
+
         self.ikon_repeating_panel.add_event_handler('x-icon-click', self.icon_selected)
-        
 
-    def icon_selected(self, icon_media, **event_args):
-        self.raise_event('x-close-alert', value=icon_media)
+    def icon_selected(self, icon_data, **event_args):
+        """Denne mottar nå en dictionary med 'media' og 'path'"""
+        # Send hele dictionaryen tilbake til PoengVelger
+        self.raise_event('x-close-alert', value=icon_data)
         
