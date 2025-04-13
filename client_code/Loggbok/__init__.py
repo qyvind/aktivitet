@@ -59,7 +59,7 @@ class Loggbok(LoggbokTemplate):
         valgt_poeng = int(knapp.text or 0)
         aktivitet = label.text
 
-        def mottak_fra_poengvelger(poeng, aktivitet, nytt_ikon,beskrivelse):
+        def mottak_fra_poengvelger(poeng, aktivitet, nytt_ikon,beskrivelse, ikon_path):
           week_info = self.get_week_info(self.week_offset_label.text)
           valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
       
