@@ -9,6 +9,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import json
+import anvil.js
 
 
 class admin(adminTemplate):
@@ -166,6 +167,10 @@ class admin(adminTemplate):
 
   def endre_konkurranse_click(self, **event_args):
     anvil.server.call('lagre_konkurranse',self.konkurransenavn_label.text,self.fra_date_picker.date,self.til_date_picker.date)
+
+  def button_3_click(self, **event_args):
+    url_to_open = "https://wheelofnames.com/" 
+    anvil.js.window.open(url_to_open, "_blank")
 
 
 
