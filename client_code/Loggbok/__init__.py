@@ -529,3 +529,7 @@ class Loggbok(LoggbokTemplate):
             anvil.server.call("lagre_week_offset", self.week_offset_label.text)
         except Exception as e:
             print(f"Feil ved lagring av ukevalg: {e}")
+
+    def button_1_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      open_form(('Supertrekning'))
