@@ -2,12 +2,14 @@ components:
 - components:
   - layout_properties: {grid_position: 'KDKVGG,CXLXKV'}
     name: label_1
-    properties: {role: display, text: Konkurranseregler}
+    properties: {role: headline, text: Konkurranseregler}
     type: Label
   - layout_properties: {grid_position: 'VXATUB,SOBLWX'}
     name: text_area_1
     properties:
-      height: 66.33331298828125
+      enabled: false
+      foreground: black
+      height: 104.45455932617188
       text: |
         Hvem kan delta?
         Alle medlemmer i Framo BIL er invitert til å delta.
@@ -19,7 +21,9 @@ components:
   - layout_properties: {grid_position: 'SOEHOG,EQTGKX'}
     name: text_area_2
     properties:
-      height: 478.5555419921875
+      enabled: false
+      foreground: black
+      height: 536
       text: |-
         Premier
         Hver uke blir det trukket ut tre premier, hver på 1000 kroner. De to første vinnerne trekkes ut blant de som har klart å få ett eller flere poeng fem forskjellige dager i løpet av uken. Den tredje premien trekkes ut blant de som har klart dette hver uke så langt.
@@ -49,7 +53,9 @@ components:
   - layout_properties: {grid_position: 'RLCWOS,WCNFUE'}
     name: text_area_3
     properties:
-      height: 438.5555419921875
+      enabled: false
+      foreground: black
+      height: 480.2727355957031
       text: "Hovedbildet viser innværende uke, når konkurransen er i gang. \n\nDu kan hoppe fra uke til uke med pilene til høyre og venstre.\n\nDet er en knapp for hver dag. Du registrerer poeng på en dag ved å klikke på knappen. Du markerer da hvor mange poeng du fortjener den dagen, og kan velge et ikon. Du kan la teksten stå., eller tilpasse den. DU kan også skrive en lengre beskrivelse av økten. \nHvis du klikker på navnet ditt kommer du inn i et bilde der du kan korrigere navnet du har skrevet. Det er lurt å bruke ekte navn hvis du vil ha premie. \nI det samme bildet kan du velge å bli med i et eksisterende lag, elelr du kan opprette et nytt lag. Et lag må ha tre deltagere for å være med i konkurransen.  Lag som blir stående tomme blir slettet. \nMedlemmene i et lag kan velge å låse for nye medlemmer i laget. De kan da ikke bytte lag, og dette laget blir ikke med i listene over lag som andre kan velge. \nNår konkurransen er ca tre uker på vei blir alle lagene låst. \nKonkurransen er åpen, på den måten at alle deltagere kan se hva andre har registrert., Når du viser individuell resultatliste får de frem et øye-ikon for hver deltager. Hvis du klikker på det kan du se alle dagsøktene som den personen har registrert.\nRegistreringen av poeng er basert på tillit. Les avsnittet om poengberegning nøye. "
     type: TextArea
   - components:
@@ -60,10 +66,13 @@ components:
     - layout_properties: {grid_position: 'RLCWOS,WCNFUE'}
       name: text_area_3_copy
       properties:
+        enabled: false
+        foreground: black
         height: 246.88885498046875
         text: "Skritt\nHvis du har skritteller og den viser 8000 skritt på en dag kan du få ett poeng. Hvis du går lengre enn 8000 skritt på en dag har det ingen innvirkning på poeng. \n\nTreningsøkter\nHvis du registrerer annen form for trening kan du ikke registrere poeng for skritt. Du kan få ett poeng for hver halve time med aktiv trening, og maksimalt tre poeng per. dag.\n"
       type: TextArea
-    - layout_properties: {grid_position: 'NPDRUE,NVTGLG'}
+    - event_bindings: {click: button_1_click}
+      layout_properties: {grid_position: 'NPDRUE,NVTGLG'}
       name: button_1
       properties: {role: filled-button, text: Lukk}
       type: Button
