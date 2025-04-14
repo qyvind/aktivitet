@@ -92,6 +92,19 @@ db_schema:
       type: date
     server: full
     title: Trekninger
+  trekningsliste:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: user
+      target: users
+      type: link_single
+    - admin_ui: {order: 1, width: 200}
+      name: trekning
+      target: trekninger
+      type: link_single
+    server: full
+    title: Trekningsliste
   userinfo:
     client: search
     columns:

@@ -4,6 +4,11 @@ components:
     name: label_1
     properties: {role: headline, text: Endringslogg}
     type: Label
+  - layout_properties: {grid_position: 'YACQLQ,HZIOYW'}
+    name: text_area_10
+    properties:
+      text: "14/4 la til tabell for lagring av trekninger\nBegrenset mulighet til å oppdatere bakover i tid. Nå kan man oppdatere inneværende uke og hvis det er mandag kan man oppdatere forrige uke. "
+    type: TextArea
   - layout_properties: {grid_position: 'LMZXMW,JKJKSY'}
     name: text_area_9
     properties: {text: '13/4 La til navn på ikonene som tooltip når man velger ikon. Navnet blir satt inn som beskrivelse på aktiviteten dersom den ikke er fylt ut fra før. '}
