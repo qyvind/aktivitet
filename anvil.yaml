@@ -166,10 +166,15 @@ package_name: Aktivitet
 renamed: true
 runtime_options:
   client_version: '3'
-  server_spec: {base: python310-minimal}
-  server_version: python3-sandbox
+  server_spec: null
+  server_spec_disabled: {base: python310-minimal, requirements: ''}
+  server_version: python3-full
   version: 2
 scheduled_tasks: []
+secrets:
+  openai:
+    type: secret
+    value: {H6HTKUCPNYME7Z2Q: 0nvCIFQrfrDfrlt4WR3+sjRg5zNvYpRsMwCmAXvSQOMuvP0E5corVCeFyf2fNLWtiMgtKL9T/8oaK5DB2/lrlGykOJorxD5McZbPLFHZRX59d2tlnsT/dCxtNEflZty6h6y7cUlmgiJm36ry5B50QT9cnT4OKReape4JldMqxkekBqocDCpimt62AXxj18Og7Ow8Fqg63r/bAzy04sh+6x9qNRwOCNv5nbLTc46oxTdhf27vyftWT5tBG9rHHDJOhEGOLajK0UOJ9BVNAbxeVvWUBZEk+PbJFIUvv7KPdej4zaJVtW594T3d5vcA4Z4f2NoNazwgO6vQWQmXhfnDthfunw==}
 services:
 - client_config: {}
   server_config: {}
@@ -193,5 +198,8 @@ services:
 - client_config: {}
   server_config: {file_table: files}
   source: /runtime/services/anvil/files.yml
+- client_config: {}
+  server_config: {}
+  source: /runtime/services/anvil/secrets.yml
 startup: {module: Loggbok, type: form}
 startup_form: null

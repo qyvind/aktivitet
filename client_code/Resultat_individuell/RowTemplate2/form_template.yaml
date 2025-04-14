@@ -23,6 +23,17 @@ components:
     name: button_1
     properties: {align: left, icon: 'fa:eye', text: ''}
     type: Button
+  - event_bindings: {click: ai_click}
+    layout_properties: {}
+    name: ai
+    properties:
+      icon: fa:beer
+      spacing:
+        margin: ['4', null, '4', null]
+        padding: ['10', '0', '10', '0']
+      text: ''
+      visible: true
+    type: Button
   - layout_properties: {}
     name: email
     properties: {visible: false}

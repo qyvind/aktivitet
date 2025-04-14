@@ -1,3 +1,4 @@
+import anvil.secrets
 import anvil.files
 from anvil.files import data_files
 import anvil.email
@@ -10,7 +11,11 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 from datetime import date, timedelta
+import datetime
+from anvil.secrets import get_secret
+import openai
 
+openai.api_key = get_secret("openai")
 
 @anvil.server.callable
 def add_aktivitet(aktivitet):
@@ -742,3 +747,102 @@ def opprett_ukentlige_trekninger(start_dato, slutt_dato):
         # Vurder om du skal rulle tilbake (slette de som ble opprettet) ved feil.
         # For enkelhets skyld stopper vi her og rapporterer feilen.
         raise Exception(f"Kunne ikke opprette nye trekninger: {e}")
+
+
+@anvil.server.callable
+def lag_status_for_bruker():
+    bruker = anvil.users.get_user()
+    if not bruker:
+        return "Ingen bruker logget inn."
+
+    # Hent brukernavn og lag
+    userinfo = app_tables.userinfo.get(user=bruker)
+    navn = userinfo['navn'] if userinfo else bruker['email']
+    lag_obj = userinfo['team'] if userinfo else None
+    lag_navn = lag_obj['team'] if lag_obj else "Ingen lag"
+
+    # Hent konkurransen
+    konkurranse = app_tables.konkurranse.get()
+    startdato = konkurranse['fradato']
+    slutt_dato = konkurranse['tildato']
+    
+    idag = datetime.date.today()
+    antall_uker = ((slutt_dato - startdato).days + 1) // 7
+    nåværende_uke = ((idag - startdato).days) // 7 + 1
+
+    statuslinjer = []
+
+    for uke_nr in range(1, antall_uker + 1):
+        uke_start = startdato + datetime.timedelta(days=(uke_nr - 1) * 7)
+        uke_slutt = uke_start + datetime.timedelta(days=6)
+        
+        rader = app_tables.aktivitet.search(deltager=bruker,
+                                            dato=q.between(uke_start, uke_slutt))
+        
+        aktiviteter = [rad['aktivitet'] for rad in rader]
+        beskrivelser = [rad['beskrivelse'] for rad in rader if rad['beskrivelse']]
+        total_poeng = sum(rad['poeng'] for rad in rader)
+
+        aktiviteter_tekst = ", ".join(aktiviteter) if aktiviteter else "ingen"
+        beskrivelse_tekst = "; ".join(beskrivelser) if beskrivelser else ""
+
+        statuslinjer.append(f"uke {uke_nr}: {aktiviteter_tekst} (poeng: {total_poeng})")
+        if beskrivelse_tekst:
+            statuslinjer.append(f"beskrivelser uke {uke_nr}: {beskrivelse_tekst}")
+    
+    # Finn brukerens plassering
+    alle_poeng = hent_poengsummer()
+    plassering = next((i + 1 for i, d in enumerate(alle_poeng) if d["email"] == bruker["email"]), None)
+    plassering_tekst = f"\nplassering totalt: {plassering} av {len(alle_poeng)}" if plassering else "\nplassering ikke funnet"
+
+    # Finn lagets plassering
+    lag_resultater = hent_team_poengsummer()
+    lag_plassering = next((i + 1 for i, d in enumerate(lag_resultater) if d["team"] == lag_navn), None)
+    lag_tekst = f"\nlag: {lag_navn} (plassering: {lag_plassering} av {len(lag_resultater)})" if lag_navn != "Ingen lag" else ""
+
+    # Sett sammen alt
+    status = f"navn: {navn}{plassering_tekst}{lag_tekst}\n" + "\n".join(statuslinjer)
+    return status
+
+
+@anvil.server.callable
+def generer_oppmuntring_for_bruker():
+    bruker = anvil.users.get_user()
+    if not bruker:
+        return "Fant ikke innlogget bruker."
+
+    # Hent status-tekst
+    status = lag_status_for_bruker()
+
+    # Prompt til AI
+    prompt = f"""
+Du er en motiverende og entusiastisk treningscoach i en vennskapelig aktivitetskonkurranse på jobb.
+Basert på denne statusen, skriv en kort og inspirerende melding til brukeren.
+Du kan gi ros, oppmuntring og forslag til hva de kan gjøre for å holde koken! Kommenter gjerne siste aktivitet.
+
+STATUS:
+{status}
+"""
+
+    # Kall til OpenAI (bruker GPT-3.5)
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",  # Endre til "gpt-4" om du ønsker
+            messages=[
+                {"role": "system", "content": "Du er en hyggelig, morsom og støttende treningscoach."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.9,
+            max_tokens=250
+        )
+
+        melding = response["choices"][0]["message"]["content"].strip()
+
+        # Oppdater siste genereringstid i databasen
+        userinfo = app_tables.userinfo.get(user=bruker)
+        userinfo['siste_melding_tid'] = datetime.today()
+
+        return melding
+
+    except Exception as e:
+        return f"Feil ved henting av AI-melding: {e}"

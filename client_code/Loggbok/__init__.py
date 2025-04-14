@@ -13,6 +13,7 @@ from ..PoengVelger import PoengVelger
 
 
 
+
 class Loggbok(LoggbokTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
@@ -21,6 +22,7 @@ class Loggbok(LoggbokTemplate):
         self.initier_uke(self.week_offset_label.text)
         self.sjekk_bruker()
         # anvil.users.set_user_info(week_offset=7)
+        
 
 
   
@@ -386,6 +388,7 @@ class Loggbok(LoggbokTemplate):
             # print(navn, team)
             self.deltager_label.text = deltagerdata['navn']
             self.team_label.text = deltagerdata['team']
+            self.coach.text = anvil.server.call('generer_oppmuntring_for_bruker')
     
             if not navn or navn.strip() == "":  # Forhindrer at None eller tom streng trigger navnespørsmål
                 # Feltet 'navn' er tomt – spør om navn
