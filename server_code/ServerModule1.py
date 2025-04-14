@@ -193,16 +193,6 @@ def hent_brukernavn():
     }
 
 
-
-
-      
-
-
-
-
-
-import anvil.server
-
 @anvil.server.callable
 def hent_poengsummer():
     #print('hent_poengsummer')
