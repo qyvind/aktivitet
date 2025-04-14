@@ -290,7 +290,6 @@ def hent_konsekutive_kvalifiserte(konkurranse_start, konkurranse_slutt):
     """
     import datetime
 
-    # Sikrer at vi jobber med date-objekter
     if isinstance(konkurranse_start, datetime.datetime):
         konkurranse_start_dato = konkurranse_start.date()
     else:
@@ -301,52 +300,33 @@ def hent_konsekutive_kvalifiserte(konkurranse_start, konkurranse_slutt):
     else:
         konkurranse_slutt_dato = konkurranse_slutt
 
-
-    # Validering av input
     if konkurranse_start_dato.weekday() != 0:
         raise ValueError("konkurranse_start må være en mandag.")
-    # Vi validerer ikke lenger at konkurranse_slutt MÅ være søndag,
-    # men det er fortsatt logisk at den er det for å definere perioden.
-    # Vi trenger ikke sjekke ukedagen strengt her siden vi uansett
-    # finner siste *faktiske* søndag å sjekke mot.
     if konkurranse_start_dato > konkurranse_slutt_dato:
-        # Hvis start er etter den oppgitte slutt, er perioden ugyldig
         return []
 
-    # --- Finn den faktiske siste søndagen vi skal sjekke ---
     today = datetime.date.today()
-    # Finner mandagen i *denne* uken
     start_of_current_week = today - datetime.timedelta(days=today.weekday())
-    # Finner søndagen i *forrige* uke
     siste_fullforte_sondag = start_of_current_week - datetime.timedelta(days=1)
-
-    # Den effektive sluttdatoen for *beregningen* er den tidligste av:
-    # 1. Den oppgitte konkurransesluttdatoen
-    # 2. Søndagen i forrige fullførte uke
     effektiv_slutt_dato = min(konkurranse_slutt_dato, siste_fullforte_sondag)
-    #---------------------------------------------------------
 
-    # Hvis konkurransen starter etter den siste fullførte søndagen
-    # som er relevant for perioden, er det ingen uker å sjekke.
     if konkurranse_start_dato > effektiv_slutt_dato:
         return []
 
-    konsekutive_kvalifiserte = None # Holder settet med deltagere som er kvalifisert så langt
+    konsekutive_kvalifiserte = None
     gjeldende_mandag = konkurranse_start_dato
 
     while True:
         gjeldende_søndag = gjeldende_mandag + datetime.timedelta(days=6)
 
-        # Stopp hvis denne ukens søndag er ETTER den effektive sluttdatoen
         if gjeldende_søndag > effektiv_slutt_dato:
             break
 
-        # --- Logikk for å finne kvalifiserte for *denne* uken ---
-        # (Identisk med forrige versjon, men bruker gjeldende_mandag/søndag)
         deltager_dager_uke = {}
+        # KORRIGERT LINJE: Bruker q.greater_than_or_equal_to
         relevante_aktiviteter = app_tables.aktivitet.search(
-            dato=q.between(gjeldende_mandag, gjeldende_søndag, inclusive_start=True, inclusive_end=True),
-            poeng=q.greater_than_or_equal(1)
+            dato=q.between(gjeldende_mandag, gjeldende_søndag, min_inclusive=True, max_inclusive=True),
+            poeng=q.greater_than_or_equal_to(1) # <-- ENDRING HER
         )
 
         for rad in relevante_aktiviteter:
@@ -360,34 +340,27 @@ def hent_konsekutive_kvalifiserte(konkurranse_start, konkurranse_slutt):
         ukens_kvalifiserte_set = {
             deltager for deltager, dager in deltager_dager_uke.items() if len(dager) >= 5
         }
-        # --- Slutt på ukentlig kvalifiseringslogikk ---
 
-        # --- Oppdater settet med konsekutive kvalifiserte ---
         if konsekutive_kvalifiserte is None:
             konsekutive_kvalifiserte = ukens_kvalifiserte_set
         else:
             konsekutive_kvalifiserte.intersection_update(ukens_kvalifiserte_set)
 
-        if not konsekutive_kvalifiserte: # Hvis settet blir tomt, stopp tidlig
+        if not konsekutive_kvalifiserte:
             break
-        # --- Slutt på oppdatering ---
 
-        # Gå til neste uke
         gjeldende_mandag += datetime.timedelta(days=7)
 
-
-    # --- Hent resultater ---
     if konsekutive_kvalifiserte is None or not konsekutive_kvalifiserte:
         return []
 
     resultat = []
     for deltager in konsekutive_kvalifiserte:
         userinfo_rad = app_tables.userinfo.get(user=deltager)
-        navn = userinfo_rad['navn'] if userinfo_rad else None
+        navn = userinfo_rad['navn'] if userinfo_rad and userinfo_rad['navn'] else None
         resultat.append(navn if navn else deltager['email'])
 
     return resultat
-
 
 
 @anvil.server.callable
