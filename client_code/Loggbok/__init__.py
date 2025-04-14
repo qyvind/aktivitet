@@ -421,58 +421,73 @@ class Loggbok(LoggbokTemplate):
       open_form('team_medlemmer',teamnavn=self.team_label.text)
 
 
-    def oppdater_dag(self, knapp, panel, label, aktivitet_data, dato, today_date, ikon_komponent,column_panel):
+# Inne i Loggbok klassen
+
+    def oppdater_dag(self, knapp, panel, label, aktivitet_data, dato, today_date, ikon_komponent, column_panel):
+        # ... (kode for å hente poeng, aktivitet, ikon - som før) ...
         if aktivitet_data:
             poeng = str(aktivitet_data[0]['poeng'])
             aktivitet = aktivitet_data[0]['aktivitet']
             ikon=aktivitet_data[0]['ikon']
             column_panel.tooltip = aktivitet_data[0]['beskrivelse']
-            
         else:
             poeng = "0"
             aktivitet = ""
             ikon=None
             column_panel.tooltip = ""
-          
+
         if ikon_komponent is not None:
-          ikon_komponent.source = ikon
-          print(ikon_komponent.source)
-    
+            ikon_komponent.source = ikon
+            # Fjernet print(ikon_komponent.source) for renere output
+
         knapp.text = poeng
         if poeng == "0" and not aktivitet and dato <= today_date and ikon == None:
             label.text = "Hviledag"
-            # if ikon_komponent is not None:
-            #   ikon_komponent.source = app_files.relax_png
-            #   ikon_komponent.visible = True
         else:
             label.text = aktivitet
-    
-        fremtid = dato > today_date  # 💡 i dag er tillatt, kun fremtid deaktiveres
-        knapp.enabled = not fremtid
-    
-        # 🎨 Visuell differensiering
-        if fremtid:
-            panel.background = "#eeeeee"
-            knapp.foreground = "#888888"
-            label.foreground = "#888888"
-            panel.style = (
-                "border: 1px dashed #999;"
-                "border-radius: 16px;"
-                "padding: 8px;"
-            )
-        else:
+
+        # --- START: Logikk for å bestemme om dagen er redigerbar ---
+        mandag_denne_uken = today_date - timedelta(days=today_date.weekday())
+        mandag_forrige_uke = mandag_denne_uken - timedelta(weeks=1)
+
+        er_fremtid = dato > today_date
+
+        er_redigerbar_uke = False
+        # Sjekk 1: Er datoen i inneværende uke eller senere?
+        if dato >= mandag_denne_uken:
+            er_redigerbar_uke = True
+        # Sjekk 2: Er datoen i forrige uke OG er det mandag i dag?
+        elif dato >= mandag_forrige_uke and today_date.weekday() == 0:
+             er_redigerbar_uke = True
+        # Ellers (eldre enn forrige uke, eller forrige uke på en annen dag enn mandag)
+        # er er_redigerbar_uke fortsatt False
+
+        # Knappen skal være aktivert hvis det IKKE er fremtid OG uken er redigerbar
+        knapp.enabled = (not er_fremtid) and er_redigerbar_uke
+        # --- SLUTT: Logikk for å bestemme om dagen er redigerbar ---
+
+
+        # --- START: Oppdatert visuell differensiering ---
+        if not knapp.enabled: # Hvis knappen er deaktivert (enten fremtid eller låst fortid)
+            panel.background = "#eeeeee" # Mer nøytral grå for låst/fremtid
+            knapp.foreground = "#aaaaaa" # Litt lysere grå tekst
+            label.foreground = "#aaaaaa"
+            ikon_komponent.foreground = "#aaaaaa" # Evt. også for ikon hvis det er relevant
+            panel.border = "1px dashed #cccccc" # Mindre markant border
+            # Du kan også vurdere panel.opacity = 0.7 e.l. for å tone det ned mer
+        else: # Aktiv knapp (fortid som er redigerbar)
             panel.background = "#e0e0e0" if poeng == "0" else self.get_farge(poeng)
             knapp.foreground = "black"
             label.foreground = "black"
-            panel.style = (
-                "border: 2px dashed #0077cc;"
-                "border-radius: 16px;"
-                "padding: 8px;"
-            )
-    
+            ikon_komponent.foreground = "black" # Tilbakestill ikonfarge
+            panel.border = "2px dashed #0077cc;" # Tydelig border for aktive
+            panel.opacity = 1.0 # Sørg for full synlighet
+
+        # Tilbakestill style-attributter som ikke dekkes av border/background
+        # panel.style = (...) # Vurder om du trenger å nullstille mer her
         knapp.style = ""
         label.style = ""
-
+        # --- SLUTT: Oppdatert visuell differensiering ---
 
 
     def deltager_label_click(self, **event_args):
