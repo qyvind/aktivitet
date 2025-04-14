@@ -506,11 +506,6 @@ components:
       name: regler_button
       properties: {background: 'theme:Secondary Container', role: elevated-button, text: Regler}
       type: Button
-    - event_bindings: {click: veil_button_click}
-      layout_properties: {}
-      name: veil_button
-      properties: {background: 'theme:Secondary Container', role: elevated-button, text: Brukerveiledning}
-      type: Button
     - event_bindings: {click: individuell_button_click}
       layout_properties: {}
       name: individuell_button

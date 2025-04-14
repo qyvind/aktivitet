@@ -22,3 +22,5 @@ class Regler(ReglerTemplate):
     open_form("Loggbok")
 
 
+
+
