@@ -29,6 +29,11 @@ components:
       name: button_5
       properties: {role: tonal-button, text: Endringslogg}
       type: Button
+    - event_bindings: {click: button_3_click}
+      layout_properties: {}
+      name: button_3
+      properties: {role: tonal-button, text: Lykkehjul}
+      type: Button
     - event_bindings: {click: button_1_click}
       name: button_1
       properties: {role: tonal-button, text: Lukk}
