@@ -150,8 +150,8 @@ class admin(adminTemplate):
       else:
           return None, None, None
 
-  def lagre_konkurranse_button_click(self, **event_args):
-    anvil.server.call('lagre_konkurranse',self.konkurransenavn_label.text,self.fra_date_picker.date,self.til_date_picker.date)
+  def trekningsdata_button_click(self, **event_args):   
+    anvil.server.call('opprett_ukentlige_trekninger',self.fra_date_picker.date,self.til_date_picker.date)
 
   def button_5_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -163,6 +163,10 @@ class admin(adminTemplate):
     anvil.server.call('slett_tomme_team')
     team_resultater = anvil.server.call('hent_team_poengsummer')
     self.team_repeating_panel.items = team_resultater
+
+  def endre_konkurranse_click(self, **event_args):
+    anvil.server.call('lagre_konkurranse',self.konkurransenavn_label.text,self.fra_date_picker.date,self.til_date_picker.date)
+
 
 
   

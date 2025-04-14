@@ -81,6 +81,17 @@ db_schema:
       type: date
     server: full
     title: Trekning
+  trekninger:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: nummer
+      type: number
+    - admin_ui: {order: 1, width: 200}
+      name: uke_mandag
+      type: date
+    server: full
+    title: Trekninger
   userinfo:
     client: search
     columns:

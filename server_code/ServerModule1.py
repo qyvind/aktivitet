@@ -9,7 +9,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
-
+from datetime import date, timedelta
 
 
 @anvil.server.callable
@@ -597,3 +597,73 @@ def hent_user_fra_email(email):
     if not bruker:
         raise Exception(f"Ingen bruker funnet med e-post: {email}")
     return bruker
+
+# ----- Plasser denne koden i en Server Module (f.eks. ServerModule1.py) -----
+
+
+
+@anvil.server.callable
+def opprett_ukentlige_trekninger(start_dato, slutt_dato):
+    """
+    Sletter alle eksisterende rader i 'trekninger'-tabellen og oppretter
+    nye rader for hver uke innenfor den gitte perioden.
+
+    Args:
+        start_dato (date): Datoen for den første mandagen i konkurransen.
+        slutt_dato (date): Datoen for den siste søndagen i konkurransen.
+
+    Returns:
+        str: En melding som indikerer resultatet av operasjonen.
+    """
+    # --- Validering av input (anbefalt) ---
+    if not isinstance(start_dato, date) or not isinstance(slutt_dato, date):
+        raise TypeError("Både start_dato og slutt_dato må være date objekter.")
+    if start_dato.weekday() != 0: # 0 er mandag
+        raise ValueError("Startdatoen må være en mandag.")
+    if slutt_dato.weekday() != 6: # 6 er søndag
+        raise ValueError("Sluttdatoen må være en søndag.")
+    if start_dato > slutt_dato:
+        raise ValueError("Startdato kan ikke være etter sluttdato.")
+
+    # --- Steg 1: Slett alle eksisterende records i 'trekninger' ---
+    print("Starter sletting av eksisterende trekninger...")
+    try:
+        # Hent alle rader. Bruk search_iterator for store tabeller om nødvendig.
+        alle_trekninger = app_tables.trekninger.search()
+        antall_slettet = 0
+        for rad in alle_trekninger:
+            rad.delete()
+            antall_slettet += 1
+        print(f"Slettet {antall_slettet} eksisterende trekninger.")
+    except Exception as e:
+        print(f"Feil under sletting av trekninger: {e}")
+        raise Exception(f"Kunne ikke slette eksisterende trekninger: {e}")
+
+    # --- Steg 2: Opprett en record for hver uke i perioden ---
+    print(f"Oppretter nye trekninger fra {start_dato} til {slutt_dato}...")
+    current_mandag = start_dato
+    uke_nummer = 1
+    antall_opprettet = 0
+
+    try:
+        while current_mandag <= slutt_dato:
+            print(f"  Oppretter rad for uke {uke_nummer}: Mandag {current_mandag}")
+            app_tables.trekninger.add_row(
+                nummer=uke_nummer,
+                uke_mandag=current_mandag
+            )
+            antall_opprettet += 1
+
+            # Gå til neste mandag
+            current_mandag += timedelta(weeks=1)
+            uke_nummer += 1
+
+        print(f"Opprettet {antall_opprettet} nye ukentlige trekninger.")
+        return f"Fullført: Slettet {antall_slettet} og opprettet {antall_opprettet} ukentlige trekninger."
+
+    except Exception as e:
+        print(f"Feil under oppretting av nye trekninger: {e}")
+        # Vurder om du skal rulle tilbake (slette de som ble opprettet) ved feil.
+        # For enkelhets skyld stopper vi her og rapporterer feilen.
+        raise Exception(f"Kunne ikke opprette nye trekninger: {e}")
+

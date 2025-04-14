@@ -194,47 +194,62 @@ components:
     type: ColumnPanel
   - components:
     - components:
-      - name: label_4
-        properties: {text: 'Konkurransenavn:'}
-        type: Label
-      - layout_properties: {width: 222.142822265625}
-        name: konkurransenavn_label
-        properties: {}
-        type: TextBox
-      layout_properties: {grid_position: 'YSQUMC,ODSGRE'}
-      name: flow_panel_4
-      properties: {align: center}
-      type: FlowPanel
+      - components:
+        - name: label_4
+          properties: {text: 'Konkurransenavn:'}
+          type: Label
+        - layout_properties: {width: 222.142822265625}
+          name: konkurransenavn_label
+          properties: {}
+          type: TextBox
+        layout_properties: {grid_position: 'QMTDQB,MPOSRR'}
+        name: flow_panel_4
+        properties: {align: center}
+        type: FlowPanel
+      - components:
+        - name: label_9
+          properties: {text: 'Fra dato:'}
+          type: Label
+        - layout_properties: {width: 159.5}
+          name: fra_date_picker
+          properties: {}
+          type: DatePicker
+        layout_properties: {grid_position: 'VKMMBC,ZXHMSF'}
+        name: flow_panel_9
+        properties: {align: center}
+        type: FlowPanel
+      - components:
+        - layout_properties: {}
+          name: label_10
+          properties: {text: 'Til dato:'}
+          type: Label
+        - layout_properties: {width: 163.5}
+          name: til_date_picker
+          properties: {}
+          type: DatePicker
+        layout_properties: {grid_position: 'JYZYNB,GJRRES'}
+        name: flow_panel_11
+        properties: {align: center}
+        type: FlowPanel
+      - event_bindings: {click: endre_konkurranse_click}
+        layout_properties: {grid_position: 'TZKFGB,LPXXMU'}
+        name: endre_konkurranse
+        properties: {role: filled-button, text: Endre konkurranse}
+        type: Button
+      layout_properties: {grid_position: 'HSKZOU,ZOOUPO'}
+      name: outlined_card_3
+      properties: {role: outlined-card}
+      type: ColumnPanel
     - components:
-      - name: label_9
-        properties: {text: 'Fra dato:'}
-        type: Label
-      - layout_properties: {width: 159.5}
-        name: fra_date_picker
-        properties: {}
-        type: DatePicker
-      layout_properties: {grid_position: 'WFYGWC,YFQMEW'}
-      name: flow_panel_9
-      properties: {align: center}
-      type: FlowPanel
-    - components:
-      - layout_properties: {}
-        name: label_10
-        properties: {text: 'Til dato:'}
-        type: Label
-      - layout_properties: {width: 163.5}
-        name: til_date_picker
-        properties: {}
-        type: DatePicker
-      layout_properties: {grid_position: 'YZQRRX,BUFJQM'}
-      name: flow_panel_11
-      properties: {align: center}
-      type: FlowPanel
-    - event_bindings: {click: lagre_konkurranse_button_click}
-      layout_properties: {grid_position: 'TXCZHI,HFAWRC'}
-      name: lagre_konkurranse_button
-      properties: {role: outlined-button, text: Endre konkurranse}
-      type: Button
+      - event_bindings: {click: trekningsdata_button_click}
+        layout_properties: {grid_position: 'NAPUGH,LVPUMB'}
+        name: trekningsdata_button
+        properties: {role: filled-button, text: Slett trekninsdata og opprett nytt}
+        type: Button
+      layout_properties: {grid_position: 'WUUMNM,NRKRPW'}
+      name: outlined_card_4
+      properties: {role: outlined-card}
+      type: ColumnPanel
     layout_properties: {grid_position: 'NWYMHD,ASANKT'}
     name: konk_card
     properties: {role: tonal-card, visible: true}
