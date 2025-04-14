@@ -160,7 +160,7 @@ db_schema:
     server: full
     title: Users
 dependencies: []
-metadata: {description: For Framo BIL, logo_img: 'asset:IKONS/running.svg', title: Aktivitetskonkurranse}
+metadata: {description: For Framo BIL, logo_img: 'asset:walking.svg', title: Aktivitetskonkurranse}
 name: Aktivitet
 package_name: Aktivitet
 renamed: true

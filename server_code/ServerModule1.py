@@ -807,38 +807,38 @@ def lag_status_for_bruker():
 
 @anvil.server.callable
 def generer_oppmuntring_for_bruker():
+    import openai
+    from datetime import datetime
+
+    openai.api_key = get_secret("openai")
+
     bruker = anvil.users.get_user()
     if not bruker:
         return "Fant ikke innlogget bruker."
 
-    # Hent status-tekst
     status = lag_status_for_bruker()
 
-    # Prompt til AI
     prompt = f"""
-Du er en motiverende og entusiastisk treningscoach i en vennskapelig aktivitetskonkurranse på jobb.
+Du er en motiverende og positiv treningscoach i en vennskapelig aktivitetskonkurranse på jobb.
 Basert på denne statusen, skriv en kort og inspirerende melding til brukeren.
-Du kan gi ros, oppmuntring og forslag til hva de kan gjøre for å holde koken! Kommenter gjerne siste aktivitet.
+Du kan gi ros, oppmuntring og forslag til hva de kan gjøre for å holde koken. Kommenter gjerne siste aktivitet.
 
 STATUS:
 {status}
+
+Oppmuntring:
 """
 
-    # Kall til OpenAI (bruker GPT-3.5)
     try:
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",  # Endre til "gpt-4" om du ønsker
-            messages=[
-                {"role": "system", "content": "Du er en hyggelig, morsom og støttende treningscoach."},
-                {"role": "user", "content": prompt}
-            ],
+        response = openai.Completion.create(
+            model="text-davinci-003",
+            prompt=prompt,
             temperature=0.9,
             max_tokens=250
         )
 
-        melding = response["choices"][0]["message"]["content"].strip()
+        melding = response["choices"][0]["text"].strip()
 
-        # Oppdater siste genereringstid i databasen
         userinfo = app_tables.userinfo.get(user=bruker)
         userinfo['siste_melding_tid'] = datetime.today()
 
