@@ -11,15 +11,6 @@ components:
   properties: {}
   type: Label
 - components:
-  - layout_properties: {}
-    name: email
-    properties: {visible: false}
-    type: Label
-  layout_properties: {column: VUDOQL}
-  name: flow_panel_1
-  properties: {}
-  type: FlowPanel
-- components:
   - event_bindings: {click: button_1_click}
     layout_properties: {}
     name: button_1
