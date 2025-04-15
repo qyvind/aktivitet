@@ -278,7 +278,7 @@ class Loggbok(LoggbokTemplate):
             # if dato == date.today():
             #     melding = anvil.server.call('generer_oppmuntring_for_bruker')
             #     if melding:
-            #         alert(melding, title="💬 Coach Turbo sier:")
+            #         alert(melding, title="💬 Framskritt:")
         except Exception as e:
             print(f"Error saving activity: {e}")
 
