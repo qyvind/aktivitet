@@ -13,6 +13,7 @@ from ..PoengVelger import PoengVelger
 
 
 
+
 class Loggbok(LoggbokTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
@@ -85,7 +86,14 @@ class Loggbok(LoggbokTemplate):
       
           print("lagrer med ikon-type:", type(ikon_til_server))
       
-          self.lagre_aktivitet(valgt_dato, aktivitet, poeng, ikon_til_server,beskrivelse)
+          resultat = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng, ikon,beskrivelse)
+          
+          if valgt_dato == datetime.date.today():
+              melding = anvil.server.call("generer_oppmuntring_for_bruker")
+              if melding:
+                  Notification(melding, title="🏆 AI-coach sier:", timeout=10).show()
+
+          
       
             
 
@@ -266,14 +274,6 @@ class Loggbok(LoggbokTemplate):
       self.lykkehjul.visible = self.sjekk_lykkehjul()
 
 
-          
-    def lagre_aktivitet(self, dato, aktivitet, poeng, ikon,beskrivelse):
-        try:
-            result = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng, ikon,beskrivelse)
-            print("til lagring",result)
-            alert(anvil.server.call('generer_oppmuntring_for_bruker'))
-        except Exception as e:
-            print(f"Error saving activity: {e}")
             
           
     def get_farge(self, poeng_verdi):
