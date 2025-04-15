@@ -8,6 +8,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from ..Utils import Utils
 
 
 class team_medlemmer(team_medlemmerTemplate):
@@ -17,7 +18,7 @@ class team_medlemmer(team_medlemmerTemplate):
     # print(f"📢 Åpner team_medlemmer med teamnavn: {teamnavn}")  # Debugging
 
     # Kall serverfunksjonen med riktig teamnavn
-    team_medl = anvil.server.call('hent_teammedlemmer', teamnavn)
+    team_medl = Utils.hent_teammedlemmer(teamnavn)
     #print(team_medl)
     self.team_label.text = teamnavn
     # Sett inn data i et Repeating Panel hvis du har et

@@ -10,6 +10,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import json
 import anvil.js
+from ..Utils import Utils
 
 
 class admin(adminTemplate):
@@ -72,7 +73,7 @@ class admin(adminTemplate):
 
   def teams_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    team_resultater = anvil.server.call('hent_team_poengsummer')
+    team_resultater = Utils.hent_team_poengsummer()
     print("teams:",team_resultater)
     self.team_repeating_panel.items = team_resultater
     if self.team_card.visible:
@@ -97,7 +98,7 @@ class admin(adminTemplate):
     if self.nytt_team_box.text != "":
       anvil.server.call('opprett_nytt_team',self.nytt_team_box.text)
       self.nytt_team_box.text = ""
-      team_resultater = anvil.server.call('hent_team_poengsummer')
+      team_resultater = Utils.hent_team_poengsummer()
       self.team_repeating_panel.items = team_resultater
 
   def brukere_click(self, **event_args):
@@ -114,7 +115,7 @@ class admin(adminTemplate):
       self.import_mang_card.visible = False
       self.enkeltbruker_card.visible = False
       self.konk_card.visible=False
-    liste = anvil.server.call('hent_poengsummer')
+    liste = Utils.hent_poengsummer()
     self.bruker_repeating_panel.items = liste
     
 
@@ -141,7 +142,7 @@ class admin(adminTemplate):
 
   def hent_konkurranse_info(self):
       # Kall serverfunksjonen for å hente den første posten
-      record = anvil.server.call('hent_konkurranse')
+      record = Utils.hent_konkurranse()
       # Dersom record finnes, trekk ut feltene og returner dem
       if record:
           konkurransenavn = record['konkurransenavn']
@@ -162,7 +163,7 @@ class admin(adminTemplate):
       
   def autoslett_click(self, **event_args):
     anvil.server.call('slett_tomme_team')
-    team_resultater = anvil.server.call('hent_team_poengsummer')
+    team_resultater = Utils.hent_team_poengsummer()
     self.team_repeating_panel.items = team_resultater
 
   def endre_konkurranse_click(self, **event_args):

@@ -9,6 +9,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import datetime  # Importer datetime for å håndtere datoer
+from ..Utils import Utils
 
 
 class Supertrekning(SupertrekningTemplate):
@@ -24,7 +25,7 @@ class Supertrekning(SupertrekningTemplate):
       )  # Finn mandagen i uken
 
     # Kall serverfunksjonen med aktiv mandag
-      record = anvil.server.call('hent_konkurranse')
+      record = Utils.hent_konkurranse()
       if record:
         fradato = record['fradato']
         tildato = record['tildato']

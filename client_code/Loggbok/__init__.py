@@ -10,6 +10,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from datetime import datetime, timedelta
 from ..PoengVelger import PoengVelger
+from ..Utils import Utils
 
 
 
@@ -318,7 +319,7 @@ class Loggbok(LoggbokTemplate):
       
     def hent_konkurranse_info(self):
         # Kall serverfunksjonen for å hente den første posten
-        record = anvil.server.call('hent_konkurranse')
+        record = Utils.hent_konkurranse()
         # Dersom record finnes, trekk ut feltene og returner dem
         if record:
             konkurransenavn = record['konkurransenavn']

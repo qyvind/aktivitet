@@ -8,6 +8,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from ...Utils import Utils
 
 
 class RowTemplate6(RowTemplate6Template):
@@ -28,7 +29,7 @@ class RowTemplate6(RowTemplate6Template):
         parent_form = parent_form.parent  # Gå oppover i UI-hierarkiet
     if parent_form and hasattr(parent_form, 'team_repeating_panel'):
         # Hent nye data fra databasen
-        team_resultater = anvil.server.call('hent_team_poengsummer')
+        team_resultater = Utils.hent_team_poengsummer()
         parent_form.team_repeating_panel.items = team_resultater
 
   def lock_check_box_change(self, **event_args):
