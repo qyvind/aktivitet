@@ -267,13 +267,20 @@ class Loggbok(LoggbokTemplate):
 
 
           
-    def lagre_aktivitet(self, dato, aktivitet, poeng, ikon,beskrivelse):
+    def lagre_aktivitet(self, dato, aktivitet, poeng, ikon, beskrivelse):
         try:
-            result = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng, ikon,beskrivelse)
-            print("til lagring",result)
-            alert(anvil.server.call('generer_oppmuntring_for_bruker'))
+            result = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng, ikon, beskrivelse)
+            print("Til lagring:", result)
+    
+            # ✅ Sjekk om datoen er i dag
+            from datetime import date
+            if dato == date.today():
+                melding = anvil.server.call('generer_oppmuntring_for_bruker')
+                if melding:
+                    alert(melding, title="💬 Coach Turbo sier:")
         except Exception as e:
             print(f"Error saving activity: {e}")
+
             
           
     def get_farge(self, poeng_verdi):
