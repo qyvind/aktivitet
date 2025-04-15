@@ -1,11 +1,4 @@
 components:
-- layout_properties: {column: JKSDUP}
-  name: Deltager_label
-  properties:
-    spacing:
-      margin: ['2', null, '2', null]
-      padding: ['2', null, '2', null]
-  type: Label
 - layout_properties: {column: VJQQOR}
   name: Poeng_label
   properties:
@@ -18,11 +11,6 @@ components:
   properties: {}
   type: Label
 - components:
-  - event_bindings: {click: button_1_click}
-    layout_properties: {}
-    name: button_1
-    properties: {align: left, icon: 'fa:eye', text: ''}
-    type: Button
   - layout_properties: {}
     name: email
     properties: {visible: false}
@@ -31,7 +19,32 @@ components:
   name: flow_panel_1
   properties: {}
   type: FlowPanel
+- components:
+  - event_bindings: {click: button_1_click}
+    layout_properties: {}
+    name: button_1
+    properties:
+      align: left
+      icon: fa:eye
+      spacing:
+        margin: ['0', null, '2', null]
+        padding: ['0', '0', '2', '2']
+      text: ''
+    type: Button
+  - name: Deltager_label
+    properties:
+      spacing:
+        margin: ['12', null, '2', null]
+        padding: ['2', null, '2', null]
+    type: Label
+  layout_properties: {column: JKSDUP}
+  name: flow_panel_2
+  properties: {}
+  type: FlowPanel
 container:
-  properties: {align: left, font_size: 10}
+  properties:
+    align: left
+    font_size: 10
+    margin: ['0', null, null, null]
   type: DataRowPanel
 is_package: true
