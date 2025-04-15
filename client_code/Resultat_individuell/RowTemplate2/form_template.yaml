@@ -28,6 +28,14 @@ components:
         margin: ['12', null, '2', null]
         padding: ['2', null, '2', null]
     type: Label
+  - components:
+    - layout_properties: {}
+      name: email
+      properties: {visible: false}
+      type: Label
+    name: flow_panel_1
+    properties: {visible: false}
+    type: FlowPanel
   layout_properties: {column: JKSDUP}
   name: flow_panel_2
   properties: {}
