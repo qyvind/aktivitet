@@ -317,8 +317,12 @@ class Loggbok(LoggbokTemplate):
       open_form("Trekninger", week_info['monday_date'])
       
     def hent_konkurranse_info(self):
+        print('ny hent konkurranse')
         # Kall serverfunksjonen for å hente den første posten
-        record = anvil.server.call('hent_konkurranse')
+        #record = anvil.server.call('hent_konkurranse')
+        record = app_tables.konkurranse.search(record=1)
+      #return records[0] if records else None
+      
         # Dersom record finnes, trekk ut feltene og returner dem
         if record:
             konkurransenavn = record['konkurransenavn']
@@ -541,3 +545,5 @@ class Loggbok(LoggbokTemplate):
     def button_1_click(self, **event_args):
       """This method is called when the button is clicked"""
       open_form(('Supertrekning'))
+      
+
