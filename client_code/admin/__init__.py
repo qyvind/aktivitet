@@ -25,6 +25,7 @@ class admin(adminTemplate):
     self.enkeltbruker_card.visible = False
     self.bruker_card.visible = False 
     self.konk_card.visible=False
+    self.ai_cardcavisible = False
 
     # Any code you write here will run before the form opens.
 
@@ -39,12 +40,14 @@ class admin(adminTemplate):
       self.team_card.visible=False
       self.bruker_card.visible = False 
       self.konk_card.visible=False
+      self.ai.visible = False
     else:
       self.enkeltbruker_card.visible = True
       self.import_mang_card.visible = False
       self.team_card.visible=False
       self.bruker_card.visible = False 
       self.konk_card.visible=False
+      self.ai.visible = False
 
 
   def button_2_click(self, **event_args):
@@ -59,12 +62,14 @@ class admin(adminTemplate):
       self.team_card.visible=False
       self.bruker_card.visible = False 
       self.konk_card.visible=False
+      self.ai.visible = False
     else:
       self.import_mang_card.visible = True
       self.enkeltbruker_card.visible = False
       self.team_card.visible=False
       self.bruker_card.visible = False 
       self.konk_card.visible=False
+      self.ai.visible = False
 
   def button_4_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -82,12 +87,14 @@ class admin(adminTemplate):
       self.enkeltbruker_card.visible = False
       self.bruker_card.visible = False 
       self.konk_card.visible=False
+      self.ai.visible = False
     else:
       self.team_card.visible=True
       self.import_mang_card.visible = False
       self.enkeltbruker_card.visible = False
       self.bruker_card.visible = False 
       self.konk_card.visible=False
+      self.ai.visible = False
 
   def label1_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -109,12 +116,14 @@ class admin(adminTemplate):
       self.import_mang_card.visible = False
       self.enkeltbruker_card.visible = False
       self.konk_card.visible=False
+      self.ai.visible = False
     else:
       self.bruker_card.visible = True
       self.team_card.visible=False
       self.import_mang_card.visible = False
       self.enkeltbruker_card.visible = False
       self.konk_card.visible=False
+      self.ai.visible = False
     liste = Utils.hent_poengsummer()
     self.bruker_repeating_panel.items = liste
     
@@ -133,12 +142,14 @@ class admin(adminTemplate):
       self.team_card.visible=False
       self.import_mang_card.visible = False
       self.enkeltbruker_card.visible = False
+      self.ai.visible = False
     else:
       self.konk_card.visible=True
       self.bruker_card.visible = False
       self.team_card.visible=False
       self.import_mang_card.visible = False
       self.enkeltbruker_card.visible = False
+      self.ai.visible = False
 
   def hent_konkurranse_info(self):
       # Kall serverfunksjonen for å hente den første posten
@@ -175,7 +186,24 @@ class admin(adminTemplate):
 
   def ai_click(self, **event_args):
     """This method is called when the button is clicked"""
-    self.ai_card.visible = True
+    
+
+    if self.ai_card.visible:
+      self.konk_card.visible=False
+      self.bruker_card.visible = False
+      self.team_card.visible=False
+      self.import_mang_card.visible = False
+      self.enkeltbruker_card.visible = False
+      self.ai.visible = False
+    else:
+      self.ai.visible = True
+      self.konk_card.visible=True
+      self.bruker_card.visible = False
+      self.team_card.visible=False
+      self.import_mang_card.visible = False
+      self.enkeltbruker_card.visible = False
+      
+    
     self.ai_repeating_panel_1.items = anvil.server.call('hent_prompter')
 
   def nytt_prompt_button_click(self, **event_args):
