@@ -172,6 +172,17 @@ class admin(adminTemplate):
     url_to_open = "https://wheelofnames.com/" 
     anvil.js.window.open(url_to_open, "_blank")
 
+  def ai_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.ai_card.visible = True
+    self.ai_repeating_panel_1.items = anvil.server.call('hent_prompter')
+
+  def nytt_prompt_button_click(self, **event_args):
+    resultat = anvil.server.call('legg_til_prompt', self.nytt_prompt.text)
+    Notification(resultat, style="success").show()
+    self.nytt_prompt.text = ""  # Tøm feltet etterpå
+    self.ai_repeating_panel_1.items = anvil.server.call('hent_prompter')  # Oppdater listen
+
 
 
   

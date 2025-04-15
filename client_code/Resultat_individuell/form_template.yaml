@@ -20,6 +20,9 @@ components:
     properties: {}
     type: ColumnPanel
   - components:
+    - name: button_1
+      properties: {text: button_1}
+      type: Button
     - layout_properties: {}
       name: resultat_repeat_panel
       properties: {item_template: Resultat_individuell.RowTemplate2}

@@ -4,6 +4,10 @@ components:
     name: label_1
     properties: {role: headline, text: Endringslogg}
     type: Label
+  - layout_properties: {grid_position: 'RSTXWX,ATBTOS'}
+    name: text_area_11
+    properties: {text: '15/4 La til oppmuntrende skrytekommentar ved innlegging av aktivitet. La til vedlikehold av ai-prompt for skryt i admin. '}
+    type: TextArea
   - layout_properties: {grid_position: 'YACQLQ,HZIOYW'}
     name: text_area_10
     properties:

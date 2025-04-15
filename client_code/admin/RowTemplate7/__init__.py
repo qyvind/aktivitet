@@ -47,6 +47,10 @@ class RowTemplate7(RowTemplate7Template):
     """This method is called when the button is clicked"""
     anvil.server.call('update_user_team',self.email_label.text,self.team_drop.selected_value, self.admin_checkbox.checked)
 
+  def ai_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    alert(anvil.server.call('generer_oppmuntring_for_bruker'))
+
 
 
 

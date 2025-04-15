@@ -1,0 +1,10 @@
+components:
+- data_bindings:
+  - {code: 'self.item[''prompt'']', property: text, writeback: false}
+  event_bindings: {change: prompt_change}
+  layout_properties: {grid_position: 'XVXUEB,LCRFTM'}
+  name: prompt
+  properties: {}
+  type: TextArea
+container: {type: ColumnPanel}
+is_package: true

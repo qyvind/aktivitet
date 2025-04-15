@@ -30,3 +30,8 @@ class RowTemplate2(RowTemplate2Template):
     except Exception as e:
         alert(f"Feil: {e}")
 
+  def button_2_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    coaching = anvil.server.call('lag_status_for_bruker')
+    print(coaching)
+
