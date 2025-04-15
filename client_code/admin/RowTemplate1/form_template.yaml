@@ -1,0 +1,18 @@
+components:
+- data_bindings:
+  - {code: 'self.item[''prompt'']', property: text, writeback: false}
+  layout_properties: {column: JKSDUP}
+  name: prompt
+  properties: {}
+  type: TextArea
+- event_bindings: {click: save_click}
+  layout_properties: {column: VJQQOR}
+  name: save
+  properties:
+    icon: fa:save
+    spacing:
+      padding: [null, '0', null, '0']
+    text: ''
+  type: Button
+container: {type: DataRowPanel}
+is_package: true

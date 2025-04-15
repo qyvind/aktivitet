@@ -172,6 +172,11 @@ class admin(adminTemplate):
     url_to_open = "https://wheelofnames.com/" 
     anvil.js.window.open(url_to_open, "_blank")
 
+  def ai_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.ai_card.visible = True
+    self.ai_repeating_panel_1.items = anvil.server.call('hent_prompter')
+
 
 
   

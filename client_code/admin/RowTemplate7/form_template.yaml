@@ -32,6 +32,15 @@ components:
         padding: [null, '2', null, '2']
       text: ''
     type: Button
+  - event_bindings: {click: ai_click}
+    layout_properties: {}
+    name: ai
+    properties:
+      spacing:
+        margin: ['4', null, '4', null]
+        padding: ['10', '0', '10', '0']
+      text: ai
+    type: Button
   layout_properties: {column: TTMEJE}
   name: flow_panel_1
   properties: {}

@@ -1,3 +1,4 @@
+import anvil.secrets
 import anvil.files
 from anvil.files import data_files
 import anvil.email
@@ -10,6 +11,11 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 from datetime import date, timedelta
+import datetime
+import openai
+from anvil.secrets import get_secret
+
+
 
 
 @anvil.server.callable
@@ -786,3 +792,113 @@ def hent_poengsummer_uten_null():
 
     resultat.sort(key=lambda x: x["poeng"], reverse=True)
     return resultat
+
+
+@anvil.server.callable
+def lag_status_for_bruker():
+    bruker = anvil.users.get_user()
+    if not bruker:
+        return "Ingen bruker logget inn."
+
+    # Hent brukernavn og lag
+    userinfo = app_tables.userinfo.get(user=bruker)
+    navn = userinfo['navn'] if userinfo else bruker['email']
+    lag_obj = userinfo['team'] if userinfo else None
+    lag_navn = lag_obj['team'] if lag_obj else "Ingen lag"
+
+    # Hent konkurransen
+    konkurranse = app_tables.konkurranse.get()
+    startdato = konkurranse['fradato']
+    slutt_dato = konkurranse['tildato']
+    
+    idag = datetime.date.today()
+    antall_uker = ((slutt_dato - startdato).days + 1) // 7
+    nåværende_uke = ((idag - startdato).days) // 7 + 1
+
+    statuslinjer = []
+
+    for uke_nr in range(1, nåværende_uke + 1):
+        uke_start = startdato + datetime.timedelta(days=(uke_nr - 1) * 7)
+        uke_slutt = uke_start + datetime.timedelta(days=6)
+        
+        rader = app_tables.aktivitet.search(deltager=bruker,
+                                            dato=q.between(uke_start, uke_slutt))
+        
+        aktiviteter = [rad['aktivitet'] for rad in rader]
+        beskrivelser = [rad['beskrivelse'] for rad in rader if rad['beskrivelse']]
+        total_poeng = sum(rad['poeng'] for rad in rader)
+
+        aktiviteter_tekst = ", ".join(aktiviteter) if aktiviteter else "ingen"
+        beskrivelse_tekst = "; ".join(beskrivelser) if beskrivelser else ""
+
+        statuslinjer.append(f"uke {uke_nr}: {aktiviteter_tekst} (poeng: {total_poeng})")
+        if beskrivelse_tekst:
+            statuslinjer.append(f"beskrivelser uke {uke_nr}: {beskrivelse_tekst}")
+    
+    # Finn brukerens plassering
+    alle_poeng = hent_poengsummer()
+    plassering = next((i + 1 for i, d in enumerate(alle_poeng) if d["email"] == bruker["email"]), None)
+    plassering_tekst = f"\nplassering totalt: {plassering} av {len(alle_poeng)}" if plassering else "\nplassering ikke funnet"
+
+    # Finn lagets plassering
+    lag_resultater = hent_team_poengsummer()
+    lag_plassering = next((i + 1 for i, d in enumerate(lag_resultater) if d["team"] == lag_navn), None)
+    lag_tekst = f"\nlag: {lag_navn} (plassering: {lag_plassering} av {len(lag_resultater)})" if lag_navn != "Ingen lag" else ""
+
+    # Sett sammen alt
+    status = f"navn: {navn}{plassering_tekst}{lag_tekst}\n" + "\n".join(statuslinjer)
+    return status
+
+
+@anvil.server.callable
+def generer_oppmuntring_for_bruker():
+    import random
+    bruker = anvil.users.get_user()
+    if not bruker:
+        return "Fant ikke innlogget bruker."
+
+    # Hent status-tekst
+    status = lag_status_for_bruker()
+
+    # Hent alle tilgjengelige prompts fra databasen
+    alle_prompter = list(app_tables.ai_prompt.search())
+    if not alle_prompter:
+        return "Ingen AI-prompter funnet i tabellen."
+
+    # Velg én tilfeldig prompt
+    valgt_prompt_mal = random.choice(alle_prompter)['prompt']
+
+    # Sett inn status i prompten
+    if "{status}" in valgt_prompt_mal:
+        prompt = valgt_prompt_mal.replace("{status}", status)
+    else:
+        prompt = f"{valgt_prompt_mal}\n\nStatus:\n{status}"
+
+    # Sett OpenAI-nøkkel
+    openai.api_key = get_secret("openai_key")
+
+    try:
+        # Send forespørsel til OpenAI
+        response = openai.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "Du er en positiv, humoristisk treningscoach for en aktivitetskonkurranse på jobb."},
+                {"role": "system", "content": "Du representerer bedriftsidrettslaget, Framo BIL. Ikke bruk noen tittel på deg selv. Bruk gjerne fornavn til deltageren. "},
+                {"role": "user", "content": " I konkurransen må man gå få poeng fem dager i uken for å delta i ukentlig trekning av store premier. Pengene er en motiverende faktor for deltagerne. "},
+              
+                {"role": "user", "content": "Det er også en lagkonkurranse, for de som er med på et lag. For alle er det en indibviduell konkurranse, men det viktigste er at de får en vane med å trene litt hver dag"},
+                {"role": "user", "content": "Konkurransen går over 10 uker"},
+          
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.9,
+            max_tokens=300
+        )
+
+        melding = response.choices[0].message.content.strip()
+        return melding
+
+    except Exception as e:
+        return f"Feil ved henting av AI-melding: {e}"
+
+

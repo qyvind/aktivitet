@@ -1,5 +1,13 @@
 allow_embedding: false
 db_schema:
+  ai_prompt:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: prompt
+      type: string
+    server: full
+    title: ai-prompt
   aktivitet:
     client: search
     columns:
@@ -160,7 +168,7 @@ db_schema:
     server: full
     title: Users
 dependencies: []
-metadata: {description: For Framo BIL, logo_img: 'asset:walking.svg', title: Aktivitetskonkurranse}
+metadata: {description: For Framo BIL, logo_img: 'asset:walking.svg', title: Framskritt}
 name: Aktivitet
 package_name: Aktivitet
 renamed: true
@@ -170,6 +178,10 @@ runtime_options:
   server_version: python3-sandbox
   version: 2
 scheduled_tasks: []
+secrets:
+  openai_key:
+    type: secret
+    value: {H6HTKUCPNYME7Z2Q: fAnE4AugJvvU+Hra23LZynSi+e2KIj7psH32bkH3yooqbz1q/AbyFpb6OF8SpOGrupmVOTCPl9j39/yKdvzWvaLlMC33QpO/UBJh5ArVfuUQ9NywN9XoUOuwJL3/ILorcQ/ZMVdJR9eaaQrNJP1PBvD2YnysWvKfiSg0/fpSNtyOlQcq2t9duuMx4AWYGSgjb+A+7TI9Mo2TT2M4PezLXVOL2gjWYRjqwlnC7m55TfzuH+Hy4VC0bjzAHeQSA/RxbKWfSF9z5Zj5vvDPO6LJpLDsmZfSTmRa3WrCaPnU7qAMC/gqbrDS6Tbdyx92AQXqVeh9eN4nI8JOvv2hnmTiRRPHug==}
 services:
 - client_config: {}
   server_config: {}
@@ -193,5 +205,8 @@ services:
 - client_config: {}
   server_config: {file_table: files}
   source: /runtime/services/anvil/files.yml
+- client_config: {}
+  server_config: {}
+  source: /runtime/services/anvil/secrets.yml
 startup: {module: Loggbok, type: form}
 startup_form: null
