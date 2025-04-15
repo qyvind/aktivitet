@@ -6,7 +6,8 @@ components:
     type: Label
   - layout_properties: {grid_position: 'RSTXWX,ATBTOS'}
     name: text_area_11
-    properties: {text: '15/4 La til oppmuntrende skrytekommentar ved innlegging av aktivitet. La til vedlikehold av ai-prompt for skryt i admin. '}
+    properties:
+      text: "15/4 La til oppmuntrende skrytekommentar ved innlegging av aktivitet. La til vedlikehold av ai-prompt for skryt i admin. \nLa til at den bare skryter når man legge inn aktivitet for samme dag. Ellers blir det for masete."
     type: TextArea
   - layout_properties: {grid_position: 'YACQLQ,HZIOYW'}
     name: text_area_10
