@@ -160,13 +160,13 @@ db_schema:
     server: full
     title: Users
 dependencies: []
-metadata: {description: For Framo BIL, logo_img: 'asset:IKONS/running.svg', title: Aktivitetskonkurranse}
+metadata: {description: For Framo BIL, logo_img: 'asset:walking.svg', title: Aktivitetskonkurranse}
 name: Aktivitet
 package_name: Aktivitet
 renamed: true
 runtime_options:
   client_version: '3'
-  server_spec: {base: python310-minimal}
+  server_spec: {base: python310-standard}
   server_version: python3-sandbox
   version: 2
 scheduled_tasks: []

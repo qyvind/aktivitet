@@ -14,7 +14,7 @@ class Resultat_individuell(Resultat_individuellTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    liste = anvil.server.call('hent_poengsummer')
+    liste = anvil.server.call('hent_poengsummer_uten_null')
     
     self.resultat_repeat_panel.items = liste
 

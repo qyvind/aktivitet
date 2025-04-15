@@ -3,12 +3,15 @@ components:
   name: Poeng_label
   properties:
     spacing:
-      margin: ['2', null, '2', null]
+      margin: ['12', null, '2', null]
       padding: ['2', null, '2', null]
   type: Label
 - layout_properties: {column: LSHEHV}
   name: team_label
-  properties: {}
+  properties:
+    spacing:
+      margin: ['12', null, '2', null]
+      padding: ['2', null, '2', null]
   type: Label
 - components:
   - event_bindings: {click: button_1_click}
@@ -18,27 +21,32 @@ components:
       align: left
       icon: fa:eye
       spacing:
-        margin: ['0', null, '2', null]
-        padding: ['0', '0', '2', '2']
+        margin: ['0', null, '0', null]
+        padding: [0, '0', '0', '2']
+      spacing_above: none
+      spacing_below: none
       text: ''
     type: Button
-  - name: Deltager_label
+  - layout_properties: {}
+    name: Deltager_label
     properties:
       spacing:
         margin: ['12', null, '2', null]
         padding: ['2', null, '2', null]
     type: Label
-  - components:
-    - layout_properties: {}
-      name: email
-      properties: {visible: false}
-      type: Label
-    name: flow_panel_1
-    properties: {visible: false}
-    type: FlowPanel
+  - layout_properties: {}
+    name: email
+    properties:
+      spacing:
+        margin: [0, null, 0, null]
+        padding: [0, null, 0, null]
+      visible: false
+    type: Label
   layout_properties: {column: JKSDUP}
   name: flow_panel_2
-  properties: {}
+  properties:
+    spacing:
+      margin: ['0', null, '0', null]
   type: FlowPanel
 container:
   properties:
