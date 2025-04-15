@@ -902,3 +902,22 @@ def generer_oppmuntring_for_bruker():
         return f"Feil ved henting av AI-melding: {e}"
 
 
+@anvil.server.callable
+def hent_prompter():
+    return list(app_tables.ai_prompt.search())
+
+@anvil.server.callable
+def lagre_prompt(prompt_rad, ny_tekst):
+    if prompt_rad and ny_tekst:
+        prompt_rad['prompt'] = ny_tekst
+        return "Prompt oppdatert"
+    else:
+        return "Mangler data – kunne ikke oppdatere"
+
+@anvil.server.callable
+def legg_til_prompt(prompt_tekst):
+    #if not prompt_tekst or "{status}" not in prompt_tekst:
+    #    return "Prompt må inneholde teksten {status} for å fungere."
+
+    app_tables.ai_prompt.add_row(prompt=prompt_tekst)
+    return "Prompt lagt til!"

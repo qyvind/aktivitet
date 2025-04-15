@@ -177,6 +177,12 @@ class admin(adminTemplate):
     self.ai_card.visible = True
     self.ai_repeating_panel_1.items = anvil.server.call('hent_prompter')
 
+  def nytt_prompt_button_click(self, **event_args):
+    resultat = anvil.server.call('legg_til_prompt', self.nytt_prompt.text)
+    Notification(resultat, style="success").show()
+    self.nytt_prompt.text = ""  # Tøm feltet etterpå
+    self.ai_repeating_panel_1.items = anvil.server.call('hent_prompter')  # Oppdater listen
+
 
 
   

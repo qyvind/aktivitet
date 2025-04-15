@@ -267,6 +267,23 @@ components:
   - components:
     - components:
       - components:
+        - name: label_2
+          properties: {text: 'Nytt prompt:'}
+          type: Label
+        - layout_properties: {width: 648.333}
+          name: nytt_prompt
+          properties: {height: 100.66665649414062}
+          type: TextArea
+        - event_bindings: {click: nytt_prompt_button_click}
+          layout_properties: {}
+          name: nytt_prompt_button
+          properties: {icon: 'fa:save', text: ''}
+          type: Button
+        layout_properties: {grid_position: 'EPUOAG,SEBUDQ'}
+        name: flow_panel_12
+        properties: {}
+        type: FlowPanel
+      - components:
         - name: ai_repeating_panel_1
           properties: {item_template: admin.RowTemplate1}
           type: RepeatingPanel
@@ -283,7 +300,7 @@ components:
       type: ColumnPanel
     layout_properties: {grid_position: 'GGATNX,TQRQNU'}
     name: ai_card
-    properties: {role: outlined-card, visible: false}
+    properties: {role: outlined-card, visible: true}
     type: ColumnPanel
   layout_properties: {grid_position: 'DJZTTS,OKSYEP'}
   name: outlined_card_1
