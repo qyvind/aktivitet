@@ -887,6 +887,7 @@ def generer_oppmuntring_for_bruker():
                 {"role": "user", "content": " I konkurransen må man gå få poeng fem dager i uken for å delta i ukentlig trekning av store premier. Pengene er en motiverende faktor for deltagerne. "},
               
                 {"role": "user", "content": "Det er også en lagkonkurranse, for de som er med på et lag. For alle er det en indibviduell konkurranse, men det viktigste er at de får en vane med å trene litt hver dag"},
+                {"role": "user", "content": "Ikke avslutt med et spørsmål."},
                 {"role": "user", "content": "Konkurransen går over 10 uker"},
           
                 {"role": "user", "content": prompt}
