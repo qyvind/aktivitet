@@ -8,13 +8,14 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from ..Utils import Utils
 
 
 class Resultat_team(Resultat_teamTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    team_resultater = anvil.server.call('hent_team_poengsummer')
+    team_resultater = Utils.hent_team_poengsummer()
     self.team_resultat_repeating_panel.items = team_resultater
     
     # Any code you write here will run before the form opens.

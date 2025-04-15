@@ -109,13 +109,13 @@ def lagre_aktivitet(dato, aktivitet, poeng, ikon,beskrivelse):
         return "Aktivitet lagret"
 
 
-@anvil.server.callable
-def hent_konkurranse():
-    #print('hent_konkurranse')
-    # Hent alle poster med record lik 1
-    konkurranse_records = app_tables.konkurranse.search(record=1)
-    # Returner den første posten dersom den finnes, ellers None
-    return konkurranse_records[0] if konkurranse_records else None
+# @anvil.server.callable
+# def hent_konkurranse():
+#     #print('hent_konkurranse')
+#     # Hent alle poster med record lik 1
+#     konkurranse_records = app_tables.konkurranse.search(record=1)
+#     # Returner den første posten dersom den finnes, ellers None
+#     return konkurranse_records[0] if konkurranse_records else None
 
 @anvil.server.callable
 def lagre_trekning(uke_mandag):
@@ -749,49 +749,49 @@ def opprett_ukentlige_trekninger(start_dato, slutt_dato):
         # For enkelhets skyld stopper vi her og rapporterer feilen.
         raise Exception(f"Kunne ikke opprette nye trekninger: {e}")
 
-@anvil.server.callable
-def hent_poengsummer_uten_null():
-    poeng_dict = {}
+# @anvil.server.callable
+# def hent_poengsummer_uten_null():
+#     poeng_dict = {}
 
-    # Hent alle brukere og initialiser dem med 0 poeng
-    for userinfo_rad in app_tables.userinfo.search():
-        deltager = userinfo_rad['user']
-        if deltager:
-            poeng_dict[deltager] = 0  # Start med 0 poeng
+#     # Hent alle brukere og initialiser dem med 0 poeng
+#     for userinfo_rad in app_tables.userinfo.search():
+#         deltager = userinfo_rad['user']
+#         if deltager:
+#             poeng_dict[deltager] = 0  # Start med 0 poeng
 
-    # Hent alle aktiviteter og summer poeng
-    for rad in app_tables.aktivitet.search():
-        deltager = rad['deltager']  # Link til user-tabellen
-        poeng = rad['poeng']
+#     # Hent alle aktiviteter og summer poeng
+#     for rad in app_tables.aktivitet.search():
+#         deltager = rad['deltager']  # Link til user-tabellen
+#         poeng = rad['poeng']
 
-        if deltager:
-            if deltager not in poeng_dict:
-                poeng_dict[deltager] = 0  
-            poeng_dict[deltager] += poeng
+#         if deltager:
+#             if deltager not in poeng_dict:
+#                 poeng_dict[deltager] = 0  
+#             poeng_dict[deltager] += poeng
 
-    # Konverter til liste, ekskluder deltakere med 0 poeng
-    resultat = []
-    for deltager, poeng in poeng_dict.items():
-        if poeng == 0:
-            continue  # Hopp over deltakere uten poeng
+#     # Konverter til liste, ekskluder deltakere med 0 poeng
+#     resultat = []
+#     for deltager, poeng in poeng_dict.items():
+#         if poeng == 0:
+#             continue  # Hopp over deltakere uten poeng
 
-        userinfo_rad = app_tables.userinfo.get(user=deltager)
-        navn = userinfo_rad['navn'] if userinfo_rad else None
-        email = deltager['email']
-        admin = userinfo_rad['admin']
-        team = userinfo_rad['team']['team'] if userinfo_rad and userinfo_rad['team'] else "Ingen team"
+#         userinfo_rad = app_tables.userinfo.get(user=deltager)
+#         navn = userinfo_rad['navn'] if userinfo_rad else None
+#         email = deltager['email']
+#         admin = userinfo_rad['admin']
+#         team = userinfo_rad['team']['team'] if userinfo_rad and userinfo_rad['team'] else "Ingen team"
 
-        resultat.append({
-            "deltager": navn if navn else email,
-            "navn": navn,
-            "email": email,
-            "poeng": poeng,
-            "team": team,
-            "admin": admin
-        })
+#         resultat.append({
+#             "deltager": navn if navn else email,
+#             "navn": navn,
+#             "email": email,
+#             "poeng": poeng,
+#             "team": team,
+#             "admin": admin
+#         })
 
-    resultat.sort(key=lambda x: x["poeng"], reverse=True)
-    return resultat
+#     resultat.sort(key=lambda x: x["poeng"], reverse=True)
+#     return resultat
 
 
 @anvil.server.callable

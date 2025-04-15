@@ -8,6 +8,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from ...Utils import Utils
 
 
 class RowTemplate7(RowTemplate7Template):
@@ -36,7 +37,7 @@ class RowTemplate7(RowTemplate7Template):
         parent_form = parent_form.parent  # Gå oppover i UI-hierarkiet
     if parent_form and hasattr(parent_form, 'bruker_repeating_panel'):
         # Hent nye data fra databasen
-        liste = anvil.server.call('hent_poengsummer')
+        liste = Utils.hent_poengsummer()
         parent_form.bruker_repeating_panel.items = liste
       
     
