@@ -133,6 +133,12 @@ db_schema:
     - admin_ui: {order: 4, width: 107}
       name: week_offset
       type: number
+    - admin_ui: {order: 5, width: 200}
+      name: siste_melding_dato
+      type: date
+    - admin_ui: {order: 6, width: 200}
+      name: siste_ai_melding
+      type: string
     server: full
     title: userinfo
   users:

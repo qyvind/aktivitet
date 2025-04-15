@@ -857,39 +857,34 @@ def generer_oppmuntring_for_bruker():
     if not bruker:
         return "Fant ikke innlogget bruker."
 
-    # Hent status-tekst
+    userinfo = app_tables.userinfo.get(user=bruker)
+    if not userinfo:
+        return "Brukerinfo ikke funnet."
+
+    # Sjekk om melding allerede er generert i dag
+    i_dag = datetime.date.today()
+    if userinfo.get('siste_melding_dato') == i_dag:
+        return None  # Eller: return "Du har allerede fått dagens melding 😊"
+
+    # Hent status
     status = lag_status_for_bruker()
 
-    # Hent alle tilgjengelige prompts fra databasen
+    # Hent tilfeldig prompt
     alle_prompter = list(app_tables.ai_prompt.search())
     if not alle_prompter:
-        return "Ingen AI-prompter funnet i tabellen."
+        return "Ingen AI-prompter funnet."
 
-    # Velg én tilfeldig prompt
     valgt_prompt_mal = random.choice(alle_prompter)['prompt']
-
-    # Sett inn status i prompten
-    if "{status}" in valgt_prompt_mal:
-        prompt = valgt_prompt_mal.replace("{status}", status)
-    else:
-        prompt = f"{valgt_prompt_mal}\n\nStatus:\n{status}"
+    prompt = valgt_prompt_mal.replace("{status}", status) if "{status}" in valgt_prompt_mal else f"{valgt_prompt_mal}\n\nStatus:\n{status}"
 
     # Sett OpenAI-nøkkel
     openai.api_key = get_secret("openai_key")
 
     try:
-        # Send forespørsel til OpenAI
         response = openai.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "Du er en positiv, humoristisk treningscoach for en aktivitetskonkurranse på jobb."},
-                {"role": "system", "content": "Du representerer bedriftsidrettslaget, Framo BIL. Ikke bruk noen tittel på deg selv. Bruk gjerne fornavn til deltageren. "},
-                {"role": "user", "content": " I konkurransen må man gå få poeng fem dager i uken for å delta i ukentlig trekning av store premier. Pengene er en motiverende faktor for deltagerne. "},
-              
-                {"role": "user", "content": "Det er også en lagkonkurranse, for de som er med på et lag. For alle er det en indibviduell konkurranse, men det viktigste er at de får en vane med å trene litt hver dag"},
-                {"role": "user", "content": "Ikke avslutt med et spørsmål."},
-                {"role": "user", "content": "Konkurransen går over 10 uker"},
-          
+                {"role": "system", "content": "Du er Coach Turbo – en morsom og støttende treningscoach."},
                 {"role": "user", "content": prompt}
             ],
             temperature=0.9,
@@ -897,10 +892,16 @@ def generer_oppmuntring_for_bruker():
         )
 
         melding = response.choices[0].message.content.strip()
+
+        # Lagre at vi har generert melding i dag
+        userinfo['siste_melding_dato'] = i_dag
+        print('lagrer siste melding', userinfo)
+
         return melding
 
     except Exception as e:
         return f"Feil ved henting av AI-melding: {e}"
+
 
 
 @anvil.server.callable

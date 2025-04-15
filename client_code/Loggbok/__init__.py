@@ -271,7 +271,11 @@ class Loggbok(LoggbokTemplate):
         try:
             result = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng, ikon,beskrivelse)
             print("til lagring",result)
-            alert(anvil.server.call('generer_oppmuntring_for_bruker'))
+            melding = anvil.server.call("generer_oppmuntring_for_bruker")
+            if melding:
+                alert(melding)
+            else:
+                print("Allerede vist dagens melding.")
         except Exception as e:
             print(f"Error saving activity: {e}")
             
