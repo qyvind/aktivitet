@@ -119,6 +119,6 @@ class Utils:
 
         return team_liste
 
-    @staticmethod
-    def hent_prompter():
-        return list(app_tables.ai_prompt.search())
+    # @staticmethod
+    # def hent_prompter():
+    #     return list(app_tables.ai_prompt.search())

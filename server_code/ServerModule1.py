@@ -433,37 +433,37 @@ def create_user(email, name, password, team_name=None):
         print(f"Feil ved opprettelse av bruker {email}.")
         return "Feil ved opprettelse av bruker."
 
-@anvil.server.callable
-def hent_teammedlemmer(team_navn):
-    #print(f"Henter medlemmer og poeng for team: {team_navn}")
+# @anvil.server.callable
+# def hent_teammedlemmer(team_navn):
+#     #print(f"Henter medlemmer og poeng for team: {team_navn}")
     
-    # Finn team-raden basert på navn
-    team_record = app_tables.team.get(team=team_navn)
+#     # Finn team-raden basert på navn
+#     team_record = app_tables.team.get(team=team_navn)
 
-    if not team_record:
-        #print(f"❌ Fant ikke team med navn: {team_navn}")
-        return []
+#     if not team_record:
+#         #print(f"❌ Fant ikke team med navn: {team_navn}")
+#         return []
 
-    # Hent alle brukere i userinfo-tabellen som er tilknyttet dette teamet
-    medlemmer = app_tables.userinfo.search(team=team_record)
+#     # Hent alle brukere i userinfo-tabellen som er tilknyttet dette teamet
+#     medlemmer = app_tables.userinfo.search(team=team_record)
 
-    # Lag en liste med navn og total poengsum basert på aktivitetene deres
-    team_liste = []
-    for member in medlemmer:
-        bruker = member['user']  # Hent bruker-raden (fra users-tabellen)
-        if not bruker:
-            continue  # Hopp over hvis user er None
+#     # Lag en liste med navn og total poengsum basert på aktivitetene deres
+#     team_liste = []
+#     for member in medlemmer:
+#         bruker = member['user']  # Hent bruker-raden (fra users-tabellen)
+#         if not bruker:
+#             continue  # Hopp over hvis user er None
 
-        navn = member['navn']  # Hent navn fra userinfo-tabellen
+#         navn = member['navn']  # Hent navn fra userinfo-tabellen
 
-        # Finn og summer poeng fra aktivitet-tabellen hvor brukeren er deltager
-        poengsum = sum(rad['poeng'] for rad in app_tables.aktivitet.search(deltager=bruker))
-        user = member['user']
-        # Legg til i listen
-        team_liste.append({"navn": navn, "poeng": poengsum, "user":user})
+#         # Finn og summer poeng fra aktivitet-tabellen hvor brukeren er deltager
+#         poengsum = sum(rad['poeng'] for rad in app_tables.aktivitet.search(deltager=bruker))
+#         user = member['user']
+#         # Legg til i listen
+#         team_liste.append({"navn": navn, "poeng": poengsum, "user":user})
 
-    #print(f"🏆 Teammedlemmer i {team_navn}: {team_liste}")
-    return team_liste
+#     #print(f"🏆 Teammedlemmer i {team_navn}: {team_liste}")
+#     return team_liste
 
 @anvil.server.callable
 def opprett_nytt_team(team_navn):
