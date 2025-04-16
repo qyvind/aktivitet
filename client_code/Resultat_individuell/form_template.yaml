@@ -5,17 +5,7 @@ components:
       name: label_1
       properties: {align: center, role: headline, text: Individuell resultatliste}
       type: Label
-    - layout_properties: {grid_position: 'EJNBYQ,QSXQYM'}
-      name: label_2
-      properties:
-        align: center
-        font_size: 8
-        spacing:
-          margin: ['0', null, '0', null]
-          padding: ['0', null, '0', null]
-        text: Klikk på øyet for å se en persons aktiviteter
-      type: Label
-    layout_properties: {grid_position: 'TIJDPM,SUCWMV'}
+    layout_properties: {grid_position: 'FWQDZV,ILXBQB'}
     name: column_panel_1
     properties: {}
     type: ColumnPanel
@@ -30,9 +20,45 @@ components:
       columns:
       - {data_key: column_1, expand: false, id: JKSDUP, title: Deltager, width: 269}
       - {data_key: column_2, id: VJQQOR, title: Poeng}
-      - {data_key: column_1, id: ZPQDNV, title: Lengste streak}
+      - {data_key: column_1, id: ZPQDNV, title: Streak}
+      - {data_key: column_1, id: PJNLQL, title: Score}
       - {data_key: column_1, expand: false, id: LSHEHV, title: Team, width: 278.5999755859375}
     type: DataGrid
+  - components:
+    - layout_properties: {grid_position: 'SOTLTL,HZANYT'}
+      name: label_2
+      properties:
+        align: center
+        font_size: 8
+        spacing:
+          margin: ['0', null, '0', null]
+          padding: ['0', null, '0', null]
+        text: Klikk på øyet for å se en persons aktiviteter
+      type: Label
+    - layout_properties: {grid_position: 'RJVBCH,OZFEGY'}
+      name: label_2_copy
+      properties:
+        align: center
+        font_size: 8
+        spacing:
+          margin: ['0', null, '0', null]
+          padding: ['0', null, '0', null]
+        text: 'Streak er den lengste ssammehnegnende perioden deltageren har registrert aktivitet hver dag. Aktivitet i dag teller ikke enda. Dette benyttes for å skille mellom deltagere med ellers like mye poeng. '
+      type: Label
+    - layout_properties: {grid_position: 'QOHEIT,GMUFNU'}
+      name: label_2_copy_copy
+      properties:
+        align: center
+        font_size: 8
+        spacing:
+          margin: ['0', null, '0', null]
+          padding: ['0', null, '0', null]
+        text: Score = (poeng x 100) + streak
+      type: Label
+    layout_properties: {grid_position: 'ENBSMS,BKKVBY'}
+    name: column_panel_2
+    properties: {}
+    type: ColumnPanel
   - event_bindings: {click: lukk_button_click}
     layout_properties: {grid_position: 'FACYFA,RKQROA'}
     name: lukk_button

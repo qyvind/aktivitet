@@ -933,11 +933,11 @@ from datetime import date, timedelta
 def calculate_longest_streak(user):
     today = date.today()
     
-    aktiviteter = app_tables.aktivitet.search(user=user)
+    aktiviteter = app_tables.aktivitet.search(deltager=user)
     aktive_dager = {
-        row['date']
+        row['dato']
         for row in aktiviteter
-        if row['points'] > 0 and row['date'] < today
+        if row['poeng'] > 0 and row['dato'] < today
     }
 
     if not aktive_dager:
@@ -960,14 +960,61 @@ def calculate_longest_streak(user):
 
 @anvil.server.background_task
 def nightly_streak_recalc():
+    from datetime import date, timedelta
+
+    today = date.today()
+
+    # Forhånds-summer poeng for alle brukere
+    poeng_dict = {}
+    for rad in app_tables.aktivitet.search():
+        deltager = rad['deltager']
+        poeng = rad['poeng']
+        if deltager:
+            poeng_dict[deltager] = poeng_dict.get(deltager, 0) + poeng
+
+    # Gå gjennom hver bruker og oppdater streak + score
     for info in app_tables.userinfo.search():
         user = info['user']
-        longest = calculate_longest_streak(user)
-        info['longest_streak'] = longest
+
+        # Beregn longest streak
+        aktiviteter = app_tables.aktivitet.search(deltager=user)
+        aktive_dager = {
+            row['dato']
+            for row in aktiviteter
+            if row['poeng'] > 0 and row['dato'] < today
+        }
+
+        longest = 0
+        if aktive_dager:
+            dager = sorted(aktive_dager, reverse=True)
+            current = 0
+            prev_day = None
+
+            for d in dager:
+                if prev_day is None or prev_day - d == timedelta(days=1):
+                    current += 1
+                else:
+                    current = 1
+                longest = max(longest, current)
+                prev_day = d
+
+        # Hent poeng
+        poeng = poeng_dict.get(user, 0)
+
+        # Beregn score
+        score = (poeng * 100) + longest
+
+        # Oppdater alt i én operasjon
+        info.update(
+            longest_streak=longest,
+            score=score
+        )
+
+        print(f"{user['email']}: poeng={poeng}, streak={longest}, score={score}")
+
+
 
 @anvil.server.callable
 def nightly_streak_recalc_test():
-    for info in app_tables.userinfo.search():
-        user = info['user']
-        longest = calculate_longest_streak(user)
-        info['longest_streak'] = longest
+    nightly_streak_recalc()
+
