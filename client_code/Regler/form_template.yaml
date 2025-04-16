@@ -24,22 +24,7 @@ components:
       enabled: false
       foreground: black
       height: 536
-      text: |-
-        Premier
-        Hver uke blir det trukket ut tre premier, hver på 1000 kroner. De to første vinnerne trekkes ut blant de som har klart å få ett eller flere poeng fem forskjellige dager i løpet av uken. Den tredje premien trekkes ut blant de som har klart dette hver uke så langt.
-
-        Poengsystem
-        Alle idrettsaktiviteter teller. Deltakerne logger poeng via vårt program, med mulighet til å opptjene inntil 3 poeng per dag. Poeng gis etter følgende kriterier:
-
-        1 poeng: 0,5 time aktiv trening eller 8000 skritt
-        2 poeng: 1 time aktiv trening
-        3 poeng: 1,5 time aktiv trening
-        Det er tilstrekkelig med 1 poeng i fem dager for å være med i trekningen i den uken. Poeng utover dette påvirker ikke trekningen, men vil hjelpe laget ditt, og din personlige plassering.
-
-        Konkurranseformer
-        Individuell konkurranse: Resultatlisten føres for hver deltaker.
-
-        Lagkonkurranse: Det er mulig å melde seg på som lag (minimum 3 personer). Lagene føres på en egen resultatliste. Det blir trukket ut premier til deltagerne i vinnende lag i siste trekening.
+      text: "Premier\nHver uke blir det trukket ut tre premier, hver på 1000 kroner. De to første vinnerne trekkes ut blant de som har klart å få ett eller flere poeng fem forskjellige dager i løpet av uken. Den tredje premien trekkes ut blant de som har klart dette hver uke så langt.\n\nPoengsystem\nAlle idrettsaktiviteter teller. Deltakerne logger poeng via vårt program, med mulighet til å opptjene inntil 3 poeng per dag. Poeng gis etter følgende kriterier:\n\n1 poeng: 0,5 time aktiv trening eller 8000 skritt\n2 poeng: 1 time aktiv trening\n3 poeng: 1,5 time aktiv trening\nDet er tilstrekkelig med 1 poeng i fem dager for å være med i trekningen i den uken. Poeng utover dette påvirker ikke trekningen, men vil hjelpe laget ditt, og din personlige plassering.\n\nStreak: \nStreak er antall påfølgende dager du har registrert aktiviteter. Din lengste streak blir benyttet til å skille deltagere som ellers har like mye poeng. \n\nKonkurranseformer\nIndividuell konkurranse: Resultatlisten føres for hver deltaker.\n\nLagkonkurranse: Det er mulig å melde seg på som lag (minimum 3 personer). Lagene føres på en egen resultatliste. Det blir trukket ut premier til deltagerne i vinnende lag i siste trekening."
     type: TextArea
   layout_properties: {grid_position: 'GMGFNB,WFPWMF'}
   name: column_panel_1
@@ -56,7 +41,7 @@ components:
       enabled: false
       foreground: black
       height: 480.2727355957031
-      text: "Hovedbildet viser innværende uke, når konkurransen er i gang. \n\nDu kan hoppe fra uke til uke med pilene til høyre og venstre.\n\nDet er en knapp for hver dag. Du registrerer poeng på en dag ved å klikke på knappen. Du markerer da hvor mange poeng du fortjener den dagen, og kan velge et ikon. Du kan la teksten stå., eller tilpasse den. DU kan også skrive en lengre beskrivelse av økten. \nHvis du klikker på navnet ditt kommer du inn i et bilde der du kan korrigere navnet du har skrevet. Det er lurt å bruke ekte navn hvis du vil ha premie. \nI det samme bildet kan du velge å bli med i et eksisterende lag, elelr du kan opprette et nytt lag. Et lag må ha tre deltagere for å være med i konkurransen.  Lag som blir stående tomme blir slettet. \nMedlemmene i et lag kan velge å låse for nye medlemmer i laget. De kan da ikke bytte lag, og dette laget blir ikke med i listene over lag som andre kan velge. \nNår konkurransen er ca tre uker på vei blir alle lagene låst. \nKonkurransen er åpen, på den måten at alle deltagere kan se hva andre har registrert., Når du viser individuell resultatliste får de frem et øye-ikon for hver deltager. Hvis du klikker på det kan du se alle dagsøktene som den personen har registrert.\nRegistreringen av poeng er basert på tillit. Les avsnittet om poengberegning nøye. "
+      text: "Hovedbildet viser innværende uke, når konkurransen er i gang. \n\nDu kan hoppe fra uke til uke med pilene til høyre og venstre.\n\nDet er en knapp for hver dag. Du registrerer poeng på en dag ved å klikke på knappen. Du markerer da hvor mange poeng du fortjener den dagen, og kan velge et ikon. Du kan la teksten stå., eller tilpasse den. Du kan også skrive en lengre beskrivelse av økten. \nDu kan bare registrere aktiviteter for i dag og i går. \nHvis du klikker på navnet ditt kommer du inn i et bilde der du kan korrigere navnet du har skrevet. Det er lurt å bruke ekte navn hvis du vil ha premie. \nI det samme bildet kan du velge å bli med i et eksisterende lag, elelr du kan opprette et nytt lag. Et lag må ha tre deltagere for å være med i konkurransen.  Lag som blir stående tomme blir slettet. \nMedlemmene i et lag kan velge å låse for nye medlemmer i laget. De kan da ikke bytte lag, og dette laget blir ikke med i listene over lag som andre kan velge. \nNår konkurransen er ca tre uker på vei blir alle lagene låst. \nKonkurransen er åpen, på den måten at alle deltagere kan se hva andre har registrert., Når du viser individuell resultatliste får de frem et øye-ikon for hver deltager. Hvis du klikker på det kan du se alle dagsøktene som den personen har registrert.\nRegistreringen av poeng er basert på tillit. Les avsnittet om poengberegning nøye. "
     type: TextArea
   - components:
     - layout_properties: {grid_position: 'KDKVGG,CXLXKV'}
