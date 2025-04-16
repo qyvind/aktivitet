@@ -125,16 +125,19 @@ components:
           margin: ['0', null, '0', null]
       type: FlowPanel
     - components:
-      - layout_properties: {width: 30}
-        name: image_1
+      - event_bindings: {mouse_enter: badge_1_mouse_enter, mouse_leave: badge_1_mouse_leave}
+        layout_properties: {width: 30}
+        name: badge_1
         properties: {height: '30', source: _/theme/grey badge.png, tooltip: 'Hvordan kan man vinne denne tro?'}
         type: Image
-      - layout_properties: {width: 30}
-        name: image_2
+      - event_bindings: {mouse_enter: badge_2_mouse_enter, mouse_leave: badge_2_mouse_leave}
+        layout_properties: {width: 30}
+        name: badge_2
         properties: {height: '30', source: _/theme/grey badge.png, tooltip: 'Hvordan kan man vinne denne tro?'}
         type: Image
-      - layout_properties: {width: 30}
-        name: image_3
+      - event_bindings: {mouse_enter: badge_3_mouse_enter, mouse_leave: badge_3_mouse_leave}
+        layout_properties: {width: 30}
+        name: badge_3
         properties: {height: '30', source: _/theme/grey badge.png, tooltip: 'Hvordan kan man vinne denne tro?'}
         type: Image
       - layout_properties: {width: 30}
