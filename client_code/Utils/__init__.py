@@ -52,6 +52,8 @@ class Utils:
             navn = userinfo_rad['navn'] if userinfo_rad else None
             email = deltager['email']
             admin = userinfo_rad['admin'] if userinfo_rad else False
+            longest_streak = userinfo_rad['longest_streak']
+            print('streak',navn,longest_streak)
             team = userinfo_rad['team']['team'] if userinfo_rad and userinfo_rad['team'] else "Ingen team"
 
             resultat.append({
@@ -59,6 +61,7 @@ class Utils:
                 "navn": navn,
                 "email": email,
                 "poeng": poeng,
+                "longest_streak": longest_streak,
                 "team": team,
                 "admin": admin
             })
@@ -84,6 +87,7 @@ class Utils:
         for userinfo in app_tables.userinfo.search():
             team = userinfo['team']
             bruker = userinfo['user']
+            longest_streak = userinfo['longest_streak']
             if team and bruker:
                 team_navn = team['team']
                 bruker_poeng = sum(rad['poeng'] for rad in app_tables.aktivitet.search(deltager=bruker))
@@ -93,6 +97,7 @@ class Utils:
             {
                 "team": team,
                 "poengsum": poeng,
+                "longest_streak": longest_streak,
                 "lock": team_lock_map.get(team, False)
             }
             for team, poeng in team_poeng.items()

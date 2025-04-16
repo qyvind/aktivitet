@@ -18,7 +18,7 @@ class RowTemplate2(RowTemplate2Template):
     self.Poeng_label.text = self.item['poeng']
     self.team_label.text = self.item['team']
     self.email.text = self.item['email']
-    
+    self.streak_label.text = self.item['longest_streak']    
 
     # Any code you write here will run before the form opens.
 

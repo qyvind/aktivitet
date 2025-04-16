@@ -30,6 +30,7 @@ components:
       columns:
       - {data_key: column_1, expand: false, id: JKSDUP, title: Deltager, width: 269}
       - {data_key: column_2, id: VJQQOR, title: Poeng}
+      - {data_key: column_1, id: ZPQDNV, title: Lengste streak}
       - {data_key: column_1, expand: false, id: LSHEHV, title: Team, width: 278.5999755859375}
     type: DataGrid
   - event_bindings: {click: lukk_button_click}
