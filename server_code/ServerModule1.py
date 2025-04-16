@@ -117,37 +117,37 @@ def lagre_aktivitet(dato, aktivitet, poeng, ikon,beskrivelse):
 #     # Returner den første posten dersom den finnes, ellers None
 #     return konkurranse_records[0] if konkurranse_records else None
 
-@anvil.server.callable
-def lagre_trekning(uke_mandag):
-    print('lagre_trekning')
-    # Hent den påloggede brukeren
-    user = anvil.users.get_user()
-    if not user:
-        raise Exception("Bruker ikke logget inn")
+# @anvil.server.callable
+# def lagre_trekning(uke_mandag):
+#     print('lagre_trekning')
+#     # Hent den påloggede brukeren
+#     user = anvil.users.get_user()
+#     if not user:
+#         raise Exception("Bruker ikke logget inn")
     
-    # Sjekk om en record med samme uke og bruker allerede finnes
-    eksisterende = list(app_tables.trekning.search(uke_mandag=uke_mandag, deltager=user))
-    if eksisterende:
-        pass
-    else:
-        # Legg til ny record i tabellen 'trekning'
-        app_tables.trekning.add_row(uke_mandag=uke_mandag, deltager=user)
-    return ()
+#     # Sjekk om en record med samme uke og bruker allerede finnes
+#     eksisterende = list(app_tables.trekning.search(uke_mandag=uke_mandag, deltager=user))
+#     if eksisterende:
+#         pass
+#     else:
+#         # Legg til ny record i tabellen 'trekning'
+#         app_tables.trekning.add_row(uke_mandag=uke_mandag, deltager=user)
+#     return ()
 
-@anvil.server.callable
-def slett_trekning(uke_mandag):
-    #print('slett_trekning')
-    # Hent den påloggede brukeren
-    user = anvil.users.get_user()
-    if not user:
-        raise Exception("Bruker ikke logget inn")
+# @anvil.server.callable
+# def slett_trekning(uke_mandag):
+#     #print('slett_trekning')
+#     # Hent den påloggede brukeren
+#     user = anvil.users.get_user()
+#     if not user:
+#         raise Exception("Bruker ikke logget inn")
     
-    # Sjekk om en record med samme uke og bruker allerede finnes
-    eksisterende = list(app_tables.trekning.search(uke_mandag=uke_mandag, deltager=user))
-    # Dersom record finnes, slett den(e)
-    for row in eksisterende:
-        row.delete()
-    return ()
+#     # Sjekk om en record med samme uke og bruker allerede finnes
+#     eksisterende = list(app_tables.trekning.search(uke_mandag=uke_mandag, deltager=user))
+#     # Dersom record finnes, slett den(e)
+#     for row in eksisterende:
+#         row.delete()
+#     return ()
 
 @anvil.server.callable
 def oppdater_brukernavn(nytt_navn):
@@ -1002,15 +1002,15 @@ def nightly_streak_recalc():
         poeng = poeng_dict.get(user, 0)
 
         # Beregn score
-        score = (poeng * 100) + longest
+        #score = (poeng * 100) + longest
 
         # Oppdater alt i én operasjon
         info.update(
             longest_streak=longest,
-            score=score
+            #score=score
         )
 
-        print(f"{user['email']}: poeng={poeng}, streak={longest}, score={score}")
+        #print(f"{user['email']}: poeng={poeng}, streak={longest}, score={score}")
 
 
 

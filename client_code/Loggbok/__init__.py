@@ -84,7 +84,7 @@ class Loggbok(LoggbokTemplate):
           else:
               ikon_til_server = anvil.BlobMedia(nytt_ikon.content_type, nytt_ikon.get_bytes(), name=nytt_ikon.name)
       
-          print("lagrer med ikon-type:", type(ikon_til_server))
+          #print("lagrer med ikon-type:", type(ikon_til_server))
       
           self.lagre_aktivitet(valgt_dato, aktivitet, poeng, ikon_til_server,beskrivelse)
       
