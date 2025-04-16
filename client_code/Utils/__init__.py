@@ -89,7 +89,7 @@ class Utils:
         for userinfo in app_tables.userinfo.search():
             team = userinfo['team']
             bruker = userinfo['user']
-            score = userinfo['score']
+            #score = userinfo['score']
             longest_streak = userinfo['longest_streak']
             if team and bruker:
                 team_navn = team['team']
@@ -101,7 +101,7 @@ class Utils:
                 "team": team,
                 "poengsum": poeng,
                 "longest_streak": longest_streak,
-                "score": score,
+                #"score": score,
                 "lock": team_lock_map.get(team, False)
             }
             for team, poeng in team_poeng.items()
