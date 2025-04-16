@@ -53,8 +53,8 @@ class Utils:
             email = deltager['email']
             admin = userinfo_rad['admin'] if userinfo_rad else False
             longest_streak = userinfo_rad['longest_streak']
-            score = userinfo_rad['score']
-            print('streak',navn,longest_streak)
+            score = poeng * 100 + longest_streak
+
             team = userinfo_rad['team']['team'] if userinfo_rad and userinfo_rad['team'] else "Ingen team"
 
             resultat.append({

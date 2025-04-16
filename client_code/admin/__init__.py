@@ -79,7 +79,7 @@ class admin(adminTemplate):
   def teams_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     team_resultater = Utils.hent_team_poengsummer()
-    print("teams:",team_resultater)
+    #print("teams:",team_resultater)
     self.team_repeating_panel.items = team_resultater
     if self.team_card.visible:
       self.team_card.visible=False

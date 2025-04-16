@@ -57,7 +57,7 @@ class PoengVelger(PoengVelgerTemplate):
 
             self.ikon_preview.source = self.selected_ikon_media
 
-            print(f"Ikon valgt: Media={self.selected_ikon_media.name if self.selected_ikon_media else 'None'}, Pent Navn (fra path)={self.selected_ikon_path}")
+            #print(f"Ikon valgt: Media={self.selected_ikon_media.name if self.selected_ikon_media else 'None'}, Pent Navn (fra path)={self.selected_ikon_path}")
 
             # --- HER ER DEN FORENKLEDE LOGIKKEN ---
             # Sjekk om aktivitet_box er tom OG vi faktisk har fått et pent navn
@@ -79,7 +79,7 @@ class PoengVelger(PoengVelgerTemplate):
 
         # Gjør noe med ikon_path hvis du trenger det her,
         # f.eks. lagre det i en annen tabell sammen med resten av dataen.
-        print(f"Lagrer med ikon path: {ikon_path}")
+        #print(f"Lagrer med ikon path: {ikon_path}")
 
 
         # Hvis PoengVelger ble åpnet med en callback, kall den nå
