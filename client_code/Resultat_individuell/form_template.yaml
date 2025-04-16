@@ -43,7 +43,7 @@ components:
         spacing:
           margin: ['0', null, '0', null]
           padding: ['0', null, '0', null]
-        text: 'Streak er den lengste ssammehnegnende perioden deltageren har registrert aktivitet hver dag. Aktivitet i dag teller ikke enda. Dette benyttes for å skille mellom deltagere med ellers like mye poeng. '
+        text: 'Streak er den lengste ssammehnegnende perioden deltageren har registrert aktivitet hver dag. Dagens aktivitet påvirker ikke streak enda. Streak benyttes for å skille mellom deltagere med ellers like mye poeng. '
       type: Label
     - layout_properties: {grid_position: 'QOHEIT,GMUFNU'}
       name: label_2_copy_copy
