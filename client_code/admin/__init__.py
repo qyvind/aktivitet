@@ -212,6 +212,10 @@ class admin(adminTemplate):
     self.nytt_prompt.text = ""  # Tøm feltet etterpå
     self.ai_repeating_panel_1.items = anvil.server.call('hent_prompter')  # Oppdater listen
 
+  def button_6_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    anvil.server.call('nightly_streak_recalc_test')
+
 
 
   

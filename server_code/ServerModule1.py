@@ -964,3 +964,10 @@ def nightly_streak_recalc():
         user = info['user']
         longest = calculate_longest_streak(user)
         info['longest_streak'] = longest
+
+@anvil.server.callable
+def nightly_streak_recalc_test():
+    for info in app_tables.userinfo.search():
+        user = info['user']
+        longest = calculate_longest_streak(user)
+        info['longest_streak'] = longest
