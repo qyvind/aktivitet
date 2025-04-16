@@ -6,7 +6,10 @@ components:
     type: Label
   - layout_properties: {grid_position: 'SXEDQY,XELDVM'}
     name: text_area_12
-    properties: {text: 16/4 La til Streak og Score. Nattlig oppdatering av streak.}
+    properties:
+      text: |-
+        16/4 La til Streak og Score. Nattlig oppdatering av streak.
+        Kun redigering av dagens og gårsdagens aktiviteter er tillatt
     type: TextArea
   - layout_properties: {grid_position: 'RSTXWX,ATBTOS'}
     name: text_area_11
