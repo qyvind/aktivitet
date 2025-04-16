@@ -165,7 +165,7 @@ def oppdater_brukernavn(nytt_navn):
         record['navn'] = nytt_navn
     else:
         # Opprett en ny record i tabellen UserInfo for denne brukeren
-        app_tables.userinfo.add_row(user=user, navn=nytt_navn)
+        app_tables.userinfo.add_row(user=user, navn=nytt_navn, longest_streak=0)
     
     return "Navn oppdatert"
 
