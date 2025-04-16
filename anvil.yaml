@@ -177,7 +177,13 @@ runtime_options:
   server_spec: {base: python310-standard}
   server_version: python3-sandbox
   version: 2
-scheduled_tasks: []
+scheduled_tasks:
+- job_id: GGPDYCYJ
+  task_name: nightly_streak_recalc
+  time_spec:
+    at: {hour: 0, minute: 14}
+    every: day
+    n: 1
 secrets:
   openai_key:
     type: secret
