@@ -48,6 +48,19 @@ components:
     spacing:
       margin: ['0', null, '0', null]
   type: FlowPanel
+- data_bindings:
+  - {code: '', property: text, writeback: false}
+  layout_properties: {column: ZPQDNV}
+  name: streak_label
+  properties:
+    spacing:
+      margin: ['12', null, '2', null]
+      padding: ['2', null, '2', null]
+  type: Label
+- layout_properties: {column: PJNLQL}
+  name: score
+  properties: {visible: true}
+  type: Label
 container:
   properties:
     align: left
