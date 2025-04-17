@@ -23,6 +23,7 @@ class Loggbok(LoggbokTemplate):
         self.initier_uke(self.week_offset_label.text)
         self.sjekk_bruker()
         # anvil.users.set_user_info(week_offset=7)
+        
 
 
   
@@ -35,66 +36,81 @@ class Loggbok(LoggbokTemplate):
         
 
     def man_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(0, self.man_button, self.man_akt_label, self.man_ikon, self.man_label, self.man_column_panel.tooltip)
+        self.åpne_poengvelger_for_dag(0, self.man_button, self.man_akt_label, self.man_ikon, self.man_label, self.man_column_panel.tooltip,self.man_skritt)
 
     
     def tir_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(1, self.tir_button, self.tir_akt_label, self.tir_ikon,self.tir_label,self.tir_column_panel.tooltip)
+        self.åpne_poengvelger_for_dag(1, self.tir_button, self.tir_akt_label, self.tir_ikon,self.tir_label,self.tir_column_panel.tooltip,self.tir_skritt)
     
     def ons_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(2, self.ons_button, self.ons_akt_label,self.ons_ikon, self.ons_label,self.ons_column_panel.tooltip)
+        self.åpne_poengvelger_for_dag(2, self.ons_button, self.ons_akt_label,self.ons_ikon, self.ons_label,self.ons_column_panel.tooltip,self.ons_skritt)
     
     def tor_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(3, self.tor_button, self.tor_akt_label, self.tor_ikon,self.tor_label,self.tor_column_panel.tooltip)
+        self.åpne_poengvelger_for_dag(3, self.tor_button, self.tor_akt_label, self.tor_ikon,self.tor_label,self.tor_column_panel.tooltip,self.tor_skritt)
     
     def fre_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(4, self.fre_button, self.fre_akt_label,self.fre_ikon, self.fre_label,self.fre_column_panel.tooltip)
+        self.åpne_poengvelger_for_dag(4, self.fre_button, self.fre_akt_label,self.fre_ikon, self.fre_label,self.fre_column_panel.tooltip,self.fre_skritt)
     
     def lor_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(5, self.lor_button, self.lor_akt_label, self.lor_ikon,self.lor_label,self.lor_column_panel.tooltip)
+        self.åpne_poengvelger_for_dag(5, self.lor_button, self.lor_akt_label, self.lor_ikon,self.lor_label,self.lor_column_panel.tooltip,self.lor_skritt)
     
     def son_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(6, self.son_button, self.son_akt_label,self.son_ikon, self.son_label,self.son_column_panel.tooltip)
+        self.åpne_poengvelger_for_dag(6, self.son_button, self.son_akt_label,self.son_ikon, self.son_label,self.son_column_panel.tooltip,self.son_skritt)
     
     
-    def åpne_poengvelger_for_dag(self, dag_index, knapp, label,ikon_komponent, ukedag_label, beskrivelse):
-        valgt_poeng = int(knapp.text or 0)
-        aktivitet = label.text
-
-        def mottak_fra_poengvelger(poeng, aktivitet, nytt_ikon,beskrivelse, ikon_path, skritt):
+    def åpne_poengvelger_for_dag(self, dag_index, knapp, label, ikon_komponent, ukedag_label, beskrivelse, skritt_felt):
+      valgt_poeng = int(knapp.text or 0)
+      aktivitet = label.text
+  
+      # Hent eksisterende skrittverdi fra feltet (f.eks. self.man_skritt.text)
+      try:
+          eksisterende_skritt = int(skritt_felt.text or 0)
+      except ValueError:
+          eksisterende_skritt = 0
+  
+      def mottak_fra_poengvelger(poeng, aktivitet, nytt_ikon, beskrivelse, ikon_path, nye_skritt):
           week_info = self.get_week_info(self.week_offset_label.text)
           valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
-      
+  
           # Oppdater GUI
           knapp.text = str(poeng)
           label.text = aktivitet
+          skritt_felt.text = str(nye_skritt)
+  
           ikon_komponent.source = nytt_ikon
           ikon_komponent.width = 32
           ikon_komponent.height = 32
           ikon_komponent.tooltip = beskrivelse
-          if ikon_komponent == None:
-            label.visible=True
-            ikon_komponent.visible=False
-          else:
-            label.visible = False
-            ikon_komponent.visible = True
-      
-          # 🧠 Konverter LazyMedia til vanlig Media
+  
+          label.visible = not nytt_ikon
+          ikon_komponent.visible = bool(nytt_ikon)
+  
+          # Konverter ikon hvis nødvendig
           if isinstance(nytt_ikon, anvil.BlobMedia) or nytt_ikon is None:
               ikon_til_server = nytt_ikon
           else:
-              ikon_til_server = anvil.BlobMedia(nytt_ikon.content_type, nytt_ikon.get_bytes(), name=nytt_ikon.name)
-      
-          #print("lagrer med ikon-type:", type(ikon_til_server))
-      
-          self.lagre_aktivitet(valgt_dato, aktivitet, poeng, ikon_til_server,beskrivelse,skritt)
-      
-        skritt=0    
-
-        # open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text,ikon=ikon_komponent,beskrivelse=beskrivelse, callback=mottak_fra_poengvelger)
-        open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text, ikon=ikon_komponent.source, beskrivelse=beskrivelse,skritt=skritt, callback=mottak_fra_poengvelger)
-
-
+              ikon_til_server = anvil.BlobMedia(
+                  nytt_ikon.content_type,
+                  nytt_ikon.get_bytes(),
+                  name=nytt_ikon.name
+              )
+  
+          # Lagre til server
+          self.lagre_aktivitet(valgt_dato, aktivitet, poeng, ikon_til_server, beskrivelse, nye_skritt)
+  
+      # Åpne PoengVelger med korrekt init-verdi for skritt
+      open_form(
+          "PoengVelger",
+          valgt_poeng=valgt_poeng,
+          aktivitet=aktivitet,
+          ukedag=ukedag_label.text,
+          ikon=ikon_komponent.source,
+          beskrivelse=beskrivelse,
+          skritt=eksisterende_skritt,
+          callback=mottak_fra_poengvelger
+      )
+  
+  
 
 
     def logout_click(self, **event_args):
@@ -204,6 +220,7 @@ class Loggbok(LoggbokTemplate):
                 'poeng': activity['poeng'],
                 'ikon': activity['ikon'],
                 'beskrivelse': activity['beskrivelse'],
+                'skritt': activity['skritt']
             })
         
         return week_activities  # Returner aktiviteter for hver dag i uken
@@ -473,11 +490,13 @@ class Loggbok(LoggbokTemplate):
             poeng = str(aktivitet_data[0]['poeng'])
             aktivitet = aktivitet_data[0]['aktivitet']
             ikon = aktivitet_data[0]['ikon']
+            skritt = aktivitet_data[0].get('skritt', 0)
             column_panel.tooltip = aktivitet_data[0]['beskrivelse']
         else:
             poeng = "0"
             aktivitet = ""
             ikon = None
+            skritt = 0
             column_panel.tooltip = ""
     
         if ikon_komponent is not None:
@@ -488,6 +507,12 @@ class Loggbok(LoggbokTemplate):
             label.text = "Hviledag"
         else:
             label.text = aktivitet
+        ukedager = ['man', 'tir', 'ons', 'tor', 'fre', 'lor', 'son']
+        felt_navn = f"{ukedager[dato.weekday()]}_skritt"
+        skritt_felt = getattr(self, felt_navn, None)
+        if skritt_felt:
+            skritt_felt.text = str(skritt)
+
 
           
     

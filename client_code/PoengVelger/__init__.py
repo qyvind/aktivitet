@@ -8,7 +8,7 @@ from anvil.tables import app_tables
 from ..VelgIkon import VelgIkon
 
 class PoengVelger(PoengVelgerTemplate):
-    def __init__(self, valgt_poeng=1, aktivitet="", ukedag="", ikon=None, beskrivelse=None, callback=None, **properties):
+    def __init__(self, valgt_poeng=1, aktivitet="", ukedag="", ikon=None, beskrivelse=None, skritt = None, callback=None, **properties):
         self.init_components(**properties)
         self.callback = callback
 
@@ -28,10 +28,11 @@ class PoengVelger(PoengVelgerTemplate):
              # self.selected_ikon_path = hent_path_for_media(ikon) # (Pseudokode)
 
         # --- MODIFISERT DEL SLUTT ---
-
+        print('poengvelger ',skritt)
         self.ukedag_label.text = ukedag
         self.poeng_drop.items = [("0 poeng", 0), ("1 poeng", 1), ("2 poeng", 2), ("3 poeng", 3)]
         self.poeng_drop.selected_value = valgt_poeng
+        self.skritt.text = skritt
         self.aktivitet_box.text = aktivitet
         if self.aktivitet_box.text == "Hviledag":
             self.aktivitet_box.text = ""
@@ -73,33 +74,53 @@ class PoengVelger(PoengVelgerTemplate):
         poeng = self.poeng_drop.selected_value
         aktivitet = self.aktivitet_box.text
         skritt = self.skritt.text
-        # Bruk de lagrede verdiene
-        ikon_media = self.selected_ikon_media
-        ikon_path = self.selected_ikon_path # Du har nå path her!
         beskrivelse = self.beskrivelse.text
-
-        # Gjør noe med ikon_path hvis du trenger det her,
-        # f.eks. lagre det i en annen tabell sammen med resten av dataen.
-        #print(f"Lagrer med ikon path: {ikon_path}")
-
-
-        # Hvis PoengVelger ble åpnet med en callback, kall den nå
-        # Viktig: Hvis callback-funksjonen skal motta path, må signaturen oppdateres!
+        ikon_path = self.selected_ikon_path
+        ikon_media = self.selected_ikon_media  # <-- original verdi
+    
+        try:
+            antall_skritt = int(skritt or 0)
+        except ValueError:
+            antall_skritt = 0
+    
+        # 🔁 Automatisk ikon hvis kun skritt
+        
+        if antall_skritt > 0 and not ikon_media:
+          
+            ikon_media = self.walking.source
+            self.selected_ikon_media = ikon_media  # <-- 🔥 viktig!
+            self.ikon_preview.source = ikon_media  # <-- vis i forhåndsvisning
+            self.aktivitet_box.text = f"{antall_skritt} Skritt"
+            self.poeng_drop.selected_value = 1
+        poeng = self.poeng_drop.selected_value
+        aktivitet = self.aktivitet_box.text
+        beskrivelse = self.beskrivelse.text
+        
+    
         if self.callback:
-            # Du må bestemme om callback trenger path
-            # Alternativ 1: Uten path (som før)
-            # self.callback(poeng, aktivitet, ikon_media, beskrivelse)
-            # Alternativ 2: Med path (krever endring der callback er definert)
-             self.callback(poeng, aktivitet, ikon_media, beskrivelse, ikon_path,skritt)
+            self.callback(poeng, aktivitet, ikon_media, beskrivelse, ikon_path, skritt)
+    
+        open_form("Loggbok")
 
-        open_form('Loggbok')
 
-    def button_1_click(self, **event_args):
+
+          
+
+
+
+    def lagre_skritt_button_click(self, **event_args):
       try:
           antall = int(self.skritt.text)
           if antall > 0:
               self.aktivitet_box.text = f"{antall} Skritt"
-              self.ikon_preview.source = '_/theme/walking.svg'
+              self.poeng_drop.selected_value = 1
+              loggbok = get_open_form()
+              if hasattr(loggbok, "skritt") and loggbok.skritt.source:
+                self.selected_ikon_media = loggbok.skritt.source
+                self.ikon_preview.source = self.selected_ikon_media
+              
+        
+        
           else:
               #alert("Vennligst skriv et positivt tall.")
               pass

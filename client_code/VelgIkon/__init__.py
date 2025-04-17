@@ -21,7 +21,7 @@ class VelgIkon(VelgIkonTemplate):
         all_icon_data = [{'media': r['file'], 'path': r['path']}
                          for r in app_tables.files.search()
                          if r['file'] and r['path']] # Sørg for at begge feltene finnes
-
+        print(all_icon_data)
         # Group icon data into lists of 4 for the repeating panel
         grouped_icon_data = []
         for i in range(0, len(all_icon_data), 4):

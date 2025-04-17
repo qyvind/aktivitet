@@ -8,51 +8,54 @@ components:
     - components:
       - components:
         - components:
-          - name: label_1
-            properties: {text: 'Sett poeng: '}
-            type: Label
-          - data_bindings:
-            - {code: '', property: items, writeback: false}
-            name: poeng_drop
+          - components:
+            - name: label_1
+              properties: {text: 'Sett poeng: '}
+              type: Label
+            - data_bindings:
+              - {code: '', property: items, writeback: false}
+              name: poeng_drop
+              properties: {}
+              type: DropDown
+            name: flow_panel_1
             properties: {}
-            type: DropDown
-          name: flow_panel_1
-          properties: {}
+            type: FlowPanel
+          - layout_properties: {}
+            name: rich_text_2
+            properties:
+              align: left
+              content: |2-
+                    <ul>
+                      <li><strong>1 poeng:</strong> 0,5 time aktiv trening eller 8000 skritt</li>
+                      <li><strong>2 poeng:</strong> 1 time aktiv trening</li>
+                      <li><strong>3 poeng:</strong> 1,5 time aktiv trening</li>
+                    </ul>
+              format: restricted_html
+              spacing:
+                margin: ['0', null, '0', null]
+                padding: ['0', null, '0', null]
+            type: RichText
+          layout_properties: {grid_position: 'OBAHRO,DULUTA'}
+          name: flow_panel_8
+          properties: {align: center}
           type: FlowPanel
-        - layout_properties: {}
-          name: rich_text_2
-          properties:
-            align: left
-            content: |2-
-                  <ul>
-                    <li><strong>1 poeng:</strong> 0,5 time aktiv trening eller 8000 skritt</li>
-                    <li><strong>2 poeng:</strong> 1 time aktiv trening</li>
-                    <li><strong>3 poeng:</strong> 1,5 time aktiv trening</li>
-                  </ul>
-            format: restricted_html
-            spacing:
-              margin: ['0', null, '0', null]
-              padding: ['0', null, '0', null]
-          type: RichText
-        layout_properties: {grid_position: 'RHFXDS,SKNNKF'}
-        name: flow_panel_8
-        properties: {align: center}
-        type: FlowPanel
+        layout_properties: {grid_position: 'ISHYIF,WUWDGZ'}
+        name: outlined_card_6
+        properties: {background: 'theme:Secondary Container', role: outlined-card}
+        type: ColumnPanel
       - components:
         - components:
           - layout_properties: {}
             name: label_5
             properties: {text: Antall skritt}
             type: Label
-          - event_bindings: {pressed_enter: skritt_pressed_enter}
+          - event_bindings: {}
             name: skritt
             properties: {}
             type: TextBox
-          - event_bindings: {click: button_1_click}
-            layout_properties: {}
-            name: button_1
-            properties: {text: bruk skritt}
-            type: Button
+          - name: walking
+            properties: {height: 48, source: _/theme/man-walking-default.svg, visible: false}
+            type: Image
           layout_properties: {grid_position: 'AQEEEG,AMRQJI'}
           name: flow_panel_5
           properties: {align: center}
