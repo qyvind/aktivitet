@@ -450,17 +450,38 @@ class Loggbok(LoggbokTemplate):
             label.text = "Hviledag"
         else:
             label.text = aktivitet
+
+          
     
         mandag_denne_uken = today_date - timedelta(days=today_date.weekday())
         mandag_forrige_uke = mandag_denne_uken - timedelta(weeks=1)
     
+        # --- START: Logikk for å bestemme om dagen er redigerbar ---
+        mandag_denne_uken = today_date - timedelta(days=today_date.weekday())
+        mandag_forrige_uke = mandag_denne_uken - timedelta(weeks=1)
+
         er_fremtid = dato > today_date
+        ''' # Avsnittet under åpnet for redigering av inneværende uke + forrige hvis det er mandag
         er_redigerbar_uke = False
+        # Sjekk 1: Er datoen i inneværende uke eller senere?
         if dato >= mandag_denne_uken:
             er_redigerbar_uke = True
+        # Sjekk 2: Er datoen i forrige uke OG er det mandag i dag?
         elif dato >= mandag_forrige_uke and today_date.weekday() == 0:
-            er_redigerbar_uke = True
-    
+             er_redigerbar_uke = True
+        # Ellers (eldre enn forrige uke, eller forrige uke på en annen dag enn mandag)
+        # er er_redigerbar_uke fortsatt False
+        '''
+
+        # Ny regel: kun tillat redigering for i dag og i går
+        er_redigerbar_uke = dato >= (today_date - timedelta(days=1))
+
+        # Knappen skal være aktivert hvis det IKKE er fremtid OG uken er redigerbar
+        knapp.enabled = (not er_fremtid) and er_redigerbar_uke
+        # --- SLUTT: Logikk for å bestemme om dagen er redigerbar ---
+
+
+      
         knapp.enabled = (not er_fremtid) and er_redigerbar_uke
     
         # --- Oppdatert farge- og stilsetting ---
@@ -472,14 +493,14 @@ class Loggbok(LoggbokTemplate):
             knapp.foreground = "#aaaaaa"
             label.foreground = "#aaaaaa"
             ikon_komponent.foreground = "#aaaaaa"
-            panel.border = "1px dashed #cccccc"
+            #panel.border = "1px dashed #cccccc"
             panel.opacity = 1.0  # Evt. sett til 0.7 hvis du vil tone det mer ned
         else:
             panel.background = "#e0e0e0" if poeng == "0" else self.get_farge(poeng)
             knapp.foreground = "black"
             label.foreground = "black"
             ikon_komponent.foreground = "black"
-            panel.border = "2px dashed #0077cc"
+            #panel.border = "2px dashed #0077cc"
             panel.opacity = 1.0
     
         knapp.style = ""
