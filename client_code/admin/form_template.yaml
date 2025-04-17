@@ -43,6 +43,11 @@ components:
       name: button_6
       properties: {role: tonal-button, text: test nightly recalc}
       type: Button
+    - event_bindings: {click: button_7_click}
+      layout_properties: {}
+      name: badges
+      properties: {role: tonal-button, text: sjekk badges}
+      type: Button
     - event_bindings: {click: button_1_click}
       name: button_1
       properties: {role: tonal-button, text: Lukk}

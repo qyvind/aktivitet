@@ -216,6 +216,14 @@ class admin(adminTemplate):
     """This method is called when the button is clicked"""
     anvil.server.call('nightly_streak_recalc_test')
 
+  def button_7_click(self, **event_args):
+      print('sjekker badges')
+      anvil.server.call('start_badge_sjekk_manually')
+      alert("Badgesjekk fullført!", title="Suksess")
+
+
+
+
 
 
   

@@ -1,4 +1,4 @@
-from ._anvil_designer import LoginTemplate
+from ._anvil_designer import ItemTemplate3Template
 from anvil import *
 import anvil.server
 import anvil.facebook.auth
@@ -10,7 +10,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
-class Login(LoginTemplate):
+class ItemTemplate3(ItemTemplate3Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)

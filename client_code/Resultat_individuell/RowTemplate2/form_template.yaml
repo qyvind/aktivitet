@@ -59,7 +59,18 @@ components:
   type: Label
 - layout_properties: {column: PJNLQL}
   name: score
-  properties: {visible: true}
+  properties:
+    spacing:
+      margin: ['12', null, '12', null]
+      padding: ['2', null, '2', null]
+    visible: true
+  type: Label
+- layout_properties: {column: AHNFPO}
+  name: bonus
+  properties:
+    spacing:
+      margin: ['12', null, '12', null]
+      padding: ['2', null, '2', null]
   type: Label
 container:
   properties:

@@ -36,7 +36,7 @@ db_schema:
     server: full
     title: Aktivitet
   badges:
-    client: none
+    client: search
     columns:
     - admin_ui: {width: 200}
       name: id
@@ -113,8 +113,8 @@ db_schema:
       type: link_single
     server: full
     title: Trekningsliste
-  userbadges:
-    client: none
+  user_badges:
+    client: full
     columns:
     - admin_ui: {width: 200}
       name: user
@@ -124,11 +124,14 @@ db_schema:
       name: badge
       target: badges
       type: link_single
-    - admin_ui: {width: 200}
+    - admin_ui: {order: 2, width: 200}
       name: awarded_date
-      type: date
+      type: datetime
+    - admin_ui: {order: 3, width: 200}
+      name: informert
+      type: bool
     server: full
-    title: UserBadges
+    title: user_badges
   userinfo:
     client: search
     columns:
@@ -151,6 +154,9 @@ db_schema:
       type: number
     - admin_ui: {width: 200}
       name: longest_streak
+      type: number
+    - admin_ui: {order: 6, width: 200}
+      name: bonus
       type: number
     server: full
     title: userinfo

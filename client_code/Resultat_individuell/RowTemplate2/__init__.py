@@ -20,6 +20,7 @@ class RowTemplate2(RowTemplate2Template):
     self.email.text = self.item['email']
     self.streak_label.text = self.item['longest_streak']    
     self.score.text = self.item['score']
+    self.bonus.text = self.item['bonus']
 
     # Any code you write here will run before the form opens.
 
