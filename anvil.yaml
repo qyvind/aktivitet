@@ -3,7 +3,7 @@ db_schema:
   ai_prompt:
     client: none
     columns:
-    - admin_ui: {order: 0, width: 200}
+    - admin_ui: {width: 200}
       name: prompt
       type: string
     server: full
@@ -25,16 +25,39 @@ db_schema:
       target: users
       type: link_single
     - admin_ui: {width: 200}
+      name: ikon_path
+      type: string
+    - admin_ui: {width: 200}
       name: ikon
       type: media
     - admin_ui: {width: 200}
       name: beskrivelse
       type: string
-    - admin_ui: {width: 200}
-      name: ikon_path
-      type: string
     server: full
     title: Aktivitet
+  badges:
+    client: search
+    columns:
+    - admin_ui: {width: 200}
+      name: id
+      type: number
+    - admin_ui: {width: 200}
+      name: name
+      type: string
+    - admin_ui: {width: 200}
+      name: description
+      type: string
+    - admin_ui: {width: 200}
+      name: icon_gray
+      type: string
+    - admin_ui: {order: 4, width: 256}
+      name: icon_color
+      type: string
+    - admin_ui: {width: 200}
+      name: bonus
+      type: number
+    server: full
+    title: badges
   files:
     client: search
     columns:
@@ -77,42 +100,38 @@ db_schema:
       type: bool
     server: full
     title: team
-  trekning:
-    client: search
-    columns:
-    - admin_ui: {width: 200}
-      name: deltager
-      target: users
-      type: link_single
-    - admin_ui: {width: 200}
-      name: uke_mandag
-      type: date
-    server: full
-    title: Trekning
-  trekninger:
-    client: none
-    columns:
-    - admin_ui: {order: 0, width: 200}
-      name: nummer
-      type: number
-    - admin_ui: {order: 1, width: 200}
-      name: uke_mandag
-      type: date
-    server: full
-    title: Trekninger
   trekningsliste:
     client: none
     columns:
-    - admin_ui: {order: 0, width: 200}
+    - admin_ui: {width: 200}
       name: user
       target: users
       type: link_single
-    - admin_ui: {order: 1, width: 200}
+    - admin_ui: {width: 200}
       name: trekning
-      target: trekninger
+      target: null
       type: link_single
     server: full
     title: Trekningsliste
+  user_badges:
+    client: full
+    columns:
+    - admin_ui: {width: 200}
+      name: user
+      target: users
+      type: link_single
+    - admin_ui: {width: 200}
+      name: badge
+      target: badges
+      type: link_single
+    - admin_ui: {order: 2, width: 200}
+      name: awarded_date
+      type: datetime
+    - admin_ui: {order: 3, width: 200}
+      name: informert
+      type: bool
+    server: full
+    title: user_badges
   userinfo:
     client: search
     columns:
@@ -130,36 +149,39 @@ db_schema:
     - admin_ui: {width: 200}
       name: admin
       type: bool
-    - admin_ui: {order: 4, width: 107}
+    - admin_ui: {width: 107}
       name: week_offset
       type: number
     - admin_ui: {width: 200}
       name: longest_streak
+      type: number
+    - admin_ui: {order: 6, width: 200}
+      name: bonus
       type: number
     server: full
     title: userinfo
   users:
     client: search
     columns:
-    - admin_ui: {width: 200}
+    - admin_ui: {width: 117}
       name: email
       type: string
-    - admin_ui: {width: 200}
+    - admin_ui: {width: 106}
       name: enabled
       type: bool
-    - admin_ui: {width: 200}
+    - admin_ui: {width: 126}
       name: last_login
       type: datetime
-    - admin_ui: {width: 200}
+    - admin_ui: {width: 110}
       name: password_hash
       type: string
-    - admin_ui: {width: 200}
+    - admin_ui: {width: 132}
       name: n_password_failures
       type: number
     - admin_ui: {width: 200}
       name: confirmed_email
       type: bool
-    - admin_ui: {width: 200}
+    - admin_ui: {width: 183}
       name: signed_up
       type: datetime
     - admin_ui: {width: 200}

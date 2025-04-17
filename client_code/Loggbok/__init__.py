@@ -17,6 +17,7 @@ from ..Utils import Utils
 class Loggbok(LoggbokTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
+        self.vis_nye_badges(anvil.users.get_user())
         self.week_offset_label.text = 0
         self.hent_week_offset() 
         self.initier_uke(self.week_offset_label.text)
@@ -265,6 +266,27 @@ class Loggbok(LoggbokTemplate):
 
   
       self.lykkehjul.visible = self.sjekk_lykkehjul()
+      user = anvil.users.get_user()
+      self.vis_tildelte_badges(user)
+
+  
+    def vis_tildelte_badges(self, bruker):
+      # Skjul alle badges først
+      for i in range(1, 10):  # Tilpass til maks antall badges du har
+          badge_komponent = getattr(self, f"badge_{i}", None)
+          if badge_komponent:
+              badge_komponent.visible = False
+  
+      # Vis badges som brukeren har fått
+      user_badger = app_tables.user_badges.search(user=bruker)
+      for rad in user_badger:
+          badge = rad['badge']
+          badge_id = badge['id']
+          badge_komponent = getattr(self, f"badge_{badge_id}", None)
+          if badge_komponent:
+              badge_komponent.visible = True
+
+      
 
 
           
@@ -557,7 +579,7 @@ class Loggbok(LoggbokTemplate):
 
     def badge_1_mouse_leave(self, x, y, **event_args):
       """This method is called when the mouse cursor leaves this component"""
-      self.badge_1.source = '_/theme/grey badge.png'
+      self.badge_1.source = '_/theme/icons8-three-leaf-clover-48 BW.png'
 
     def badge_2_mouse_enter(self, x, y, **event_args):
       """This method is called when the mouse cursor enters this component"""
@@ -565,11 +587,28 @@ class Loggbok(LoggbokTemplate):
 
     def badge_2_mouse_leave(self, x, y, **event_args):
       """This method is called when the mouse cursor leaves this component"""
-      self.badge_2.source = '_/theme/grey badge.png'
+      self.badge_2.source = '_/theme/icons8-777-48 BW.png'
 
     def badge_3_mouse_enter(self, x, y, **event_args):
       self.badge_3.source='_/theme/icons8-triathlon-64.png'
 
     def badge_3_mouse_leave(self, x, y, **event_args):
       """This method is called when the mouse cursor leaves this component"""
-      self.badge_3.source = '_/theme/grey badge.png'
+      self.badge_3.source = '_/theme/icons8-triathlon-64 BW.png'
+
+    def vis_nye_badges(self,bruker):
+        nye_badger = app_tables.user_badges.search(user=bruker, informert=False)
+    
+        for rad in nye_badger:
+            badge = rad['badge']
+            navn = badge['name']
+            beskrivelse = badge['description']
+            poeng = badge['bonus'] or 0
+    
+            alert(
+                f"🎉 Du har fått en ny badge!\n\n🏅 {navn}\n📝 {beskrivelse}\n💎 Bonuspoeng: {poeng}",
+                title="Ny badge!",
+                large=True
+            )
+    
+            rad.update(informert=True)

@@ -165,7 +165,7 @@ def oppdater_brukernavn(nytt_navn):
         record['navn'] = nytt_navn
     else:
         # Opprett en ny record i tabellen UserInfo for denne brukeren
-        app_tables.userinfo.add_row(user=user, navn=nytt_navn, longest_streak=0)
+        app_tables.userinfo.add_row(user=user, navn=nytt_navn, longest_streak=0, bonus=0)
     
     return "Navn oppdatert"
 
@@ -1018,3 +1018,73 @@ def nightly_streak_recalc():
 def nightly_streak_recalc_test():
     nightly_streak_recalc()
 
+def tildel_badges_for_alle_brukere():
+    for bruker in app_tables.users.search():
+        sjekk_og_tildel_badges(bruker)
+
+def sjekk_og_tildel_badges(bruker):
+    if sjekk_badge_1(bruker):
+        badge=1
+        tildel_badge(bruker,badge)
+
+    if sjekk_badge_2(bruker):
+      badge=2
+      tildel_badge(bruker,badge)
+
+    if sjekk_badge_3(bruker):
+      badge=3
+      tildel_badge(bruker,badge)
+
+def sjekk_badge_1(bruker):
+    userinfo = app_tables.userinfo.get(user=bruker)
+    return userinfo and userinfo['longest_streak'] >= 3
+
+def sjekk_badge_2(bruker):
+    userinfo = app_tables.userinfo.get(user=bruker)
+    return userinfo and userinfo['longest_streak'] >= 7
+
+def sjekk_badge_3(bruker):
+    aktiviteter = app_tables.aktivitet.search(deltager=bruker)
+
+    ikoner = {akt['ikon'] for akt in aktiviteter if akt['ikon']}
+
+    har_sykkel = 'sykkeltrening' in ikoner or 'sykling' in ikoner
+    har_svømming = 'svømming' in ikoner
+    har_lop = 'løp' in ikoner
+
+    return har_sykkel and har_svømming and har_lop
+    
+
+def tildel_badge(bruker, badge_id):
+    badge = app_tables.badges.get(id=badge_id)
+    if not badge:
+        print(f"❌ Badge med id={badge_id} finnes ikke.")
+        return
+
+    if app_tables.user_badges.get(user=bruker, badge=badge):
+        return
+
+    app_tables.user_badges.add_row(
+        user=bruker,
+        badge=badge,
+        awarded_date=datetime.datetime.now()
+    )
+    print(f"🏅 Tildelt badge {badge['name']} til {bruker['email']}")
+
+    userinfo = app_tables.userinfo.get(user=bruker)
+    if userinfo:
+        gammel_bonus = userinfo['bonus'] or 0
+        ekstra_bonus = badge['bonus'] or 0
+        ny_bonus = gammel_bonus + ekstra_bonus
+        userinfo.update(bonus=ny_bonus)
+        print(f"➕ Lagt til {ekstra_bonus} bonuspoeng (totalt: {ny_bonus})")
+
+@anvil.server.callable
+def start_badge_sjekk_manually():
+    tildel_badges_for_alle_brukere()
+
+@anvil.server.background_task
+def nightly_badge_check():
+    print("🌙 Starter nattlig badge-sjekk")
+    tildel_badges_for_alle_brukere()
+    print("🌟 Ferdig med badge-sjekk")

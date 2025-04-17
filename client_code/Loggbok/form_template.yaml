@@ -125,36 +125,36 @@ components:
           margin: ['0', null, '0', null]
       type: FlowPanel
     - components:
-      - event_bindings: {mouse_enter: badge_1_mouse_enter, mouse_leave: badge_1_mouse_leave}
+      - event_bindings: {}
         layout_properties: {width: 30}
         name: badge_1
-        properties: {height: '30', source: _/theme/grey badge.png, tooltip: 'Hvordan kan man vinne denne tro?'}
+        properties: {height: '30', source: _/theme/icons8-three-leaf-clover-48.png, tooltip: '', visible: false}
         type: Image
-      - event_bindings: {mouse_enter: badge_2_mouse_enter, mouse_leave: badge_2_mouse_leave}
+      - event_bindings: {}
         layout_properties: {width: 30}
         name: badge_2
-        properties: {height: '30', source: _/theme/grey badge.png, tooltip: 'Hvordan kan man vinne denne tro?'}
+        properties: {height: '30', source: _/theme/icons8-777-48.png, tooltip: '', visible: false}
         type: Image
-      - event_bindings: {mouse_enter: badge_3_mouse_enter, mouse_leave: badge_3_mouse_leave}
+      - event_bindings: {}
         layout_properties: {width: 30}
         name: badge_3
-        properties: {height: '30', source: _/theme/grey badge.png, tooltip: 'Hvordan kan man vinne denne tro?'}
+        properties: {height: '30', source: _/theme/icons8-triathlon-64.png, tooltip: '', visible: false}
         type: Image
       - layout_properties: {width: 30}
         name: image_4
-        properties: {height: '30', source: _/theme/grey badge.png, tooltip: 'Hvordan kan man vinne denne tro?'}
+        properties: {height: '30', source: _/theme/grey badge.png, tooltip: '', visible: false}
         type: Image
       - layout_properties: {width: 30}
         name: image_5
-        properties: {height: '30', source: _/theme/grey badge.png, tooltip: 'Hvordan kan man vinne denne tro?'}
+        properties: {height: '30', source: _/theme/grey badge.png, tooltip: '', visible: false}
         type: Image
       - layout_properties: {width: 30}
         name: image_6
-        properties: {height: '30', source: _/theme/grey badge.png, tooltip: 'Hvordan kan man vinne denne tro?'}
+        properties: {height: '30', source: _/theme/grey badge.png, tooltip: '', visible: false}
         type: Image
       - layout_properties: {width: 30}
         name: image_7
-        properties: {height: '30', source: _/theme/grey badge.png, tooltip: 'Hvordan kan man vinne denne tro?'}
+        properties: {height: '30', source: _/theme/grey badge.png, tooltip: '', visible: false}
         type: Image
       layout_properties: {grid_position: 'FIYLJB,VPKGHN'}
       name: flow_panel_5
