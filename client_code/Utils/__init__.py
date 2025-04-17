@@ -70,7 +70,7 @@ class Utils:
               "admin": admin
           })
   
-      resultat.sort(key=lambda x: x["poeng"], reverse=True)
+      resultat.sort(key=lambda x: x["score"], reverse=True)
       return resultat
   
 

@@ -18,11 +18,11 @@ components:
     name: data_grid_1
     properties:
       columns:
-      - {data_key: column_1, expand: false, id: JKSDUP, title: Deltager, width: 269}
-      - {data_key: column_2, id: VJQQOR, title: Poeng}
-      - {data_key: column_1, id: AHNFPO, title: Bonus}
-      - {data_key: column_1, id: ZPQDNV, title: Streak}
-      - {data_key: column_1, id: PJNLQL, title: Score}
+      - {data_key: column_1, expand: false, id: JKSDUP, title: Deltager, width: '200'}
+      - {data_key: column_2, id: VJQQOR, title: Poeng, width: '60'}
+      - {data_key: column_1, id: AHNFPO, title: Bonus, width: '60'}
+      - {data_key: column_1, id: ZPQDNV, title: Streak, width: '60'}
+      - {data_key: column_1, id: PJNLQL, title: Score, width: '60'}
       - {data_key: column_1, expand: false, id: LSHEHV, title: Team, width: 278.5999755859375}
     type: DataGrid
   - components:
