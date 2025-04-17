@@ -128,7 +128,7 @@ components:
       - event_bindings: {mouse_enter: badge_1_mouse_enter, mouse_leave: badge_1_mouse_leave}
         layout_properties: {width: 30}
         name: badge_1
-        properties: {height: '30', source: _/theme/grey badge.png, tooltip: 'Hvordan kan man vinne denne tro?'}
+        properties: {height: '30', source: _/theme/icons8-three-leaf-clover-48 BW.png, tooltip: 'Hvordan kan man vinne denne tro?'}
         type: Image
       - event_bindings: {mouse_enter: badge_2_mouse_enter, mouse_leave: badge_2_mouse_leave}
         layout_properties: {width: 30}
@@ -138,7 +138,7 @@ components:
       - event_bindings: {mouse_enter: badge_3_mouse_enter, mouse_leave: badge_3_mouse_leave}
         layout_properties: {width: 30}
         name: badge_3
-        properties: {height: '30', source: _/theme/grey badge.png, tooltip: 'Hvordan kan man vinne denne tro?'}
+        properties: {height: '30', source: _/theme/icons8-triathlon-64 BW.png, tooltip: 'Hvordan kan man vinne denne tro?'}
         type: Image
       - layout_properties: {width: 30}
         name: image_4
