@@ -100,8 +100,8 @@ class Loggbok(LoggbokTemplate):
     def logout_click(self, **event_args):
         """This method is called when the button is clicked"""
         anvil.users.logout()
-        self.login_card.visible = True
-        self.loggbok_card.visible = False
+        #self.login_card.visible = True
+        open_form('Login')
 
 
     def get_week_info(self, week_offset):
@@ -439,7 +439,7 @@ class Loggbok(LoggbokTemplate):
                 self.deltager_label.text = navn
     
             
-            self.login_card.visible = False
+            #self.login_card.visible = False
             self.loggbok_card.visible = True
     
             konkurransenavn, fradato, tildato = self.hent_konkurranse_info()
@@ -453,7 +453,7 @@ class Loggbok(LoggbokTemplate):
             self.tildato.text = tildato
         else:
             self.loggbok_card.visible = False
-            self.login_card.visible = True
+            #self.login_card.visible = True
 
 
     def login_click(self, **event_args):
