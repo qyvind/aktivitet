@@ -565,7 +565,7 @@ class Loggbok(LoggbokTemplate):
 
     def badge_2_mouse_leave(self, x, y, **event_args):
       """This method is called when the mouse cursor leaves this component"""
-      self.badge_2.source = '_/theme/grey badge.png'
+      self.badge_2.source = '_/theme/icons8-777-48 BW.png'
 
     def badge_3_mouse_enter(self, x, y, **event_args):
       self.badge_3.source='_/theme/icons8-triathlon-64.png'

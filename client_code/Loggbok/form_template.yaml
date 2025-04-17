@@ -133,7 +133,7 @@ components:
       - event_bindings: {mouse_enter: badge_2_mouse_enter, mouse_leave: badge_2_mouse_leave}
         layout_properties: {width: 30}
         name: badge_2
-        properties: {height: '30', source: _/theme/grey badge.png, tooltip: 'Hvordan kan man vinne denne tro?'}
+        properties: {height: '30', source: _/theme/icons8-777-48 BW.png, tooltip: 'Hvordan kan man vinne denne tro?'}
         type: Image
       - event_bindings: {mouse_enter: badge_3_mouse_enter, mouse_leave: badge_3_mouse_leave}
         layout_properties: {width: 30}
