@@ -270,25 +270,38 @@ class Loggbok(LoggbokTemplate):
       self.vis_tildelte_badges(user)
 
   
-    def vis_tildelte_badges(self, bruker):
-      # Skjul alle badges først
-      self.badge_flow_panel.visible = False
-      for i in range(1, 10):  # Tilpass til maks antall badges du har
-          badge_komponent = getattr(self, f"badge_{i}", None)
-          if badge_komponent:
-              badge_komponent.visible = False
+    # def vis_tildelte_badges(self, bruker):
+    #   # Skjul alle badges først
+    #   self.badge_flow_panel.visible = False
+    #   for i in range(1, 10):  # Tilpass til maks antall badges du har
+    #       badge_komponent = getattr(self, f"badge_{i}", None)
+    #       if badge_komponent:
+    #           badge_komponent.visible = False
   
-      # Vis badges som brukeren har fått
-      user_badger = app_tables.user_badges.search(user=bruker)
-      for rad in user_badger:
-          badge = rad['badge']
-          badge_id = badge['id']
-          badge_komponent = getattr(self, f"badge_{badge_id}", None)
-          if badge_komponent:
-              self.badge_flow_panel.visible = True
-              badge_komponent.visible = True
+    #   # Vis badges som brukeren har fått
+    #   user_badger = app_tables.user_badges.search(user=bruker)
+    #   for rad in user_badger:
+    #       badge = rad['badge']
+    #       badge_id = badge['id']
+    #       badge_komponent = getattr(self, f"badge_{badge_id}", None)
+    #       if badge_komponent:
+    #           self.badge_flow_panel.visible = True
+    #           badge_komponent.visible = True
 
-      
+    def vis_tildelte_badges(self, bruker):
+        print("▶️ Viser badges for:", bruker['email'])
+    
+        user_badger = app_tables.user_badges.search(user=bruker)
+        for rad in user_badger:
+            badge = rad['badge']
+            badge_id = badge['id']
+            print(f" - Har badge {badge_id}: {badge['name']}")
+    
+            badge_komponent = getattr(self, f"badge_{badge_id}", None)
+            if badge_komponent:
+                self.badge_flow_panel.visible = True
+                badge_komponent.visible = True
+
 
 
           
