@@ -77,29 +77,6 @@ db_schema:
       type: bool
     server: full
     title: team
-  trekning:
-    client: search
-    columns:
-    - admin_ui: {width: 200}
-      name: deltager
-      target: users
-      type: link_single
-    - admin_ui: {width: 200}
-      name: uke_mandag
-      type: date
-    server: full
-    title: Trekning
-  trekninger:
-    client: none
-    columns:
-    - admin_ui: {order: 0, width: 200}
-      name: nummer
-      type: number
-    - admin_ui: {order: 1, width: 200}
-      name: uke_mandag
-      type: date
-    server: full
-    title: Trekninger
   trekningsliste:
     client: none
     columns:
