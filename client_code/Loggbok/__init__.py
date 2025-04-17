@@ -100,8 +100,8 @@ class Loggbok(LoggbokTemplate):
     def logout_click(self, **event_args):
         """This method is called when the button is clicked"""
         anvil.users.logout()
-        self.login_card.visible = True
-        self.loggbok_card.visible = False
+        #self.login_card.visible = True
+        open_form('Login')
 
 
     def get_week_info(self, week_offset):
@@ -270,23 +270,38 @@ class Loggbok(LoggbokTemplate):
       self.vis_tildelte_badges(user)
 
   
-    def vis_tildelte_badges(self, bruker):
-      # Skjul alle badges først
-      for i in range(1, 10):  # Tilpass til maks antall badges du har
-          badge_komponent = getattr(self, f"badge_{i}", None)
-          if badge_komponent:
-              badge_komponent.visible = False
+    # def vis_tildelte_badges(self, bruker):
+    #   # Skjul alle badges først
+    #   self.badge_flow_panel.visible = False
+    #   for i in range(1, 10):  # Tilpass til maks antall badges du har
+    #       badge_komponent = getattr(self, f"badge_{i}", None)
+    #       if badge_komponent:
+    #           badge_komponent.visible = False
   
-      # Vis badges som brukeren har fått
-      user_badger = app_tables.user_badges.search(user=bruker)
-      for rad in user_badger:
-          badge = rad['badge']
-          badge_id = badge['id']
-          badge_komponent = getattr(self, f"badge_{badge_id}", None)
-          if badge_komponent:
-              badge_komponent.visible = True
+    #   # Vis badges som brukeren har fått
+    #   user_badger = app_tables.user_badges.search(user=bruker)
+    #   for rad in user_badger:
+    #       badge = rad['badge']
+    #       badge_id = badge['id']
+    #       badge_komponent = getattr(self, f"badge_{badge_id}", None)
+    #       if badge_komponent:
+    #           self.badge_flow_panel.visible = True
+    #           badge_komponent.visible = True
 
-      
+    def vis_tildelte_badges(self, bruker):
+        print("▶️ Viser badges for:", bruker['email'])
+    
+        user_badger = app_tables.user_badges.search(user=bruker)
+        for rad in user_badger:
+            badge = rad['badge']
+            badge_id = badge['id']
+            print(f" - Har badge {badge_id}: {badge['name']}")
+    
+            badge_komponent = getattr(self, f"badge_{badge_id}", None)
+            if badge_komponent:
+                self.badge_flow_panel.visible = True
+                badge_komponent.visible = True
+
 
 
           
@@ -424,7 +439,7 @@ class Loggbok(LoggbokTemplate):
                 self.deltager_label.text = navn
     
             
-            self.login_card.visible = False
+            #self.login_card.visible = False
             self.loggbok_card.visible = True
     
             konkurransenavn, fradato, tildato = self.hent_konkurranse_info()
@@ -438,7 +453,7 @@ class Loggbok(LoggbokTemplate):
             self.tildato.text = tildato
         else:
             self.loggbok_card.visible = False
-            self.login_card.visible = True
+            #self.login_card.visible = True
 
 
     def login_click(self, **event_args):
@@ -573,28 +588,28 @@ class Loggbok(LoggbokTemplate):
       """This method is called when the button is clicked"""
       open_form(('Supertrekning'))
 
-    def badge_1_mouse_enter(self, x, y, **event_args):
-      """This method is called when the mouse cursor enters this component"""
-      self.badge_1.source = '_/theme/icons8-three-leaf-clover-48.png'
+    # def badge_1_mouse_enter(self, x, y, **event_args):
+    #   """This method is called when the mouse cursor enters this component"""
+    #   self.badge_1.source = '_/theme/icons8-three-leaf-clover-48.png'
 
-    def badge_1_mouse_leave(self, x, y, **event_args):
-      """This method is called when the mouse cursor leaves this component"""
-      self.badge_1.source = '_/theme/icons8-three-leaf-clover-48 BW.png'
+    # def badge_1_mouse_leave(self, x, y, **event_args):
+    #   """This method is called when the mouse cursor leaves this component"""
+    #   self.badge_1.source = '_/theme/icons8-three-leaf-clover-48 BW.png'
 
-    def badge_2_mouse_enter(self, x, y, **event_args):
-      """This method is called when the mouse cursor enters this component"""
-      self.badge_2.source = '_/theme/icons8-777-48.png'
+    # def badge_2_mouse_enter(self, x, y, **event_args):
+    #   """This method is called when the mouse cursor enters this component"""
+    #   self.badge_2.source = '_/theme/icons8-777-48.png'
 
-    def badge_2_mouse_leave(self, x, y, **event_args):
-      """This method is called when the mouse cursor leaves this component"""
-      self.badge_2.source = '_/theme/icons8-777-48 BW.png'
+    # def badge_2_mouse_leave(self, x, y, **event_args):
+    #   """This method is called when the mouse cursor leaves this component"""
+    #   self.badge_2.source = '_/theme/icons8-777-48 BW.png'
 
-    def badge_3_mouse_enter(self, x, y, **event_args):
-      self.badge_3.source='_/theme/icons8-triathlon-64.png'
+    # def badge_3_mouse_enter(self, x, y, **event_args):
+    #   self.badge_3.source='_/theme/icons8-triathlon-64.png'
 
-    def badge_3_mouse_leave(self, x, y, **event_args):
-      """This method is called when the mouse cursor leaves this component"""
-      self.badge_3.source = '_/theme/icons8-triathlon-64 BW.png'
+    # def badge_3_mouse_leave(self, x, y, **event_args):
+    #   """This method is called when the mouse cursor leaves this component"""
+    #   self.badge_3.source = '_/theme/icons8-triathlon-64 BW.png'
 
     def vis_nye_badges(self,bruker):
         nye_badger = app_tables.user_badges.search(user=bruker, informert=False)
