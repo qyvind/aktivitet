@@ -61,7 +61,7 @@ class Loggbok(LoggbokTemplate):
         valgt_poeng = int(knapp.text or 0)
         aktivitet = label.text
 
-        def mottak_fra_poengvelger(poeng, aktivitet, nytt_ikon,beskrivelse, ikon_path):
+        def mottak_fra_poengvelger(poeng, aktivitet, nytt_ikon,beskrivelse, ikon_path, skritt):
           week_info = self.get_week_info(self.week_offset_label.text)
           valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
       
@@ -87,12 +87,12 @@ class Loggbok(LoggbokTemplate):
       
           #print("lagrer med ikon-type:", type(ikon_til_server))
       
-          self.lagre_aktivitet(valgt_dato, aktivitet, poeng, ikon_til_server,beskrivelse)
+          self.lagre_aktivitet(valgt_dato, aktivitet, poeng, ikon_til_server,beskrivelse,skritt)
       
-            
+        skritt=0    
 
         # open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text,ikon=ikon_komponent,beskrivelse=beskrivelse, callback=mottak_fra_poengvelger)
-        open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text, ikon=ikon_komponent.source, beskrivelse=beskrivelse, callback=mottak_fra_poengvelger)
+        open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text, ikon=ikon_komponent.source, beskrivelse=beskrivelse,skritt=skritt, callback=mottak_fra_poengvelger)
 
 
 
@@ -305,9 +305,10 @@ class Loggbok(LoggbokTemplate):
 
 
           
-    def lagre_aktivitet(self, dato, aktivitet, poeng, ikon, beskrivelse):
+    def lagre_aktivitet(self, dato, aktivitet, poeng, ikon, beskrivelse, skritt):
+        
         try:
-            result = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng, ikon, beskrivelse)
+            result = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng, ikon, beskrivelse, skritt)
 
             # AI oppmuntring:          
             # # ✅ Sjekk om datoen er i dag

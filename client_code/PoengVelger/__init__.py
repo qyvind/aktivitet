@@ -69,9 +69,10 @@ class PoengVelger(PoengVelgerTemplate):
         else:
             print("Valg av ikon avbrutt.")
 
-    def lagre_button_click(self, **event_args):
+    def OK_click(self, **event_args):
         poeng = self.poeng_drop.selected_value
         aktivitet = self.aktivitet_box.text
+        skritt = self.skritt.text
         # Bruk de lagrede verdiene
         ikon_media = self.selected_ikon_media
         ikon_path = self.selected_ikon_path # Du har nå path her!
@@ -89,6 +90,22 @@ class PoengVelger(PoengVelgerTemplate):
             # Alternativ 1: Uten path (som før)
             # self.callback(poeng, aktivitet, ikon_media, beskrivelse)
             # Alternativ 2: Med path (krever endring der callback er definert)
-             self.callback(poeng, aktivitet, ikon_media, beskrivelse, ikon_path)
+             self.callback(poeng, aktivitet, ikon_media, beskrivelse, ikon_path,skritt)
 
         open_form('Loggbok')
+
+    def button_1_click(self, **event_args):
+      try:
+          antall = int(self.skritt.text)
+          if antall > 0:
+              self.aktivitet_box.text = f"{antall} Skritt"
+              self.ikon_preview.source = '_/theme/walking.svg'
+          else:
+              #alert("Vennligst skriv et positivt tall.")
+              pass
+      except (ValueError, TypeError):
+          alert("Skriv inn et gyldig tall.")
+
+
+  
+

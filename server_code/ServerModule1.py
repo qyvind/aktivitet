@@ -82,9 +82,10 @@ def batch_create_users(user_list):
 
 
 @anvil.server.callable
-def lagre_aktivitet(dato, aktivitet, poeng, ikon,beskrivelse):
+def lagre_aktivitet(dato, aktivitet, poeng, ikon,beskrivelse,skritt):
+    print('lanre ',skritt)
+    skrittverdi = int(skritt) if skritt not in (None, "") else None
 
-    #print('lagre_aktivitet')
     user = anvil.users.get_user()
     if not user:
         raise Exception("Ingen bruker er pålogget")
@@ -94,7 +95,7 @@ def lagre_aktivitet(dato, aktivitet, poeng, ikon,beskrivelse):
     
     if existing_activity:
         # Oppdater den eksisterende posten
-        existing_activity.update(aktivitet=aktivitet, poeng=poeng,ikon=ikon, beskrivelse=beskrivelse )
+        existing_activity.update(aktivitet=aktivitet, poeng=poeng,ikon=ikon, beskrivelse=beskrivelse, skritt=skrittverdi )
         return "Aktivitet oppdatert"
     else:
         # Lagre ny post i tabellen aktivitet
@@ -104,7 +105,8 @@ def lagre_aktivitet(dato, aktivitet, poeng, ikon,beskrivelse):
             aktivitet=aktivitet,
             poeng=poeng,
             ikon=ikon,
-            beskrivelse = beskrivelse
+            beskrivelse = beskrivelse,
+            skritt=skrittverdi
         )
         return "Aktivitet lagret"
 
