@@ -460,7 +460,7 @@ class Loggbok(LoggbokTemplate):
         mandag_forrige_uke = mandag_denne_uken - timedelta(weeks=1)
 
         er_fremtid = dato > today_date
-        ''' Avsnittet under åpnet for redigering av inneværende uke + forrige hvis det er mandag
+        # Avsnittet under åpnet for redigering av inneværende uke + forrige hvis det er mandag
         er_redigerbar_uke = False
         # Sjekk 1: Er datoen i inneværende uke eller senere?
         if dato >= mandag_denne_uken:
@@ -470,10 +470,10 @@ class Loggbok(LoggbokTemplate):
              er_redigerbar_uke = True
         # Ellers (eldre enn forrige uke, eller forrige uke på en annen dag enn mandag)
         # er er_redigerbar_uke fortsatt False
-        '''
+        #'''
 
         # Ny regel: kun tillat redigering for i dag og i går
-        er_redigerbar_uke = dato >= (today_date - timedelta(days=1))
+        # er_redigerbar_uke = dato >= (today_date - timedelta(days=1))
 
         # Knappen skal være aktivert hvis det IKKE er fremtid OG uken er redigerbar
         knapp.enabled = (not er_fremtid) and er_redigerbar_uke
