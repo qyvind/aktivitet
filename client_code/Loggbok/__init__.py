@@ -61,7 +61,7 @@ class Loggbok(LoggbokTemplate):
         valgt_poeng = int(knapp.text or 0)
         aktivitet = label.text
 
-        def mottak_fra_poengvelger(poeng, aktivitet, nytt_ikon,beskrivelse, ikon_path):
+        def mottak_fra_poengvelger(poeng, aktivitet, nytt_ikon,beskrivelse, ikon_path,skritt=None):
           week_info = self.get_week_info(self.week_offset_label.text)
           valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
       
@@ -85,9 +85,9 @@ class Loggbok(LoggbokTemplate):
           else:
               ikon_til_server = anvil.BlobMedia(nytt_ikon.content_type, nytt_ikon.get_bytes(), name=nytt_ikon.name)
       
-          #print("lagrer med ikon-type:", type(ikon_til_server))
+          print('skal lagre skritt', skritt)
       
-          self.lagre_aktivitet(valgt_dato, aktivitet, poeng, ikon_til_server,beskrivelse)
+          self.lagre_aktivitet(valgt_dato, aktivitet, poeng, ikon_til_server,beskrivelse,skritt)
       
             
 
@@ -305,10 +305,11 @@ class Loggbok(LoggbokTemplate):
 
 
           
-    def lagre_aktivitet(self, dato, aktivitet, poeng, ikon, beskrivelse):
+    def lagre_aktivitet(self, dato, aktivitet, poeng, ikon, beskrivelse,skritt=None):
         try:
-            result = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng, ikon, beskrivelse)
-
+            print('vil lagre skritt',skritt)
+            result = anvil.server.call('lagre_aktivitet', dato, aktivitet, poeng, ikon, beskrivelse,skritt)
+            print(result)
             # AI oppmuntring:          
             # # ✅ Sjekk om datoen er i dag
             # from datetime import date

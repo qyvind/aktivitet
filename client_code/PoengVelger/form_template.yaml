@@ -7,50 +7,67 @@ components:
   - components:
     - components:
       - components:
+        - layout_properties: {}
+          name: label_3
+          properties: {text: 'Antall skritt:'}
+          type: Label
+        - layout_properties: {width: 100.5714111328125}
+          name: antall_skritt
+          properties: {}
+          type: TextBox
+        layout_properties: {grid_position: 'BKOXHI,SWZVCN'}
+        name: skritt_panel_1
+        properties: {align: center}
+        type: FlowPanel
+      - components:
         - components:
-          - name: label_1
-            properties: {text: 'Sett poeng: '}
+          - layout_properties: {}
+            name: label_1
+            properties: {text: Lengde på treningsøkt}
             type: Label
           - data_bindings:
             - {code: '', property: items, writeback: false}
             name: poeng_drop
             properties: {}
             type: DropDown
+          - components:
+            - event_bindings: {mouse_down: ikon_preview_click}
+              layout_properties: {grid_position: 'VJBWVC,KSQHVW'}
+              name: ikon_preview
+              properties: {height: '60'}
+              type: Image
+            - layout_properties: {grid_position: 'UMZAJC,LNVVRA'}
+              name: velg_aktivitet_label
+              properties:
+                align: center
+                font_size: 8
+                spacing:
+                  margin: ['0', null, '0', null]
+                  padding: ['0', null, '0', null]
+                text: Velg trening
+              type: Label
+            layout_properties: {width: 104.99993896484375}
+            name: outlined_card_2
+            properties: {role: outlined-card}
+            type: ColumnPanel
+          layout_properties: {}
           name: flow_panel_1
-          properties: {}
+          properties: {vertical_align: middle}
           type: FlowPanel
-        - layout_properties: {}
-          name: rich_text_2
-          properties:
-            align: left
-            content: |2-
-                  <ul>
-                    <li><strong>1 poeng:</strong> 0,5 time aktiv trening eller 8000 skritt</li>
-                    <li><strong>2 poeng:</strong> 1 time aktiv trening</li>
-                    <li><strong>3 poeng:</strong> 1,5 time aktiv trening</li>
-                  </ul>
-            format: restricted_html
-            spacing:
-              margin: ['0', null, '0', null]
-              padding: ['0', null, '0', null]
-          type: RichText
         layout_properties: {grid_position: 'RHFXDS,SKNNKF'}
-        name: flow_panel_8
-        properties: {align: center}
+        name: trening_panel_1
+        properties: {align: center, visible: false}
         type: FlowPanel
       - components:
         - components:
-          - layout_properties: {grid_position: 'DTSQLA,NDUWGZ'}
-            name: label_3
-            properties: {text: Skriv type aktivitet eller velg et ikon som passer}
-            type: Label
           - components:
-            - name: label_2
-              properties: {text: 'Aktivitet:'}
+            - layout_properties: {}
+              name: label_2
+              properties: {text: 'Aktivitet:', visible: false}
               type: Label
             - layout_properties: {width: 132.14285278320312}
               name: aktivitet_box
-              properties: {}
+              properties: {visible: false}
               type: TextBox
             layout_properties: {grid_position: 'YISWBH,BAXIOP'}
             name: flow_panel_2
@@ -59,31 +76,21 @@ components:
           name: column_panel_2
           properties: {}
           type: ColumnPanel
-        - components:
-          - event_bindings: {mouse_down: ikon_preview_click}
-            layout_properties: {grid_position: 'VJBWVC,KSQHVW'}
-            name: ikon_preview
-            properties: {height: 78.63638305664062}
-            type: Image
-          layout_properties: {width: 120}
-          name: outlined_card_2
-          properties: {role: outlined-card}
-          type: ColumnPanel
         layout_properties: {grid_position: 'ZFFFAT,TWLSIX'}
-        name: flow_panel_4
-        properties: {align: center}
+        name: gammel_aktivitet_panel
+        properties: {align: center, visible: false}
         type: FlowPanel
       - components:
         - layout_properties: {grid_position: 'VZQZVR,ZKWIOM'}
           name: label_4
-          properties: {text: Her kan du skrive en lengre beskrivelse hvis du ønsker}
+          properties: {text: 'Beskrivelse:'}
           type: Label
         - layout_properties: {grid_position: 'SSGWTO,FIHUKR'}
           name: beskrivelse
           properties: {height: 49.7142333984375}
           type: TextArea
         layout_properties: {grid_position: 'HLMYBC,AIRTPG'}
-        name: column_panel_3
+        name: beskrivelse_panel
         properties: {}
         type: ColumnPanel
       layout_properties: {grid_position: 'RVIUTL,JORSMI'}
@@ -95,14 +102,34 @@ components:
     properties: {}
     type: ColumnPanel
   - components:
-    - event_bindings: {click: lagre_button_click}
+    - event_bindings: {click: bytt_til_trening_click}
       layout_properties: {}
-      name: lagre_button
+      name: bytt_til_trening
+      properties: {role: filled-button, text: Bytt til trening}
+      type: Button
+    - event_bindings: {click: lagre_skritt_click}
+      layout_properties: {}
+      name: lagre_skritt
+      properties: {role: filled-button, text: Lagre}
+      type: Button
+    layout_properties: {grid_position: 'JDJKYU,DKDGBP'}
+    name: skritt_panel_2
+    properties: {align: right}
+    type: FlowPanel
+  - components:
+    - event_bindings: {click: nytt_til_skritt_button_click}
+      layout_properties: {}
+      name: nytt_til_skritt_button
+      properties: {role: filled-button, text: Bytt til skritt}
+      type: Button
+    - event_bindings: {click: lagre_trening_button_click}
+      layout_properties: {}
+      name: lagre_trening_button
       properties: {align: right, role: filled-button, text: Lagre}
       type: Button
     layout_properties: {grid_position: 'LDAPRP,OKEEXD'}
-    name: flow_panel_3
-    properties: {align: right}
+    name: trening_panel_2
+    properties: {align: right, visible: false}
     type: FlowPanel
   layout_properties: {grid_position: 'EKYBVU,PBCROG'}
   name: outlined_card_1

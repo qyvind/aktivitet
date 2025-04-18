@@ -30,11 +30,10 @@ class PoengVelger(PoengVelgerTemplate):
         # --- MODIFISERT DEL SLUTT ---
 
         self.ukedag_label.text = ukedag
-        self.poeng_drop.items = [("0 poeng", 0), ("1 poeng", 1), ("2 poeng", 2), ("3 poeng", 3)]
+        self.poeng_drop.items = [("Mindre enn en halv time", 0), ("En halv time", 1), ("En time", 2), ("Halvannen time eller mer", 3)]
         self.poeng_drop.selected_value = valgt_poeng
         self.aktivitet_box.text = aktivitet
-        if self.aktivitet_box.text == "Hviledag":
-            self.aktivitet_box.text = ""
+
         self.beskrivelse.text = beskrivelse
 
         # Sett den initielle forhåndsvisningen
@@ -54,6 +53,7 @@ class PoengVelger(PoengVelgerTemplate):
         if selected_data is not None:
             self.selected_ikon_media = selected_data.get('media')
             self.selected_ikon_path = selected_data.get('path') # Dette er nå det pene navnet
+            self.velg_aktivitet_label.text = selected_data.get('path')
 
             self.ikon_preview.source = self.selected_ikon_media
 
@@ -69,9 +69,10 @@ class PoengVelger(PoengVelgerTemplate):
         else:
             print("Valg av ikon avbrutt.")
 
-    def lagre_button_click(self, **event_args):
+    def lagre_trening_button_click(self, **event_args):
         poeng = self.poeng_drop.selected_value
-        aktivitet = self.aktivitet_box.text
+        aktivitet = self.selected_ikon_path
+        
         # Bruk de lagrede verdiene
         ikon_media = self.selected_ikon_media
         ikon_path = self.selected_ikon_path # Du har nå path her!
@@ -92,3 +93,46 @@ class PoengVelger(PoengVelgerTemplate):
              self.callback(poeng, aktivitet, ikon_media, beskrivelse, ikon_path)
 
         open_form('Loggbok')
+
+    def lagre_skritt_click(self, **event_args):
+        skritt_rad = app_tables.files.get(path = "Skritt")
+        if not skritt_rad or not skritt_rad['file']:
+          alert("Fant ikke ikon for skritt – kontakt admin")
+          return
+        tekst = self.antall_skritt.text
+        if tekst and tekst.isdigit():
+            antall = int(tekst)
+            
+        else:
+            alert("Du må skrive inn et gyldig tall for skritt.")
+        
+        if antall >= 800:
+          poeng = 1
+        else:
+          poeng=0
+        aktivitet = f"{antall} skritt"
+        
+        # Bruk de lagrede verdiene
+        ikon_media = skritt_rad['file']
+        ikon_path = aktivitet
+        beskrivelse = self.beskrivelse.text
+
+
+        skritt = antall
+        if self.callback:
+
+             self.callback(poeng, aktivitet, ikon_media, beskrivelse, ikon_path,skritt)
+
+        open_form('Loggbok')
+
+    def bytt_til_trening_click(self, **event_args):
+      self.trening_panel_1.visible = True
+      self.trening_panel_2.visible = True
+      self.skritt_panel_1.visible = False
+      self.skritt_panel_2.visible = False
+
+    def nytt_til_skritt_button_click(self, **event_args):
+      self.trening_panel_1.visible = False
+      self.trening_panel_2.visible = False
+      self.skritt_panel_1.visible = True
+      self.skritt_panel_2.visible = True
