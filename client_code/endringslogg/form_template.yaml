@@ -8,7 +8,7 @@ components:
     name: text_area_14
     properties:
       height: 104
-      text: "18/4 Bygget om måten man legger inn aktiviteter og skritt. Enklere for bruker. \nAktiverte tre prestasjoner\nAktiverte AI til å informere deltager om prestasjoner"
+      text: "18/4 Bygget om måten man legger inn aktiviteter og skritt. Enklere for bruker.\nProgrammet husker om bruker sist var i skritt eller trening og åpner rett del (Er dette pålitelig ?? må testes) \nAktiverte tre prestasjoner\nAktiverte AI til å informere deltager om prestasjoner"
     type: TextArea
   - layout_properties: {grid_position: 'YDWXMR,JTPKXU'}
     name: text_area_13
