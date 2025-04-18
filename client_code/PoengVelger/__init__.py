@@ -100,11 +100,13 @@ class PoengVelger(PoengVelgerTemplate):
           alert("Fant ikke ikon for skritt – kontakt admin")
           return
         tekst = self.antall_skritt.text
+        antall = 0
         if tekst and tekst.isdigit():
             antall = int(tekst)
             
         else:
-            alert("Du må skrive inn et gyldig tall for skritt.")
+            #alert("Du må skrive inn et gyldig tall for skritt.")
+            self.antall_skritt.text =0
         
         if antall >= 800:
           poeng = 1
