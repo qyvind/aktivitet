@@ -4,9 +4,39 @@ components:
     name: ukedag_label
     properties: {role: headline}
     type: Label
+  - components:
+    - components:
+      - name: antall_skritt_label
+        properties: {text: 'Antall skritt:'}
+        type: Label
+      - name: antall_skritt
+        properties: {}
+        type: TextBox
+      layout_properties: {}
+      name: flow_panel_1
+      properties: {}
+      type: FlowPanel
+    - components:
+      - event_bindings: {click: registrer_trening_click}
+        layout_properties: {}
+        name: registrer_trening
+        properties: {role: tonal-button, text: Registrer heller treningsøkt}
+        type: Button
+      - layout_properties: {}
+        name: lagre_skritt
+        properties: {align: right, role: tonal-button, text: OK}
+        type: Button
+      layout_properties: {column: 'null'}
+      name: flow_panel_2
+      properties: {align: right}
+      type: FlowPanel
+    layout_properties: {grid_position: 'NNWEVH,NESHQD'}
+    name: skritt_panel
+    properties: {}
+    type: DataRowPanel
   layout_properties: {grid_position: 'BDFDPY,CPRVGV'}
   name: outlined_card_1
-  properties: {role: outlined-card}
+  properties: {role: elevated-card}
   type: ColumnPanel
 container: {type: ColumnPanel}
 is_package: true

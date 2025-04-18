@@ -16,3 +16,6 @@ class VelgPoeng(VelgPoengTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+
+  def registrer_trening_click(self, **event_args):
+    self.skritt_panel.visible = False
