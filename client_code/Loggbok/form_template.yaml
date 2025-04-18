@@ -141,7 +141,6 @@ components:
   - components:
     - components:
       - event_bindings: {click: prev_week_button_click}
-        layout_properties: {}
         name: prev_week_button
         properties: {background: 'theme:Secondary Container', icon: 'fa:long-arrow-left', role: elevated-button, text: ''}
         type: Button
