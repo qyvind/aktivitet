@@ -9,7 +9,8 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from datetime import datetime, timedelta
-from ..PoengVelger import PoengVelger
+# from ..PoengVelger import PoengVelger
+from ..VelgPoeng import VelgPoeng
 from ..Utils import Utils
 
 
@@ -56,45 +57,67 @@ class Loggbok(LoggbokTemplate):
     def son_button_click(self, **event_args):
         self.åpne_poengvelger_for_dag(6, self.son_button, self.son_akt_label,self.son_ikon, self.son_label,self.son_column_panel.tooltip)
     
-    
-    def åpne_poengvelger_for_dag(self, dag_index, knapp, label,ikon_komponent, ukedag_label, beskrivelse):
+        
+    def åpne_poengvelger_for_dag(self, dag_index, knapp, label, ikon_komponent, ukedag_label, beskrivelse):
         valgt_poeng = int(knapp.text or 0)
-        aktivitet = label.text
+        aktivitet = ""  # 👈 aktivitet settes basert på ikonets path
+    
+        def alert_callback(poengdata):
+            print('callback')
+            if poengdata:
+                print('poengdata',poengdata)
+                week_info = self.get_week_info(self.week_offset_label.text)
+                valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
+          
+                # Oppdater GUI
+                knapp.text = str(poengdata['poeng'])
+                label.text = poengdata['aktivitet']
+                ikon_komponent.source = poengdata['ikon']
+                ikon_komponent.width = 32
+                ikon_komponent.height = 32
+                ikon_komponent.tooltip = poengdata['beskrivelse']
+    
+                if poengdata['ikon'] is None:
+                    label.visible = True
+                    ikon_komponent.visible = False
+                else:
+                    label.visible = False
+                    ikon_komponent.visible = True
+    
+                # Konverter LazyMedia hvis nødvendig
+                nytt_ikon = poengdata['ikon']
+                if isinstance(nytt_ikon, anvil.BlobMedia) or nytt_ikon is None:
+                    ikon_til_server = nytt_ikon
+                else:
+                    ikon_til_server = anvil.BlobMedia(nytt_ikon.content_type, nytt_ikon.get_bytes(), name=nytt_ikon.name)
+    
+                # Lagre i tabell
+                self.lagre_aktivitet(
+                    valgt_dato,
+                    poengdata['aktivitet'],
+                    poengdata['poeng'],
+                    ikon_til_server,
+                    poengdata['beskrivelse']
+                )
+    
+        # Åpne VelgPoeng som alert
+        velg_poeng_form = VelgPoeng(
+            valgt_poeng=valgt_poeng,
+            aktivitet=aktivitet,
+            ukedag=ukedag_label.text,
+            ikon=ikon_komponent.source,
+            beskrivelse=beskrivelse
+        )
 
-        def mottak_fra_poengvelger(poeng, aktivitet, nytt_ikon,beskrivelse, ikon_path):
-          week_info = self.get_week_info(self.week_offset_label.text)
-          valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
-      
-          # Oppdater GUI
-          knapp.text = str(poeng)
-          label.text = aktivitet
-          ikon_komponent.source = nytt_ikon
-          ikon_komponent.width = 32
-          ikon_komponent.height = 32
-          ikon_komponent.tooltip = beskrivelse
-          if ikon_komponent == None:
-            label.visible=True
-            ikon_komponent.visible=False
-          else:
-            label.visible = False
-            ikon_komponent.visible = True
-      
-          # 🧠 Konverter LazyMedia til vanlig Media
-          if isinstance(nytt_ikon, anvil.BlobMedia) or nytt_ikon is None:
-              ikon_til_server = nytt_ikon
-          else:
-              ikon_til_server = anvil.BlobMedia(nytt_ikon.content_type, nytt_ikon.get_bytes(), name=nytt_ikon.name)
-      
-          #print("lagrer med ikon-type:", type(ikon_til_server))
-      
-          self.lagre_aktivitet(valgt_dato, aktivitet, poeng, ikon_til_server,beskrivelse)
-      
-            
+        velg_poeng_form.set_event_handler('x-close-alert', alert_callback)
+        
+        alert(
+            content=velg_poeng_form,
+            large=True,
+            buttons=[]
+        )
 
-        # open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text,ikon=ikon_komponent,beskrivelse=beskrivelse, callback=mottak_fra_poengvelger)
-        open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text, ikon=ikon_komponent.source, beskrivelse=beskrivelse, callback=mottak_fra_poengvelger)
-
-
+        
 
 
     def logout_click(self, **event_args):

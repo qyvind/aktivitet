@@ -69,6 +69,8 @@ class ItemTemplate1(ItemTemplate1Template):
         # Sørg for at 'click'-event for image_1, image_2, image_3, image_4
         # er satt til å kalle 'image_click' I DESIGNER VIEW (dette er uendret)
 
+        self.ikon_repeating_panel.add_event_handler('x-icon-click', self.icon_selected)
+
     def image_click(self, **event_args):
         """This method is called when image_1, image_2, image_3, or image_4 is clicked"""
         clicked_image_component = event_args['sender']
@@ -88,3 +90,5 @@ class ItemTemplate1(ItemTemplate1Template):
         # --- MODIFISERT DEL SLUTT ---
         else:
             print("ItemTemplate1 (Ikon): Klikket på en tom bildeplass.")
+
+          

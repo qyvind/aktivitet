@@ -42,6 +42,6 @@ class VelgIkon(VelgIkonTemplate):
 
     def icon_selected(self, icon_data, **event_args):
         """Denne mottar nå en dictionary med 'media' og 'path'"""
-        # Send hele dictionaryen tilbake til PoengVelger
+        
         self.raise_event('x-close-alert', value=icon_data)
         

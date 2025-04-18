@@ -46,9 +46,9 @@ components:
           properties: {}
           type: DropDown
         - components:
-          - event_bindings: {mouse_down: ikon_preview_click}
+          - event_bindings: {}
             layout_properties: {grid_position: 'VJBWVC,KSQHVW'}
-            name: ikon_preview
+            name: icon_preview
             properties: {height: 40.428558349609375}
             type: Image
           layout_properties: {width: 84.41052783203125}
@@ -101,11 +101,12 @@ components:
     type: ColumnPanel
   - components:
     - components:
-      - event_bindings: {click: button_1_click}
-        name: button_1
+      - event_bindings: {click: registrer_skritt_click}
+        name: registrer_skritt
         properties: {role: filled-button, text: Registrer heller skritt}
         type: Button
-      - name: lagre_trening
+      - event_bindings: {click: lagre_trening_click}
+        name: lagre_trening
         properties: {role: filled-button, text: OK}
         type: Button
       layout_properties: {grid_position: 'KQFMOA,XWRNHY'}

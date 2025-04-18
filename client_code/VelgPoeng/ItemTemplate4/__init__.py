@@ -63,22 +63,23 @@ class ItemTemplate4(ItemTemplate4Template):
         self.label_4.text = ""
         self.image_4.tag = None
 
+
+
+
   def image_click(self, x, y, button, keys, **event_args):
         clicked_image_component = event_args['sender']
 
-        # --- MODIFISERT DEL START ---
-        # Hent den lagrede data-dictionaryen fra tag'en
         selected_icon_data = clicked_image_component.tag
 
         if selected_icon_data: # Sjekk at vi klikket på et bilde med data
             # selected_icon_data er nå {'media': MediaObject, 'path': 'stien/til/fil.png'}
           
 
-        #     if self.parent:
-        #         # Send hele data-dictionaryen oppover
-        #         self.parent.raise_event('x-icon-click', icon_data=selected_icon_data)
-        #     else:
-        #         print("ItemTemplate1 (Ikon) FEIL: Kunne ikke finne self.parent!")
-        # # --- MODIFISERT DEL SLUTT ---
-        # else:
-        #     print("ItemTemplate1 (Ikon): Klikket på en tom bildeplass.")
+            if self.parent:
+                 
+              self.parent.raise_event('x-icon-click', icon_data=selected_icon_data, clicked_image=clicked_image_component)
+
+            else:
+              print("ItemTemplate1 (Ikon) FEIL: Kunne ikke finne self.parent!")
+
+
