@@ -8,7 +8,7 @@ from anvil.tables import app_tables
 from ..VelgIkon import VelgIkon
 
 class PoengVelger(PoengVelgerTemplate):
-    def __init__(self, valgt_poeng=1, aktivitet="", ukedag="", ikon=None, beskrivelse=None, callback=None, **properties):
+    def __init__(self, valgt_poeng=1, aktivitet="", ukedag="", ikon=None, beskrivelse=None,skritt=None, callback=None, **properties):
         self.init_components(**properties)
         self.callback = callback
 
@@ -33,6 +33,8 @@ class PoengVelger(PoengVelgerTemplate):
         self.poeng_drop.items = [("Mindre enn en halv time", 0), ("En halv time", 1), ("En time", 2), ("Halvannen time eller mer", 3)]
         self.poeng_drop.selected_value = valgt_poeng
         self.aktivitet_box.text = aktivitet
+        self.antall_skritt.text = skritt.text
+        
 
         self.beskrivelse.text = beskrivelse
 
@@ -90,7 +92,8 @@ class PoengVelger(PoengVelgerTemplate):
             # Alternativ 1: Uten path (som før)
             # self.callback(poeng, aktivitet, ikon_media, beskrivelse)
             # Alternativ 2: Med path (krever endring der callback er definert)
-             self.callback(poeng, aktivitet, ikon_media, beskrivelse, ikon_path)
+             skritt=0
+             self.callback(poeng, aktivitet, ikon_media, beskrivelse, ikon_path,skritt)
 
         open_form('Loggbok')
 
@@ -112,7 +115,7 @@ class PoengVelger(PoengVelgerTemplate):
           poeng = 1
         else:
           poeng=0
-        aktivitet = f"{antall} skritt"
+        aktivitet = "Skritt"
         
         # Bruk de lagrede verdiene
         ikon_media = skritt_rad['file']
