@@ -1,0 +1,88 @@
+components:
+- components:
+  - components:
+    - event_bindings: {mouse_down: image_click}
+      layout_properties: {grid_position: 'VWSYMY,MEVDBO'}
+      name: image_1
+      properties: {height: '50'}
+      type: Image
+    - layout_properties: {grid_position: 'IPGTKK,IBMYQI'}
+      name: label_1
+      properties:
+        align: center
+        font_size: 8
+        spacing:
+          margin: ['0', null, '6', null]
+          padding: ['0', null, '0', null]
+        text: ikon_1_label
+      type: Label
+    layout_properties: {width: 58.84815834960938}
+    name: ikon1_panel
+    properties: {}
+    type: ColumnPanel
+  - components:
+    - event_bindings: {mouse_down: image_click}
+      layout_properties: {grid_position: 'VWSYMY,MEVDBO'}
+      name: image_2
+      properties: {height: '50'}
+      type: Image
+    - layout_properties: {grid_position: 'IPGTKK,IBMYQI'}
+      name: label_2
+      properties:
+        align: center
+        font_size: 8
+        spacing:
+          margin: ['0', null, '6', null]
+          padding: ['0', null, '0', null]
+        text: ikon_2_label
+      type: Label
+    layout_properties: {width: 52.9286}
+    name: ikon1_panel_copy
+    properties: {}
+    type: ColumnPanel
+  - components:
+    - event_bindings: {mouse_down: image_click}
+      layout_properties: {grid_position: 'VWSYMY,MEVDBO'}
+      name: image_3
+      properties: {height: '50'}
+      type: Image
+    - layout_properties: {grid_position: 'IPGTKK,IBMYQI'}
+      name: label_3
+      properties:
+        align: center
+        font_size: 8
+        spacing:
+          margin: ['0', null, '6', null]
+          padding: ['0', null, '0', null]
+        text: ikon_3_label
+      type: Label
+    layout_properties: {width: 59.9286}
+    name: ikon1_panel_copy_copy
+    properties: {}
+    type: ColumnPanel
+  - components:
+    - event_bindings: {mouse_down: image_click}
+      layout_properties: {grid_position: 'VWSYMY,MEVDBO'}
+      name: image_4
+      properties: {height: '50'}
+      type: Image
+    - layout_properties: {grid_position: 'IPGTKK,IBMYQI'}
+      name: label_4
+      properties:
+        align: center
+        font_size: 8
+        spacing:
+          margin: ['0', null, '6', null]
+          padding: ['0', null, '0', null]
+        text: ikon_4_label
+      type: Label
+    layout_properties: {width: 54.5000111328125}
+    name: ikon1_panel_copy_copy_copy
+    properties: {}
+    type: ColumnPanel
+  layout_properties: {grid_position: 'HPTLIC,XPKWAA'}
+  name: flow_panel_1
+  properties: {align: center}
+  type: FlowPanel
+container: {type: ColumnPanel}
+is_package: true
