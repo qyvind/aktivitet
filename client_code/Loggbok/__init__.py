@@ -27,11 +27,13 @@ class Loggbok(LoggbokTemplate):
 
   
 
-    def initier_uke(self,week_offset):
-        self.get_week_info(week_offset)
-        self.uke_label.text = self.get_week_range(week_offset)
-        week_activities = self.get_activities_for_week()
-        self.fyll_skjermen(week_activities)
+    # def initier_uke(self,week_offset):
+    #     print('initierer uke!')
+    #     self.get_week_info(week_offset)
+    #     self.uke_label.text = self.get_week_range(week_offset)
+    #     week_activities = self.get_activities_for_week()
+    #     #print("📦 Hentet week_activities 1:", week_activities)
+    #     self.fyll_skjermen(week_activities)
         
 
     def man_button_click(self, **event_args):
@@ -171,103 +173,109 @@ class Loggbok(LoggbokTemplate):
 
 
 
-    def get_activities_for_week(self):
-        # Få den påloggede brukeren
-        user = anvil.users.get_user()
-        if not user:
-            return {day: [] for day in range(7)}  # Returner en dictionary med alle dager
+    # def get_activities_for_week(self):
+    #     # Få den påloggede brukeren
+    #     user = anvil.users.get_user()
+    #     if not user:
+    #         return {day: [] for day in range(7)}  # Returner en dictionary med alle dager
         
-        # Få datoene for den aktive uken (mandag til søndag)
-        week_info = self.get_week_info(self.week_offset_label.text)
-        start_of_week = week_info['monday_date']  # Mandag som date-objekt
-        end_of_week = week_info['sunday_date']  # Søndag som date-objekt
+    #     # Få datoene for den aktive uken (mandag til søndag)
+    #     week_info = self.get_week_info(self.week_offset_label.text)
+    #     start_of_week = week_info['monday_date']  # Mandag som date-objekt
+    #     end_of_week = week_info['sunday_date']  # Søndag som date-objekt
+    #     print("📆 Henter aktiviteter fra:", start_of_week, "til", end_of_week)
+    #     try:
+    #         # Hent aktivitetene kun for påloggede bruker innenfor ukens datoer
+    #         activities = app_tables.aktivitet.search(
+    #             tables.order_by('dato'),
+    #             deltager=user,  # Filtrer på innlogget bruker
+    #             dato=q.between(start_of_week, end_of_week + timedelta(days=1))  # Filtrer på datoer
+    #         )
+    #         print("✅ Fant antall aktiviteter:", len(activities))
+    #     except Exception as e:
+    #         print(f"Error fetching activities: {e}")
+    #         return {}
         
-        try:
-            # Hent aktivitetene kun for påloggede bruker innenfor ukens datoer
-            activities = app_tables.aktivitet.search(
-                tables.order_by('dato'),
-                deltager=user,  # Filtrer på innlogget bruker
-                dato=q.between(start_of_week, end_of_week + timedelta(days=1))  # Filtrer på datoer
-            )
-        except Exception as e:
-            #print(f"Error fetching activities: {e}")
-            return {}
+    #     # Organisere aktivitetene i en liste med 7 dager (0=Mandag, 6=Søndag)
+    #     week_activities = {day: [] for day in range(7)}
         
-        # Organisere aktivitetene i en liste med 7 dager (0=Mandag, 6=Søndag)
-        week_activities = {day: [] for day in range(7)}
+    #     for activity in activities:
+    #         activity_date = activity['dato']
+    #         day_of_week = activity_date.weekday()  # Mandag = 0, Søndag = 6
+    #         week_activities[day_of_week].append({
+    #             'aktivitet': activity['aktivitet'],
+    #             'poeng': activity['poeng'],
+    #             'ikon': activity['ikon'],
+    #             'beskrivelse': activity['beskrivelse'],
+    #             'skritt':activity.get('skritt')
+    #         })
         
-        for activity in activities:
-            activity_date = activity['dato']
-            day_of_week = activity_date.weekday()  # Mandag = 0, Søndag = 6
-            week_activities[day_of_week].append({
-                'aktivitet': activity['aktivitet'],
-                'poeng': activity['poeng'],
-                'ikon': activity['ikon'],
-                'beskrivelse': activity['beskrivelse'],
-            })
-        
-        return week_activities  # Returner aktiviteter for hver dag i uken
+    #     return week_activities  # Returner aktiviteter for hver dag i uken
                 
-    def fyll_skjermen(self, week_activities):
-      # Hent ukens info og konkurranseinfo
-      week_info = self.get_week_info(self.week_offset_label.text)
-      mandag_dato = week_info['monday_date']
-      _, konkurranse_fradato, konkurranse_tildato = self.hent_konkurranse_info()
+    # def fyll_skjermen(self, week_activities):
+    #   # Hent ukens info og konkurranseinfo
+    #   week_info = self.get_week_info(self.week_offset_label.text)
+    #   mandag_dato = week_info['monday_date']
+    #   _, konkurranse_fradato, konkurranse_tildato = self.hent_konkurranse_info()
 
-      # Sjekk om vi er på første uke i konkurransen
-      if mandag_dato == konkurranse_fradato:
-          self.prev_week_button.visible = False  # Skjul pil til forrige uke
-      else:
-          self.prev_week_button.visible = True  # Vis pil ellers
+    #   # Sjekk om vi er på første uke i konkurransen
+    #   if mandag_dato == konkurranse_fradato:
+    #       self.prev_week_button.visible = False  # Skjul pil til forrige uke
+    #   else:
+    #       self.prev_week_button.visible = True  # Vis pil ellers
 
-      # Sjekk om vi er på siste uke i konkurransen
-      sondag_dato = mandag_dato + timedelta(days=6)
-      if sondag_dato == konkurranse_tildato:
-          self.next_week_button.visible = False  # Skjul pil til neste uke
-      else:
-          self.next_week_button.visible = True   # Vis pil ellers
+    #   # Sjekk om vi er på siste uke i konkurransen
+    #   sondag_dato = mandag_dato + timedelta(days=6)
+    #   if sondag_dato == konkurranse_tildato:
+    #       self.next_week_button.visible = False  # Skjul pil til neste uke
+    #   else:
+    #       self.next_week_button.visible = True   # Vis pil ellers
 
       
-      # 👇 Bruker JavaScript Date-objekt for å få lokal "i dag"-dato fra klientens tidssone
-      import anvil.js
-      js_now = anvil.js.window.Date() 
-      today_date = datetime.fromtimestamp(js_now.getTime() / 1000).date()
+    #   # 👇 Bruker JavaScript Date-objekt for å få lokal "i dag"-dato fra klientens tidssone
+    #   import anvil.js
+    #   js_now = anvil.js.window.Date() 
+    #   today_date = datetime.fromtimestamp(js_now.getTime() / 1000).date()
   
-      # Først sjekker vi om uken ligger utenfor konkurranseintervallet
-      if not self.er_dato_i_interval(mandag_dato, konkurranse_fradato, konkurranse_tildato):
-          # Utenfor intervallet: sett alle kolonnepaneler til rød og deaktiver knappene
-          for panel, knapp in [
-              (self.man_column_panel, self.man_button),
-              (self.tir_column_panel, self.tir_button),
-              (self.ons_column_panel, self.ons_button),
-              (self.tor_column_panel, self.tor_button),
-              (self.fre_column_panel, self.fre_button),
-              (self.lor_column_panel, self.lor_button),
-              (self.son_column_panel, self.son_button),
-          ]:
-              panel.background = "RED"
-              knapp.enabled = False
-      else:
-          # Uken er innenfor konkurranseintervallet, oppdater hver dag og sjekk for fremtid
-          base_dato = mandag_dato
-          komponenter = [
-              (self.man_button, self.man_column_panel, self.man_akt_label, week_activities[0], base_dato, self.man_ikon,self.man_column_panel),
-              (self.tir_button, self.tir_column_panel, self.tir_akt_label, week_activities[1], base_dato + timedelta(days=1), self.tir_ikon,self.tir_column_panel),
-              (self.ons_button, self.ons_column_panel, self.ons_akt_label, week_activities[2], base_dato + timedelta(days=2), self.ons_ikon,self.ons_column_panel),
-              (self.tor_button, self.tor_column_panel, self.tor_akt_label, week_activities[3], base_dato + timedelta(days=3), self.tor_ikon,self.tor_column_panel),
-              (self.fre_button, self.fre_column_panel, self.fre_akt_label, week_activities[4], base_dato + timedelta(days=4), self.fre_ikon,self.fre_column_panel),
-              (self.lor_button, self.lor_column_panel, self.lor_akt_label, week_activities[5], base_dato + timedelta(days=5), self.lor_ikon,self.lor_column_panel),
-              (self.son_button, self.son_column_panel, self.son_akt_label, week_activities[6], base_dato + timedelta(days=6), self.son_ikon,self.son_column_panel),
-          ]
+    #   # Først sjekker vi om uken ligger utenfor konkurranseintervallet
+    #   if not self.er_dato_i_interval(mandag_dato, konkurranse_fradato, konkurranse_tildato):
+    #       # Utenfor intervallet: sett alle kolonnepaneler til rød og deaktiver knappene
+    #       print("❌ Utenfor konkurranseperiode")
+    #       for panel, knapp in [
+    #           (self.man_column_panel, self.man_button),
+    #           (self.tir_column_panel, self.tir_button),
+    #           (self.ons_column_panel, self.ons_button),
+    #           (self.tor_column_panel, self.tor_button),
+    #           (self.fre_column_panel, self.fre_button),
+    #           (self.lor_column_panel, self.lor_button),
+    #           (self.son_column_panel, self.son_button),
+    #       ]:
+    #           panel.background = "RED"
+    #           knapp.enabled = False
+    #   else:
+    #       # Uken er innenfor konkurranseintervallet, oppdater hver dag og sjekk for fremtid
+    #       print("✅ Innenfor konkurranseperiode")
+    #       base_dato = mandag_dato
+    #       komponenter = [
+    #           (self.man_button, self.man_column_panel, self.man_akt_label, week_activities[0], base_dato, self.man_ikon,self.man_column_panel,self.man_skritt_label),
+    #           (self.tir_button, self.tir_column_panel, self.tir_akt_label, week_activities[1], base_dato + timedelta(days=1), self.tir_ikon,self.tir_column_panel,self.tir_skritt_label),
+    #           (self.ons_button, self.ons_column_panel, self.ons_akt_label, week_activities[2], base_dato + timedelta(days=2), self.ons_ikon,self.ons_column_panel,self.ons_skritt_label),
+    #           (self.tor_button, self.tor_column_panel, self.tor_akt_label, week_activities[3], base_dato + timedelta(days=3), self.tor_ikon,self.tor_column_panel,self.tor_skritt_label),
+    #           (self.fre_button, self.fre_column_panel, self.fre_akt_label, week_activities[4], base_dato + timedelta(days=4), self.fre_ikon,self.fre_column_panel,self.fre_skritt_label),
+    #           (self.lor_button, self.lor_column_panel, self.lor_akt_label, week_activities[5], base_dato + timedelta(days=5), self.lor_ikon,self.lor_column_panel,self.lor_skritt_label),
+    #           (self.son_button, self.son_column_panel, self.son_akt_label, week_activities[6], base_dato + timedelta(days=6), self.son_ikon,self.son_column_panel,self.son_skritt_label),
+    #       ]
           
           
-          for knapp, panel, label, akt_data, dato, ikon_komponent, ColumnPanel in komponenter:
-              self.oppdater_dag(knapp, panel, label, akt_data, dato, today_date, ikon_komponent, ColumnPanel)
+    #       for knapp, panel, label, akt_data, dato, ikon_komponent, ColumnPanel, skritt_label in komponenter:
+    #           print('kaller oppdater_dag')
+    #           self.oppdater_dag(knapp, panel, label, akt_data, dato, today_date, ikon_komponent, ColumnPanel, skritt_label)
+          
 
   
-      self.lykkehjul.visible = self.sjekk_lykkehjul()
-      user = anvil.users.get_user()
-      self.vis_tildelte_badges(user)
+    #   self.lykkehjul.visible = self.sjekk_lykkehjul()
+    #   user = anvil.users.get_user()
+    #   self.vis_tildelte_badges(user)
 
   
     # def vis_tildelte_badges(self, bruker):
@@ -383,6 +391,7 @@ class Loggbok(LoggbokTemplate):
       """
       # Hent aktivitetene for uken, en dictionary med nøkler 0 (mandag) til 6 (søndag)
       week_activities = self.get_activities_for_week()
+      print("📦 Hentet week_activities: 2", week_activities)
       
       count_days = 0  # Teller antall dager med minst ett poeng
       for day in range(7):
@@ -468,81 +477,61 @@ class Loggbok(LoggbokTemplate):
       open_form('team_medlemmer',teamnavn=self.team_label.text)
 
 
-    def oppdater_dag(self, knapp, panel, label, aktivitet_data, dato, today_date, ikon_komponent, column_panel):
-        if aktivitet_data:
-            poeng = str(aktivitet_data[0]['poeng'])
-            aktivitet = aktivitet_data[0]['aktivitet']
-            ikon = aktivitet_data[0]['ikon']
-            column_panel.tooltip = aktivitet_data[0]['beskrivelse']
-        else:
-            poeng = "0"
-            aktivitet = ""
-            ikon = None
-            column_panel.tooltip = ""
-    
-        if ikon_komponent is not None:
-            ikon_komponent.source = ikon
-    
-        knapp.text = poeng
-        if poeng == "0" and not aktivitet and dato <= today_date and ikon is None:
-            label.text = "Hviledag"
-        else:
-            label.text = aktivitet
-
-          
-    
-        mandag_denne_uken = today_date - timedelta(days=today_date.weekday())
-        mandag_forrige_uke = mandag_denne_uken - timedelta(weeks=1)
-    
-        # --- START: Logikk for å bestemme om dagen er redigerbar ---
-        mandag_denne_uken = today_date - timedelta(days=today_date.weekday())
-        mandag_forrige_uke = mandag_denne_uken - timedelta(weeks=1)
-
-        er_fremtid = dato > today_date
-        ''' # Avsnittet under åpnet for redigering av inneværende uke + forrige hvis det er mandag
-        er_redigerbar_uke = False
-        # Sjekk 1: Er datoen i inneværende uke eller senere?
-        if dato >= mandag_denne_uken:
-            er_redigerbar_uke = True
-        # Sjekk 2: Er datoen i forrige uke OG er det mandag i dag?
-        elif dato >= mandag_forrige_uke and today_date.weekday() == 0:
-             er_redigerbar_uke = True
-        # Ellers (eldre enn forrige uke, eller forrige uke på en annen dag enn mandag)
-        # er er_redigerbar_uke fortsatt False
-        '''
-
-        # Ny regel: kun tillat redigering for i dag og i går
-        er_redigerbar_uke = dato >= (today_date - timedelta(days=1))
-
-        # Knappen skal være aktivert hvis det IKKE er fremtid OG uken er redigerbar
-        knapp.enabled = (not er_fremtid) and er_redigerbar_uke
-        # --- SLUTT: Logikk for å bestemme om dagen er redigerbar ---
-
-
-      
-        knapp.enabled = (not er_fremtid) and er_redigerbar_uke
-    
-        # --- Oppdatert farge- og stilsetting ---
-        if not knapp.enabled:
-            if dato < today_date:
-                panel.background = self.get_farge(poeng) if poeng != "0" else "#f5f5f5"
-            else:
-                panel.background = "#eeeeee"
-            knapp.foreground = "#aaaaaa"
-            label.foreground = "#aaaaaa"
-            ikon_komponent.foreground = "#aaaaaa"
-            #panel.border = "1px dashed #cccccc"
-            panel.opacity = 1.0  # Evt. sett til 0.7 hvis du vil tone det mer ned
-        else:
-            panel.background = "#e0e0e0" if poeng == "0" else self.get_farge(poeng)
-            knapp.foreground = "black"
-            label.foreground = "black"
-            ikon_komponent.foreground = "black"
-            #panel.border = "2px dashed #0077cc"
-            panel.opacity = 1.0
-    
-        knapp.style = ""
-        label.style = ""
+    # def oppdater_dag(self, knapp, panel, label, aktivitet_data, dato, today_date, ikon_komponent, column_panel, skritt_label):
+    #   if aktivitet_data:
+    #       poeng = str(aktivitet_data[0]['poeng'])
+    #       aktivitet = aktivitet_data[0]['aktivitet']
+    #       ikon = aktivitet_data[0]['ikon']
+    #       column_panel.tooltip = aktivitet_data[0]['beskrivelse']
+    #       skritt = aktivitet_data[0].get('skritt')  # ✅ Nytt felt
+    #   else:
+    #       poeng = "0"
+    #       aktivitet = ""
+    #       ikon = None
+    #       column_panel.tooltip = ""
+    #       skritt = None
+  
+    #   if ikon_komponent is not None:
+    #       ikon_komponent.source = ikon
+  
+    #   knapp.text = poeng
+    #   if poeng == "0" and not aktivitet and dato <= today_date and ikon is None:
+    #       label.text = "Hviledag"
+    #   else:
+    #       label.text = aktivitet
+    #   print('oppdaterer skjerm med skritt:',skritt,"L:",skritt_label)
+    #   # ✅ Oppdater skritt-label hvis den finnes
+    #   if skritt_label is not None:
+    #       if skritt:
+    #           skritt_label.text = skritt
+    #       else:
+    #           skritt_label.text = ""
+  
+    #   # Redigerbarhetslogikk
+    #   mandag_denne_uken = today_date - timedelta(days=today_date.weekday())
+    #   er_fremtid = dato > today_date
+    #   er_redigerbar_uke = dato >= (today_date - timedelta(days=1))
+    #   knapp.enabled = (not er_fremtid) and er_redigerbar_uke
+  
+    #   # Stil
+    #   if not knapp.enabled:
+    #       if dato < today_date:
+    #           panel.background = self.get_farge(poeng) if poeng != "0" else "#f5f5f5"
+    #       else:
+    #           panel.background = "#eeeeee"
+    #       knapp.foreground = "#aaaaaa"
+    #       label.foreground = "#aaaaaa"
+    #       ikon_komponent.foreground = "#aaaaaa"
+    #       panel.opacity = 1.0
+    #   else:
+    #       panel.background = "#e0e0e0" if poeng == "0" else self.get_farge(poeng)
+    #       knapp.foreground = "black"
+    #       label.foreground = "black"
+    #       ikon_komponent.foreground = "black"
+    #       panel.opacity = 1.0
+  
+    #   knapp.style = ""
+    #   label.style = ""
 
 
     def deltager_label_click(self, **event_args):

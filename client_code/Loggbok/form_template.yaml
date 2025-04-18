@@ -192,6 +192,14 @@ components:
             spacing_below: none
             visible: true
           type: Image
+        - layout_properties: {grid_position: 'EBOSPB,MXRHHG'}
+          name: man_skritt
+          properties:
+            font_size: 8
+            spacing:
+              margin: ['0', null, '0', null]
+              padding: ['0', null, '0', null]
+          type: Label
         - layout_properties: {grid_position: 'EBOSPB,PRGYBS'}
           name: man_akt_label
           properties:
@@ -240,6 +248,14 @@ components:
             height: '32'
             margin: ['0', null, '0', null]
           type: Image
+        - layout_properties: {grid_position: 'PXLERO,UBVJBE'}
+          name: tir_skritt
+          properties:
+            font_size: 8
+            spacing:
+              margin: ['0', null, '0', null]
+              padding: ['0', null, '0', null]
+          type: Label
         - layout_properties: {grid_position: 'PXLERO,PKVRMB'}
           name: tir_akt_label
           properties:
@@ -287,6 +303,14 @@ components:
             height: '32'
             margin: ['0', null, '0', null]
           type: Image
+        - layout_properties: {grid_position: 'SOIAYZ,EAQYZU'}
+          name: ons_skritt
+          properties:
+            font_size: 8
+            spacing:
+              margin: ['0', null, '0', null]
+              padding: ['0', null, '0', null]
+          type: Label
         - layout_properties: {grid_position: 'SOIAYZ,XAITQX'}
           name: ons_akt_label
           properties:
@@ -334,6 +358,14 @@ components:
             height: '32'
             margin: ['0', null, '0', null]
           type: Image
+        - layout_properties: {grid_position: 'JUEBES,XXQDYB'}
+          name: tor_skritt
+          properties:
+            font_size: 8
+            spacing:
+              margin: ['0', null, '0', null]
+              padding: ['0', null, '0', null]
+          type: Label
         - layout_properties: {grid_position: 'JUEBES,WOMSNG'}
           name: tor_akt_label
           properties:
@@ -386,6 +418,14 @@ components:
             height: '32'
             margin: ['0', null, '0', null]
           type: Image
+        - layout_properties: {grid_position: 'EAQPVP,OCEZMW'}
+          name: fre_skritt
+          properties:
+            font_size: 8
+            spacing:
+              margin: ['0', null, '0', null]
+              padding: ['0', null, '0', null]
+          type: Label
         - layout_properties: {grid_position: 'EAQPVP,FHTBQS'}
           name: fre_akt_label
           properties:
@@ -433,6 +473,14 @@ components:
             height: '32'
             margin: ['0', null, '0', null]
           type: Image
+        - layout_properties: {grid_position: 'ETZXYW,MLOUYE'}
+          name: lor_skritt
+          properties:
+            font_size: 8
+            spacing:
+              margin: ['0', null, '0', null]
+              padding: ['0', null, '0', null]
+          type: Label
         - layout_properties: {grid_position: 'ETZXYW,AGFTEO'}
           name: lor_akt_label
           properties:
@@ -480,6 +528,14 @@ components:
             height: '32'
             margin: ['0', null, '0', null]
           type: Image
+        - layout_properties: {grid_position: 'JWPLVX,ZVVNVP'}
+          name: son_skritt
+          properties:
+            font_size: 8
+            spacing:
+              margin: ['0', null, '0', null]
+              padding: ['0', null, '0', null]
+          type: Label
         - layout_properties: {grid_position: 'JWPLVX,KFSMCP'}
           name: son_akt_label
           properties:

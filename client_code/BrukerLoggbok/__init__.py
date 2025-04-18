@@ -17,7 +17,7 @@ class BrukerLoggbok(BrukerLoggbokTemplate):
         self.initier_uke(self.week_offset_label.text)
         self.sjekk_bruker()
 
-    def initier_uke(self, week_offset):
+    def _initier_uke(self, week_offset):
         self.get_week_info(week_offset)
         self.uke_label.text = self.get_week_range(week_offset)
         week_activities = self.get_activities_for_week()
@@ -71,6 +71,7 @@ class BrukerLoggbok(BrukerLoggbokTemplate):
                 'poeng': act['poeng'],
                 'ikon': act['ikon'],
                 'beskrivelse': act['beskrivelse'],
+                #'skritt': act['skritt']
             })
         return week_activities
 
