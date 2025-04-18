@@ -6,14 +6,26 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 # Make sure the import path is correct for your project structure
 from ..VelgIkon import VelgIkon
+from ..Utils import Utils
 
 class PoengVelger(PoengVelgerTemplate):
     def __init__(self, valgt_poeng=1, aktivitet="", ukedag="", ikon=None, beskrivelse=None,skritt=None, callback=None, **properties):
         self.init_components(**properties)
         self.callback = callback
+        skrittf= Utils.hent_skritt_first()
+        if skrittf:
+          print('skritt',skrittf )
+          self.trening_panel_1.visible = False
+          self.trening_panel_2.visible = False
+          self.skritt_panel_1.visible = True
+          self.skritt_panel_2.visible = True
+        else:
+          self.trening_panel_1.visible = True
+          self.trening_panel_2.visible = True
+          self.skritt_panel_1.visible = False
+          self.skritt_panel_2.visible = False
 
-        # --- MODIFISERT DEL START ---
-        # Lagre både Media-objektet og path-strengen
+      
         self.selected_ikon_media = None # Initialiser som None
         self.selected_ikon_path = None  # Initialiser som None
 
@@ -94,7 +106,7 @@ class PoengVelger(PoengVelgerTemplate):
             # Alternativ 2: Med path (krever endring der callback er definert)
              skritt=0
              self.callback(poeng, aktivitet, ikon_media, beskrivelse, ikon_path,skritt)
-
+        anvil.server.call('sett_skritt_first',False)
         open_form('Loggbok')
 
     def lagre_skritt_click(self, **event_args):
@@ -127,7 +139,7 @@ class PoengVelger(PoengVelgerTemplate):
         if self.callback:
 
              self.callback(poeng, aktivitet, ikon_media, beskrivelse, ikon_path,skritt)
-
+        anvil.server.call('sett_skritt_first',True)
         open_form('Loggbok')
 
     def bytt_til_trening_click(self, **event_args):

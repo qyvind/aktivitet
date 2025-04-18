@@ -833,8 +833,18 @@ def lag_status_for_bruker():
         if beskrivelse_tekst:
             statuslinjer.append(f"beskrivelser uke {uke_nr}: {beskrivelse_tekst}")
     
-    # Finn brukerens plassering
+    
+    # Finn brukerens plassering basert på ny score
     alle_poeng = hent_poengsummer()
+    
+    # Beregn score for hver bruker
+    for d in alle_poeng:
+        d["score"] = (100 * (d.get("poeng", 0) + d.get("bonus", 0))) + d.get("longest_streak", 0)
+    
+    # Sorter etter score, høyest først
+    alle_poeng.sort(key=lambda d: d["score"], reverse=True)
+    
+    # Finn brukerens plassering
     plassering = next((i + 1 for i, d in enumerate(alle_poeng) if d["email"] == bruker["email"]), None)
     plassering_tekst = f"\nplassering totalt: {plassering} av {len(alle_poeng)}" if plassering else "\nplassering ikke funnet"
 
@@ -847,6 +857,20 @@ def lag_status_for_bruker():
     status = f"navn: {navn}{plassering_tekst}{lag_tekst}\n" + "\n".join(statuslinjer)
     return status
 
+@anvil.server.callable
+def beregn_plassering(email):
+    alle_poeng = hent_poengsummer()
+
+    for d in alle_poeng:
+        d["score"] = (100 * (d.get("poeng", 0) + d.get("bonus", 0))) + d.get("longest_streak", 0)
+
+    alle_poeng.sort(key=lambda d: d["score"], reverse=True)
+
+    plassering = next((i + 1 for i, d in enumerate(alle_poeng) if d["email"] == email), None)
+    return {
+        "plassering": plassering,
+        "antall_deltakere": len(alle_poeng)
+    }
 
 @anvil.server.callable
 def generer_oppmuntring_for_bruker():
@@ -1047,7 +1071,9 @@ def sjekk_badge_3(bruker):
     har_lop = 'løp' in ikoner
 
     return har_sykkel and har_svømming and har_lop
-    
+
+
+
 
 def tildel_badge(bruker, badge_id):
     badge = app_tables.badges.get(id=badge_id)
@@ -1132,3 +1158,15 @@ def generer_badge_melding(badge_id):
 
     except Exception as e:
         return f"Feil ved henting av AI-melding: {e}"
+
+
+@anvil.server.callable
+def sett_skritt_first(verdi: bool):
+    from anvil.tables import app_tables
+    user = anvil.users.get_user()
+    userinfo_rad = app_tables.userinfo.get(user=user)
+
+    if userinfo_rad:
+        userinfo_rad["skritt_first"] = verdi
+    else:
+        app_tables.userinfo.add_row(user=user, skritt_first=verdi)
