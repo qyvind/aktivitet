@@ -23,7 +23,7 @@ components:
       - {data_key: column_1, id: AHNFPO, title: Bonus, width: '60'}
       - {data_key: column_1, id: ZPQDNV, title: Streak, width: '60'}
       - {data_key: column_1, id: PJNLQL, title: Score, width: '60'}
-      - {data_key: column_1, expand: false, id: LSHEHV, title: Team, width: 278.5999755859375}
+      - {data_key: column_1, expand: false, id: LSHEHV, title: Team, width: 98.7142333984375}
     type: DataGrid
   - components:
     - layout_properties: {grid_position: 'QGWPOY,PWVMAI'}

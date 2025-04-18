@@ -41,7 +41,7 @@ components:
     - event_bindings: {click: button_6_click}
       layout_properties: {}
       name: button_6
-      properties: {role: tonal-button, text: test nightly recalc}
+      properties: {role: tonal-button, text: test}
       type: Button
     - event_bindings: {click: button_7_click}
       layout_properties: {}

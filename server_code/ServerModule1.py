@@ -15,9 +15,6 @@ import datetime
 import openai
 from anvil.secrets import get_secret
 
-
-
-
 @anvil.server.callable
 def add_aktivitet(aktivitet):
   #print('add_aktivitet')
@@ -860,48 +857,49 @@ def generer_oppmuntring_for_bruker():
 
     # Hent status-tekst
     status = lag_status_for_bruker()
+    print(status)
+    #ai kommentert vekk foreløpig:
+    # # Hent alle tilgjengelige prompts fra databasen
+    # alle_prompter = list(app_tables.ai_prompt.search())
+    # if not alle_prompter:
+    #     return "Ingen AI-prompter funnet i tabellen."
 
-    # Hent alle tilgjengelige prompts fra databasen
-    alle_prompter = list(app_tables.ai_prompt.search())
-    if not alle_prompter:
-        return "Ingen AI-prompter funnet i tabellen."
+    # # Velg én tilfeldig prompt
+    # valgt_prompt_mal = random.choice(alle_prompter)['prompt']
 
-    # Velg én tilfeldig prompt
-    valgt_prompt_mal = random.choice(alle_prompter)['prompt']
+    # # Sett inn status i prompten
+    # if "{status}" in valgt_prompt_mal:
+    #     prompt = valgt_prompt_mal.replace("{status}", status)
+    # else:
+    #     prompt = f"{valgt_prompt_mal}\n\nStatus:\n{status}"
 
-    # Sett inn status i prompten
-    if "{status}" in valgt_prompt_mal:
-        prompt = valgt_prompt_mal.replace("{status}", status)
-    else:
-        prompt = f"{valgt_prompt_mal}\n\nStatus:\n{status}"
+    # # Sett OpenAI-nøkkel
+    # openai.api_key = get_secret("openai_key")
 
-    # Sett OpenAI-nøkkel
-    openai.api_key = get_secret("openai_key")
-
-    try:
-        # Send forespørsel til OpenAI
-        response = openai.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "Du er en positiv, humoristisk treningscoach for en aktivitetskonkurranse på jobb."},
-                {"role": "system", "content": "Du representerer bedriftsidrettslaget, Framo BIL. Ikke bruk noen tittel på deg selv. Bruk gjerne fornavn til deltageren. "},
-                {"role": "user", "content": " I konkurransen må man gå få poeng fem dager i uken for å delta i ukentlig trekning av store premier. Pengene er en motiverende faktor for deltagerne. "},
+    # try:
+    #     # Send forespørsel til OpenAI
+    #     response = openai.chat.completions.create(
+    #         model="gpt-3.5-turbo",
+    #         messages=[
+    #             {"role": "system", "content": "Du er en positiv, humoristisk treningscoach for en aktivitetskonkurranse på jobb."},
+    #             {"role": "system", "content": "Du representerer bedriftsidrettslaget, Framo BIL. Ikke bruk noen tittel på deg selv. Bruk gjerne fornavn til deltageren. "},
+    #             {"role": "user", "content": " I konkurransen må man gå få poeng fem dager i uken for å delta i ukentlig trekning av store premier. Pengene er en motiverende faktor for deltagerne. "},
               
-                {"role": "user", "content": "Det er også en lagkonkurranse, for de som er med på et lag. For alle er det en indibviduell konkurranse, men det viktigste er at de får en vane med å trene litt hver dag"},
-                {"role": "user", "content": "Ikke avslutt med et spørsmål."},
-                {"role": "user", "content": "Konkurransen går over 10 uker"},
+    #             {"role": "user", "content": "Det er også en lagkonkurranse, for de som er med på et lag. For alle er det en indibviduell konkurranse, men det viktigste er at de får en vane med å trene litt hver dag"},
+    #             {"role": "user", "content": "Ikke avslutt med et spørsmål."},
+    #             {"role": "user", "content": "Konkurransen går over 10 uker"},
           
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.9,
-            max_tokens=300
-        )
+    #             {"role": "user", "content": prompt}
+    #         ],
+    #         temperature=0.9,
+    #         max_tokens=300
+    #     )
 
-        melding = response.choices[0].message.content.strip()
-        return melding
+    #     melding = response.choices[0].message.content.strip()
+    #     return melding
 
-    except Exception as e:
-        return f"Feil ved henting av AI-melding: {e}"
+    # except Exception as e:
+    #     return f"Feil ved henting av AI-melding: {e}"
 
 
 @anvil.server.callable
@@ -923,12 +921,7 @@ def legg_til_prompt(prompt_tekst):
 
     app_tables.ai_prompt.add_row(prompt=prompt_tekst)
     return "Prompt lagt til!"
-import datetime
 
-# Server Module
-
-import anvil.server
-from datetime import date, timedelta
 
 @anvil.server.callable  # valgfritt, hvis du vil teste direkte
 def calculate_longest_streak(user):

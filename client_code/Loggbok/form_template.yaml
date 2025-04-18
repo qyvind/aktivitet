@@ -200,6 +200,7 @@ components:
             spacing:
               margin: ['0', null, '0', null]
               padding: ['0', null, '0', null]
+            visible: false
           type: Label
         - layout_properties: {grid_position: 'EBOSPB,MFIGPZ'}
           name: man_akt_label
@@ -257,6 +258,7 @@ components:
             spacing:
               margin: ['0', null, '0', null]
               padding: ['0', null, '0', null]
+            visible: false
           type: Label
         - layout_properties: {grid_position: 'PXLERO,PKVRMB'}
           name: tir_akt_label
@@ -313,6 +315,7 @@ components:
             spacing:
               margin: ['0', null, '0', null]
               padding: ['0', null, '0', null]
+            visible: false
           type: Label
         - layout_properties: {grid_position: 'SOIAYZ,XAITQX'}
           name: ons_akt_label
@@ -369,6 +372,7 @@ components:
             spacing:
               margin: ['0', null, '0', null]
               padding: ['0', null, '0', null]
+            visible: false
           type: Label
         - layout_properties: {grid_position: 'JUEBES,WOMSNG'}
           name: tor_akt_label
@@ -430,6 +434,7 @@ components:
             spacing:
               margin: ['0', null, '0', null]
               padding: ['0', null, '0', null]
+            visible: false
           type: Label
         - layout_properties: {grid_position: 'EAQPVP,FHTBQS'}
           name: fre_akt_label
@@ -486,6 +491,7 @@ components:
             spacing:
               margin: ['0', null, '0', null]
               padding: ['0', null, '0', null]
+            visible: false
           type: Label
         - layout_properties: {grid_position: 'ETZXYW,AGFTEO'}
           name: lor_akt_label
@@ -542,6 +548,7 @@ components:
             spacing:
               margin: ['0', null, '0', null]
               padding: ['0', null, '0', null]
+            visible: false
           type: Label
         - layout_properties: {grid_position: 'JWPLVX,KFSMCP'}
           name: son_akt_label

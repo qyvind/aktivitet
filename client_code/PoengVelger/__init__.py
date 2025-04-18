@@ -115,7 +115,7 @@ class PoengVelger(PoengVelgerTemplate):
           poeng = 1
         else:
           poeng=0
-        aktivitet = "Skritt"
+        aktivitet = f"{antall} Skritt"
         
         # Bruk de lagrede verdiene
         ikon_media = skritt_rad['file']
