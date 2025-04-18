@@ -98,17 +98,17 @@ components:
       - event_bindings: {}
         layout_properties: {width: 30}
         name: badge_1
-        properties: {height: '30', source: _/theme/icons8-three-leaf-clover-48.png, tooltip: '', visible: false}
+        properties: {height: '30', source: _/theme/icons8-three-leaf-clover-48.png, tooltip: Trippel Aktiv, visible: false}
         type: Image
       - event_bindings: {}
         layout_properties: {width: 30}
         name: badge_2
-        properties: {height: '30', source: _/theme/icons8-777-48.png, tooltip: '', visible: false}
+        properties: {height: '30', source: _/theme/icons8-777-48.png, tooltip: Seventh heaven, visible: false}
         type: Image
       - event_bindings: {}
         layout_properties: {width: 30}
         name: badge_3
-        properties: {height: '30', source: _/theme/icons8-triathlon-64.png, tooltip: '', visible: false}
+        properties: {height: '30', source: _/theme/icons8-triathlon-64.png, tooltip: Triathlon, visible: false}
         type: Image
       - layout_properties: {width: 30}
         name: image_4

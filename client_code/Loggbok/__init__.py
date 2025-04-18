@@ -617,14 +617,15 @@ class Loggbok(LoggbokTemplate):
     
         for rad in nye_badger:
             badge = rad['badge']
-            navn = badge['name']
+            badgenummer = badge['id']
             beskrivelse = badge['description']
             poeng = badge['bonus'] or 0
-    
+            alertmessage = anvil.server.call('generer_badge_melding',badgenummer)
             alert(
-                f"🎉 Du har fått en ny badge!\n\n🏅 {navn}\n📝 {beskrivelse}\n💎 Bonuspoeng: {poeng}",
-                title="Ny badge!",
+                alertmessage,
+                title="Ny prestasjon oppnådd!",
                 large=True
             )
     
             rad.update(informert=True)
+
