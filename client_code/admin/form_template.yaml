@@ -24,10 +24,6 @@ components:
       name: konk_button
       properties: {role: tonal-button, text: Konkurranse}
       type: Button
-    - event_bindings: {click: ai_click}
-      name: ai
-      properties: {role: tonal-button, text: AI}
-      type: Button
     - event_bindings: {click: button_5_click}
       layout_properties: {}
       name: button_5
@@ -38,15 +34,23 @@ components:
       name: button_3
       properties: {role: tonal-button, text: Lykkehjul}
       type: Button
-    - event_bindings: {click: button_6_click}
-      layout_properties: {}
-      name: button_6
-      properties: {role: tonal-button, text: test ai}
-      type: Button
     - event_bindings: {click: button_7_click}
       layout_properties: {}
       name: badges
       properties: {role: tonal-button, text: sjekk badges}
+      type: Button
+    - event_bindings: {click: button_6_click}
+      name: button_6
+      properties: {role: tonal-button, text: test ai}
+      type: Button
+    - event_bindings: {click: ai_click}
+      name: ai
+      properties: {role: tonal-button, text: AI-prompt}
+      type: Button
+    - event_bindings: {click: ailogg_click}
+      layout_properties: {}
+      name: ailogg
+      properties: {role: tonal-button, text: AI Logg}
       type: Button
     - event_bindings: {click: button_1_click}
       name: button_1

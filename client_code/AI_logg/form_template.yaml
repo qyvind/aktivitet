@@ -1,0 +1,30 @@
+components:
+- components:
+  - layout_properties: {grid_position: 'JNQBPX,QWVIPL'}
+    name: label_1
+    properties: {align: center, text: AI logg}
+    type: Label
+  - components:
+    - name: repeating_panel_1
+      properties: {item_template: AI_logg.RowTemplate8}
+      type: RepeatingPanel
+    layout_properties: {grid_position: 'WLWMAE,XKMFRW'}
+    name: data_grid_1
+    properties:
+      columns:
+      - {data_key: column_1, id: JKSDUP, title: Deltager}
+      - {data_key: column_2, id: VJQQOR, title: Prompt}
+      - {data_key: column_3, id: OJLQEN, title: Svar}
+      - {data_key: column_1, id: ISNZQV, title: Dato}
+    type: DataGrid
+  - event_bindings: {click: button_1_click}
+    layout_properties: {grid_position: 'ZONYPE,GVFDCS'}
+    name: button_1
+    properties: {text: Lukk}
+    type: Button
+  layout_properties: {grid_position: 'MCKCVU,RUZZHP'}
+  name: outlined_card_1
+  properties: {role: outlined-card}
+  type: ColumnPanel
+container: {type: ColumnPanel}
+is_package: true
