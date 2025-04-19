@@ -511,8 +511,11 @@ class Loggbok(LoggbokTemplate):
         # er er_redigerbar_uke fortsatt False
         '''
 
-        # Ny regel: kun tillat redigering for i dag og i går
-        er_redigerbar_uke = dato >= (today_date - timedelta(days=1))
+        if self.sjekk_korrigering():
+          #korrigering av tidligere datoer tillatt
+          er_redigerbar_uke = True
+        else:
+          er_redigerbar_uke = dato >= (today_date - timedelta(days=1))
 
         # Knappen skal være aktivert hvis det IKKE er fremtid OG uken er redigerbar
         knapp.enabled = (not er_fremtid) and er_redigerbar_uke
@@ -629,3 +632,6 @@ class Loggbok(LoggbokTemplate):
     
             rad.update(informert=True)
 
+    def sjekk_korrigering(self,**event_args):
+        konkurranse = app_tables.konkurranse.search()[0]  # Forutsetter én rad
+        return konkurranse['korrigering']

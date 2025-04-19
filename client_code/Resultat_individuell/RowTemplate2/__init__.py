@@ -10,6 +10,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
+
+
 class RowTemplate2(RowTemplate2Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
@@ -22,6 +24,7 @@ class RowTemplate2(RowTemplate2Template):
     self.score.text = self.item['score']
     bonus = self.item['bonus']
     self.score.tooltip = f"((Poeng: {poeng} + Bonus: {bonus}) * 100) + Streak: {streak}"
+    
 
     # Any code you write here will run before the form opens.
 
