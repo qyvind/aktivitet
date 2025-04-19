@@ -287,19 +287,19 @@ class Loggbok(LoggbokTemplate):
     #           self.badge_flow_panel.visible = True
     #           badge_komponent.visible = True
 
-    # def vis_tildelte_badges(self, bruker):
-    #     print("▶️ Viser badges for:", bruker['email'])
+    def vis_tildelte_badges(self, bruker):
+        print("▶️ Viser badges for:", bruker['email'])
     
-    #     user_badger = app_tables.user_badges.search(user=bruker)
-    #     for rad in user_badger:
-    #         badge = rad['badge']
-    #         badge_id = badge['id']
-    #         print(f" - Har badge {badge_id}: {badge['name']}")
+        user_badger = app_tables.user_badges.search(user=bruker)
+        for rad in user_badger:
+            badge = rad['badge']
+            badge_id = badge['id']
+            print(f" - Har badge {badge_id}: {badge['name']}")
     
-    #         badge_komponent = getattr(self, f"badge_{badge_id}", None)
-    #         if badge_komponent:
-    #             self.badge_flow_panel.visible = True
-    #             badge_komponent.visible = True
+            badge_komponent = getattr(self, f"badge_{badge_id}", None)
+            if badge_komponent:
+                self.badge_flow_panel.visible = True
+                badge_komponent.visible = True
 
 
 
