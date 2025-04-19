@@ -15,12 +15,13 @@ class RowTemplate2(RowTemplate2Template):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     self.Deltager_label.text = self.item['deltager']
-    self.Poeng_label.text = self.item['poeng']
+    poeng = self.item['poeng']
     self.team_label.text = self.item['team']
     self.email.text = self.item['email']
-    self.streak_label.text = self.item['longest_streak']    
+    streak = self.item['longest_streak']    
     self.score.text = self.item['score']
-    self.bonus.text = self.item['bonus']
+    bonus = self.item['bonus']
+    self.score.tooltip = f"((Poeng: {poeng} + Bonus: {bonus}) * 100) + Streak: {streak}"
 
     # Any code you write here will run before the form opens.
 

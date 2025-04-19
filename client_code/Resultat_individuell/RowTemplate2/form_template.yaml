@@ -1,11 +1,4 @@
 components:
-- layout_properties: {column: VJQQOR}
-  name: Poeng_label
-  properties:
-    spacing:
-      margin: ['12', null, '2', null]
-      padding: ['2', null, '2', null]
-  type: Label
 - layout_properties: {column: LSHEHV}
   name: team_label
   properties:
@@ -48,15 +41,6 @@ components:
     spacing:
       margin: ['0', null, '0', null]
   type: FlowPanel
-- data_bindings:
-  - {code: '', property: text, writeback: false}
-  layout_properties: {column: ZPQDNV}
-  name: streak_label
-  properties:
-    spacing:
-      margin: ['12', null, '2', null]
-      padding: ['2', null, '2', null]
-  type: Label
 - layout_properties: {column: PJNLQL}
   name: score
   properties:
@@ -64,13 +48,6 @@ components:
       margin: ['12', null, '12', null]
       padding: ['2', null, '2', null]
     visible: true
-  type: Label
-- layout_properties: {column: AHNFPO}
-  name: bonus
-  properties:
-    spacing:
-      margin: ['12', null, '12', null]
-      padding: ['2', null, '2', null]
   type: Label
 container:
   properties:
