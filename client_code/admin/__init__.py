@@ -215,13 +215,18 @@ class admin(adminTemplate):
   def button_6_click(self, **event_args):
     alert(anvil.server.call('generer_badge_melding',1))
 
-  def button_7_click(self, **event_args):
+  def sjekk_badges(self, **event_args):
       print('sjekker badges')
       anvil.server.call('start_badge_sjekk_manually')
       alert("Badgesjekk fullført!", title="Suksess")
 
   def korrigering_check_change(self, **event_args):
     self.korrigering_check.checked = anvil.server.call(('toggle_korrigering'))
+
+  def ailogg_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form(('AI_logg'))
+
 
 
 

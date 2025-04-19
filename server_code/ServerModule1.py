@@ -920,6 +920,7 @@ def generer_oppmuntring_for_bruker():
         )
 
         melding = response.choices[0].message.content.strip()
+        
         return melding
 
     except Exception as e:
@@ -1206,6 +1207,12 @@ def generer_badge_melding(badge_id):
         )
         
         melding = response.choices[0].message.content.strip()
+        app_tables.ai_log.add_row(
+            user=bruker,
+            date=datetime.datetime.now(),
+            prompt=prompt,
+            svar=melding
+)
         return melding
 
     except Exception as e:
@@ -1232,3 +1239,22 @@ def toggle_korrigering():
         return ny_verdi  # Returnerer ny verdi etter toggle
     else:
         raise Exception("Fant ingen konkurranse-record.")
+
+@anvil.server.callable
+def hent_ai_log():
+    rader = app_tables.ai_log.search(tables.order_by("date", ascending=False))
+    resultat = []
+
+    for rad in rader:
+        user_rad = rad['user']
+        email = user_rad['email'] if user_rad else "Ukjent"
+
+        resultat.append({
+            "email": email,
+            "prompt": rad['prompt'],
+            "svar": rad['svar'],
+            "dato": rad['date']
+        })
+
+    return resultat
+
