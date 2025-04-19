@@ -4,6 +4,10 @@ components:
     name: label_1
     properties: {role: headline, text: Endringslogg}
     type: Label
+  - layout_properties: {grid_position: 'WKNQKB,YYMYWA'}
+    name: text_area_15
+    properties: {text: 19/4 Forenklet individuell resultatliste}
+    type: TextArea
   - layout_properties: {grid_position: 'HPCFSP,RLRDBV'}
     name: text_area_14
     properties:
@@ -102,7 +106,7 @@ components:
     name: button_1
     properties: {role: filled-button, text: Lukk}
     type: Button
-  layout_properties: {grid_position: 'OOIWYI,FGCOXH'}
+  layout_properties: {grid_position: 'WKFCDP,BRSNDL'}
   name: column_panel_1
   properties: {role: tonal-card}
   type: ColumnPanel
