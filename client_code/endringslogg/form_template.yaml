@@ -7,8 +7,8 @@ components:
   - layout_properties: {grid_position: 'WKNQKB,YYMYWA'}
     name: text_area_15
     properties:
-      height: 159
-      text: "19/4 Forenklet individuell resultatliste. Hover over score for å se detaljer i stedet for mye clutter i bildet \nLa til en fjerde og femte badge\nLaget opsjon under admin/konkurranse som åpner for endring av alle dager,, ikke bare gårsdagen. Fint for test og debug. "
+      height: 172.71426391601562
+      text: "19/4 Forenklet individuell resultatliste. Hover over score for å se detaljer i stedet for mye clutter i bildet \nLa til en fjerde og femte badge\nLaget opsjon under admin/konkurranse som åpner for endring av alle dager,, ikke bare gårsdagen. Fint for test og debug. \nLa til logging av AI-meldinger om utdeling av badges, og et bilde til å lese disse."
     type: TextArea
   - layout_properties: {grid_position: 'HPCFSP,RLRDBV'}
     name: text_area_14
