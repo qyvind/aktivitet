@@ -7,12 +7,13 @@ components:
   - layout_properties: {grid_position: 'WKNQKB,YYMYWA'}
     name: text_area_15
     properties:
-      text: "19/4 Forenklet individuell resultatliste. Hover over score for å se detaljer i stedet for mye clutter i bildet \nLa til en fjernde badge\nLaget opsjon under admin/konkurranse som åpner for endring av alle dager,, ikke bare gårsdagen. Fint for test og debug. "
+      height: 159
+      text: "19/4 Forenklet individuell resultatliste. Hover over score for å se detaljer i stedet for mye clutter i bildet \nLa til en fjerde og femte badge\nLaget opsjon under admin/konkurranse som åpner for endring av alle dager,, ikke bare gårsdagen. Fint for test og debug. "
     type: TextArea
   - layout_properties: {grid_position: 'HPCFSP,RLRDBV'}
     name: text_area_14
     properties:
-      height: 104
+      height: 141.28570556640625
       text: "18/4 Bygget om måten man legger inn aktiviteter og skritt. Enklere for bruker.\nProgrammet husker om bruker sist var i skritt eller trening og åpner rett del (Er dette pålitelig ?? må testes) \nAktiverte tre prestasjoner\nAktiverte AI til å informere deltager om prestasjoner"
     type: TextArea
   - layout_properties: {grid_position: 'YDWXMR,JTPKXU'}
@@ -22,7 +23,7 @@ components:
   - layout_properties: {grid_position: 'SXEDQY,XELDVM'}
     name: text_area_12
     properties:
-      height: 105
+      height: 114.142822265625
       text: |-
         16/4 La til Streak og Score. Nattlig oppdatering av streak.
         Kun redigering av dagens og gårsdagens aktiviteter er tillatt
@@ -90,7 +91,7 @@ components:
     name: text_area_4
     properties:
       height: 355
-      text: |
+      text: |+
         Bør kunne redigere en dag ved å klikke hvor som helst i dagen, ikke bare på poengtallet.
         Slette tomme team hver natt
         Slette team med færre enn tre hver helg
@@ -100,7 +101,7 @@ components:
         Vise badges på resultatlister og på kikk-bildet
         Kikkbildet må oppdateres emd nye endringer i hovedbildet
         Legge til Ligaer
-        Lykkehjulet vises i kikk-bildet i noen tilfeller uten at deltagerer med i trekning
+
     type: TextArea
   - event_bindings: {click: button_1_click}
     layout_properties: {grid_position: 'RUNMFH,GYRFVX'}

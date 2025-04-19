@@ -1053,6 +1053,14 @@ def sjekk_og_tildel_badges(bruker):
       badge=3
       tildel_badge(bruker,badge)
 
+    if sjekk_badge_4(bruker):
+      badge=4
+      tildel_badge(bruker,badge)
+
+    if sjekk_badge_5(bruker):
+      badge=5
+      tildel_badge(bruker,badge)
+
 def sjekk_badge_1(bruker):
     userinfo = app_tables.userinfo.get(user=bruker)
     return userinfo and userinfo['longest_streak'] >= 3
@@ -1095,6 +1103,28 @@ def sjekk_badge_4(bruker):
 
     return False
 
+def sjekk_badge_5(bruker):
+    # 24 dager med samme type trening
+    aktiviteter = app_tables.aktivitet.search(deltager=bruker)
+
+    # Lager en dict for å holde oversikt over hvilke datoer en aktivitetstype har skjedd på
+    ikon_datoer = {}
+
+    for akt in aktiviteter:
+        ikon = akt['ikon']
+        dato = akt['start'].date() if akt['start'] else None
+
+        if ikon and dato:
+            if ikon not in ikon_datoer:
+                ikon_datoer[ikon] = set()
+            ikon_datoer[ikon].add(dato)
+
+    # Sjekk om noen aktivitetstyper har skjedd på 8 eller flere forskjellige dager
+    for datoer in ikon_datoer.values():
+        if len(datoer) >= 24:
+            return True
+
+    return False
 
 
 def tildel_badge(bruker, badge_id):
