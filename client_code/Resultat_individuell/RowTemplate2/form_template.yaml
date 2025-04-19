@@ -49,6 +49,51 @@ components:
       padding: ['2', null, '2', null]
     visible: true
   type: Label
+- components:
+  - layout_properties: {width: 25}
+    name: badge_1
+    properties:
+      height: '25'
+      margin: ['4', null, '0', null]
+      source: _/theme/icons8-three-leaf-clover-48.png
+      visible: false
+    type: Image
+  - layout_properties: {width: 25}
+    name: badge_2
+    properties:
+      height: '25'
+      margin: ['4', null, '0', null]
+      source: _/theme/icons8-777-48.png
+      visible: false
+    type: Image
+  - layout_properties: {width: 25}
+    name: badge_3
+    properties:
+      height: '25'
+      margin: ['4', null, '0', null]
+      source: _/theme/icons8-triathlon-64.png
+      visible: false
+    type: Image
+  - layout_properties: {width: 25}
+    name: badge_4
+    properties:
+      height: '25'
+      margin: ['4', null, '0', null]
+      source: _/theme/icons8-habit-64.png
+      visible: false
+    type: Image
+  - layout_properties: {width: 25}
+    name: badge_5
+    properties:
+      height: '25'
+      margin: ['4', null, '0', null]
+      source: _/theme/icons8-habit-64 (1).png
+      visible: false
+    type: Image
+  layout_properties: {column: PFFFKV}
+  name: flow_panel_1
+  properties: {}
+  type: FlowPanel
 container:
   properties:
     align: left
