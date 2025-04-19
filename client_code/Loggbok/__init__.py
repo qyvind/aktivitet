@@ -39,7 +39,7 @@ class Loggbok(LoggbokTemplate):
 
     
     def tir_button_click(self, **event_args):
-        self.åpne_poengvelger_for_dag(1, self.tir_button, self.tir_akt_label, self.tir_ikon,self.tir_label,self.tir_column_panel.toolti,self.tir_skritt)
+        self.åpne_poengvelger_for_dag(1, self.tir_button, self.tir_akt_label, self.tir_ikon,self.tir_label,self.tir_column_panel.tooltip,self.tir_skritt)
     
     def ons_button_click(self, **event_args):
         self.åpne_poengvelger_for_dag(2, self.ons_button, self.ons_akt_label,self.ons_ikon, self.ons_label,self.ons_column_panel.tooltip,self.ons_skritt)
