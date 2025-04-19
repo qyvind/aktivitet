@@ -43,7 +43,7 @@ class PoengVelger(PoengVelgerTemplate):
         # --- MODIFISERT DEL SLUTT ---
 
         self.ukedag_label.text = ukedag
-        self.poeng_drop.items = [("Mindre enn en halv time", 0), ("En halv time", 1), ("En time", 2), ("Halvannen time eller mer", 3)]
+        self.poeng_drop.items = [ ("En halv time", 1), ("En time", 2), ("Halvannen time eller mer", 3)]
         self.poeng_drop.selected_value = valgt_poeng
         self.aktivitet_box.text = aktivitet
         self.antall_skritt.text = skritt.text
