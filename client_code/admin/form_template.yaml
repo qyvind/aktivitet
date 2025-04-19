@@ -34,9 +34,9 @@ components:
       name: button_3
       properties: {role: tonal-button, text: Lykkehjul}
       type: Button
-    - event_bindings: {click: button_7_click}
+    - event_bindings: {click: sjekk_badges_click}
       layout_properties: {}
-      name: badges
+      name: sjekk_badges
       properties: {role: tonal-button, text: sjekk badges}
       type: Button
     - event_bindings: {click: button_6_click}

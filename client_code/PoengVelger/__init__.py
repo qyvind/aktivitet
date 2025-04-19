@@ -13,6 +13,7 @@ class PoengVelger(PoengVelgerTemplate):
         self.init_components(**properties)
         self.callback = callback
         skrittf= Utils.hent_skritt_first()
+        print('skritt_first',skrittf)
         if skrittf:
           print('skritt',skrittf )
           self.trening_panel_1.visible = False
