@@ -139,11 +139,14 @@ class Utils:
     @staticmethod
     def hent_skritt_first():
         from anvil.tables import app_tables
-
         user = anvil.users.get_user()
-        userinfo_rad = app_tables.userinfo.get(user=user)
-
-        if userinfo_rad and "skritt_first" in userinfo_rad and userinfo_rad["skritt_first"] is not None:
-            return userinfo_rad["skritt_first"]
-        else:
+    
+        if not user:
             return False
+   
+        userinfo_rad = app_tables.userinfo.get(user=user)
+        if not userinfo_rad:
+            return False
+
+        return bool(userinfo_rad['skritt_first'])
+    

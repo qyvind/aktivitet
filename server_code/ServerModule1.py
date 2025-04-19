@@ -1082,50 +1082,45 @@ def sjekk_badge_3(bruker):
     return har_sykkel and har_svømming and har_lop
 
 def sjekk_badge_4(bruker):
-    # 8 dager med samme type trening
+    # Hent alle aktiviteter for brukeren
     aktiviteter = app_tables.aktivitet.search(deltager=bruker)
 
-    # Lager en dict for å holde oversikt over hvilke datoer en aktivitetstype har skjedd på
-    ikon_datoer = {}
+    # Tell forekomster av hver aktivitetstype (ikon)
+    ikon_teller = {}
 
     for akt in aktiviteter:
-        ikon = akt['ikon']
-        dato = akt['start'].date() if akt['start'] else None
+        ikon = akt['aktivitet']
+        if ikon and "Skritt" not in ikon:
+            ikon_teller[ikon] = ikon_teller.get(ikon, 0) + 1
 
-        if ikon and dato:
-            if ikon not in ikon_datoer:
-                ikon_datoer[ikon] = set()
-            ikon_datoer[ikon].add(dato)
-
-    # Sjekk om noen aktivitetstyper har skjedd på 8 eller flere forskjellige dager
-    for datoer in ikon_datoer.values():
-        if len(datoer) >= 8:
+    # Sjekk om noen aktivitetstyper har 8 eller flere forekomster
+    print(ikon_teller)
+    for antall in ikon_teller.values():
+        if antall >= 8:
             return True
 
     return False
 
 def sjekk_badge_5(bruker):
-    # 24 dager med samme type trening
+    # Hent alle aktiviteter for brukeren
     aktiviteter = app_tables.aktivitet.search(deltager=bruker)
 
-    # Lager en dict for å holde oversikt over hvilke datoer en aktivitetstype har skjedd på
-    ikon_datoer = {}
+    # Tell forekomster av hver aktivitetstype (ikon)
+    ikon_teller = {}
 
     for akt in aktiviteter:
-        ikon = akt['ikon']
-        dato = akt['start'].date() if akt['start'] else None
+        ikon = akt['aktivitet']
+        if ikon and "Skritt" not in ikon:
+            ikon_teller[ikon] = ikon_teller.get(ikon, 0) + 1
 
-        if ikon and dato:
-            if ikon not in ikon_datoer:
-                ikon_datoer[ikon] = set()
-            ikon_datoer[ikon].add(dato)
-
-    # Sjekk om noen aktivitetstyper har skjedd på 8 eller flere forskjellige dager
-    for datoer in ikon_datoer.values():
-        if len(datoer) >= 24:
+    # Sjekk om noen aktivitetstyper har 8 eller flere forekomster
+    for antall in ikon_teller.values():
+        if antall >= 24:
             return True
 
     return False
+
+    
 
 
 def tildel_badge(bruker, badge_id):
