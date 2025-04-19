@@ -60,7 +60,7 @@ components:
       - components:
         - layout_properties: {}
           name: label_1
-          properties: {text: 'Deltager:'}
+          properties: {text: 'Deltager:', visible: false}
           type: Label
         - components: []
           event_bindings: {click: deltager_label_click}
@@ -112,7 +112,7 @@ components:
         type: Image
       - layout_properties: {width: 30}
         name: image_4
-        properties: {height: '30', source: _/theme/grey badge.png, tooltip: '', visible: false}
+        properties: {height: '30', source: _/theme/icons8-habit-64.png, tooltip: '', visible: false}
         type: Image
       - layout_properties: {width: 30}
         name: image_5

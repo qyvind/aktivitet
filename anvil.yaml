@@ -33,6 +33,9 @@ db_schema:
     - admin_ui: {width: 200}
       name: beskrivelse
       type: string
+    - admin_ui: {width: 200}
+      name: skritt
+      type: number
     server: full
     title: Aktivitet
   badges:
@@ -56,6 +59,9 @@ db_schema:
     - admin_ui: {width: 200}
       name: bonus
       type: number
+    - admin_ui: {width: 200}
+      name: prompt
+      type: string
     server: full
     title: badges
   files:
@@ -87,6 +93,9 @@ db_schema:
     - admin_ui: {width: 200}
       name: record
       type: number
+    - admin_ui: {order: 4, width: 200}
+      name: korrigering
+      type: bool
     server: full
     title: Konkurranse
   team:
@@ -158,6 +167,9 @@ db_schema:
     - admin_ui: {order: 6, width: 200}
       name: bonus
       type: number
+    - admin_ui: {width: 200}
+      name: skritt_first
+      type: bool
     server: full
     title: userinfo
   users:

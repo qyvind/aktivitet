@@ -6,7 +6,8 @@ components:
     type: Label
   - layout_properties: {grid_position: 'WKNQKB,YYMYWA'}
     name: text_area_15
-    properties: {text: 19/4 Forenklet individuell resultatliste}
+    properties:
+      text: "19/4 Forenklet individuell resultatliste. Hover over score for å se detaljer i stedet for mye clutter i bildet \nLa til en fjernde badge\nLaget opsjon under admin/konkurranse som åpner for endring av alle dager,, ikke bare gårsdagen. Fint for test og debug. "
     type: TextArea
   - layout_properties: {grid_position: 'HPCFSP,RLRDBV'}
     name: text_area_14
@@ -99,7 +100,7 @@ components:
         Vise badges på resultatlister og på kikk-bildet
         Kikkbildet må oppdateres emd nye endringer i hovedbildet
         Legge til Ligaer
-        La programmet huske om bruker foretrekker skritt eller trening, og vise den delen av bildet først.
+        Lykkehjulet vises i kikk-bildet i noen tilfeller uten at deltagerer med i trekning
     type: TextArea
   - event_bindings: {click: button_1_click}
     layout_properties: {grid_position: 'RUNMFH,GYRFVX'}

@@ -6,18 +6,7 @@ components:
       properties: {visible: false}
       type: Label
     - components:
-      - layout_properties: {}
-        name: lykkehjul
-        properties:
-          height: 50.79998779296875
-          margin: ['0', null, '0', null]
-          source: _/theme/lykkehjul.jpg
-        type: Image
       - components:
-        - layout_properties: {}
-          name: label_1
-          properties: {text: 'Se deltager:'}
-          type: Label
         - components: []
           event_bindings: {}
           layout_properties: {}

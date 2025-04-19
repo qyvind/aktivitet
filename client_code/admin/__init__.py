@@ -163,8 +163,8 @@ class admin(adminTemplate):
       else:
           return None, None, None
 
-  def trekningsdata_button_click(self, **event_args):   
-    anvil.server.call('opprett_ukentlige_trekninger',self.fra_date_picker.date,self.til_date_picker.date)
+  # def trekningsdata_button_click(self, **event_args):   
+  #   anvil.server.call('opprett_ukentlige_trekninger',self.fra_date_picker.date,self.til_date_picker.date)
 
   def button_5_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -219,6 +219,9 @@ class admin(adminTemplate):
       print('sjekker badges')
       anvil.server.call('start_badge_sjekk_manually')
       alert("Badgesjekk fullført!", title="Suksess")
+
+  def korrigering_check_change(self, **event_args):
+    self.korrigering_check.checked = anvil.server.call(('toggle_korrigering'))
 
 
 
