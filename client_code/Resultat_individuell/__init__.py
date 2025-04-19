@@ -16,7 +16,8 @@ class Resultat_individuell(Resultat_individuellTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     liste = Utils.hent_poengsummer_uten_null()
-    print(liste)
+    
+    
     self.resultat_repeat_panel.items = liste
 
     # Any code you write here will run before the form opens.

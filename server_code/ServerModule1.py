@@ -1135,7 +1135,8 @@ def tildel_badge(bruker, badge_id):
     app_tables.user_badges.add_row(
         user=bruker,
         badge=badge,
-        awarded_date=datetime.datetime.now()
+        awarded_date=datetime.datetime.now(),
+        informert=False
     )
     print(f"🏅 Tildelt badge {badge['name']} til {bruker['email']}")
 

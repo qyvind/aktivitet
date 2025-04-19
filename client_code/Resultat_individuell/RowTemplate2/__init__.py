@@ -25,6 +25,7 @@ class RowTemplate2(RowTemplate2Template):
     bonus = self.item['bonus']
     self.score.tooltip = f"((Poeng: {poeng} + Bonus: {bonus}) * 100) + Streak: {streak}"
     
+    
 
     # Any code you write here will run before the form opens.
 

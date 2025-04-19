@@ -21,6 +21,7 @@ components:
       - {data_key: column_1, expand: false, id: JKSDUP, title: Deltager, width: '200'}
       - {data_key: column_1, id: PJNLQL, title: Score, width: '60'}
       - {data_key: column_1, expand: false, id: LSHEHV, title: Team, width: 98.7142333984375}
+      - {data_key: column_1, id: PFFFKV, title: Utmerkelser}
     type: DataGrid
   - components:
     - layout_properties: {grid_position: 'QGWPOY,PWVMAI'}
