@@ -1281,4 +1281,12 @@ def toggle_ny_aktivitet(rad):
     rad['behandlet'] = ny_verdi
     return ny_verdi
 
-
+@anvil.server.callable
+def send_test_email():
+    anvil.email.send(
+    to="qf@simba.no",
+    from_address="support@framskritt.framo.com",
+    from_name="MyApp Support",
+    subject="Welcome to MyApp",
+    html="<h1>Welcome!</h1>"
+  )
