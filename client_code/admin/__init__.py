@@ -11,6 +11,7 @@ from anvil.tables import app_tables
 import json
 import anvil.js
 from ..Utils import Utils
+import anvil.email
 
 
 class admin(adminTemplate):
@@ -229,6 +230,10 @@ class admin(adminTemplate):
       print('sjekker badges')
       anvil.server.call('start_badge_sjekk_manually')
       alert("Badgesjekk fullført!", title="Suksess")
+
+
+
+
 
 
 

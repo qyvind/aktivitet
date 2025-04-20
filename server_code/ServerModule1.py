@@ -1269,7 +1269,7 @@ def lagre_ny_aktivitet(aktivitet_tekst: str):
         aktivitet=aktivitet_tekst,
         behandlet=False
     )
-
+    anvil.server.call('send_email',"qf@simba.no", "forslag om ny idrett", aktivitet_tekst)
 
 
 @anvil.server.callable
@@ -1281,4 +1281,12 @@ def toggle_ny_aktivitet(rad):
     rad['behandlet'] = ny_verdi
     return ny_verdi
 
-
+@anvil.server.callable
+def send_email(to,subject,html):
+    print(f"mailer to: {to} subject: {subject} html: {html}")
+    anvil.email.send(
+    from_address="support@framskritt.framo.com",
+    from_name="Framskritt Support",
+    subject=subject,
+    html=html
+  )
