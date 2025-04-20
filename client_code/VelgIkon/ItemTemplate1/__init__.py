@@ -27,43 +27,42 @@ class ItemTemplate1(ItemTemplate1Template):
         # --- Sett egenskaper for Bilde 1 ---
         if icon_data_1:
             self.image_1.source = icon_data_1.get('media')
-            # Hent det pene navnet fra 'path' og sett det som tooltip
-            self.image_1.tooltip = icon_data_1.get('path', '') # Bruker .get() for sikkerhets skyld
+            self.aktivitet_1.text = icon_data_1.get('path', '')
             self.image_1.tag = icon_data_1 # Lagre hele dictionaryen i tag
         else:
             # Håndter tilfellet der det ikke er noe ikon på denne plassen
             self.image_1.source = None
-            self.image_1.tooltip = "" # Ingen tooltip for tom plass
+            self.aktivitet_1.text = "" # Ingen tekst for tom plass
             self.image_1.tag = None
 
         # --- Sett egenskaper for Bilde 2 ---
         if icon_data_2:
             self.image_2.source = icon_data_2.get('media')
-            self.image_2.tooltip = icon_data_2.get('path', '')
+            self.aktivitet_2.text = icon_data_2.get('path', '')
             self.image_2.tag = icon_data_2
         else:
             self.image_2.source = None
-            self.image_2.tooltip = ""
+            self.aktivitet_2 = ""
             self.image_2.tag = None
 
         # --- Sett egenskaper for Bilde 3 ---
         if icon_data_3:
             self.image_3.source = icon_data_3.get('media')
-            self.image_3.tooltip = icon_data_3.get('path', '')
+            self.aktivitet_3.text = icon_data_3.get('path', '')
             self.image_3.tag = icon_data_3
         else:
             self.image_3.source = None
-            self.image_3.tooltip = ""
+            self.aktivitet_3.text = ""
             self.image_3.tag = None
 
         # --- Sett egenskaper for Bilde 4 ---
         if icon_data_4:
             self.image_4.source = icon_data_4.get('media')
-            self.image_4.tooltip = icon_data_4.get('path', '')
+            self.aktivitet_4.text = icon_data_4.get('path', '')
             self.image_4.tag = icon_data_4
         else:
             self.image_4.source = None
-            self.image_4.tooltip = ""
+            self.aktivitet_4.text = ""
             self.image_4.tag = None
 
         # Sørg for at 'click'-event for image_1, image_2, image_3, image_4
