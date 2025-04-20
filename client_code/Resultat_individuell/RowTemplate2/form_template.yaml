@@ -50,49 +50,40 @@ components:
     visible: true
   type: Label
 - components:
-  - layout_properties: {width: 25}
+  - event_bindings: {}
+    layout_properties: {width: 30}
     name: badge_1
-    properties:
-      height: '25'
-      margin: ['4', null, '0', null]
-      source: _/theme/icons8-three-leaf-clover-48.png
-      visible: false
+    properties: {height: '30', source: _/theme/icons8-three-leaf-clover-48.png, tooltip: Trippel Aktiv, visible: false}
     type: Image
-  - layout_properties: {width: 25}
+  - event_bindings: {}
+    layout_properties: {width: 30}
     name: badge_2
-    properties:
-      height: '25'
-      margin: ['4', null, '0', null]
-      source: _/theme/icons8-777-48.png
-      visible: false
+    properties: {height: '30', source: _/theme/icons8-777-48.png, tooltip: Seventh heaven, visible: false}
     type: Image
-  - layout_properties: {width: 25}
+  - event_bindings: {}
+    layout_properties: {width: 30}
     name: badge_3
-    properties:
-      height: '25'
-      margin: ['4', null, '0', null]
-      source: _/theme/icons8-triathlon-64.png
-      visible: false
+    properties: {height: '30', source: _/theme/icons8-triathlon-64.png, tooltip: Triathlon, visible: false}
     type: Image
-  - layout_properties: {width: 25}
+  - layout_properties: {width: 30}
     name: badge_4
-    properties:
-      height: '25'
-      margin: ['4', null, '0', null]
-      source: _/theme/icons8-habit-64.png
-      visible: false
+    properties: {height: '30', source: _/theme/icons8-habit-64.png, tooltip: Habit Master, visible: false}
     type: Image
-  - layout_properties: {width: 25}
+  - layout_properties: {width: 30}
     name: badge_5
-    properties:
-      height: '25'
-      margin: ['4', null, '0', null]
-      source: _/theme/icons8-habit-64 (1).png
-      visible: false
+    properties: {height: '30', source: _/theme/icons8-habit-64 (1).png, tooltip: Habit God, visible: false}
+    type: Image
+  - layout_properties: {width: 30}
+    name: image_6
+    properties: {height: '30', source: _/theme/grey badge.png, tooltip: '', visible: false}
+    type: Image
+  - layout_properties: {width: 30}
+    name: image_7
+    properties: {height: '30', source: _/theme/grey badge.png, tooltip: '', visible: false}
     type: Image
   layout_properties: {column: PFFFKV}
-  name: flow_panel_1
-  properties: {}
+  name: badge_flow_panel
+  properties: {align: center, visible: false}
   type: FlowPanel
 container:
   properties:
