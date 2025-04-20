@@ -1,8 +1,4 @@
 components:
-- layout_properties: {grid_position: 'DEGVNE,MGNHMC'}
-  name: label_1
-  properties: {}
-  type: Label
 - components:
   - components:
     - event_bindings: {mouse_down: image_click}

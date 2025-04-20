@@ -223,8 +223,7 @@ class admin(adminTemplate):
     open_form(('AI_logg'))
 
   def button_7_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    pass
+    open_form(('admin_ny_aktivitet'))
 
   def sjekk_badges_click(self, **event_args):
       print('sjekker badges')

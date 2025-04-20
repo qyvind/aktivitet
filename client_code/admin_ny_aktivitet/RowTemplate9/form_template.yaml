@@ -1,0 +1,28 @@
+components:
+- data_bindings:
+  - {code: 'self.item[''aktivitet'']', property: text, writeback: false}
+  layout_properties: {column: JKSDUP}
+  name: label_1
+  properties: {}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''email'']', property: text, writeback: false}
+  layout_properties: {column: VJQQOR}
+  name: label_2
+  properties: {}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''dato'']', property: text, writeback: false}
+  layout_properties: {column: OJLQEN}
+  name: label_3
+  properties: {}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''behandlet'']', property: text, writeback: false}
+  event_bindings: {change: check_box_1_change}
+  layout_properties: {column: DPHDBV}
+  name: check_box_1
+  properties: {text: ''}
+  type: CheckBox
+container: {type: DataRowPanel}
+is_package: true

@@ -15,9 +15,6 @@ class VelgIkon(VelgIkonTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
-        # --- MODIFISERT DEL START ---
-        # Load all icons with their paths from the 'files' table
-        # Fetch rows that have both 'file' and 'path' populated
         all_icon_data = [{'media': r['file'], 'path': r['path']}
                          for r in app_tables.files.search()
                          if r['file'] and r['path']] # Sørg for at begge feltene finnes
@@ -36,7 +33,6 @@ class VelgIkon(VelgIkonTemplate):
             grouped_icon_data.append(row_data)
 
         self.ikon_repeating_panel.items = grouped_icon_data
-        # --- MODIFISERT DEL SLUTT ---
 
         self.ikon_repeating_panel.add_event_handler('x-icon-click', self.icon_selected)
 
@@ -44,4 +40,20 @@ class VelgIkon(VelgIkonTemplate):
         """Denne mottar nå en dictionary med 'media' og 'path'"""
         # Send hele dictionaryen tilbake til PoengVelger
         self.raise_event('x-close-alert', value=icon_data)
-        
+
+    def ny_aktivitet_pressed_enter(self, **event_args):
+        ny_forslag = self.ny_aktivitet.text
+        if not ny_forslag:
+            alert("Du må skrive inn en aktivitet først.")
+            return
+    
+        anvil.server.call('lagre_ny_aktivitet', ny_forslag)
+    
+        # Optional: Gi brukeren en bekreftelse før lukking
+        alert(f'Nå blir "{ny_forslag}" vurdert som nytt ikon du kan velge. Sjekk senere om du det er kommet.')
+    
+        # Returner samme format som for ikon – men uten media
+        self.raise_event('x-close-alert', value={
+            'media': None,
+            'path': ny_forslag
+        })

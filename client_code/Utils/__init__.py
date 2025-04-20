@@ -7,6 +7,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 from anvil.tables import app_tables
+from datetime import timedelta
+
 
 class Utils:
 
@@ -164,3 +166,26 @@ class Utils:
             if badge_komponent:
                 self.badge_flow_panel.visible = True
                 badge_komponent.visible = True
+
+    @staticmethod
+    def hent_ny_aktivitet():
+        rader = app_tables.ny_aktivitet.search()
+        resultat = []
+    
+        offset = timedelta(hours=2)
+    
+        for rad in rader:
+            tidspunkt_norsk = rad['dato'] + offset
+            tidspunkt_str = tidspunkt_norsk.strftime("%d.%m.%Y %H:%M")
+    
+            resultat.append({
+                'email': rad['user']['email'] if rad['user'] else 'Ukjent',
+                'dato': tidspunkt_str,
+                'aktivitet': rad['aktivitet'],
+                'behandlet': rad['behandlet'],
+                'row': rad  # 👈 Denne gjør magien!
+            })
+    
+        return resultat
+
+
