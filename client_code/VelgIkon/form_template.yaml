@@ -9,7 +9,7 @@ components:
       properties: {text: 'Hvis du savner din idrett på listen, skriv den her:'}
       type: Label
     - event_bindings: {pressed_enter: ny_aktivitet_pressed_enter}
-      layout_properties: {width: 101.5}
+      layout_properties: {width: 144.5}
       name: ny_aktivitet
       properties: {}
       type: TextBox

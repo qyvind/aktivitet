@@ -19,7 +19,4 @@ class RowTemplate9(RowTemplate9Template):
 
   def check_box_1_change(self, **event_args):
     anvil.server.call('toggle_ny_aktivitet',self.item['row'])
-    # anvil.email.send(from_name = "Framskritt support", 
-    #              to = "qf@simba..nom",
-    #              subject = "Forslag til ny idrett",
-    #              text = f"Forslag: {self.item['aktivitet']}")
+

@@ -57,11 +57,6 @@ components:
       name: ailogg
       properties: {role: tonal-button, text: AI Logg}
       type: Button
-    - event_bindings: {click: button_8_click}
-      layout_properties: {}
-      name: button_8
-      properties: {role: tonal-button, text: test email}
-      type: Button
     - event_bindings: {click: button_1_click}
       name: button_1
       properties: {role: tonal-button, text: Lukk}

@@ -231,8 +231,7 @@ class admin(adminTemplate):
       anvil.server.call('start_badge_sjekk_manually')
       alert("Badgesjekk fullført!", title="Suksess")
 
-  def button_8_click(self, **event_args):
-    anvil.server.call('send_test_email')
+
 
 
 
