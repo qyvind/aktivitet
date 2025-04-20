@@ -48,6 +48,11 @@ components:
       name: button_6
       properties: {role: tonal-button, text: test ai}
       type: Button
+    - event_bindings: {click: button_8_click}
+      layout_properties: {}
+      name: button_8
+      properties: {role: tonal-button, text: Recalc streak}
+      type: Button
     - event_bindings: {click: ai_click}
       name: ai
       properties: {role: tonal-button, text: AI-prompt}
