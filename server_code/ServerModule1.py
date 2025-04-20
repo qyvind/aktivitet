@@ -1254,3 +1254,31 @@ def hent_ai_log():
 
     return resultat
 
+# Server Module
+
+
+@anvil.server.callable
+def lagre_ny_aktivitet(aktivitet_tekst: str):
+    bruker = anvil.users.get_user()
+    if not bruker:
+        raise Exception("Bruker ikke innlogget")
+
+    app_tables.ny_aktivitet.add_row(
+        user=bruker,
+        dato=datetime.datetime.now(),
+        aktivitet=aktivitet_tekst,
+        behandlet=False
+    )
+
+
+
+@anvil.server.callable
+def toggle_ny_aktivitet(rad):
+    if not rad:
+        raise ValueError("Ingen rad ble sendt inn")
+
+    ny_verdi = not rad['behandlet']
+    rad['behandlet'] = ny_verdi
+    return ny_verdi
+
+

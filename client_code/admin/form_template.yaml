@@ -24,6 +24,11 @@ components:
       name: konk_button
       properties: {role: tonal-button, text: Konkurranse}
       type: Button
+    - event_bindings: {click: button_7_click}
+      layout_properties: {}
+      name: button_7
+      properties: {role: tonal-button, text: Nytt ikon}
+      type: Button
     - event_bindings: {click: button_5_click}
       layout_properties: {}
       name: button_5

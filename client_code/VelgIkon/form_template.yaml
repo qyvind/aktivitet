@@ -4,6 +4,19 @@ components:
     name: ikon_repeating_panel
     properties: {item_template: VelgIkon.ItemTemplate1}
     type: RepeatingPanel
+  - components:
+    - name: label_1
+      properties: {text: 'Hvis du savner din idrett på listen, skriv den her:'}
+      type: Label
+    - event_bindings: {pressed_enter: ny_aktivitet_pressed_enter}
+      layout_properties: {width: 101.5}
+      name: ny_aktivitet
+      properties: {}
+      type: TextBox
+    layout_properties: {grid_position: 'OIJOXV,TLJBRX'}
+    name: flow_panel_1
+    properties: {align: center}
+    type: FlowPanel
   layout_properties: {grid_position: 'KNWUNP,ERLBJR'}
   name: outlined_card_1
   properties: {role: outlined-card}
