@@ -826,7 +826,7 @@ def lag_status_for_bruker():
         beskrivelser = [rad['beskrivelse'] for rad in rader if rad['beskrivelse']]
         total_poeng = sum(rad['poeng'] for rad in rader)
 
-        aktiviteter_tekst = ", ".join(aktiviteter) if aktiviteter else "ingen"
+        aktiviteter_tekst = ", ".join(a for a in aktiviteter if a) if aktiviteter else "ingen"
         beskrivelse_tekst = "; ".join(beskrivelser) if beskrivelser else ""
 
         statuslinjer.append(f"uke {uke_nr}: {aktiviteter_tekst} (poeng: {total_poeng})")
