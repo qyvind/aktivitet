@@ -4,6 +4,10 @@ components:
     name: label_1
     properties: {role: headline, text: Endringslogg}
     type: Label
+  - layout_properties: {grid_position: 'FTYVJX,NKFQVW'}
+    name: text_area_17
+    properties: {font_size: 10, text: 21/4 Nå kommer badges frem på linjene i resultatlisten også}
+    type: TextArea
   - layout_properties: {grid_position: 'VAQWIL,XVCGWZ'}
     name: text_area_16
     properties:
@@ -11,7 +15,7 @@ components:
       height: 83.5
       text: |-
         20/4 Deltager kan nå foreslå ny type idrett. Dette kommer frem i et eget bilde i admin, som kan legge inn ikon for dette. Ø får umiddelbart mail om nye forslag.
-        Nå kan man se andres badges i kikk-bildet i resultatlisten.
+        Nå kan man se andres badges i kikk-bildet i resultatlisten
     type: TextArea
   - layout_properties: {grid_position: 'WKNQKB,YYMYWA'}
     name: text_area_15
