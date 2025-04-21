@@ -618,6 +618,8 @@ def oppdater_brukernavn_og_team(navn, team_streng):
     # Oppdater verdier
     row['navn'] = navn
     row['team'] = app_tables.team.get(team=team_streng)
+   
+      
 
     return "OK"
 
