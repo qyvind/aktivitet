@@ -153,6 +153,11 @@ class PoengVelger(PoengVelgerTemplate):
       self.skritt_panel_1.visible = True
       self.skritt_panel_2.visible = True
 
+    def ikon_preview_mouse_enter(self, x, y, **event_args):
+      pass
+      #self.ikon_preview.style = "cursor: pointer;"
+
+
 
 
 

@@ -41,7 +41,7 @@ components:
             properties: {}
             type: ColumnPanel
           - components:
-            - event_bindings: {mouse_down: ikon_preview_click}
+            - event_bindings: {mouse_down: ikon_preview_click, mouse_enter: ikon_preview_mouse_enter}
               layout_properties: {grid_position: 'VJBWVC,KSQHVW'}
               name: ikon_preview
               properties: {height: '60'}
