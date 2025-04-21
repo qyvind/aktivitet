@@ -7,6 +7,7 @@ from anvil.tables import app_tables
 # Make sure the import path is correct for your project structure
 from ..VelgIkon import VelgIkon
 from ..Utils import Utils
+import anvil.js
 
 class PoengVelger(PoengVelgerTemplate):
     def __init__(self, valgt_poeng=1, aktivitet="", ukedag="", ikon=None, beskrivelse=None,skritt=None, callback=None, **properties):
@@ -152,6 +153,13 @@ class PoengVelger(PoengVelgerTemplate):
       self.trening_panel_2.visible = False
       self.skritt_panel_1.visible = True
       self.skritt_panel_2.visible = True
+
+    def ikon_preview_mouse_enter(self, x, y, **event_args):
+      anvil.js.window.document.body.style.cursor = 'pointer'
+
+    def ikon_preview_mouse_leave(self, x, y, **event_args):
+      anvil.js.window.document.body.style.cursor = 'default'
+
 
 
 
