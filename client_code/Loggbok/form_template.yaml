@@ -132,7 +132,7 @@ components:
       - event_bindings: {mouse_down: badge_6_mouse_down, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
         layout_properties: {width: 30}
         name: badge_6
-        properties: {height: '30', source: _/theme/icons8-weekend-48.png, tooltip: '', visible: false}
+        properties: {height: '30', source: _/theme/icons8-weekend-48.png, tooltip: Weekend Warrior, visible: false}
         type: Image
       - event_bindings: {}
         layout_properties: {width: 30}
