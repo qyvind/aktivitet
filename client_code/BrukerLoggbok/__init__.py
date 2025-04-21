@@ -16,6 +16,7 @@ class BrukerLoggbok(BrukerLoggbokTemplate):
         self.week_offset_label.text = 0
         self.initier_uke(self.week_offset_label.text)
         self.sjekk_bruker()
+        #self.leage_ikon.text = 
         self.vis_tildelte_badges(enuser)
 
     def initier_uke(self, week_offset):

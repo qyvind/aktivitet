@@ -7,6 +7,9 @@ components:
       type: Label
     - components:
       - components:
+        - name: leage_ikon
+          properties: {}
+          type: Label
         - components: []
           event_bindings: {}
           layout_properties: {}
