@@ -6,7 +6,10 @@ components:
     type: Label
   - layout_properties: {grid_position: 'FTYVJX,NKFQVW'}
     name: text_area_17
-    properties: {font_size: 10, text: 21/4 Nå kommer badges frem på linjene i resultatlisten også}
+    properties:
+      font_size: 10
+      height: 75.5
+      text: "21/4 Nå kommer badges frem på linjene i resultatlisten også\nForenklet registrering av skritt. \nFjernet ukurante treningstyper. Vi legger til de som folk trenger etter hvert. "
     type: TextArea
   - layout_properties: {grid_position: 'VAQWIL,XVCGWZ'}
     name: text_area_16
