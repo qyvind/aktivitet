@@ -1004,6 +1004,7 @@ def nightly_streak_recalc():
     # Gå gjennom hver bruker og oppdater streak + score
     for info in app_tables.userinfo.search():
         user = info['user']
+        print('beregner streak for ',user)
 
         # Beregn longest streak
         aktiviteter = app_tables.aktivitet.search(deltager=user)
