@@ -13,9 +13,9 @@ class PoengVelger(PoengVelgerTemplate):
         self.init_components(**properties)
         self.callback = callback
         skrittf= Utils.hent_skritt_first()
-        print('skritt_first',skrittf)
+        
         if skrittf:
-          print('skritt',skrittf )
+          
           self.trening_panel_1.visible = False
           self.trening_panel_2.visible = False
           self.skritt_panel_1.visible = True
@@ -29,18 +29,10 @@ class PoengVelger(PoengVelgerTemplate):
       
         self.selected_ikon_media = None # Initialiser som None
         self.selected_ikon_path = None  # Initialiser som None
+        #self.ikon_preview.source = "_/theme/treninger.png"
 
-        # Hvis et ikon ble sendt inn ved initialisering, anta at det KUN er Media-objektet
-        # Du *kan* trenge å hente path separat hvis du initialiserer med et ikon her
-        # ELLER endre hvordan du kaller PoengVelger for å sende inn path også.
-        # For enkelhets skyld antar vi her at initialisering med 'ikon' ikke trenger path med en gang.
         if ikon:
              self.selected_ikon_media = ikon
-             # Hvis du trenger path her også, må du ha en måte å finne den på basert på 'ikon'
-             # f.eks. et oppslag i databasen.
-             # self.selected_ikon_path = hent_path_for_media(ikon) # (Pseudokode)
-
-        # --- MODIFISERT DEL SLUTT ---
 
         self.ukedag_label.text = ukedag
         self.poeng_drop.items = [ ("En halv time", 1), ("En time", 2), ("Halvannen time eller mer", 3)]
@@ -54,7 +46,10 @@ class PoengVelger(PoengVelgerTemplate):
         self.beskrivelse.text = beskrivelse
 
         # Sett den initielle forhåndsvisningen
-        self.ikon_preview.source = self.selected_ikon_media
+        if self.ikon_preview.source == "":
+          self.ikon_preview.source = "_/theme/treninger.png"
+        else:
+          self.ikon_preview.source= self.selected_ikon_media
 
 
     def ikon_preview_click(self, **event_args):
