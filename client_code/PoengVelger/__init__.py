@@ -53,9 +53,21 @@ class PoengVelger(PoengVelgerTemplate):
         
 
         self.beskrivelse.text = beskrivelse
+        self.ikon_preview.source = "_/theme/treninger.png"
 
         # Sett den initielle forhåndsvisningen
         self.ikon_preview.source = self.selected_ikon_media
+        if ikon:
+            self.selected_ikon_media = ikon
+            self.ikon_preview.source = ikon
+            self.velg_aktivitet_label.text = aktivitet
+            
+            
+        else:
+            self.selected_ikon_media = None
+            self.ikon_preview.source = "_/theme/treninger.png"
+
+        #self.selected_ikon_path = None
 
 
     def ikon_preview_click(self, **event_args):
