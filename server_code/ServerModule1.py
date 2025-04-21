@@ -1083,65 +1083,10 @@ def sjekk_og_tildel_badges(bruker):
       badge=5
       tildel_badge(bruker,badge)
 
-def sjekk_badge_1(bruker):
-    userinfo = app_tables.userinfo.get(user=bruker)
-    return userinfo and userinfo['longest_streak'] >= 3
+    if sjekk_badge_6(bruker):
+      badge=6
+      tildel_badge(bruker,badge)
 
-def sjekk_badge_2(bruker):
-    userinfo = app_tables.userinfo.get(user=bruker)
-    return userinfo and userinfo['longest_streak'] >= 7
-
-def sjekk_badge_3(bruker):
-    aktiviteter = app_tables.aktivitet.search(deltager=bruker)
-
-    ikoner = {akt['ikon'] for akt in aktiviteter if akt['ikon']}
-
-    har_sykkel = 'sykling' in ikoner
-    har_svømming = 'svømming' in ikoner
-    har_lop = 'løp' in ikoner
-
-    return har_sykkel and har_svømming and har_lop
-
-def sjekk_badge_4(bruker):
-    # Hent alle aktiviteter for brukeren
-    aktiviteter = app_tables.aktivitet.search(deltager=bruker)
-
-    # Tell forekomster av hver aktivitetstype (ikon)
-    ikon_teller = {}
-
-    for akt in aktiviteter:
-        ikon = akt['aktivitet']
-        if ikon and "Skritt" not in ikon:
-            ikon_teller[ikon] = ikon_teller.get(ikon, 0) + 1
-
-    # Sjekk om noen aktivitetstyper har 8 eller flere forekomster
-    print(ikon_teller)
-    for antall in ikon_teller.values():
-        if antall >= 8:
-            return True
-
-    return False
-
-def sjekk_badge_5(bruker):
-    # Hent alle aktiviteter for brukeren
-    aktiviteter = app_tables.aktivitet.search(deltager=bruker)
-
-    # Tell forekomster av hver aktivitetstype (ikon)
-    ikon_teller = {}
-
-    for akt in aktiviteter:
-        ikon = akt['aktivitet']
-        if ikon and "Skritt" not in ikon:
-            ikon_teller[ikon] = ikon_teller.get(ikon, 0) + 1
-
-    # Sjekk om noen aktivitetstyper har 8 eller flere forekomster
-    for antall in ikon_teller.values():
-        if antall >= 24:
-            return True
-
-    return False
-
-    
 
 
 def tildel_badge(bruker, badge_id):
@@ -1311,3 +1256,104 @@ def send_email(to,subject,html):
     subject=subject,
     html=html
   )
+
+def sjekk_badge_1(bruker):
+    # streak > 3
+    userinfo = app_tables.userinfo.get(user=bruker)
+    return userinfo and userinfo['longest_streak'] >= 3
+
+def sjekk_badge_2(bruker):
+    #streak > 7
+    userinfo = app_tables.userinfo.get(user=bruker)
+    return userinfo and userinfo['longest_streak'] >= 7
+
+def sjekk_badge_3(bruker):
+    #Triathlon
+    aktiviteter = app_tables.aktivitet.search(deltager=bruker)
+
+    ikoner = {akt['ikon'] for akt in aktiviteter if akt['ikon']}
+
+    har_sykkel = 'sykling' in ikoner
+    har_svømming = 'svømming' in ikoner
+    har_lop = 'løp' in ikoner
+
+    return har_sykkel and har_svømming and har_lop
+
+def sjekk_badge_4(bruker):
+    # 8 like treninger
+    # Hent alle aktiviteter for brukeren
+    aktiviteter = app_tables.aktivitet.search(deltager=bruker)
+
+    # Tell forekomster av hver aktivitetstype (ikon)
+    ikon_teller = {}
+
+    for akt in aktiviteter:
+        ikon = akt['aktivitet']
+        if ikon and "Skritt" not in ikon:
+            ikon_teller[ikon] = ikon_teller.get(ikon, 0) + 1
+
+    # Sjekk om noen aktivitetstyper har 8 eller flere forekomster
+    print(ikon_teller)
+    for antall in ikon_teller.values():
+        if antall >= 8:
+            return True
+
+    return False
+
+def sjekk_badge_5(bruker):
+    # 24 like treninger
+    # Hent alle aktiviteter for brukeren
+    aktiviteter = app_tables.aktivitet.search(deltager=bruker)
+
+    # Tell forekomster av hver aktivitetstype (ikon)
+    ikon_teller = {}
+
+    for akt in aktiviteter:
+        ikon = akt['aktivitet']
+        if ikon and "Skritt" not in ikon:
+            ikon_teller[ikon] = ikon_teller.get(ikon, 0) + 1
+
+    # Sjekk om noen aktivitetstyper har 8 eller flere forekomster
+    for antall in ikon_teller.values():
+        if antall >= 24:
+            return True
+
+    return False
+
+def sjekk_badge_6(bruker):
+    from datetime import timedelta
+
+    aktiviteter = app_tables.aktivitet.search(deltager=bruker)
+    helgepoeng = {}
+
+    for akt in aktiviteter:
+        dato = akt['dato']
+
+        try:
+            poeng = akt['poeng']
+        except KeyError:
+            poeng = 0
+
+        if poeng is None:
+            poeng = 0
+
+        if not dato:
+            continue
+
+        ukedag = dato.weekday()  # 0 = mandag, 6 = søndag
+
+        if ukedag in [4, 5, 6]:  # fredag–søndag
+            antall_dager_tilbake = ukedag - 4
+            fredag_dato = dato - timedelta(days=antall_dager_tilbake)
+
+            #print(f"{bruker['email']}, {akt['aktivitet']}, {poeng} poeng, dato: {dato}")
+
+            helgepoeng[fredag_dato] = helgepoeng.get(fredag_dato, 0) + poeng
+
+    for fredag, poengsum in helgepoeng.items():
+        #print(f"Helg som starter {fredag}: {poengsum} poeng")
+        if poengsum >= 9:
+            return True
+
+    return False
+

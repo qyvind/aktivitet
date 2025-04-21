@@ -84,9 +84,10 @@ components:
     name: badge_5
     properties: {height: '20', source: _/theme/icons8-habit-64 (1).png, tooltip: Habit God, visible: false}
     type: Image
-  - layout_properties: {width: 16.5}
+  - event_bindings: {mouse_down: badge_6_mouse_down, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
+    layout_properties: {width: 16.5}
     name: image_6
-    properties: {height: '20', source: _/theme/grey badge.png, tooltip: '', visible: false}
+    properties: {height: '20', source: _/theme/icons8-weekend-48.png, tooltip: '', visible: false}
     type: Image
   - layout_properties: {width: 19}
     name: image_7
