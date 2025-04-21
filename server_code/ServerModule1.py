@@ -149,23 +149,31 @@ def lagre_aktivitet(dato, aktivitet, poeng, ikon,beskrivelse,skritt=None):
 
 @anvil.server.callable
 def oppdater_brukernavn(nytt_navn):
-    #print('oppdater_brukernavn')
-    # Hent den påloggede brukeren
     user = anvil.users.get_user()
     if not user:
         raise Exception("Bruker ikke logget inn")
-    
-    # Søk etter en eksisterende record i UserInfo for denne brukeren
+
     record = app_tables.userinfo.get(user=user)
-    
+
     if record:
-        # Oppdater feltet 'navn' i den eksisterende recorden
         record['navn'] = nytt_navn
     else:
-        # Opprett en ny record i tabellen UserInfo for denne brukeren
-        app_tables.userinfo.add_row(user=user, navn=nytt_navn, longest_streak=0, bonus=0)
-    
+        # Hent ligaen med level = 1
+        leage_record = app_tables.leages.get(level=1)
+        if not leage_record:
+            raise Exception("Fant ikke liga med level = 1")
+        
+        # Opprett ny userinfo med referanse til liga
+        app_tables.userinfo.add_row(
+            user=user,
+            navn=nytt_navn,
+            longest_streak=0,
+            bonus=0,
+            leage=leage_record
+        )
+
     return "Navn oppdatert"
+
 
 
 @anvil.server.callable
