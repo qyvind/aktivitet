@@ -62,10 +62,15 @@ components:
           name: label_1
           properties: {text: 'Deltager:', visible: false}
           type: Label
-        - layout_properties: {}
+        - event_bindings: {click: leage_ikon_click}
+          layout_properties: {}
           name: leage_ikon
-          properties: {font_size: 18, text: ''}
-          type: Label
+          properties:
+            font_size: 18
+            spacing:
+              padding: [null, '2', null, '2']
+            text: ''
+          type: Button
         - components: []
           event_bindings: {click: deltager_label_click}
           layout_properties: {}
@@ -99,27 +104,27 @@ components:
           margin: ['0', null, '0', null]
       type: FlowPanel
     - components:
-      - event_bindings: {mouse_down: badge_1_mouse_down}
+      - event_bindings: {mouse_down: badge_1_mouse_down, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
         layout_properties: {width: 30}
         name: badge_1
         properties: {height: '30', source: _/theme/icons8-three-leaf-clover-48.png, tooltip: Trippel Aktiv, visible: false}
         type: Image
-      - event_bindings: {mouse_down: badge_2_mouse_down}
+      - event_bindings: {mouse_down: badge_2_mouse_down, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
         layout_properties: {width: 30}
         name: badge_2
         properties: {height: '30', source: _/theme/icons8-777-48.png, tooltip: Seventh heaven, visible: false}
         type: Image
-      - event_bindings: {mouse_down: badge_3_mouse_down}
+      - event_bindings: {mouse_down: badge_3_mouse_down, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
         layout_properties: {width: 30}
         name: badge_3
         properties: {height: '30', source: _/theme/icons8-triathlon-64.png, tooltip: Triathlon, visible: false}
         type: Image
-      - event_bindings: {mouse_down: badge_4_mouse_down}
+      - event_bindings: {mouse_down: badge_4_mouse_down, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
         layout_properties: {width: 30}
         name: badge_4
         properties: {height: '30', source: _/theme/icons8-habit-64.png, tooltip: Habit Master, visible: false}
         type: Image
-      - event_bindings: {mouse_down: badge_5_mouse_down}
+      - event_bindings: {mouse_down: badge_5_mouse_down, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
         layout_properties: {width: 30}
         name: badge_5
         properties: {height: '30', source: _/theme/icons8-habit-64 (1).png, tooltip: Habit God, visible: false}
