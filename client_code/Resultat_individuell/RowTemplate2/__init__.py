@@ -16,7 +16,10 @@ class RowTemplate2(RowTemplate2Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    #print (self.item)
     self.Deltager_label.text = self.item['deltager']
+    self.leage_ikon.text = self.item['leage_ikon']
+    self.leage_ikon.tooltip = f"Liga: {self.item['leage']}"
     poeng = self.item['poeng']
     self.team_label.text = self.item['team']
     self.email.text = self.item['email']

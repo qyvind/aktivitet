@@ -426,12 +426,18 @@ class Loggbok(LoggbokTemplate):
         if user:
             # Hent oppdaterte brukerdata fra UserInfo-tabellen
             deltagerdata= anvil.server.call("hent_brukernavn")
-            # print(deltagerdata)
+            
+            #print(deltagerdata)
             navn=deltagerdata['navn']
             team=deltagerdata['team']
+            leage_ikon = deltagerdata['leage_ikon']
+            leage = deltagerdata['leage']
             # print(navn, team)
             self.deltager_label.text = deltagerdata['navn']
             self.team_label.text = deltagerdata['team']
+            self.leage_ikon.text = leage_ikon
+            self.leage_ikon.tooltip = f"Liga: {leage}"
+            
     
             if not navn or navn.strip() == "":  # Forhindrer at None eller tom streng trigger navnespørsmål
                 # Feltet 'navn' er tomt – spør om navn
