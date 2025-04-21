@@ -69,7 +69,8 @@ class Utils:
               "bonus": bonus,
               "score": score,
               "team": team,
-              "admin": admin
+              "admin": admin,
+              
           })
   
       resultat.sort(key=lambda x: x["score"], reverse=True)
