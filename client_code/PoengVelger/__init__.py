@@ -48,7 +48,7 @@ class PoengVelger(PoengVelgerTemplate):
           valgt_poeng = 1
         self.poeng_drop.selected_value = valgt_poeng
         self.aktivitet_box.text = aktivitet
-        self.antall_skritt.text = skritt.text
+        #self.antall_skritt.text = skritt.text
         
 
         self.beskrivelse.text = beskrivelse
@@ -114,23 +114,19 @@ class PoengVelger(PoengVelgerTemplate):
 
     def lagre_skritt_click(self, **event_args):
         skritt_rad = app_tables.files.get(path = "Skritt")
-        if not skritt_rad or not skritt_rad['file']:
-          alert("Fant ikke ikon for skritt – kontakt admin")
-          return
-        tekst = self.antall_skritt.text
-        antall = 0
-        if tekst and tekst.isdigit():
-            antall = int(tekst)
-            
-        else:
-            #alert("Du må skrive inn et gyldig tall for skritt.")
-            self.antall_skritt.text =0
-        
-        if antall >= 800:
-          poeng = 1
-        else:
-          poeng=0
-        aktivitet = f"{antall} Skritt"
+        #if not skritt_rad or not skritt_rad['file']:
+        #  alert("Fant ikke ikon for skritt – kontakt admin")
+        #  return
+        #tekst = self.antall_skritt.text
+        #antall = 0
+        #if tekst and tekst.isdigit():
+        #    antall = int(tekst)
+        #    
+        #else:
+        #    #alert("Du må skrive inn et gyldig tall for skritt.")
+        poeng=1
+     
+        aktivitet = "Skritt"
         
         # Bruk de lagrede verdiene
         ikon_media = skritt_rad['file']
@@ -138,10 +134,10 @@ class PoengVelger(PoengVelgerTemplate):
         beskrivelse = self.beskrivelse.text
 
 
-        skritt = antall
+        #skritt = antall
         if self.callback:
 
-             self.callback(poeng, aktivitet, ikon_media, beskrivelse, ikon_path,skritt)
+             self.callback(poeng, aktivitet, ikon_media, beskrivelse, ikon_path)
         anvil.server.call('sett_skritt_first',True)
         open_form('Loggbok')
 
@@ -156,3 +152,12 @@ class PoengVelger(PoengVelgerTemplate):
       self.trening_panel_2.visible = False
       self.skritt_panel_1.visible = True
       self.skritt_panel_2.visible = True
+
+
+
+
+  
+
+
+
+ 

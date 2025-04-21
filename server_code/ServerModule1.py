@@ -1075,7 +1075,7 @@ def sjekk_badge_3(bruker):
 
     ikoner = {akt['ikon'] for akt in aktiviteter if akt['ikon']}
 
-    har_sykkel = 'sykkeltrening' in ikoner or 'sykling' in ikoner
+    har_sykkel = 'sykling' in ikoner
     har_svømming = 'svømming' in ikoner
     har_lop = 'løp' in ikoner
 
