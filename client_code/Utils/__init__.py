@@ -83,7 +83,7 @@ class Utils:
             })
     
         resultat.sort(key=lambda x: x["score"], reverse=True)
-        print(resultat)
+        #print(resultat)
         return resultat
 
       
@@ -166,13 +166,12 @@ class Utils:
     
     @staticmethod
     def vis_tildelte_badges(bruker):
-        print("▶️ Viser badges for:", bruker['email'])
     
         user_badger = app_tables.user_badges.search(user=bruker)
         for rad in user_badger:
             badge = rad['badge']
             badge_id = badge['id']
-            print(f" - Har badge {badge_id}: {badge['name']}")
+            #print(f" - Har badge {badge_id}: {badge['name']}")
     
             badge_komponent = getattr(self, f"badge_{badge_id}", None)
             if badge_komponent:

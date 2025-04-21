@@ -99,34 +99,38 @@ components:
           margin: ['0', null, '0', null]
       type: FlowPanel
     - components:
-      - event_bindings: {}
+      - event_bindings: {mouse_down: badge_1_mouse_down}
         layout_properties: {width: 30}
         name: badge_1
         properties: {height: '30', source: _/theme/icons8-three-leaf-clover-48.png, tooltip: Trippel Aktiv, visible: false}
         type: Image
-      - event_bindings: {}
+      - event_bindings: {mouse_down: badge_2_mouse_down}
         layout_properties: {width: 30}
         name: badge_2
         properties: {height: '30', source: _/theme/icons8-777-48.png, tooltip: Seventh heaven, visible: false}
         type: Image
-      - event_bindings: {}
+      - event_bindings: {mouse_down: badge_3_mouse_down}
         layout_properties: {width: 30}
         name: badge_3
         properties: {height: '30', source: _/theme/icons8-triathlon-64.png, tooltip: Triathlon, visible: false}
         type: Image
-      - layout_properties: {width: 30}
+      - event_bindings: {mouse_down: badge_4_mouse_down}
+        layout_properties: {width: 30}
         name: badge_4
         properties: {height: '30', source: _/theme/icons8-habit-64.png, tooltip: Habit Master, visible: false}
         type: Image
-      - layout_properties: {width: 30}
+      - event_bindings: {mouse_down: badge_5_mouse_down}
+        layout_properties: {width: 30}
         name: badge_5
         properties: {height: '30', source: _/theme/icons8-habit-64 (1).png, tooltip: Habit God, visible: false}
         type: Image
-      - layout_properties: {width: 30}
+      - event_bindings: {}
+        layout_properties: {width: 30}
         name: image_6
         properties: {height: '30', source: _/theme/grey badge.png, tooltip: '', visible: false}
         type: Image
-      - layout_properties: {width: 30}
+      - event_bindings: {}
+        layout_properties: {width: 30}
         name: image_7
         properties: {height: '30', source: _/theme/grey badge.png, tooltip: '', visible: false}
         type: Image
@@ -195,7 +199,7 @@ components:
               padding: ['0', '0', '0', '0']
             text: '0'
           type: Button
-        - event_bindings: {}
+        - event_bindings: {mouse_down: man_button_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
           layout_properties: {grid_position: 'BUEXBD,JKJSLR'}
           name: man_ikon
           properties:
@@ -257,7 +261,7 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - event_bindings: {}
+        - event_bindings: {mouse_down: tir_button_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
           layout_properties: {grid_position: 'ITOHFN,CSAUSV'}
           name: tir_ikon
           properties:
@@ -314,7 +318,7 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - event_bindings: {}
+        - event_bindings: {mouse_down: ons_button_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
           layout_properties: {grid_position: 'AEDULU,BYYDDZ'}
           name: ons_ikon
           properties:
@@ -371,7 +375,7 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - event_bindings: {}
+        - event_bindings: {mouse_down: tor_button_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
           layout_properties: {grid_position: 'NKUVYK,IJXQBK'}
           name: tor_ikon
           properties:
@@ -433,12 +437,13 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - event_bindings: {}
+        - event_bindings: {mouse_down: fre_button_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
           layout_properties: {grid_position: 'HFGYCY,CTAMUA'}
           name: fre_ikon
           properties:
             height: '32'
             margin: ['0', null, '0', null]
+            source: ''
           type: Image
         - layout_properties: {grid_position: 'EAQPVP,FHTBQS'}
           name: fre_akt_label
@@ -490,12 +495,13 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - event_bindings: {}
+        - event_bindings: {mouse_down: lor_button_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
           layout_properties: {grid_position: 'MLYHRM,IXIQOA'}
           name: lor_ikon
           properties:
             height: '32'
             margin: ['0', null, '0', null]
+            source: ''
           type: Image
         - layout_properties: {grid_position: 'ETZXYW,AGFTEO'}
           name: lor_akt_label
@@ -547,12 +553,13 @@ components:
               padding: ['0', '12', '0', '12']
             text: '0'
           type: Button
-        - event_bindings: {}
+        - event_bindings: {mouse_down: son_button_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
           layout_properties: {grid_position: 'NTOGHO,MCIKOC'}
           name: son_ikon
           properties:
             height: '32'
             margin: ['0', null, '0', null]
+            source: ''
           type: Image
         - layout_properties: {grid_position: 'JWPLVX,KFSMCP'}
           name: son_akt_label

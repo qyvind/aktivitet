@@ -49,13 +49,13 @@ class RowTemplate2(RowTemplate2Template):
     print(coaching)
 
   def vis_tildelte_badges(self, bruker_rad):
-      print("▶️ Viser badges for:", self.item['deltager'])
+      #print("▶️ Viser badges for:", self.item['deltager'])
    
       user_badger = app_tables.user_badges.search(user = bruker_rad)
       for rad in user_badger:
           badge = rad['badge']
           badge_id = badge['id']
-          print(f" - Har badge {badge_id}: {badge['name']}")
+          #print(f" - Har badge {badge_id}: {badge['name']}")
   
           badge_komponent = getattr(self, f"badge_{badge_id}", None)
           if badge_komponent:

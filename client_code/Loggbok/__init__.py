@@ -288,13 +288,13 @@ class Loggbok(LoggbokTemplate):
     #           badge_komponent.visible = True
 
     def vis_tildelte_badges(self, bruker):
-        print("▶️ Viser badges for:", bruker['email'])
+        #print("▶️ Viser badges for:", bruker['email'])
     
         user_badger = app_tables.user_badges.search(user=bruker)
         for rad in user_badger:
             badge = rad['badge']
             badge_id = badge['id']
-            print(f" - Har badge {badge_id}: {badge['name']}")
+            #print(f" - Har badge {badge_id}: {badge['name']}")
     
             badge_komponent = getattr(self, f"badge_{badge_id}", None)
             if badge_komponent:
@@ -430,13 +430,19 @@ class Loggbok(LoggbokTemplate):
             #print(deltagerdata)
             navn=deltagerdata['navn']
             team=deltagerdata['team']
-            leage_ikon = deltagerdata['leage_ikon']
-            leage = deltagerdata['leage']
+            if deltagerdata['leage']:
+              leage_ikon = deltagerdata['leage_ikon']
+              leage = deltagerdata['leage']
+            else:
+              leage_ikon = " "
+              leage = " "
             # print(navn, team)
             self.deltager_label.text = deltagerdata['navn']
             self.team_label.text = deltagerdata['team']
             self.leage_ikon.text = leage_ikon
             self.leage_ikon.tooltip = f"Liga: {leage}"
+
+              
             
     
             if not navn or navn.strip() == "":  # Forhindrer at None eller tom streng trigger navnespørsmål
@@ -641,3 +647,29 @@ class Loggbok(LoggbokTemplate):
     def sjekk_korrigering(self,**event_args):
         konkurranse = app_tables.konkurranse.search()[0]  # Forutsetter én rad
         return konkurranse['korrigering']
+
+    def badge_1_mouse_down(self, x, y, button, keys, **event_args):
+      alert(self.badge_1.tooltip)
+    def badge_2_mouse_down(self, x, y, button, keys, **event_args):
+      alert(self.badge_2.tooltip)
+    def badge_3_mouse_down(self, x, y, button, keys, **event_args):
+      alert(self.badge_3.tooltip)
+    def badge_4_mouse_down(self, x, y, button, keys, **event_args):
+      alert(self.badge_4.tooltip)
+    def badge_5_mouse_down(self, x, y, button, keys, **event_args):
+      alert(self.badge_5.tooltip)
+    def badge_6_mouse_down(self, x, y, button, keys, **event_args):
+      alert(self.badge_6.tooltip)
+    def badge_7_mouse_down(self, x, y, button, keys, **event_args):
+      alert(self.badge_7.tooltip)
+    def badge_8_mouse_down(self, x, y, button, keys, **event_args):
+      alert(self.badge_8.tooltip)
+    def badge_9_mouse_down(self, x, y, button, keys, **event_args):
+      alert(self.badge_9.tooltip)
+
+
+    def image_mouse_enter(self, x, y, **event_args):
+      anvil.js.window.document.body.style.cursor = 'pointer'
+
+    def image_mouse_leave(self, x, y, **event_args):
+      anvil.js.window.document.body.style.cursor = 'default'
