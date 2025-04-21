@@ -172,6 +172,9 @@ class PoengVelger(PoengVelgerTemplate):
     def ikon_preview_mouse_leave(self, x, y, **event_args):
       anvil.js.window.document.body.style.cursor = 'default'
 
+    def angre_button_click(self, **event_args):
+      open_form('Loggbok')
+
 
 
 

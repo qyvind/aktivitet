@@ -112,6 +112,11 @@ components:
     properties: {}
     type: ColumnPanel
   - components:
+    - event_bindings: {click: angre_button_click}
+      layout_properties: {}
+      name: angre_skritt_button
+      properties: {role: filled-button, text: Angre}
+      type: Button
     - event_bindings: {click: bytt_til_trening_click}
       layout_properties: {}
       name: bytt_til_trening
@@ -127,6 +132,11 @@ components:
     properties: {align: right}
     type: FlowPanel
   - components:
+    - event_bindings: {click: angre_button_click}
+      layout_properties: {}
+      name: angre_trening_button
+      properties: {role: filled-button, text: Angre}
+      type: Button
     - event_bindings: {click: nytt_til_skritt_button_click}
       layout_properties: {}
       name: nytt_til_skritt_button
