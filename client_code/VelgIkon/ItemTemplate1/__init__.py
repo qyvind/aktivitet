@@ -8,6 +8,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+import anvil.js
 
 # Inne i ItemTemplate1 klassen
 
@@ -87,3 +88,9 @@ class ItemTemplate1(ItemTemplate1Template):
         # --- MODIFISERT DEL SLUTT ---
         else:
             print("ItemTemplate1 (Ikon): Klikket på en tom bildeplass.")
+
+    def image_mouse_enter(self, x, y, **event_args):
+      anvil.js.window.document.body.style.cursor = 'pointer'
+
+    def image_mouse_leave(self, x, y, **event_args):
+      anvil.js.window.document.body.style.cursor = 'default'

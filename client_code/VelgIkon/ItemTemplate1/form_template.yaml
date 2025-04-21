@@ -1,7 +1,7 @@
 components:
 - components:
   - components:
-    - event_bindings: {mouse_down: image_click}
+    - event_bindings: {mouse_down: image_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
       layout_properties: {grid_position: 'TKIHYI,HSEVOZ'}
       name: image_1
       properties: {height: '60'}
@@ -20,7 +20,7 @@ components:
     properties: {}
     type: ColumnPanel
   - components:
-    - event_bindings: {mouse_down: image_click}
+    - event_bindings: {mouse_down: image_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
       layout_properties: {grid_position: 'RAVKQZ,JYRLVW'}
       name: image_2
       properties: {height: '60'}
@@ -39,7 +39,7 @@ components:
     properties: {}
     type: ColumnPanel
   - components:
-    - event_bindings: {mouse_down: image_click}
+    - event_bindings: {mouse_down: image_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
       layout_properties: {grid_position: 'YQDOFA,HRRUSF'}
       name: image_3
       properties: {height: '60'}
@@ -58,7 +58,7 @@ components:
     properties: {}
     type: ColumnPanel
   - components:
-    - event_bindings: {mouse_down: image_click}
+    - event_bindings: {mouse_down: image_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
       layout_properties: {grid_position: 'KIGFCE,EHFMAZ'}
       name: image_4
       properties: {height: '60'}
