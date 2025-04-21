@@ -44,7 +44,7 @@ components:
             - event_bindings: {mouse_down: ikon_preview_click, mouse_enter: ikon_preview_mouse_enter, mouse_leave: ikon_preview_mouse_leave}
               layout_properties: {grid_position: 'VJBWVC,KSQHVW'}
               name: ikon_preview
-              properties: {height: '60'}
+              properties: {height: '60', source: _/theme/treninger.png}
               type: Image
             - layout_properties: {grid_position: 'UMZAJC,LNVVRA'}
               name: velg_aktivitet_label
