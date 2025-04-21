@@ -673,3 +673,6 @@ class Loggbok(LoggbokTemplate):
 
     def image_mouse_leave(self, x, y, **event_args):
       anvil.js.window.document.body.style.cursor = 'default'
+
+    def leage_ikon_click(self, **event_args):
+      alert(self.leage_ikon.tooltip)

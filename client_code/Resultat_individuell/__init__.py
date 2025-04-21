@@ -25,3 +25,4 @@ class Resultat_individuell(Resultat_individuellTemplate):
   def lukk_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     open_form("Loggbok")
+

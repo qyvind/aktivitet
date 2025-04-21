@@ -21,10 +21,14 @@ components:
       text: ''
       tooltip: Slå opp deltagers treningsdata
     type: Button
-  - layout_properties: {}
+  - event_bindings: {click: leage_ikon_click}
+    layout_properties: {}
     name: leage_ikon
-    properties: {font_size: 14}
-    type: Label
+    properties:
+      spacing:
+        padding: [null, '2', null, '2']
+      text: ''
+    type: Button
   - layout_properties: {}
     name: Deltager_label
     properties:
@@ -55,26 +59,28 @@ components:
     visible: true
   type: Label
 - components:
-  - event_bindings: {}
+  - event_bindings: {mouse_down: badge_1_mouse_down, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
     layout_properties: {width: 19.5}
     name: badge_1
     properties: {height: '20', source: _/theme/icons8-three-leaf-clover-48.png, tooltip: Trippel Aktiv, visible: false}
     type: Image
-  - event_bindings: {}
+  - event_bindings: {mouse_down: badge_2_mouse_down, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
     layout_properties: {width: 17.5}
     name: badge_2
     properties: {height: '20', source: _/theme/icons8-777-48.png, tooltip: Seventh heaven, visible: false}
     type: Image
-  - event_bindings: {}
+  - event_bindings: {mouse_down: badge_3_mouse_down, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
     layout_properties: {width: 21}
     name: badge_3
     properties: {height: '20', source: _/theme/icons8-triathlon-64.png, tooltip: Triathlon, visible: false}
     type: Image
-  - layout_properties: {width: 20}
+  - event_bindings: {mouse_down: badge_4_mouse_down, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
+    layout_properties: {width: 20}
     name: badge_4
     properties: {height: '20', source: _/theme/icons8-habit-64.png, tooltip: Habit Master, visible: false}
     type: Image
-  - layout_properties: {width: 20}
+  - event_bindings: {mouse_down: badge_5_mouse_down, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
+    layout_properties: {width: 20}
     name: badge_5
     properties: {height: '20', source: _/theme/icons8-habit-64 (1).png, tooltip: Habit God, visible: false}
     type: Image
