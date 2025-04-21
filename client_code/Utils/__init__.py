@@ -35,47 +35,58 @@ class Utils:
 
     @staticmethod
     def hent_poengsummer():
-      poeng_dict = {}
-  
-      for userinfo_rad in app_tables.userinfo.search():
-          deltager = userinfo_rad['user']
-          if deltager:
-              poeng_dict[deltager] = 0
-  
-      for rad in app_tables.aktivitet.search():
-          deltager = rad['deltager']
-          poeng = rad['poeng']
-          if deltager:
-              poeng_dict[deltager] = poeng_dict.get(deltager, 0) + poeng
-  
-      resultat = []
-      for deltager, poeng in poeng_dict.items():
-          userinfo_rad = app_tables.userinfo.get(user=deltager)
-          navn = userinfo_rad['navn'] if userinfo_rad else None
-          email = deltager['email']
-          admin = userinfo_rad['admin'] if userinfo_rad else False
-          longest_streak = userinfo_rad['longest_streak'] if userinfo_rad and userinfo_rad['longest_streak'] is not None else 0
-          bonus = userinfo_rad['bonus'] if userinfo_rad and userinfo_rad['bonus'] is not None else 0
-          score = ((poeng +bonus) * 100) + longest_streak
-  
-          team = userinfo_rad['team']['team'] if userinfo_rad and userinfo_rad['team'] else "Ingen team"
-  
-          resultat.append({
-              "deltager": navn if navn else email,
-              "navn": navn,
-              "email": email,
-              "poeng": poeng,
-              "longest_streak": longest_streak,
-              "bonus": bonus,
-              "score": score,
-              "team": team,
-              "admin": admin,
-              
-          })
-  
-      resultat.sort(key=lambda x: x["score"], reverse=True)
-      return resultat
-  
+        poeng_dict = {}
+    
+        for userinfo_rad in app_tables.userinfo.search():
+            deltager = userinfo_rad['user']
+            if deltager:
+                poeng_dict[deltager] = 0
+    
+        for rad in app_tables.aktivitet.search():
+            deltager = rad['deltager']
+            poeng = rad['poeng']
+            if deltager:
+                poeng_dict[deltager] = poeng_dict.get(deltager, 0) + poeng
+    
+        resultat = []
+        for deltager, poeng in poeng_dict.items():
+            userinfo_rad = app_tables.userinfo.get(user=deltager)
+            navn = userinfo_rad['navn'] if userinfo_rad else None
+            email = deltager['email']
+            admin = userinfo_rad['admin'] if userinfo_rad else False
+            longest_streak = userinfo_rad['longest_streak'] if userinfo_rad and userinfo_rad['longest_streak'] is not None else 0
+            bonus = userinfo_rad['bonus'] if userinfo_rad and userinfo_rad['bonus'] is not None else 0
+            score = ((poeng + bonus) * 100) + longest_streak
+    
+            team = userinfo_rad['team']['team'] if userinfo_rad and userinfo_rad['team'] else "Ingen team"
+    
+            # Hent fra leage riktig
+            leage_navn = ""
+            ikon = ""
+            if userinfo_rad and userinfo_rad['leage']:
+                leage_row = userinfo_rad['leage']
+                leage_navn = leage_row['leage']  # <-- FELTNAVN må stemme!
+                ikon = leage_row['ikon']
+    
+            resultat.append({
+                "deltager": navn if navn else email,
+                "navn": navn,
+                "email": email,
+                "poeng": poeng,
+                "longest_streak": longest_streak,
+                "bonus": bonus,
+                "score": score,
+                "team": team,
+                "admin": admin,
+                "leage": leage_navn,
+                "leage_ikon": ikon
+            })
+    
+        resultat.sort(key=lambda x: x["score"], reverse=True)
+        print(resultat)
+        return resultat
+
+      
 
     @staticmethod
     def hent_poengsummer_uten_null():

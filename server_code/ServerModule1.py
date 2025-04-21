@@ -177,23 +177,33 @@ def hent_brukernavn():
     record = app_tables.userinfo.get(user=user)
     
     if record is None:
-        return {"navn": "", "team": "", "lock": False}
-    
+        return {"navn": "", "team": "", "lock": False, "leage": "", "ikon": ""}
+
     record_dict = dict(record)
     navn = record_dict.get('navn', "")
 
     team_navn = ""
     lock_status = False
 
-    if 'team' in record_dict and record_dict['team']:
-        team_row = record['team']  # bruker LiveObject direkte her
+    if record_dict.get('team'):
+        team_row = record['team']
         team_navn = team_row['team']
-        lock_status = team_row['lock']  # dette vil være True/False
+        lock_status = team_row['lock']
+
+    leage_navn = ""
+    ikon_url = ""
+
+    if record_dict.get('leage'):
+        leage_row = record['leage']
+        leage_navn = leage_row['leage']  # eller 'navn' hvis det er navnet på ligaen
+        ikon_url = leage_row['ikon']     # for eksempel en URL eller media-objekt
 
     return {
         "navn": navn,
         "team": team_navn,
-        "lock": lock_status
+        "lock": lock_status,
+        "leage": leage_navn,
+        "leage_ikon": ikon_url
     }
 
 

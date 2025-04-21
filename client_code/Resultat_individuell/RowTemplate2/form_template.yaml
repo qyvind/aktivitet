@@ -19,7 +19,12 @@ components:
       spacing_above: none
       spacing_below: none
       text: ''
+      tooltip: Slå opp deltagers treningsdata
     type: Button
+  - layout_properties: {}
+    name: leage_ikon
+    properties: {font_size: 14}
+    type: Label
   - layout_properties: {}
     name: Deltager_label
     properties:

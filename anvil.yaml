@@ -117,11 +117,17 @@ db_schema:
     server: full
     title: Konkurranse
   leages:
-    client: none
+    client: search
     columns:
     - admin_ui: {order: 0, width: 200}
       name: leage
       type: string
+    - admin_ui: {order: 1, width: 200}
+      name: ikon
+      type: string
+    - admin_ui: {order: 2, width: 200}
+      name: level
+      type: number
     server: full
     title: leages
   ny_aktivitet:
@@ -214,6 +220,10 @@ db_schema:
     - admin_ui: {width: 200}
       name: skritt_first
       type: bool
+    - admin_ui: {order: 8, width: 200}
+      name: leage
+      target: leages
+      type: link_single
     server: full
     title: userinfo
   users:
