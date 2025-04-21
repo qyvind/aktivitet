@@ -24,13 +24,15 @@ class RowTemplate2(RowTemplate2Template):
     self.score.text = self.item['score']
     bonus = self.item['bonus']
     self.score.tooltip = f"((Poeng: {poeng} + Bonus: {bonus}) * 100) + Streak: {streak}"
-    #self.vis_tildelte_badges(self.item['email'])
+    email = self.email.text
+    bruker_rad = anvil.server.call("hent_user_fra_email", email)
+    self.vis_tildelte_badges(bruker_rad)
     
     
 
     # Any code you write here will run before the form opens.
 
-  def button_1_click(self, **event_args):
+  def kikk_click(self, **event_args):
     email = self.email.text
     try:
         bruker_rad = anvil.server.call("hent_user_fra_email", email)
@@ -43,16 +45,16 @@ class RowTemplate2(RowTemplate2Template):
     coaching = anvil.server.call('lag_status_for_bruker')
     print(coaching)
 
-  # def vis_tildelte_badges(self, bruker):
-  #     print("▶️ Viser badges for:", self.item['deltager'])
+  def vis_tildelte_badges(self, bruker_rad):
+      print("▶️ Viser badges for:", self.item['deltager'])
+   
+      user_badger = app_tables.user_badges.search(user = bruker_rad)
+      for rad in user_badger:
+          badge = rad['badge']
+          badge_id = badge['id']
+          print(f" - Har badge {badge_id}: {badge['name']}")
   
-  #     user_badger = app_tables.user_badges.search(user = bruker)
-  #     for rad in user_badger:
-  #         badge = rad['badge']
-  #         badge_id = badge['id']
-  #         print(f" - Har badge {badge_id}: {badge['name']}")
-  
-  #         badge_komponent = getattr(self, f"badge_{badge_id}", None)
-  #         if badge_komponent:
-  #             self.badge_flow_panel.visible = True
-  #             badge_komponent.visible = True
+          badge_komponent = getattr(self, f"badge_{badge_id}", None)
+          if badge_komponent:
+              self.badge_flow_panel.visible = True
+              badge_komponent.visible = True
