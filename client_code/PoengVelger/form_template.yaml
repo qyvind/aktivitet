@@ -37,7 +37,7 @@ components:
               properties: {}
               type: DropDown
             layout_properties: {width: 166}
-            name: column_panel_3
+            name: velg_lengde_panel
             properties: {}
             type: ColumnPanel
           - components:
