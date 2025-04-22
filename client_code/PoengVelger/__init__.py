@@ -86,6 +86,10 @@ class PoengVelger(PoengVelgerTemplate):
             self.velg_aktivitet_label.text = selected_data.get('path')
 
             self.ikon_preview.source = self.selected_ikon_media
+            if self.selected_ikon_path == "Hviledag":
+              self.velg_lengde_panel.visible = False
+            else:
+              self.velg_lengde_panel.visible = True
 
             #print(f"Ikon valgt: Media={self.selected_ikon_media.name if self.selected_ikon_media else 'None'}, Pent Navn (fra path)={self.selected_ikon_path}")
 
