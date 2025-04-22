@@ -108,13 +108,6 @@ class PoengVelger(PoengVelgerTemplate):
         ikon_path = self.selected_ikon_path # Du har nå path her!
         beskrivelse = self.beskrivelse.text
 
-        # Gjør noe med ikon_path hvis du trenger det her,
-        # f.eks. lagre det i en annen tabell sammen med resten av dataen.
-        #print(f"Lagrer med ikon path: {ikon_path}")
-
-
-        # Hvis PoengVelger ble åpnet med en callback, kall den nå
-        # Viktig: Hvis callback-funksjonen skal motta path, må signaturen oppdateres!
         if self.callback:
             # Du må bestemme om callback trenger path
             # Alternativ 1: Uten path (som før)
@@ -174,6 +167,9 @@ class PoengVelger(PoengVelgerTemplate):
 
     def angre_button_click(self, **event_args):
       open_form('Loggbok')
+
+    def slett_button_click(self, **event_args):
+      pass
 
 
 

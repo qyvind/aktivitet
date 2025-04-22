@@ -112,6 +112,11 @@ components:
     properties: {}
     type: ColumnPanel
   - components:
+    - event_bindings: {click: slett_button_click}
+      layout_properties: {}
+      name: slett_button
+      properties: {icon: 'fa:trash', role: outlined-button, text: Slett}
+      type: Button
     - event_bindings: {click: angre_button_click}
       layout_properties: {}
       name: angre_skritt_button

@@ -1357,3 +1357,11 @@ def sjekk_badge_6(bruker):
 
     return False
 
+@anvil.server.callable
+def slett_aktivitet_for_dato(dato):
+    bruker = anvil.users.get_user()
+    aktivitet_rad = app_tables.aktivitet.get(deltager=bruker, dato=dato)
+    if aktivitet_rad:
+        aktivitet_rad.delete()
+        return True
+    return False
