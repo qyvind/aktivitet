@@ -483,17 +483,17 @@ def create_user(email, name, password, team_name=None):
 
 @anvil.server.callable
 def opprett_nytt_team(team_navn):
-    #print(f'Oppretter nytt team: {team_navn}')
+    print(f'Oppretter nytt team: {team_navn}')
     
     # Sjekk om teamet allerede finnes
     eksisterende_team = app_tables.team.get(team=team_navn)
     if eksisterende_team:
-        #print(f"Team {team_navn} finnes allerede.")
+        print(f"Team {team_navn} finnes allerede.")
         return "Teamet finnes allerede!"
     
     # Opprett nytt team
     app_tables.team.add_row(team=team_navn)
-    #print(f"Team {team_navn} opprettet!")
+    print(f"Team {team_navn} opprettet!")
     return "Team opprettet!"
 
 @anvil.server.callable
