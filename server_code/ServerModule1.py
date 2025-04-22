@@ -240,14 +240,16 @@ def hent_poengsummer():
     resultat = []
     for deltager, poeng in poeng_dict.items():
         userinfo_rad = app_tables.userinfo.get(user=deltager)  # Hent userinfo basert på user-link
-        navn = userinfo_rad['navn'] if userinfo_rad else None  # Hent navn hvis tilgjengelig
-        email = deltager['email']  # Hent e-post direkte fra brukeren
+        navn = userinfo_rad['navn'] if userinfo_rad else None
+        email = deltager['email']
         admin = userinfo_rad['admin']
-        
-        # Hent team hvis brukeren er knyttet til et
         team = userinfo_rad['team']['team'] if userinfo_rad and userinfo_rad['team'] else "Ingen team"
 
-        # Fall tilbake til e-post hvis navn ikke finnes for deltager-feltet
+        # Her lagrer vi poengsummen i userinfo-tabellen
+        if userinfo_rad:
+            userinfo_rad['poeng'] = poeng
+            userinfo_rad['score'] = poeng
+
         resultat.append({
             "deltager": navn if navn else email,
             "navn": navn,
@@ -257,9 +259,9 @@ def hent_poengsummer():
             "admin": admin
         })
 
-    # Sorter etter poeng, høyest først
     resultat.sort(key=lambda x: x["poeng"], reverse=True)
     return resultat
+
 
 
 @anvil.server.callable
