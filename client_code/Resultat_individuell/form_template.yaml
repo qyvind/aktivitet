@@ -18,7 +18,7 @@ components:
     name: data_grid_1
     properties:
       columns:
-      - {data_key: column_1, expand: false, id: JKSDUP, title: Deltager, width: '200'}
+      - {data_key: column_1, expand: false, id: JKSDUP, title: Deltager, width: 237.99996948242188}
       - {data_key: column_1, id: PJNLQL, title: Score, width: '60'}
       - {data_key: column_1, expand: false, id: LSHEHV, title: Team, width: 87}
       - {data_key: column_1, id: PFFFKV, title: Utmerkelser}
