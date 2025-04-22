@@ -43,7 +43,7 @@ class ItemTemplate1(ItemTemplate1Template):
             self.image_2.tag = icon_data_2
         else:
             self.image_2.source = None
-            self.aktivitet_2 = ""
+            self.aktivitet_2.text = ""
             self.image_2.tag = None
 
         # --- Sett egenskaper for Bilde 3 ---

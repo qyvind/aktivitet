@@ -44,7 +44,7 @@ class PoengVelger(PoengVelgerTemplate):
         # --- MODIFISERT DEL SLUTT ---
 
         self.ukedag_label.text = ukedag
-        self.poeng_drop.items = [ ("En halv time", 1), ("En time", 2), ("Halvannen time eller mer", 3)]
+        self.poeng_drop.items = [ ("Hviledag",0),("En halv time", 1), ("En time", 2), ("Halvannen time eller mer", 3)]
         if valgt_poeng == 0:
           valgt_poeng = 1
         self.poeng_drop.selected_value = valgt_poeng
@@ -100,12 +100,13 @@ class PoengVelger(PoengVelgerTemplate):
             print("Valg av ikon avbrutt.")
 
     def lagre_trening_button_click(self, **event_args):
-        poeng = self.poeng_drop.selected_value
+        
         aktivitet = self.selected_ikon_path
         
         # Bruk de lagrede verdiene
         ikon_media = self.selected_ikon_media
         ikon_path = self.selected_ikon_path # Du har nå path her!
+        poeng = self.poeng_drop.selected_value
         beskrivelse = self.beskrivelse.text
 
         # Gjør noe med ikon_path hvis du trenger det her,
