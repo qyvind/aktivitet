@@ -14,6 +14,10 @@ class Login(LoginTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    bruker = anvil.users.get_user()
+    if bruker:
+        open_form('Loggbok')
+    
 
     # Any code you write here will run before the form opens.
 
