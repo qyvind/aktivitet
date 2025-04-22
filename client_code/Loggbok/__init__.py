@@ -66,6 +66,9 @@ class Loggbok(LoggbokTemplate):
           valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
       
           # Oppdater GUI
+          
+          if aktivitet == "Hviledag":
+            poeng = 0
           knapp.text = str(poeng)
           label.text = aktivitet
           ikon_komponent.source = nytt_ikon
@@ -89,7 +92,7 @@ class Loggbok(LoggbokTemplate):
       
             
 
-        # open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text,ikon=ikon_komponent,beskrivelse=beskrivelse, callback=mottak_fra_poengvelger)
+        
         open_form("PoengVelger", valgt_poeng=valgt_poeng, aktivitet=aktivitet, ukedag=ukedag_label.text, ikon=ikon_komponent.source, beskrivelse=beskrivelse, callback=mottak_fra_poengvelger)
 
 
@@ -576,11 +579,11 @@ class Loggbok(LoggbokTemplate):
       
 
 
-    def velg_ikon(self, **event_args):
-      def mottatt_ikon(source):
-        self.man_ikon.source = source  # 👈 Nå bruker du Image istedenfor .icon
+    # def velg_ikon(self, **event_args):
+    #   def mottatt_ikon(source):
+    #     self.man_ikon.source = source  # 
     
-      open_form("EgendefinertIkonVelger", callback=mottatt_ikon)
+    #   open_form("EgendefinertIkonVelger", callback=mottatt_ikon)
 
     def button_3_click(self, **event_args):
       """This method is called when the button is clicked"""
