@@ -6,23 +6,21 @@ components:
   properties: {}
   type: Label
 - data_bindings:
-  - {code: 'self.item[''prompt'']', property: text, writeback: false}
-  layout_properties: {column: VJQQOR}
-  name: label_2
-  properties: {}
-  type: Label
-- data_bindings:
-  - {code: 'self.item[''svar'']', property: text, writeback: false}
-  layout_properties: {column: OJLQEN}
-  name: label_3
-  properties: {}
-  type: Label
-- data_bindings:
-  - {code: 'self.item[''dato'']', property: visible, writeback: false}
+  - {code: '', property: visible, writeback: false}
   - {code: 'self.item[''date'']', property: text, writeback: false}
   layout_properties: {column: ISNZQV}
   name: label_4
-  properties: {}
+  properties: {visible: true}
   type: Label
+- event_bindings: {click: prompt_click}
+  layout_properties: {column: VJQQOR}
+  name: prompt
+  properties: {text: Prompt}
+  type: Button
+- event_bindings: {click: svar_click}
+  layout_properties: {column: OJLQEN}
+  name: svar
+  properties: {text: Svar}
+  type: Button
 container: {type: DataRowPanel}
 is_package: true

@@ -16,3 +16,9 @@ class RowTemplate8(RowTemplate8Template):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+
+  def prompt_click(self, **event_args):
+    alert(self.item['prompt'])
+
+  def svar_click(self, **event_args):
+    alert(self.item['svar'])
