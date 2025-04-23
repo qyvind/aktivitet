@@ -79,7 +79,8 @@ class Utils:
                 "team": team,
                 "admin": admin,
                 "leage": leage_navn,
-                "leage_ikon": ikon
+                "leage_ikon": ikon,
+                "user_record": deltager
             })
     
         resultat.sort(key=lambda x: x["score"], reverse=True)
