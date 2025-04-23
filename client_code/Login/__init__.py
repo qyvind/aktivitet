@@ -9,6 +9,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from .. import Globals
+from ..Utils import Utils
 
 
 class Login(LoginTemplate):
@@ -25,5 +26,7 @@ class Login(LoginTemplate):
 
   def login_click(self, **event_args):
     Globals.bruker = anvil.users.login_with_form()
+    if Utils.is_admin():
+      Globals.admin=True
     if Globals.bruker:
         open_form('Loggbok')
