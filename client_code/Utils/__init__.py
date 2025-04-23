@@ -235,5 +235,6 @@ class Utils:
         # Slå opp brukerens info i userinfo-tabellen
         userinfo = app_tables.userinfo.get(user=user)
         if userinfo and userinfo['admin'] :
+            Globals.admin=True
             return True
         return False

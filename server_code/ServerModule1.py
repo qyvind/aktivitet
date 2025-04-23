@@ -219,9 +219,8 @@ def hent_brukernavn():
     }
 
 
-@anvil.server.callable
 def hent_poengsummer():
-    print('hent_poengsummer')
+    #print('hent_poengsummer')
     poeng_dict = {}
 
     # Hent alle brukere og initialiser dem med 0 poeng
@@ -265,6 +264,7 @@ def hent_poengsummer():
 
     resultat.sort(key=lambda x: x["poeng"], reverse=True)
     return resultat
+
 
 
 
@@ -708,114 +708,7 @@ def hent_user_fra_email(email):
 
 
 
-# @anvil.server.callable
-# def opprett_ukentlige_trekninger(start_dato, slutt_dato):
-#     """
-#     Sletter alle eksisterende rader i 'trekninger'-tabellen og oppretter
-#     nye rader for hver uke innenfor den gitte perioden.
 
-#     Args:
-#         start_dato (date): Datoen for den første mandagen i konkurransen.
-#         slutt_dato (date): Datoen for den siste søndagen i konkurransen.
-
-#     Returns:
-#         str: En melding som indikerer resultatet av operasjonen.
-#     """
-#     # --- Validering av input (anbefalt) ---
-#     if not isinstance(start_dato, date) or not isinstance(slutt_dato, date):
-#         raise TypeError("Både start_dato og slutt_dato må være date objekter.")
-#     if start_dato.weekday() != 0: # 0 er mandag
-#         raise ValueError("Startdatoen må være en mandag.")
-#     if slutt_dato.weekday() != 6: # 6 er søndag
-#         raise ValueError("Sluttdatoen må være en søndag.")
-#     if start_dato > slutt_dato:
-#         raise ValueError("Startdato kan ikke være etter sluttdato.")
-
-#     # --- Steg 1: Slett alle eksisterende records i 'trekninger' ---
-#     print("Starter sletting av eksisterende trekninger...")
-#     try:
-#         # Hent alle rader. Bruk search_iterator for store tabeller om nødvendig.
-#         alle_trekninger = app_tables.trekninger.search()
-#         antall_slettet = 0
-#         for rad in alle_trekninger:
-#             rad.delete()
-#             antall_slettet += 1
-#         print(f"Slettet {antall_slettet} eksisterende trekninger.")
-#     except Exception as e:
-#         print(f"Feil under sletting av trekninger: {e}")
-#         raise Exception(f"Kunne ikke slette eksisterende trekninger: {e}")
-
-#     # --- Steg 2: Opprett en record for hver uke i perioden ---
-#     print(f"Oppretter nye trekninger fra {start_dato} til {slutt_dato}...")
-#     current_mandag = start_dato
-#     uke_nummer = 1
-#     antall_opprettet = 0
-
-#     try:
-#         while current_mandag <= slutt_dato:
-#             print(f"  Oppretter rad for uke {uke_nummer}: Mandag {current_mandag}")
-#             app_tables.trekninger.add_row(
-#                 nummer=uke_nummer,
-#                 uke_mandag=current_mandag
-#             )
-#             antall_opprettet += 1
-
-#             # Gå til neste mandag
-#             current_mandag += timedelta(weeks=1)
-#             uke_nummer += 1
-
-#         print(f"Opprettet {antall_opprettet} nye ukentlige trekninger.")
-#         return f"Fullført: Slettet {antall_slettet} og opprettet {antall_opprettet} ukentlige trekninger."
-
-#     except Exception as e:
-#         print(f"Feil under oppretting av nye trekninger: {e}")
-#         # Vurder om du skal rulle tilbake (slette de som ble opprettet) ved feil.
-#         # For enkelhets skyld stopper vi her og rapporterer feilen.
-#         raise Exception(f"Kunne ikke opprette nye trekninger: {e}")
-
-# @anvil.server.callable
-# def hent_poengsummer_uten_null():
-#     poeng_dict = {}
-
-#     # Hent alle brukere og initialiser dem med 0 poeng
-#     for userinfo_rad in app_tables.userinfo.search():
-#         deltager = userinfo_rad['user']
-#         if deltager:
-#             poeng_dict[deltager] = 0  # Start med 0 poeng
-
-#     # Hent alle aktiviteter og summer poeng
-#     for rad in app_tables.aktivitet.search():
-#         deltager = rad['deltager']  # Link til user-tabellen
-#         poeng = rad['poeng']
-
-#         if deltager:
-#             if deltager not in poeng_dict:
-#                 poeng_dict[deltager] = 0  
-#             poeng_dict[deltager] += poeng
-
-#     # Konverter til liste, ekskluder deltakere med 0 poeng
-#     resultat = []
-#     for deltager, poeng in poeng_dict.items():
-#         if poeng == 0:
-#             continue  # Hopp over deltakere uten poeng
-
-#         userinfo_rad = app_tables.userinfo.get(user=deltager)
-#         navn = userinfo_rad['navn'] if userinfo_rad else None
-#         email = deltager['email']
-#         admin = userinfo_rad['admin']
-#         team = userinfo_rad['team']['team'] if userinfo_rad and userinfo_rad['team'] else "Ingen team"
-
-#         resultat.append({
-#             "deltager": navn if navn else email,
-#             "navn": navn,
-#             "email": email,
-#             "poeng": poeng,
-#             "team": team,
-#             "admin": admin
-#         })
-
-#     resultat.sort(key=lambda x: x["poeng"], reverse=True)
-#     return resultat
 
 
 @anvil.server.callable
