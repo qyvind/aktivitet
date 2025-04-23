@@ -21,7 +21,7 @@ class Utils:
       
     @staticmethod
     def hent_brukernavn():
-        print('hent_brukernavn')
+        print('Utils_hent_brukernavn')
         user = Globals.bruker
         if not user:
             raise Exception("Bruker ikke logget inn")
