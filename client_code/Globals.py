@@ -13,3 +13,4 @@ week_offset = 0
 skrittf = True #lagere skritt first 
 bruker = ""
 admin = False
+userinfo_record = {"navn": "", "team": "", "lock": False, "leage": "", "ikon": ""}

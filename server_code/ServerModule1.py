@@ -181,7 +181,7 @@ def oppdater_brukernavn(nytt_navn):
 
 @anvil.server.callable
 def hent_brukernavn():
-    print('hent_brukernavn')
+    print('Server hent_brukernavn')
     user = anvil.users.get_user()
     if not user:
         raise Exception("Bruker ikke logget inn")

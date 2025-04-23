@@ -17,6 +17,7 @@ class Login(LoginTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     Globals.bruker = anvil.users.get_user()
+    Globals.userinfo_record = Utils.hent_brukernavn()
     
     if Globals.bruker:
         open_form('Loggbok')

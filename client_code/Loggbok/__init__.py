@@ -429,7 +429,7 @@ class Loggbok(LoggbokTemplate):
         
         if user:
             # Hent oppdaterte brukerdata fra UserInfo-tabellen
-            deltagerdata= Utils.hent_brukernavn()
+            deltagerdata= Globals.userinfo_record
             
             #print(deltagerdata)
             navn=deltagerdata['navn']
