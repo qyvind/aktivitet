@@ -1,10 +1,6 @@
 components:
 - components:
   - components:
-    - layout_properties: {grid_position: 'OFXVMB,IXBGSD'}
-      name: week_offset_label
-      properties: {visible: false}
-      type: Label
     - components:
       - components:
         - name: leage_ikon

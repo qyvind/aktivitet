@@ -28,6 +28,11 @@ components:
       - {data_key: column_1, expand: false, id: LSHEHV, title: Team, width: 87}
       - {data_key: column_1, id: PFFFKV, title: Utmerkelser}
     type: DataGrid
+  - event_bindings: {click: lukk_button_click}
+    layout_properties: {grid_position: 'KKGEWN,NSQFGW'}
+    name: lukk_button
+    properties: {align: center, role: filled-button, text: Lukk}
+    type: Button
   - components:
     - layout_properties: {grid_position: 'FHRIMM,XYECDR'}
       name: label_2_copy
@@ -73,11 +78,6 @@ components:
     name: outlined_card_2
     properties: {role: outlined-card}
     type: ColumnPanel
-  - event_bindings: {click: lukk_button_click}
-    layout_properties: {grid_position: 'FACYFA,RKQROA'}
-    name: lukk_button
-    properties: {align: center, role: filled-button, text: Lukk}
-    type: Button
   layout_properties: {grid_position: 'VHIKZP,ZCJBQF'}
   name: outlined_card_1
   properties: {role: tonal-card}

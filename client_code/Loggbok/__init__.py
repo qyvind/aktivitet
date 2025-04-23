@@ -11,6 +11,7 @@ from anvil.tables import app_tables
 from datetime import datetime, timedelta
 from ..PoengVelger import PoengVelger
 from ..Utils import Utils
+from .. import Globals
 
 
 
@@ -18,11 +19,11 @@ class Loggbok(LoggbokTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
         self.vis_nye_badges(anvil.users.get_user())
-        self.week_offset_label.text = 0
-        self.hent_week_offset() 
-        self.initier_uke(self.week_offset_label.text)
+        Globals.week_offset = 0
+        #self.hent_week_offset() 
+        self.initier_uke(Globals.week_offset)
         self.sjekk_bruker()
-        # anvil.users.set_user_info(week_offset=7)
+        
 
 
   
@@ -62,7 +63,7 @@ class Loggbok(LoggbokTemplate):
         aktivitet = label.text
         
         def mottak_fra_poengvelger(poeng, aktivitet, nytt_ikon,beskrivelse, ikon_path,skritt=None):
-          week_info = self.get_week_info(self.week_offset_label.text)
+          week_info = self.get_week_info(Globals.week_offset)
           valgt_dato = week_info['monday_date'] + timedelta(days=dag_index)
       
           # Oppdater GUI
@@ -160,15 +161,15 @@ class Loggbok(LoggbokTemplate):
 
     def next_week_button_click(self, **event_args):
       """This method is called when the button is clicked"""
-      self.week_offset_label.text +=1
-      self.lagre_week_offset()
-      self.initier_uke(self.week_offset_label.text)
+      Globals.week_offset +=1
+      #self.lagre_week_offset()
+      self.initier_uke(Globals.week_offset)
 
     def prev_week_button_click(self, **event_args):
       """This method is called when the button is clicked"""
-      self.week_offset_label.text -=1
-      self.lagre_week_offset() 
-      self.initier_uke(self.week_offset_label.text)
+      Globals.week_offset -= 1
+      #self.lagre_week_offset() 
+      self.initier_uke(Globals.week_offset)
 
 
 
@@ -179,7 +180,7 @@ class Loggbok(LoggbokTemplate):
             return {day: [] for day in range(7)}  # Returner en dictionary med alle dager
         
         # Få datoene for den aktive uken (mandag til søndag)
-        week_info = self.get_week_info(self.week_offset_label.text)
+        week_info = self.get_week_info(Globals.week_offset)
         start_of_week = week_info['monday_date']  # Mandag som date-objekt
         end_of_week = week_info['sunday_date']  # Søndag som date-objekt
         
@@ -212,7 +213,7 @@ class Loggbok(LoggbokTemplate):
                 
     def fyll_skjermen(self, week_activities):
       # Hent ukens info og konkurranseinfo
-      week_info = self.get_week_info(self.week_offset_label.text)
+      week_info = self.get_week_info(Globals.week_offset)
       mandag_dato = week_info['monday_date']
       _, konkurranse_fradato, konkurranse_tildato = self.hent_konkurranse_info()
 
@@ -353,7 +354,7 @@ class Loggbok(LoggbokTemplate):
 
     def trekning_button_click(self, **event_args):
       """This method is called when the button is clicked"""
-      week_info = self.get_week_info(self.week_offset_label.text)
+      week_info = self.get_week_info(Globals.week_offset)
       #print(week_info)
       open_form("Trekninger", week_info['monday_date'])
       
@@ -590,18 +591,18 @@ class Loggbok(LoggbokTemplate):
       self.image_1.source = app_files.swimming.png
 
 
-    def hent_week_offset(self):
-        user = anvil.users.get_user()
-        if user:
-            userinfo = app_tables.userinfo.get(user=user)
-            if userinfo and userinfo['week_offset'] is not None:
-                self.week_offset_label.text = userinfo['week_offset']
+    # def hent_week_offset(self):
+    #     user = anvil.users.get_user()
+    #     if user:
+    #         userinfo = app_tables.userinfo.get(user=user)
+    #         if userinfo and userinfo['week_offset'] is not None:
+    #             self.week_offset_label.text = userinfo['week_offset']
     
-    def lagre_week_offset(self):
-        try:
-            anvil.server.call("lagre_week_offset", self.week_offset_label.text)
-        except Exception as e:
-            print(f"Feil ved lagring av ukevalg: {e}")
+    # def lagre_week_offset(self):
+    #     try:
+    #         anvil.server.call("lagre_week_offset", self.week_offset_label.text)
+    #     except Exception as e:
+    #         print(f"Feil ved lagring av ukevalg: {e}")
 
     def button_1_click(self, **event_args):
       """This method is called when the button is clicked"""

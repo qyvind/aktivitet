@@ -6,6 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from datetime import datetime, timedelta
+from .. import Globals
 
 
 class BrukerLoggbok(BrukerLoggbokTemplate):
@@ -13,8 +14,8 @@ class BrukerLoggbok(BrukerLoggbokTemplate):
         self.enuser = enuser  # Brukeren vi skal vise logg for
         self.init_components(**properties)
 
-        self.week_offset_label.text = 0
-        self.initier_uke(self.week_offset_label.text)
+        Globals.week_offset = 0
+        self.initier_uke(Globals.week_offset)
         self.sjekk_bruker()
         #self.leage_ikon.text = 
         self.vis_tildelte_badges(enuser)
@@ -57,7 +58,7 @@ class BrukerLoggbok(BrukerLoggbokTemplate):
         user = self.enuser or anvil.users.get_user()
         if not user:
             return {day: [] for day in range(7)}
-        week_info = self.get_week_info(self.week_offset_label.text)
+        week_info = self.get_week_info(Globals.week_offset)
         start = week_info['monday_date']
         end = week_info['sunday_date']
         activities = app_tables.aktivitet.search(
@@ -77,7 +78,7 @@ class BrukerLoggbok(BrukerLoggbokTemplate):
         return week_activities
 
     def fyll_skjermen(self, week_activities):
-        base_dato = self.get_week_info(self.week_offset_label.text)['monday_date']
+        base_dato = self.get_week_info(Globals.week_offset)['monday_date']
         komponenter = [
             (self.man_button, self.man_column_panel, self.man_akt_label, week_activities[0], base_dato, self.man_ikon),
             (self.tir_button, self.tir_column_panel, self.tir_akt_label, week_activities[1], base_dato + timedelta(days=1), self.tir_ikon),
@@ -122,12 +123,12 @@ class BrukerLoggbok(BrukerLoggbokTemplate):
         return farge_mapping.get(str(poeng_verdi), "#e0e0e0")
 
     def next_week_button_click(self, **event_args):
-        self.week_offset_label.text += 1
-        self.initier_uke(self.week_offset_label.text)
+        Globals.week_offset += 1
+        self.initier_uke(Globals.week_offset)
 
     def prev_week_button_click(self, **event_args):
-        self.week_offset_label.text -= 1
-        self.initier_uke(self.week_offset_label.text)
+        Globals.week_offset -= 1
+        self.initier_uke(Globals.week_offset)
 
     def sjekk_bruker(self):
         if self.enuser:
