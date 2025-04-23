@@ -8,16 +8,17 @@ from anvil.tables import app_tables
 from ..VelgIkon import VelgIkon
 from ..Utils import Utils
 import anvil.js
+from .. import Globals
 
 class PoengVelger(PoengVelgerTemplate):
     def __init__(self, valgt_poeng=1, aktivitet="", ukedag="", ikon=None, beskrivelse=None,skritt=None, callback=None, **properties):
         self.init_components(**properties)
         self.callback = callback
-        skrittf= Utils.hent_skritt_first()
-        self.skrittf_box.checked = skrittf
-        print('skritt_first',skrittf)
-        if skrittf:
-          print('skritt',skrittf )
+        #skrittf= Globals.skrittf
+        #self.skrittf_box.checked = skrittf
+        #print('skritt_first',skrittf)
+        if Globals.skrittf:
+        #  print('skritt',skrittf )
           self.trening_panel_1.visible = False
           self.trening_panel_2.visible = False
           self.skritt_panel_1.visible = True
@@ -32,17 +33,10 @@ class PoengVelger(PoengVelgerTemplate):
         self.selected_ikon_media = None # Initialiser som None
         self.selected_ikon_path = None  # Initialiser som None
 
-        # Hvis et ikon ble sendt inn ved initialisering, anta at det KUN er Media-objektet
-        # Du *kan* trenge å hente path separat hvis du initialiserer med et ikon her
-        # ELLER endre hvordan du kaller PoengVelger for å sende inn path også.
-        # For enkelhets skyld antar vi her at initialisering med 'ikon' ikke trenger path med en gang.
+
         if ikon:
              self.selected_ikon_media = ikon
-             # Hvis du trenger path her også, må du ha en måte å finne den på basert på 'ikon'
-             # f.eks. et oppslag i databasen.
-             # self.selected_ikon_path = hent_path_for_media(ikon) # (Pseudokode)
 
-        # --- MODIFISERT DEL SLUTT ---
 
         self.ukedag_label.text = ukedag
         self.poeng_drop.items = [ ("Hviledag",0),("En halv time", 1), ("En time", 2), ("Halvannen time eller mer", 3)]
@@ -114,22 +108,12 @@ class PoengVelger(PoengVelgerTemplate):
         poeng = self.poeng_drop.selected_value
         beskrivelse = self.beskrivelse.text
 
-        # Gjør noe med ikon_path hvis du trenger det her,
-        # f.eks. lagre det i en annen tabell sammen med resten av dataen.
-        #print(f"Lagrer med ikon path: {ikon_path}")
-
-
-        # Hvis PoengVelger ble åpnet med en callback, kall den nå
-        # Viktig: Hvis callback-funksjonen skal motta path, må signaturen oppdateres!
         if self.callback:
-            # Du må bestemme om callback trenger path
-            # Alternativ 1: Uten path (som før)
-            # self.callback(poeng, aktivitet, ikon_media, beskrivelse)
-            # Alternativ 2: Med path (krever endring der callback er definert)
+
              skritt=0
              self.callback(poeng, aktivitet, ikon_media, beskrivelse, ikon_path,skritt)
-        if self.skrittf_box:
-          anvil.server.call('sett_skritt_first',False)
+        if Globals.skrittf:
+          Globals.skrittf = False
         open_form('Loggbok')
 
     def lagre_skritt_click(self, **event_args):
@@ -159,8 +143,8 @@ class PoengVelger(PoengVelgerTemplate):
 
              self.callback(poeng, aktivitet, ikon_media, beskrivelse, ikon_path)
         
-        if not self.skrittf_box:
-          anvil.server.call('sett_skritt_first',True)
+        if not Globals.skrittf:
+          Globals.skrittf = True
         open_form('Loggbok')
 
     def bytt_til_trening_click(self, **event_args):
