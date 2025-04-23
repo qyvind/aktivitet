@@ -1,9 +1,18 @@
 components:
 - components:
+  - layout_properties: {grid_position: 'IAXOHM,YNJFGV'}
+    name: label_2
+    properties: {align: center, role: headline, text: Trekning}
+    type: Label
   - layout_properties: {grid_position: 'MTSGUN,FHFTBQ'}
     name: label_1
     properties: {align: center, text: Dette er de som har kvalifisert seg til trekning for den aktuelle uken}
     type: Label
+  - event_bindings: {click: button_1_click}
+    layout_properties: {grid_position: 'GOHOOI,JGVXSC'}
+    name: button_1
+    properties: {role: filled-button, text: Supertrekning}
+    type: Button
   - components:
     - name: trekningsliste_repeating_panel
       properties: {item_template: Trekninger.RowTemplate3}

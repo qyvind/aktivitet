@@ -612,11 +612,6 @@ components:
       name: trekning_button
       properties: {background: 'theme:Secondary Container', role: elevated-button, text: Trekning}
       type: Button
-    - event_bindings: {click: button_1_click}
-      layout_properties: {}
-      name: button_1
-      properties: {background: 'theme:Secondary Container', role: elevated-button, text: Supertrekning}
-      type: Button
     - event_bindings: {click: admin_button_click}
       name: admin_button
       properties: {background: 'theme:Secondary Container', role: elevated-button, text: Admin, visible: false}

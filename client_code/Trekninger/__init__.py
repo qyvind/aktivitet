@@ -56,3 +56,6 @@ class Trekninger(TrekningerTemplate):
         resultat.append(navn)
 
     return resultat
+
+  def button_1_click(self, **event_args):
+    open_form('Supertrekning')
