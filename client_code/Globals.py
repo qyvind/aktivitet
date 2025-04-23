@@ -11,3 +11,4 @@ from anvil.tables import app_tables
 #
 week_offset = 0
 skrittf = True #lagere skritt first 
+bruker = ""

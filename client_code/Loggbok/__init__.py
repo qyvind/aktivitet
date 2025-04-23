@@ -18,7 +18,7 @@ from .. import Globals
 class Loggbok(LoggbokTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
-        self.vis_nye_badges(anvil.users.get_user())
+        self.vis_nye_badges(Globals.bruker)
         Globals.week_offset = 0
         #self.hent_week_offset() 
         self.initier_uke(Globals.week_offset)
@@ -175,7 +175,7 @@ class Loggbok(LoggbokTemplate):
 
     def get_activities_for_week(self):
         # Få den påloggede brukeren
-        user = anvil.users.get_user()
+        user = Globals.bruker
         if not user:
             return {day: [] for day in range(7)}  # Returner en dictionary med alle dager
         
@@ -269,8 +269,8 @@ class Loggbok(LoggbokTemplate):
 
   
       self.lykkehjul.visible = self.sjekk_lykkehjul()
-      user = anvil.users.get_user()
-      self.vis_tildelte_badges(user)
+      #user = anvil.users.get_user()
+      self.vis_tildelte_badges(Globals.bruker)
 
   
     # def vis_tildelte_badges(self, bruker):
@@ -421,7 +421,7 @@ class Loggbok(LoggbokTemplate):
 
 
     def sjekk_bruker(self):
-        user = anvil.users.get_user()
+        user = Globals.bruker
         if Utils.is_admin():
           self.admin_button.visible = True
         else:

@@ -15,6 +15,7 @@ import datetime
 import openai
 from anvil.secrets import get_secret
 
+
 @anvil.server.callable
 
 def add_aktivitet(aktivitet):
