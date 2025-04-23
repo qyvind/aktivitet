@@ -28,7 +28,7 @@ class RowTemplate2(RowTemplate2Template):
     bonus = self.item['bonus']
     self.score.tooltip = f"((Poeng: {poeng} + Bonus: {bonus}) * 100) + Streak: {streak}"
     email = self.email.text
-    bruker_rad = anvil.server.call("hent_user_fra_email", email)
+    bruker_rad = self.item['user_record']
     self.vis_tildelte_badges(bruker_rad)
     
     
