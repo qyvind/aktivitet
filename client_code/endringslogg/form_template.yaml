@@ -4,16 +4,20 @@ components:
     name: label_1
     properties: {role: headline, text: Endringslogg}
     type: Label
+  - layout_properties: {grid_position: 'EPKZTV,LTNKNM'}
+    name: text_area_19
+    properties:
+      font_size: 10
+      text: |-
+        22/4 Gjorde programmet raskere
+        Reduserte antall menyvalg
+    type: TextArea
   - layout_properties: {grid_position: 'FTYVJX,NKFQVW'}
     name: text_area_17
     properties:
       font_size: 10
       height: 90.42855834960938
       text: "21/4 Nå kommer badges frem på linjene i resultatlisten også\nForenklet registrering av skritt. \nFjernet ukurante treningstyper. Vi legger til de som folk trenger etter hvert. \nLaget en sjette badge, og testet den. "
-    type: TextArea
-  - layout_properties: {grid_position: 'JBJWPE,MEPQXJ'}
-    name: text_area_18
-    properties: {font_size: 10, text: 22/4 Gjorde noen endringer for å få programmet raskere.}
     type: TextArea
   - layout_properties: {grid_position: 'VAQWIL,XVCGWZ'}
     name: text_area_16
