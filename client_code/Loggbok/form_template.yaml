@@ -605,12 +605,7 @@ components:
         background: theme:Secondary Container
         role: elevated-button
         text: |
-          Individuell
-      type: Button
-    - event_bindings: {click: team_button_click}
-      layout_properties: {}
-      name: team_button
-      properties: {background: 'theme:Secondary Container', role: elevated-button, text: Team}
+          Poengstilling
       type: Button
     - event_bindings: {click: trekning_button_click}
       layout_properties: {}

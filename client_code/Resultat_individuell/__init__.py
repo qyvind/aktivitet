@@ -26,3 +26,6 @@ class Resultat_individuell(Resultat_individuellTemplate):
     """This method is called when the button is clicked"""
     open_form("Loggbok")
 
+  def button_1_click(self, **event_args):
+    open_form('Resultat_team')
+

@@ -2,8 +2,13 @@ components:
 - components:
   - layout_properties: {grid_position: 'MTSGUN,FHFTBQ'}
     name: label_1
-    properties: {align: center, text: Team resultatliste}
+    properties: {align: center, role: headline, text: Poengstilling Team}
     type: Label
+  - event_bindings: {click: button_1_click}
+    layout_properties: {grid_position: 'KFQSRV,XGIAFS'}
+    name: button_1
+    properties: {role: filled-button, text: Poengstilling Individuell}
+    type: Button
   - components:
     - name: team_resultat_repeating_panel
       properties: {item_template: Resultat_team.RowTemplate5}
