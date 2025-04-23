@@ -16,22 +16,44 @@ class Utils:
     def hent_konkurranse():
         records = app_tables.konkurranse.search(record=1)
         return records[0] if records else None
-
-    # @staticmethod
-    # def hent_brukernavn(user):
-    #     record = app_tables.userinfo.get(user=user)
-    #     if record is None:
-    #         return {"navn": "", "team": "", "lock": False}
-
-    #     navn = record.get('navn', "")
-    #     team_navn = record['team']['team'] if record.get('team') else ""
-    #     lock_status = record['team']['lock'] if record.get('team') else False
-
-    #     return {
-    #         "navn": navn,
-    #         "team": team_navn,
-    #         "lock": lock_status
-    #     }
+      
+    @staticmethod
+    def hent_brukernavn():
+        print('hent_brukernavn')
+        user = anvil.users.get_user()
+        if not user:
+            raise Exception("Bruker ikke logget inn")
+        
+        record = app_tables.userinfo.get(user=user)
+        
+        if record is None:
+            return {"navn": "", "team": "", "lock": False, "leage": "", "ikon": ""}
+    
+        record_dict = dict(record)
+        navn = record_dict.get('navn', "")
+    
+        team_navn = ""
+        lock_status = False
+    
+        if record_dict.get('team'):
+            team_row = record['team']
+            team_navn = team_row['team']
+            lock_status = team_row['lock']
+    
+        leage_navn = ""
+        ikon_url = ""
+        if record_dict.get('leage'):
+            leage_row = record['leage']
+            leage_navn = leage_row['leage']  # eller 'navn' hvis det er navnet på ligaen
+            ikon_url = leage_row['ikon']     # for eksempel en URL eller media-objekt
+    
+        return {
+            "navn": navn,
+            "team": team_navn,
+            "lock": lock_status,
+            "leage": leage_navn,
+            "leage_ikon": ikon_url
+        }
 
     @staticmethod
     def hent_poengsummer():
@@ -201,3 +223,15 @@ class Utils:
         return resultat
 
 
+    @staticmethod
+    def is_admin():
+        print('is_admin')
+        user = anvil.users.get_user()
+        if user is None:
+            return False
+        
+        # Slå opp brukerens info i userinfo-tabellen
+        userinfo = app_tables.userinfo.get(user=user)
+        if userinfo and userinfo['admin'] :
+            return True
+        return False

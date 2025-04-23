@@ -421,14 +421,14 @@ class Loggbok(LoggbokTemplate):
 
     def sjekk_bruker(self):
         user = anvil.users.get_user()
-        if anvil.server.call('is_admin'):
+        if Utils.is_admin():
           self.admin_button.visible = True
         else:
           self.admin_button.visible = False
         
         if user:
             # Hent oppdaterte brukerdata fra UserInfo-tabellen
-            deltagerdata= anvil.server.call("hent_brukernavn")
+            deltagerdata= Utils.hent_brukernavn()
             
             #print(deltagerdata)
             navn=deltagerdata['navn']

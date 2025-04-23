@@ -598,18 +598,18 @@ def update_user_team(email, team_name,admin):
 
     return f"Bruker {email} er nå i team '{team_name}'" if team_name else f"Bruker {email} er fjernet fra team."
 
-@anvil.server.callable
-def is_admin():
-    print('is_admin')
-    user = anvil.users.get_user()
-    if user is None:
-        return False
+# @anvil.server.callable
+# def is_admin():
+#     print('is_admin')
+#     user = anvil.users.get_user()
+#     if user is None:
+#         return False
     
-    # Slå opp brukerens info i userinfo-tabellen
-    userinfo = app_tables.userinfo.get(user=user)
-    if userinfo and userinfo['admin'] :
-        return True
-    return False
+#     # Slå opp brukerens info i userinfo-tabellen
+#     userinfo = app_tables.userinfo.get(user=user)
+#     if userinfo and userinfo['admin'] :
+#         return True
+#     return False
 
 @anvil.server.callable
 def oppdater_brukernavn_og_team(navn, team_streng):
