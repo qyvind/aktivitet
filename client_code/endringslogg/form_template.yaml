@@ -119,16 +119,16 @@ components:
       font_size: 10
       height: 216
       text: |+
-        Bør kunne redigere en dag ved å klikke hvor som helst i dagen, ikke bare på poengtallet.
         Slette tomme team hver natt
         Slette team med færre enn tre hver helg
         Registrere vinnere i databasen for at AI skal vite det
         resultatliste for team bør ta hensyn til teamets lengste streak
         Flere badges
-        Vise badges på resultatlister og på kikk-bildet
-        Kikkbildet må oppdateres med nye endringer i hovedbildet
-        Legge til Ligaer
-        sjekk_badge_4 feiler
+        Merke som viser at de er med i supertrekning
+        slette en aktivitet
+        Vise egne poeng mm i headeren
+        team må ha snittpoeng
+        Lås for innmelding?
 
     type: TextArea
   - event_bindings: {click: button_1_click}
