@@ -52,7 +52,8 @@ unique_ids:
     minside: '1743231868673803453047787.4751'
     team_medlemmer: '1742417549733112967066025.23576'
     team_medlemmer.RowTemplate4: '1742417606431323896215273.31647'
-  modules: {}
+  modules:
+    Globals: '174543425375599881783603.40138'
   scripts: {}
   server_modules:
     ServerModule1: '1741208220179582550843168.9172'
