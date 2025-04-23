@@ -14,6 +14,7 @@ class PoengVelger(PoengVelgerTemplate):
         self.init_components(**properties)
         self.callback = callback
         skrittf= Utils.hent_skritt_first()
+        self.skrittf_box.checked = skrittf
         print('skritt_first',skrittf)
         if skrittf:
           print('skritt',skrittf )
@@ -127,7 +128,8 @@ class PoengVelger(PoengVelgerTemplate):
             # Alternativ 2: Med path (krever endring der callback er definert)
              skritt=0
              self.callback(poeng, aktivitet, ikon_media, beskrivelse, ikon_path,skritt)
-        anvil.server.call('sett_skritt_first',False)
+        if self.skrittf_box:
+          anvil.server.call('sett_skritt_first',False)
         open_form('Loggbok')
 
     def lagre_skritt_click(self, **event_args):
@@ -156,7 +158,9 @@ class PoengVelger(PoengVelgerTemplate):
         if self.callback:
 
              self.callback(poeng, aktivitet, ikon_media, beskrivelse, ikon_path)
-        anvil.server.call('sett_skritt_first',True)
+        
+        if not self.skrittf_box:
+          anvil.server.call('sett_skritt_first',True)
         open_form('Loggbok')
 
     def bytt_til_trening_click(self, **event_args):
