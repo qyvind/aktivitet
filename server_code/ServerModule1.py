@@ -16,27 +16,28 @@ import openai
 from anvil.secrets import get_secret
 
 @anvil.server.callable
+
 def add_aktivitet(aktivitet):
-  #print('add_aktivitet')
+  print('add_aktivitet')
   
   if aktivitet.get('dato') and aktivitet.get('aktivitet') and aktivitet.get('poeng') :
     app_tables.aktivitet.add_row(**aktivitet)
 
 @anvil.server.callable
 def update_aktivitet(aktivitet, aktivitet_data):
-  #print('update_aktivitet')
+  print('update_aktivitet')
   
   if aktivitet_data['dato'] and aktivitet_data['aktivitet'] and aktivitet_data['poeng']: 
     aktivitet.update(**aktivitet_data)
 
 @anvil.server.callable
 def delete_aktivitet(aktivitet):
-  #print('delete_aktivitet')
+  print('delete_aktivitet')
   aktivitet.delete()
 
 @anvil.server.callable
 def batch_create_users(user_list):
-    #print('batch_create_users')
+    print('batch_create_users')
 
     if not isinstance(user_list, list):
         #print("Feil: Forventet en liste over brukere, men fikk noe annet.")
@@ -149,6 +150,7 @@ def lagre_aktivitet(dato, aktivitet, poeng, ikon,beskrivelse,skritt=None):
 
 @anvil.server.callable
 def oppdater_brukernavn(nytt_navn):
+    print('oppdater_brukernavn')
     user = anvil.users.get_user()
     if not user:
         raise Exception("Bruker ikke logget inn")
@@ -178,6 +180,7 @@ def oppdater_brukernavn(nytt_navn):
 
 @anvil.server.callable
 def hent_brukernavn():
+    print('hent_brukernavn')
     user = anvil.users.get_user()
     if not user:
         raise Exception("Bruker ikke logget inn")
@@ -217,7 +220,7 @@ def hent_brukernavn():
 
 @anvil.server.callable
 def hent_poengsummer():
-    #print('hent_poengsummer')
+    print('hent_poengsummer')
     poeng_dict = {}
 
     # Hent alle brukere og initialiser dem med 0 poeng
@@ -240,14 +243,16 @@ def hent_poengsummer():
     resultat = []
     for deltager, poeng in poeng_dict.items():
         userinfo_rad = app_tables.userinfo.get(user=deltager)  # Hent userinfo basert på user-link
-        navn = userinfo_rad['navn'] if userinfo_rad else None  # Hent navn hvis tilgjengelig
-        email = deltager['email']  # Hent e-post direkte fra brukeren
+        navn = userinfo_rad['navn'] if userinfo_rad else None
+        email = deltager['email']
         admin = userinfo_rad['admin']
-        
-        # Hent team hvis brukeren er knyttet til et
         team = userinfo_rad['team']['team'] if userinfo_rad and userinfo_rad['team'] else "Ingen team"
 
-        # Fall tilbake til e-post hvis navn ikke finnes for deltager-feltet
+        # Her lagrer vi poengsummen i userinfo-tabellen
+        if userinfo_rad:
+            userinfo_rad['poeng'] = poeng
+            userinfo_rad['score'] = poeng
+
         resultat.append({
             "deltager": navn if navn else email,
             "navn": navn,
@@ -257,13 +262,14 @@ def hent_poengsummer():
             "admin": admin
         })
 
-    # Sorter etter poeng, høyest først
     resultat.sort(key=lambda x: x["poeng"], reverse=True)
     return resultat
 
 
+
 @anvil.server.callable
 def hent_ukens_premietrekning(mandag):
+    print('hent_ukens_premietrekning')
     import datetime
 
     if isinstance(mandag, datetime.datetime):
@@ -297,19 +303,8 @@ def hent_ukens_premietrekning(mandag):
 
 @anvil.server.callable
 def hent_konsekutive_kvalifiserte(konkurranse_start, konkurranse_slutt):
-    """
-    Henter deltagere som har kvalifisert seg for premietrekning HVER uke
-    i en gitt konkurranseperiode, frem til siste *fullførte* uke før i dag.
+    print('hent_konsekutive_kvalifiserte')
 
-    Args:
-        konkurranse_start (datetime.date or datetime.datetime): Første mandag i konkurransen.
-        konkurranse_slutt (datetime.date or datetime.datetime): Siste søndag i konkurranseperioden
-                                                                 (kan være i fremtiden).
-
-    Returns:
-        list: En liste med navn (eller e-post) for deltagere som kvalifiserte
-              seg hver fullførte uke i perioden frem til i dag.
-    """
     import datetime
 
     if isinstance(konkurranse_start, datetime.datetime):
@@ -387,6 +382,7 @@ def hent_konsekutive_kvalifiserte(konkurranse_start, konkurranse_slutt):
 
 @anvil.server.callable
 def hent_team_poengsummer():
+    print('hent_team_poengsummer')
     team_poeng = {}
     team_lock_map = {}  # Ny dict for å lagre lock-status for hvert team
 
@@ -421,6 +417,7 @@ def hent_team_poengsummer():
 
 @anvil.server.callable
 def create_user(email, name, password, team_name=None):
+    print('create_user')
    # print(f"Oppretter bruker: {email}")
 
     # Sjekk om brukeren allerede finnes
@@ -498,7 +495,7 @@ def opprett_nytt_team(team_navn):
 
 @anvil.server.callable
 def slett_team(team_navn):
-    #print(f'Forsøker å slette team: {team_navn}')
+    print(f'Forsøker å slette team: {team_navn}')
     
     # Finn teamet i databasen
     team = app_tables.team.get(team=team_navn)
@@ -519,7 +516,7 @@ def slett_team(team_navn):
 
 @anvil.server.callable
 def lagre_konkurranse(konkurransenavn, fradato, tildato):
-    #print(f'Lagrer konkurranse: {konkurransenavn}, {fradato}, {tildato}')
+    print(f'Lagrer konkurranse: {konkurransenavn}, {fradato}, {tildato}')
     
     # Sjekk om konkurransen allerede finnes
     konkurranse_record = app_tables.konkurranse.get(record=1)
@@ -546,6 +543,7 @@ def lagre_konkurranse(konkurransenavn, fradato, tildato):
 
 @anvil.server.callable
 def delete_user_by_email(email):
+    print('delete_user_by_email')
     """Sletter en bruker og alle tilhørende data basert på e-postadresse."""
     
     # Finn brukeren i users-tabellen basert på e-post
@@ -571,6 +569,7 @@ def delete_user_by_email(email):
 
 @anvil.server.callable
 def update_user_team(email, team_name,admin):
+    print('update_user_team')
     """Oppdaterer en brukers team i userinfo-tabellen eller fjerner teamet hvis team_name er tomt."""
 
     # Finn brukeren basert på e-post
@@ -601,6 +600,7 @@ def update_user_team(email, team_name,admin):
 
 @anvil.server.callable
 def is_admin():
+    print('is_admin')
     user = anvil.users.get_user()
     if user is None:
         return False
@@ -613,6 +613,7 @@ def is_admin():
 
 @anvil.server.callable
 def oppdater_brukernavn_og_team(navn, team_streng):
+    print('oppdater_brukernavn_og_team')
     bruker = anvil.users.get_user()
     if not bruker:
         raise Exception("Ingen bruker er logget inn.")
@@ -633,6 +634,7 @@ def oppdater_brukernavn_og_team(navn, team_streng):
 
 @anvil.server.callable
 def oppdater_team_lock(team_navn, lock_status):
+    print('oppdater_team_lock')
     team_rad = app_tables.team.get(team=team_navn)
     if team_rad:
         team_rad['lock'] = lock_status
@@ -656,6 +658,7 @@ def lagre_week_offset(offset):
 
 @anvil.server.callable
 def slett_tomme_team():
+    print('slett_tomme_team')
     for lag in app_tables.team.search():
         # Finn brukere som tilhører dette laget
         medlemmer = app_tables.userinfo.search(team=lag)
@@ -666,6 +669,7 @@ def slett_tomme_team():
 
 @anvil.server.callable
 def laas_eget_team():
+    print('laas_eget_team')
     user = anvil.users.get_user()
     if not user:
         return "Du må være logget inn."
@@ -693,6 +697,7 @@ def laas_eget_team():
 
 @anvil.server.callable
 def hent_user_fra_email(email):
+    print('hent_user_fra_email')
     bruker = app_tables.users.get(email=email)
     if not bruker:
         raise Exception(f"Ingen bruker funnet med e-post: {email}")
@@ -814,6 +819,7 @@ def hent_user_fra_email(email):
 
 @anvil.server.callable
 def lag_status_for_bruker():
+    print('lag_status_for_bruker')
     bruker = anvil.users.get_user()
     if not bruker:
         return "Ingen bruker logget inn."
@@ -879,6 +885,7 @@ def lag_status_for_bruker():
 
 @anvil.server.callable
 def beregn_plassering(email):
+    print('beregn_plassering')
     alle_poeng = hent_poengsummer()
 
     for d in alle_poeng:
@@ -894,6 +901,7 @@ def beregn_plassering(email):
 
 @anvil.server.callable
 def generer_oppmuntring_for_bruker():
+    print('generer_oppmuntring_for_bruker')
     import random
     bruker = anvil.users.get_user()
     if not bruker:
@@ -970,6 +978,7 @@ def legg_til_prompt(prompt_tekst):
 
 @anvil.server.callable  # valgfritt, hvis du vil teste direkte
 def calculate_longest_streak(user):
+    print('calculate_longest_streak')
     today = date.today()
     
     aktiviteter = app_tables.aktivitet.search(deltager=user)
@@ -999,6 +1008,7 @@ def calculate_longest_streak(user):
 
 @anvil.server.background_task
 def nightly_streak_recalc():
+    
     from datetime import date, timedelta
 
     today = date.today()
@@ -1056,6 +1066,7 @@ def nightly_streak_recalc():
 
 @anvil.server.callable
 def nightly_streak_recalc_test():
+    print('nightly_streak_recalc_test')
     nightly_streak_recalc()
 
 def tildel_badges_for_alle_brukere():
@@ -1127,6 +1138,7 @@ def nightly_badge_check():
 
 @anvil.server.callable
 def generer_badge_melding(badge_id):
+    print('generer_badge_melding')
     bruker = anvil.users.get_user()
     if not bruker:
         return "Fant ikke innlogget bruker."
@@ -1183,6 +1195,7 @@ def generer_badge_melding(badge_id):
 
 @anvil.server.callable
 def sett_skritt_first(verdi: bool):
+    print('sett_skritt_first')
     from anvil.tables import app_tables
     user = anvil.users.get_user()
     userinfo_rad = app_tables.userinfo.get(user=user)
@@ -1225,6 +1238,7 @@ def hent_ai_log():
 
 @anvil.server.callable
 def lagre_ny_aktivitet(aktivitet_tekst: str):
+
     bruker = anvil.users.get_user()
     if not bruker:
         raise Exception("Bruker ikke innlogget")

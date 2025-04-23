@@ -65,28 +65,28 @@ class RowTemplate2(RowTemplate2Template):
   def leage_ikon_click(self, **event_args):
     alert(self.leage_ikon.tooltip)
 
-    def badge_1_mouse_down(self, x, y, button, keys, **event_args):
-      alert(self.badge_1.tooltip)
-    def badge_2_mouse_down(self, x, y, button, keys, **event_args):
-      alert(self.badge_2.tooltip)
-    def badge_3_mouse_down(self, x, y, button, keys, **event_args):
-      alert(self.badge_3.tooltip)
-    def badge_4_mouse_down(self, x, y, button, keys, **event_args):
-      alert(self.badge_4.tooltip)
-    def badge_5_mouse_down(self, x, y, button, keys, **event_args):
-      alert(self.badge_5.tooltip)
-    def badge_6_mouse_down(self, x, y, button, keys, **event_args):
-      alert(self.badge_6.tooltip)
-    def badge_7_mouse_down(self, x, y, button, keys, **event_args):
-      alert(self.badge_7.tooltip)
-    def badge_8_mouse_down(self, x, y, button, keys, **event_args):
-      alert(self.badge_8.tooltip)
-    def badge_9_mouse_down(self, x, y, button, keys, **event_args):
-      alert(self.badge_9.tooltip)
+  def badge_1_mouse_down(self, x, y, button, keys, **event_args):
+    alert(self.badge_1.tooltip)
+  def badge_2_mouse_down(self, x, y, button, keys, **event_args):
+    alert(self.badge_2.tooltip)
+  def badge_3_mouse_down(self, x, y, button, keys, **event_args):
+    alert(self.badge_3.tooltip)
+  def badge_4_mouse_down(self, x, y, button, keys, **event_args):
+    alert(self.badge_4.tooltip)
+  def badge_5_mouse_down(self, x, y, button, keys, **event_args):
+    alert(self.badge_5.tooltip)
+  def badge_6_mouse_down(self, x, y, button, keys, **event_args):
+    alert(self.badge_6.tooltip)
+  def badge_7_mouse_down(self, x, y, button, keys, **event_args):
+    alert(self.badge_7.tooltip)
+  def badge_8_mouse_down(self, x, y, button, keys, **event_args):
+    alert(self.badge_8.tooltip)
+  def badge_9_mouse_down(self, x, y, button, keys, **event_args):
+    alert(self.badge_9.tooltip)
 
 
-    def image_mouse_enter(self, x, y, **event_args):
-      anvil.js.window.document.body.style.cursor = 'pointer'
+  def image_mouse_enter(self, x, y, **event_args):
+    anvil.js.window.document.body.style.cursor = 'pointer'
 
-    def image_mouse_leave(self, x, y, **event_args):
-      anvil.js.window.document.body.style.cursor = 'default'
+  def image_mouse_leave(self, x, y, **event_args):
+    anvil.js.window.document.body.style.cursor = 'default'
