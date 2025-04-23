@@ -9,6 +9,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..Utils import Utils
+from .. import Globals
 
 
 class minside(minsideTemplate):
@@ -19,7 +20,7 @@ class minside(minsideTemplate):
     self.fyll_minside()
 
   def fyll_minside(self, **properties): 
-    user = anvil.users.get_user()
+    user = Globals.bruker
     deltagerdata= anvil.server.call("hent_brukernavn")
     
     navn=deltagerdata['navn']

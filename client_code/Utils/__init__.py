@@ -9,6 +9,8 @@ from anvil.tables import app_tables
 from anvil.tables import app_tables
 from datetime import timedelta
 
+from .. import Globals
+
 
 class Utils:
 
@@ -20,7 +22,7 @@ class Utils:
     @staticmethod
     def hent_brukernavn():
         print('hent_brukernavn')
-        user = anvil.users.get_user()
+        user = Globals.bruker
         if not user:
             raise Exception("Bruker ikke logget inn")
         
@@ -176,7 +178,7 @@ class Utils:
     @staticmethod
     def hent_skritt_first():
         from anvil.tables import app_tables
-        user = anvil.users.get_user()
+        user = Globals.bruker
     
         if not user:
             return False
@@ -226,7 +228,7 @@ class Utils:
     @staticmethod
     def is_admin():
         print('is_admin')
-        user = anvil.users.get_user()
+        user = Globals.bruker
         if user is None:
             return False
         
