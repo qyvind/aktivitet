@@ -19,7 +19,7 @@ components:
         OBS: Når du bruker Framo email: Melding med link for å resette passord går i Junk Emails. Husk å sjekke der.
       format: restricted_html
     type: RichText
-  layout_properties: {grid_position: 'LUTFKN,SNJPNV'}
+  layout_properties: {grid_position: 'LUTFKN,VXWKXA'}
   name: outlined_card_1
   properties: {role: tonal-card}
   type: ColumnPanel
