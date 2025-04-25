@@ -274,7 +274,7 @@ components_by_slot:
               visible: true
             type: Label
           event_bindings: {click: tir_button_click}
-          layout_properties: {width: 80}
+          layout_properties: {width: 60}
           name: tir_column_panel
           properties:
             enabled: true
