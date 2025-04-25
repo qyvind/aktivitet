@@ -1,0 +1,4 @@
+is_package: true
+layout: {type: 'form:dep_91t3sowbnwbk:Layouts.NavigationRailLayout'}
+layout_metadata: {title: Framskritt}
+slots: {}

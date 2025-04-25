@@ -1,4 +1,4 @@
-from ._anvil_designer import LoggbokTemplate
+from ._anvil_designer import HomepageTemplate
 from anvil import *
 import anvil.server
 import anvil.facebook.auth
@@ -10,7 +10,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
-class Loggbok(LoggbokTemplate):
+class Homepage(HomepageTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
