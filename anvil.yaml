@@ -264,7 +264,10 @@ db_schema:
       type: string
     server: full
     title: Users
-dependencies: []
+dependencies:
+- dep_id: dep_91t3sowbnwbk
+  resolution_hints: {app_id: 4UK6WHQ6UX7AKELK, name: Material 3 Theme, package_name: m3}
+  version: {version_tag: v1.2.3}
 metadata: {description: For Framo BIL, logo_img: 'asset:walking.svg', title: Framskritt}
 name: Aktivitet
 package_name: Aktivitet
