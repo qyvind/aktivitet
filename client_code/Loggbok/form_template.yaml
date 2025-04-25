@@ -216,9 +216,12 @@ components_by_slot:
               visible: true
             type: Label
           event_bindings: {click: man_button_click}
-          layout_properties: {expand: false, width: 80}
+          layout_properties: {expand: false, width: 60}
           name: man_column_panel
-          properties: {enabled: true}
+          properties:
+            enabled: true
+            spacing:
+              margin: [null, '0', null, '0']
           type: form:dep_91t3sowbnwbk:_Components.InteractiveCard
         - components:
           - layout_properties: {slot: card-content-slot}
@@ -273,7 +276,10 @@ components_by_slot:
           event_bindings: {click: tir_button_click}
           layout_properties: {width: 80}
           name: tir_column_panel
-          properties: {enabled: true}
+          properties:
+            enabled: true
+            spacing:
+              margin: [null, '0', null, '0']
           type: form:dep_91t3sowbnwbk:_Components.InteractiveCard
         - components:
           - layout_properties: {slot: card-content-slot}
@@ -326,9 +332,12 @@ components_by_slot:
               visible: true
             type: Label
           event_bindings: {click: ons_button_click}
-          layout_properties: {width: 80}
+          layout_properties: {width: 60}
           name: ons_column_panel
-          properties: {enabled: true}
+          properties:
+            enabled: true
+            spacing:
+              margin: [null, '0', null, '0']
           type: form:dep_91t3sowbnwbk:_Components.InteractiveCard
         - components:
           - layout_properties: {slot: card-content-slot}
@@ -381,9 +390,12 @@ components_by_slot:
               visible: true
             type: Label
           event_bindings: {click: tor_button_click}
-          layout_properties: {width: 80}
+          layout_properties: {width: 60}
           name: tor_column_panel
-          properties: {enabled: true}
+          properties:
+            enabled: true
+            spacing:
+              margin: [null, '0', null, '0']
           type: form:dep_91t3sowbnwbk:_Components.InteractiveCard
         layout_properties: {}
         name: flow_panel_1
@@ -442,9 +454,12 @@ components_by_slot:
               visible: false
             type: Label
           event_bindings: {click: fre_button_click}
-          layout_properties: {width: 80}
+          layout_properties: {width: 60}
           name: fre_column_panel
-          properties: {enabled: true}
+          properties:
+            enabled: true
+            spacing:
+              margin: [null, '0', null, '0']
           type: form:dep_91t3sowbnwbk:_Components.InteractiveCard
         - components:
           - layout_properties: {slot: card-content-slot}
@@ -498,9 +513,12 @@ components_by_slot:
               visible: false
             type: Label
           event_bindings: {click: lor_button_click}
-          layout_properties: {width: 80}
+          layout_properties: {width: 60}
           name: lor_column_panel
-          properties: {enabled: true}
+          properties:
+            enabled: true
+            spacing:
+              margin: [null, '0', null, '0']
           type: form:dep_91t3sowbnwbk:_Components.InteractiveCard
         - components:
           - layout_properties: {slot: card-content-slot}
@@ -554,9 +572,12 @@ components_by_slot:
               visible: true
             type: Label
           event_bindings: {click: son_button_click}
-          layout_properties: {width: 80}
+          layout_properties: {width: 60}
           name: son_column_panel
-          properties: {enabled: true}
+          properties:
+            enabled: true
+            spacing:
+              margin: [null, '0', null, '0']
           type: form:dep_91t3sowbnwbk:_Components.InteractiveCard
         layout_properties: {}
         name: flow_panel_6
