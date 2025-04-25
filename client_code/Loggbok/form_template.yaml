@@ -225,6 +225,14 @@ components_by_slot:
           type: form:dep_91t3sowbnwbk:_Components.InteractiveCard
         - components:
           - layout_properties: {slot: card-content-slot}
+            name: card_content_container_1
+            properties: {}
+            type: form:dep_91t3sowbnwbk:_Components.Card.CardContentContainer
+          name: interactive_card_1
+          properties: {}
+          type: form:dep_91t3sowbnwbk:_Components.InteractiveCard
+        - components:
+          - layout_properties: {slot: card-content-slot}
             name: tir_label
             properties:
               align: center
