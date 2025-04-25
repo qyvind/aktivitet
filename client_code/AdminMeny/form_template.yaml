@@ -1,0 +1,22 @@
+components_by_slot:
+  app_bar_title:
+  - layout_properties: {}
+    name: text_1
+    properties: {text: Admin}
+    type: form:dep_91t3sowbnwbk:_Components.Text
+  navigation:
+  - layout_properties: {}
+    name: navigation_link_1
+    properties: {navigate_to: endringslogg, text: Endringslogg}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+  - layout_properties: {}
+    name: navigation_link_2
+    properties: {icon: 'mi:door_back', navigate_to: Loggbok, text: Ut av admin}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+is_package: true
+layout: {type: 'form:dep_91t3sowbnwbk:Layouts.NavigationDrawerLayout'}
+slots:
+  content:
+    index: 0
+    set_layout_properties: {}
+    target: {name: content, type: slot}
