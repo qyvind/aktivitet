@@ -4,14 +4,10 @@ components:
     name: label_1
     properties: {role: headline, text: Endringslogg}
     type: Label
-  - layout_properties: {grid_position: 'EPKZTV,LTNKNM'}
-    name: text_area_19
-    properties:
-      font_size: 10
-      text: |-
-        22/4 Gjorde programmet raskere
-        Reduserte antall menyvalg
-    type: TextArea
+  - layout_properties: {grid_position: 'KUHSHX,JBISYT'}
+    name: text_area_18
+    properties: {label: 25/4 Nytt menysystem. Spesielt bra på mobil'}
+    type: form:dep_91t3sowbnwbk:_Components.TextInput.TextArea
   - layout_properties: {grid_position: 'FTYVJX,NKFQVW'}
     name: text_area_17
     properties:
