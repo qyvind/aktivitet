@@ -1,4 +1,4 @@
-from ._anvil_designer import PoengVelgerTemplate
+from ._anvil_designer import PoengVelger_oldTemplate
 from anvil import *
 import anvil.server
 import anvil.tables as tables
@@ -10,7 +10,7 @@ from ..Utils import Utils
 import anvil.js
 from .. import Globals
 
-class PoengVelger(PoengVelgerTemplate):
+class PoengVelger_old(PoengVelger_oldTemplate):
     def __init__(self, valgt_poeng=1, aktivitet="", ukedag="", ikon=None, beskrivelse=None,skritt=None, callback=None, **properties):
         self.init_components(**properties)
         self.callback = callback

@@ -1,4 +1,4 @@
-from ._anvil_designer import LoggbokTemplate
+from ._anvil_designer import Loggbok_oldTemplate
 from anvil import *
 import anvil.server
 import anvil.facebook.auth
@@ -15,7 +15,7 @@ from .. import Globals
 
 
 
-class Loggbok(LoggbokTemplate):
+class Loggbok_old(Loggbok_oldTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
         self.vis_nye_badges(Globals.bruker)

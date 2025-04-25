@@ -1,0 +1,19 @@
+components_by_slot:
+  content: []
+  navigation:
+  - layout_properties: {}
+    name: navigation_link_1
+    properties: {}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+  - layout_properties: {}
+    name: navigation_link_2
+    properties: {}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+  - layout_properties: {}
+    name: navigation_link_3
+    properties: {}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+is_package: true
+layout: {type: 'form:dep_91t3sowbnwbk:Layouts.NavigationRailLayout'}
+layout_metadata: {title: Meny_template}
+slots: {}
