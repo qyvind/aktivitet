@@ -555,16 +555,16 @@ class Loggbok(LoggbokTemplate):
         # --- Oppdatert farge- og stilsetting ---
         if not knapp.enabled:
             if dato < today_date:
-                panel.background = self.get_farge(poeng) if poeng != "0" else "#f5f5f5"
+                panel.background_color = self.get_farge(poeng) if poeng != "0" else "#f5f5f5"
             else:
-                panel.background = "#eeeeee"
+                panel.background_color = "#eeeeee"
             knapp.foreground = "#aaaaaa"
             label.foreground = "#aaaaaa"
             ikon_komponent.foreground = "#aaaaaa"
             #panel.border = "1px dashed #cccccc"
             panel.opacity = 1.0  # Evt. sett til 0.7 hvis du vil tone det mer ned
         else:
-            panel.background = "#e0e0e0" if poeng == "0" else self.get_farge(poeng)
+            panel.background_color = "#e0e0e0" if poeng == "0" else self.get_farge(poeng)
             knapp.foreground = "black"
             label.foreground = "black"
             ikon_komponent.foreground = "black"

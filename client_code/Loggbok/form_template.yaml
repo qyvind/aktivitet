@@ -161,7 +161,7 @@ components_by_slot:
         type: FlowPanel
       - components:
         - components:
-          - layout_properties: {grid_position: 'QZJWKR,TQRGOL'}
+          - layout_properties: {slot: card-content-slot}
             name: man_label
             properties:
               align: center
@@ -172,18 +172,8 @@ components_by_slot:
               text: Mandag
               tooltip: ''
             type: Label
-          - layout_properties: {grid_position: 'QEQJXU,GEASSF'}
-            name: man_skritt
-            properties:
-              align: center
-              font_size: 8
-              spacing:
-                margin: ['0', null, '0', null]
-                padding: ['0', null, '0', null]
-              visible: false
-            type: Label
           - event_bindings: {click: man_button_click}
-            layout_properties: {grid_position: 'QZTGZD,BHOIWH'}
+            layout_properties: {slot: card-content-slot}
             name: man_button
             properties:
               font_size: 25
@@ -194,7 +184,7 @@ components_by_slot:
               text: '0'
             type: Button
           - event_bindings: {mouse_down: man_button_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
-            layout_properties: {grid_position: 'BUEXBD,JKJSLR'}
+            layout_properties: {slot: card-content-slot}
             name: man_ikon
             properties:
               display_mode: shrink_to_fit
@@ -204,7 +194,17 @@ components_by_slot:
               spacing_below: none
               visible: true
             type: Image
-          - layout_properties: {grid_position: 'EBOSPB,MFIGPZ'}
+          - layout_properties: {slot: card-content-slot}
+            name: man_skritt
+            properties:
+              align: center
+              font_size: 8
+              spacing:
+                margin: ['0', null, '0', null]
+                padding: ['0', null, '0', null]
+              visible: false
+            type: Label
+          - layout_properties: {slot: card-content-slot}
             name: man_akt_label
             properties:
               align: center
@@ -215,16 +215,13 @@ components_by_slot:
               text: ''
               visible: true
             type: Label
-          layout_properties: {}
+          event_bindings: {click: man_button_click}
+          layout_properties: {expand: false, width: 80}
           name: man_column_panel
-          properties:
-            role: elevated-card
-            spacing:
-              padding: ['0', '15', '0', '15']
-            tooltip: ''
-          type: ColumnPanel
+          properties: {enabled: true}
+          type: form:dep_91t3sowbnwbk:_Components.InteractiveCard
         - components:
-          - layout_properties: {grid_position: 'QZJWKR,TQRGOL'}
+          - layout_properties: {slot: card-content-slot}
             name: tir_label
             properties:
               align: center
@@ -234,18 +231,8 @@ components_by_slot:
                 padding: [null, null, '0', null]
               text: Tirsdag
             type: Label
-          - layout_properties: {grid_position: 'LMTFJP,MAIZGC'}
-            name: tir_skritt
-            properties:
-              align: center
-              font_size: 8
-              spacing:
-                margin: ['0', null, '0', null]
-                padding: ['0', null, '0', null]
-              visible: false
-            type: Label
           - event_bindings: {click: tir_button_click}
-            layout_properties: {grid_position: 'ZDBUKX,YNRDRQ'}
+            layout_properties: {slot: card-content-slot}
             name: tir_button
             properties:
               font_size: 25
@@ -256,13 +243,23 @@ components_by_slot:
               text: '0'
             type: Button
           - event_bindings: {mouse_down: tir_button_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
-            layout_properties: {grid_position: 'ITOHFN,CSAUSV'}
+            layout_properties: {slot: card-content-slot}
             name: tir_ikon
             properties:
               height: '32'
               margin: ['0', null, '0', null]
             type: Image
-          - layout_properties: {grid_position: 'PXLERO,PKVRMB'}
+          - layout_properties: {slot: card-content-slot}
+            name: tir_skritt
+            properties:
+              align: center
+              font_size: 8
+              spacing:
+                margin: ['0', null, '0', null]
+                padding: ['0', null, '0', null]
+              visible: false
+            type: Label
+          - layout_properties: {slot: card-content-slot}
             name: tir_akt_label
             properties:
               align: center
@@ -273,15 +270,13 @@ components_by_slot:
               text: ''
               visible: true
             type: Label
-          layout_properties: {}
+          event_bindings: {click: tir_button_click}
+          layout_properties: {width: 80}
           name: tir_column_panel
-          properties:
-            role: elevated-card
-            spacing:
-              padding: ['0', null, '0', null]
-          type: ColumnPanel
+          properties: {enabled: true}
+          type: form:dep_91t3sowbnwbk:_Components.InteractiveCard
         - components:
-          - layout_properties: {grid_position: 'QZJWKR,TQRGOL'}
+          - layout_properties: {slot: card-content-slot}
             name: ons_label
             properties:
               align: center
@@ -291,18 +286,8 @@ components_by_slot:
                 padding: [null, null, '0', null]
               text: Onsdag
             type: Label
-          - layout_properties: {grid_position: 'BKENWM,AHSNEL'}
-            name: ons_skritt
-            properties:
-              align: center
-              font_size: 8
-              spacing:
-                margin: ['0', null, '0', null]
-                padding: ['0', null, '0', null]
-              visible: false
-            type: Label
           - event_bindings: {click: ons_button_click}
-            layout_properties: {grid_position: 'IXYRQO,DGJJMZ'}
+            layout_properties: {slot: card-content-slot}
             name: ons_button
             properties:
               font_size: 25
@@ -313,13 +298,23 @@ components_by_slot:
               text: '0'
             type: Button
           - event_bindings: {mouse_down: ons_button_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
-            layout_properties: {grid_position: 'AEDULU,BYYDDZ'}
+            layout_properties: {slot: card-content-slot}
             name: ons_ikon
             properties:
               height: '32'
               margin: ['0', null, '0', null]
             type: Image
-          - layout_properties: {grid_position: 'SOIAYZ,XAITQX'}
+          - layout_properties: {slot: card-content-slot}
+            name: ons_skritt
+            properties:
+              align: center
+              font_size: 8
+              spacing:
+                margin: ['0', null, '0', null]
+                padding: ['0', null, '0', null]
+              visible: false
+            type: Label
+          - layout_properties: {slot: card-content-slot}
             name: ons_akt_label
             properties:
               align: center
@@ -330,15 +325,13 @@ components_by_slot:
               text: ''
               visible: true
             type: Label
-          layout_properties: {}
+          event_bindings: {click: ons_button_click}
+          layout_properties: {width: 80}
           name: ons_column_panel
-          properties:
-            role: elevated-card
-            spacing:
-              padding: ['0', null, '0', null]
-          type: ColumnPanel
+          properties: {enabled: true}
+          type: form:dep_91t3sowbnwbk:_Components.InteractiveCard
         - components:
-          - layout_properties: {grid_position: 'QZJWKR,TQRGOL'}
+          - layout_properties: {slot: card-content-slot}
             name: tor_label
             properties:
               align: center
@@ -348,18 +341,8 @@ components_by_slot:
                 padding: [null, null, '0', null]
               text: Torsdag
             type: Label
-          - layout_properties: {grid_position: 'TLIDDO,JUPDKQ'}
-            name: tor_skritt
-            properties:
-              align: center
-              font_size: 8
-              spacing:
-                margin: ['0', null, '0', null]
-                padding: ['0', null, '0', null]
-              visible: false
-            type: Label
           - event_bindings: {click: tor_button_click}
-            layout_properties: {grid_position: 'QHWKSS,YBOXFJ'}
+            layout_properties: {slot: card-content-slot}
             name: tor_button
             properties:
               font_size: 25
@@ -370,13 +353,23 @@ components_by_slot:
               text: '0'
             type: Button
           - event_bindings: {mouse_down: tor_button_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
-            layout_properties: {grid_position: 'NKUVYK,IJXQBK'}
+            layout_properties: {slot: card-content-slot}
             name: tor_ikon
             properties:
               height: '32'
               margin: ['0', null, '0', null]
             type: Image
-          - layout_properties: {grid_position: 'JUEBES,WOMSNG'}
+          - layout_properties: {slot: card-content-slot}
+            name: tor_skritt
+            properties:
+              align: center
+              font_size: 8
+              spacing:
+                margin: ['0', null, '0', null]
+                padding: ['0', null, '0', null]
+              visible: false
+            type: Label
+          - layout_properties: {slot: card-content-slot}
             name: tor_akt_label
             properties:
               align: center
@@ -387,20 +380,18 @@ components_by_slot:
               text: ''
               visible: true
             type: Label
-          layout_properties: {}
+          event_bindings: {click: tor_button_click}
+          layout_properties: {width: 80}
           name: tor_column_panel
-          properties:
-            role: elevated-card
-            spacing:
-              padding: ['0', null, '0', null]
-          type: ColumnPanel
+          properties: {enabled: true}
+          type: form:dep_91t3sowbnwbk:_Components.InteractiveCard
         layout_properties: {}
         name: flow_panel_1
         properties: {align: center}
         type: FlowPanel
       - components:
         - components:
-          - layout_properties: {grid_position: 'QZJWKR,TQRGOL'}
+          - layout_properties: {slot: card-content-slot}
             name: fre_label
             properties:
               align: center
@@ -410,18 +401,8 @@ components_by_slot:
                 padding: [null, null, '0', null]
               text: Fredag
             type: Label
-          - layout_properties: {grid_position: 'YYIIZS,ULQJTR'}
-            name: fre_skritt
-            properties:
-              align: center
-              font_size: 8
-              spacing:
-                margin: ['0', null, '0', null]
-                padding: ['0', null, '0', null]
-              visible: false
-            type: Label
           - event_bindings: {click: fre_button_click}
-            layout_properties: {grid_position: 'IHPYUO,VXIBJA'}
+            layout_properties: {slot: card-content-slot}
             name: fre_button
             properties:
               font_size: 25
@@ -432,14 +413,14 @@ components_by_slot:
               text: '0'
             type: Button
           - event_bindings: {mouse_down: fre_button_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
-            layout_properties: {grid_position: 'HFGYCY,CTAMUA'}
+            layout_properties: {slot: card-content-slot}
             name: fre_ikon
             properties:
               height: '32'
               margin: ['0', null, '0', null]
               source: ''
             type: Image
-          - layout_properties: {grid_position: 'EAQPVP,FHTBQS'}
+          - layout_properties: {slot: card-content-slot}
             name: fre_akt_label
             properties:
               align: center
@@ -450,15 +431,23 @@ components_by_slot:
               text: ''
               visible: true
             type: Label
-          layout_properties: {}
+          - layout_properties: {slot: card-content-slot}
+            name: fre_skritt
+            properties:
+              align: center
+              font_size: 8
+              spacing:
+                margin: ['0', null, '0', null]
+                padding: ['0', null, '0', null]
+              visible: false
+            type: Label
+          event_bindings: {click: fre_button_click}
+          layout_properties: {width: 80}
           name: fre_column_panel
-          properties:
-            role: elevated-card
-            spacing:
-              padding: ['0', null, '0', null]
-          type: ColumnPanel
+          properties: {enabled: true}
+          type: form:dep_91t3sowbnwbk:_Components.InteractiveCard
         - components:
-          - layout_properties: {grid_position: 'QZJWKR,TQRGOL'}
+          - layout_properties: {slot: card-content-slot}
             name: lor_label
             properties:
               align: center
@@ -468,18 +457,8 @@ components_by_slot:
                 padding: [null, null, '0', null]
               text: Lørdag
             type: Label
-          - layout_properties: {grid_position: 'VGSWLB,AXXKOP'}
-            name: lor_skritt
-            properties:
-              align: center
-              font_size: 8
-              spacing:
-                margin: ['0', null, '0', null]
-                padding: ['0', null, '0', null]
-              visible: false
-            type: Label
           - event_bindings: {click: lor_button_click}
-            layout_properties: {grid_position: 'WZOHIV,NVIUBR'}
+            layout_properties: {slot: card-content-slot}
             name: lor_button
             properties:
               font_size: 25
@@ -490,14 +469,14 @@ components_by_slot:
               text: '0'
             type: Button
           - event_bindings: {mouse_down: lor_button_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
-            layout_properties: {grid_position: 'MLYHRM,IXIQOA'}
+            layout_properties: {slot: card-content-slot}
             name: lor_ikon
             properties:
               height: '32'
               margin: ['0', null, '0', null]
               source: ''
             type: Image
-          - layout_properties: {grid_position: 'ETZXYW,AGFTEO'}
+          - layout_properties: {slot: card-content-slot}
             name: lor_akt_label
             properties:
               align: center
@@ -508,15 +487,23 @@ components_by_slot:
               text: ''
               visible: true
             type: Label
-          layout_properties: {}
+          - layout_properties: {slot: card-content-slot}
+            name: lor_skritt
+            properties:
+              align: center
+              font_size: 8
+              spacing:
+                margin: ['0', null, '0', null]
+                padding: ['0', null, '0', null]
+              visible: false
+            type: Label
+          event_bindings: {click: lor_button_click}
+          layout_properties: {width: 80}
           name: lor_column_panel
-          properties:
-            role: elevated-card
-            spacing:
-              padding: ['0', null, '0', null]
-          type: ColumnPanel
+          properties: {enabled: true}
+          type: form:dep_91t3sowbnwbk:_Components.InteractiveCard
         - components:
-          - layout_properties: {grid_position: 'QZJWKR,TQRGOL'}
+          - layout_properties: {slot: card-content-slot}
             name: son_label
             properties:
               align: center
@@ -526,18 +513,8 @@ components_by_slot:
                 padding: [null, null, '0', null]
               text: Søndag
             type: Label
-          - layout_properties: {grid_position: 'YXGRIR,ROSURD'}
-            name: son_skritt
-            properties:
-              align: center
-              font_size: 8
-              spacing:
-                margin: ['0', null, '0', null]
-                padding: ['0', null, '0', null]
-              visible: false
-            type: Label
           - event_bindings: {click: son_button_click}
-            layout_properties: {grid_position: 'XGVADB,TGGYJY'}
+            layout_properties: {slot: card-content-slot}
             name: son_button
             properties:
               font_size: 25
@@ -548,14 +525,24 @@ components_by_slot:
               text: '0'
             type: Button
           - event_bindings: {mouse_down: son_button_click, mouse_enter: image_mouse_enter, mouse_leave: image_mouse_leave}
-            layout_properties: {grid_position: 'NTOGHO,MCIKOC'}
+            layout_properties: {slot: card-content-slot}
             name: son_ikon
             properties:
               height: '32'
               margin: ['0', null, '0', null]
               source: ''
             type: Image
-          - layout_properties: {grid_position: 'JWPLVX,KFSMCP'}
+          - layout_properties: {slot: card-content-slot}
+            name: son_skritt
+            properties:
+              align: center
+              font_size: 8
+              spacing:
+                margin: ['0', null, '0', null]
+                padding: ['0', null, '0', null]
+              visible: false
+            type: Label
+          - layout_properties: {slot: card-content-slot}
             name: son_akt_label
             properties:
               align: center
@@ -566,13 +553,11 @@ components_by_slot:
               text: ''
               visible: true
             type: Label
-          layout_properties: {}
+          event_bindings: {click: son_button_click}
+          layout_properties: {width: 80}
           name: son_column_panel
-          properties:
-            role: elevated-card
-            spacing:
-              padding: ['0', null, '0', null]
-          type: ColumnPanel
+          properties: {enabled: true}
+          type: form:dep_91t3sowbnwbk:_Components.InteractiveCard
         layout_properties: {}
         name: flow_panel_6
         properties: {align: center}
