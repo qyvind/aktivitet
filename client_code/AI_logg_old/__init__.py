@@ -1,4 +1,4 @@
-from ._anvil_designer import Brukerveiledning_slettTemplate
+from ._anvil_designer import AI_logg_oldTemplate
 from anvil import *
 import anvil.server
 import anvil.facebook.auth
@@ -10,13 +10,14 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
-class Brukerveiledning_slett(Brukerveiledning_slettTemplate):
+class AI_logg_old(AI_logg_oldTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
-    # Any code you write here will run before the form opens.
+    self.repeating_panel_1.items = anvil.server.call('hent_ai_log')
+    
 
-  def lukk_button_click(self, **event_args):
+  def button_1_click(self, **event_args):
     """This method is called when the button is clicked"""
-    open_form("Loggbok")
+    open_form('admin')

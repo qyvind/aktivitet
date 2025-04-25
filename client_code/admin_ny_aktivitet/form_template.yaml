@@ -1,21 +1,31 @@
 components_by_slot:
   content:
-  - layout_properties: {}
-    name: label_1
-    properties: {role: headline, text: Forslag til ny idrett med ikon}
-    type: Label
   - components:
-    - name: repeating_panel_1
-      properties: {item_template: admin_ny_aktivitet.RowTemplate9}
-      type: RepeatingPanel
+    - layout_properties: {grid_position: 'QRFRVW,WJDHYU'}
+      name: label_1
+      properties: {role: headline, text: Forslag til ny idrett med ikon}
+      type: Label
+    - components:
+      - name: repeating_panel_1
+        properties: {item_template: admin_ny_aktivitet.RowTemplate9}
+        type: RepeatingPanel
+      - event_bindings: {click: button_1_click}
+        layout_properties: {slot: footer}
+        name: button_1
+        properties: {appearance: elevated, text: Slett alle forslag}
+        type: form:dep_91t3sowbnwbk:_Components.Button
+      layout_properties: {grid_position: 'XHSFZR,YAHSZP'}
+      name: data_grid_1
+      properties:
+        columns:
+        - {data_key: column_1, id: JKSDUP, title: Forslag}
+        - {data_key: column_2, id: VJQQOR, title: Navn}
+        - {data_key: column_3, id: OJLQEN, title: Tidspunkt}
+        - {data_key: column_1, id: DPHDBV, title: OK}
+      type: DataGrid
     layout_properties: {}
-    name: data_grid_1
-    properties:
-      columns:
-      - {data_key: column_1, id: JKSDUP, title: Forslag}
-      - {data_key: column_2, id: VJQQOR, title: Navn}
-      - {data_key: column_3, id: OJLQEN, title: Tidspunkt}
-      - {data_key: column_1, id: DPHDBV, title: OK}
-    type: DataGrid
+    name: outlined_card_1
+    properties: {role: outlined-card}
+    type: ColumnPanel
 is_package: true
-layout: {type: 'form:Homepage'}
+layout: {type: 'form:AdminMeny'}

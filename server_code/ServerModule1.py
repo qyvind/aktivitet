@@ -1265,3 +1265,10 @@ def sjekk_badge_6(bruker):
 
     return False
 
+
+@anvil.server.callable
+def slett_alle_ny_aktivitet():
+        from anvil.tables import app_tables
+    
+        for rad in app_tables.ny_aktivitet.search():
+            rad.delete()

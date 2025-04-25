@@ -18,3 +18,19 @@ class admin_ny_aktivitet(admin_ny_aktivitetTemplate):
     resultat = Utils.hent_ny_aktivitet()
     print(resultat)
     self.repeating_panel_1.items = resultat
+
+  def button_1_click(self, **event_args):
+    svar = alert(
+        title="Er du sikker?",
+        content="Vil du virkelig slette alle forslag til aktiviteter?",
+        buttons=[("Ja", True), ("Nei", False)],
+        large=True
+    )
+    
+    if svar:
+        anvil.server.call('slett_alle_ny_aktivitet')
+        alert("Alle aktiviteter er slettet.")
+        open_form('admin_ny_aktivitet'
+                 )
+    else:
+        alert("Sletting avbrutt.")

@@ -34,7 +34,7 @@ components_by_slot:
     type: form:dep_91t3sowbnwbk:_Components.NavigationLink
 is_package: true
 layout:
-  properties: {navigation_rail_collapse_to: bottom_app_bar, navigation_rail_vertical_align: top}
+  properties: {navigation_rail_collapse_to: bottom_app_bar, navigation_rail_vertical_align: top, show_sidesheet: true}
   type: form:dep_91t3sowbnwbk:Layouts.NavigationRailLayout
 layout_metadata: {title: Framskritt}
 slots:
