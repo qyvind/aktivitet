@@ -1,4 +1,4 @@
-from ._anvil_designer import Regler_oldTemplate
+from ._anvil_designer import Brukerveiledning_slettTemplate
 from anvil import *
 import anvil.server
 import anvil.facebook.auth
@@ -10,17 +10,13 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
-class Regler_old(Regler_oldTemplate):
+class Brukerveiledning_slett(Brukerveiledning_slettTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
 
-  def button_1_click(self, **event_args):
+  def lukk_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     open_form("Loggbok")
-
-
-
-

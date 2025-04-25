@@ -6,7 +6,7 @@ components_by_slot:
     type: Label
   - components:
     - name: repeating_panel_1
-      properties: {item_template: admin_ny_aktivitet_old.RowTemplate9}
+      properties: {item_template: admin_ny_aktivitet.RowTemplate9}
       type: RepeatingPanel
     layout_properties: {}
     name: data_grid_1

@@ -185,7 +185,7 @@ components_by_slot:
         type: ColumnPanel
       - components:
         - name: team_repeating_panel
-          properties: {item_template: admin_old.RowTemplate6}
+          properties: {item_template: admin.RowTemplate6}
           type: RepeatingPanel
         layout_properties: {grid_position: 'POGSJB,RPVVVR'}
         name: data_grid_1
@@ -205,7 +205,7 @@ components_by_slot:
     - components:
       - components:
         - name: bruker_repeating_panel
-          properties: {item_template: admin_old.RowTemplate7}
+          properties: {item_template: admin.RowTemplate7}
           type: RepeatingPanel
         layout_properties: {grid_position: 'LAJQGS,XBPYDT'}
         name: data_grid_2
@@ -305,7 +305,7 @@ components_by_slot:
           type: FlowPanel
         - components:
           - name: ai_repeating_panel_1
-            properties: {item_template: admin_old.RowTemplate1}
+            properties: {item_template: admin.RowTemplate1}
             type: RepeatingPanel
           layout_properties: {grid_position: 'SMZMTL,VFQVPH'}
           name: data_grid_3
