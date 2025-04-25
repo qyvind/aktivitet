@@ -1,152 +1,157 @@
-components:
-- components:
-  - layout_properties: {grid_position: 'JVNOSK,KTOBHB'}
-    name: label_1
-    properties: {role: headline, text: Endringslogg}
-    type: Label
-  - layout_properties: {grid_position: 'EPKZTV,LTNKNM'}
-    name: text_area_19
-    properties:
-      font_size: 10
-      text: |-
-        22/4 Gjorde programmet raskere
-        Reduserte antall menyvalg
-    type: TextArea
-  - layout_properties: {grid_position: 'FTYVJX,NKFQVW'}
-    name: text_area_17
-    properties:
-      font_size: 10
-      height: 90.42855834960938
-      text: "21/4 Nå kommer badges frem på linjene i resultatlisten også\nForenklet registrering av skritt. \nFjernet ukurante treningstyper. Vi legger til de som folk trenger etter hvert. \nLaget en sjette badge, og testet den. "
-    type: TextArea
-  - layout_properties: {grid_position: 'VAQWIL,XVCGWZ'}
-    name: text_area_16
-    properties:
-      font_size: 10
-      height: 83.5
-      text: |-
-        20/4 Deltager kan nå foreslå ny type idrett. Dette kommer frem i et eget bilde i admin, som kan legge inn ikon for dette. Ø får umiddelbart mail om nye forslag.
-        Nå kan man se andres badges i kikk-bildet i resultatlisten
-    type: TextArea
-  - layout_properties: {grid_position: 'WKNQKB,YYMYWA'}
-    name: text_area_15
-    properties:
-      font_size: 10
-      height: 98.5
-      text: "19/4 Forenklet individuell resultatliste. Hover over score for å se detaljer i stedet for mye clutter i bildet \nLa til en fjerde og femte badge\nLaget opsjon under admin/konkurranse som åpner for endring av alle dager,, ikke bare gårsdagen. Fint for test og debug. \nLa til logging av AI-meldinger om utdeling av badges, og et bilde til å lese disse."
-    type: TextArea
-  - layout_properties: {grid_position: 'HPCFSP,RLRDBV'}
-    name: text_area_14
-    properties:
-      font_size: 10
-      height: 83.5
-      text: "18/4 Bygget om måten man legger inn aktiviteter og skritt. Enklere for bruker.\nProgrammet husker om bruker sist var i skritt eller trening og åpner rett del \nAktiverte tre prestasjoner\nAktiverte AI til å informere deltager om prestasjoner"
-    type: TextArea
-  - layout_properties: {grid_position: 'YDWXMR,JTPKXU'}
-    name: text_area_13
-    properties: {font_size: 10, text: '17/4 La til badges. Foreløpig to aktive badges, men plass til veldig mange. '}
-    type: TextArea
-  - layout_properties: {grid_position: 'SXEDQY,XELDVM'}
-    name: text_area_12
-    properties:
-      font_size: 10
-      height: 76
-      text: |-
-        16/4 La til Streak og Score. Nattlig oppdatering av streak.
-        Kun redigering av dagens og gårsdagens aktiviteter er tillatt
-        Laget badge placeholdere med hint om hva som kommer
-    type: TextArea
-  - layout_properties: {grid_position: 'RSTXWX,ATBTOS'}
-    name: text_area_11
-    properties:
-      font_size: 10
-      height: 70.5
-      text: "15/4 La til oppmuntrende skrytekommentar ved innlegging av aktivitet. La til vedlikehold av ai-prompt for skryt i admin. \nLa til at den bare skryter når man legge inn aktivitet for samme dag. Ellers blir det for masete."
-    type: TextArea
-  - layout_properties: {grid_position: 'YACQLQ,HZIOYW'}
-    name: text_area_10
-    properties:
-      font_size: 10
-      height: 111
-      text: "14/4 Begrenset mulighet til å oppdatere bakover i tid. Nå kan man oppdatere inneværende uke og hvis det er mandag kan man oppdatere forrige uke. \nLa til liste med supertrekning - de som har klart hver uke.\nLa til link i admin til lykkehjulet\nNy side med regler og brukerveiledning"
-    type: TextArea
-  - layout_properties: {grid_position: 'LMZXMW,JKJKSY'}
-    name: text_area_9
-    properties: {font_size: 10, text: '13/4 La til navn på ikonene som tooltip når man velger ikon. Navnet blir satt inn som beskrivelse på aktiviteten dersom den ikke er fylt ut fra før. '}
-    type: TextArea
-  - layout_properties: {grid_position: 'LGAFYI,CCOHUH'}
-    name: text_area_8
-    properties:
-      font_size: 10
-      height: 141.5
-      text: "12/4 Mulighet til å opprette team selv\npopup-melding når team slettes eller når team ikke slettes fordi det ikke var tomt for medlemmer\npopup-melding når bruker slettes\nKnapp i admin for å slette tomme team. (Vurderer å gjøre den automatisk daglig)\nLagt til hengelås som viser om team er låst. Bruker kan klikke på låsen og låse selv. Dette kan bare gjøre når det er minst tre deltagere på teamet. \nNå kan slå opp alle detaljene for alle via individuell resultatliste."
-    type: TextArea
-  - layout_properties: {grid_position: 'MOGSQP,UEYVNV'}
-    name: text_area_7
-    properties: {font_size: 10, text: 11/4 Fikk endelig til å lage bilde som viser alle ikonene på en gang}
-    type: TextArea
-  - layout_properties: {grid_position: 'JFAYHJ,EVWNIP'}
-    name: text_area_6
-    properties: {font_size: 10, text: '4/4: La inn mer hjelpetekst om team. '}
-    type: TextArea
-  - layout_properties: {grid_position: 'QPJPEQ,XYFIZA'}
-    name: text_area_5
-    properties:
-      font_size: 10
-      height: 98
-      text: "31/3: Nå kan bruker ikke velge team som er låst. Låsing uteføres i teams-bildet i admin. \nLa til tekst \"Hviledag\" på passive dager\nFjernet ukepiler hvis man er på første eller siste uke i konkurransen, for å ikke kunne vise uker utenfor konkurransen. \n"
-    type: TextArea
-  - layout_properties: {grid_position: 'TNZNYY,DKGSDY'}
-    name: text_area_3
-    properties:
-      font_size: 10
-      height: 54.5
-      text: "30/3: La til ikon for aktivitet\nLa til beskrivelse av aktivitet. Den vises som tooltip når musen er over en dag. Vises ikek på mobil da den ikke har mus. "
-    type: TextArea
-  - layout_properties: {grid_position: 'ILDDNC,ZIRYPF'}
-    name: text_area_1
-    properties:
-      font_size: 10
-      height: 81.5
-      text: "29/3-25: Flyttet adminmeny til egen knapp som bare vises for adminbrukere. \nLage en side hvor bruker kan endre eget navn og team. Den kommer når bruker klikker på navnet sitt.\nLaget vindu for å registrere poeng og tekst på en dag, i stedet for å klikke opp ett og ett poeng .Mer logisk tror jeg.  "
-    type: TextArea
-  - layout_properties: {grid_position: 'BHFXMZ,LRACXB'}
-    name: text_area_2
-    properties:
-      font_size: 10
-      height: 137
-      text: "28/3-25: La inn checkboks på brukerliste i admin for å kunne gi admintilgang til brukere\nLaget endringslogg\nLink til innmeldingsskjema i siden med Regler\nRettet feil i trekningsliste. Den inkluderte deltagere som hadde hatt fem dager og avregistrert dager sånn at de ikke skal være med likevel. \nVisuelle enringer\n"
-    type: TextArea
-  - layout_properties: {grid_position: 'LAFSXU,NDNNGT'}
-    name: label_2
-    properties: {role: headline, text: Kjente feil og planlagte endringer}
-    type: Label
-  - layout_properties: {grid_position: 'ZHCDTP,UZQHEX'}
-    name: text_area_4
-    properties:
-      font_size: 10
-      height: 216
-      text: |+
-        Slette tomme team hver natt
-        Slette team med færre enn tre hver helg
-        Registrere vinnere i databasen for at AI skal vite det
-        resultatliste for team bør ta hensyn til teamets lengste streak
-        Flere badges
-        Merke som viser at de er med i supertrekning
-        slette en aktivitet
-        Vise egne poeng mm i headeren
-        team må ha snittpoeng
-        Lås for innmelding?
+components_by_slot:
+  content:
+  - components:
+    - layout_properties: {grid_position: 'JVNOSK,KTOBHB'}
+      name: label_1
+      properties: {role: headline, text: Endringslogg}
+      type: Label
+    - layout_properties: {grid_position: 'TBQNYX,SJTPCF'}
+      name: text_area_18
+      properties: {label: 25/4 Byttet menysystem. Spesielt bra på mobil.}
+      type: form:dep_91t3sowbnwbk:_Components.TextInput.TextArea
+    - layout_properties: {grid_position: 'EPKZTV,LTNKNM'}
+      name: text_area_19
+      properties:
+        font_size: 10
+        text: |-
+          22/4 Gjorde programmet raskere
+          Reduserte antall menyvalg
+      type: TextArea
+    - layout_properties: {grid_position: 'FTYVJX,NKFQVW'}
+      name: text_area_17
+      properties:
+        font_size: 10
+        height: 90.42855834960938
+        text: "21/4 Nå kommer badges frem på linjene i resultatlisten også\nForenklet registrering av skritt. \nFjernet ukurante treningstyper. Vi legger til de som folk trenger etter hvert. \nLaget en sjette badge, og testet den. "
+      type: TextArea
+    - layout_properties: {grid_position: 'VAQWIL,XVCGWZ'}
+      name: text_area_16
+      properties:
+        font_size: 10
+        height: 83.5
+        text: |-
+          20/4 Deltager kan nå foreslå ny type idrett. Dette kommer frem i et eget bilde i admin, som kan legge inn ikon for dette. Ø får umiddelbart mail om nye forslag.
+          Nå kan man se andres badges i kikk-bildet i resultatlisten
+      type: TextArea
+    - layout_properties: {grid_position: 'WKNQKB,YYMYWA'}
+      name: text_area_15
+      properties:
+        font_size: 10
+        height: 98.5
+        text: "19/4 Forenklet individuell resultatliste. Hover over score for å se detaljer i stedet for mye clutter i bildet \nLa til en fjerde og femte badge\nLaget opsjon under admin/konkurranse som åpner for endring av alle dager,, ikke bare gårsdagen. Fint for test og debug. \nLa til logging av AI-meldinger om utdeling av badges, og et bilde til å lese disse."
+      type: TextArea
+    - layout_properties: {grid_position: 'HPCFSP,RLRDBV'}
+      name: text_area_14
+      properties:
+        font_size: 10
+        height: 83.5
+        text: "18/4 Bygget om måten man legger inn aktiviteter og skritt. Enklere for bruker.\nProgrammet husker om bruker sist var i skritt eller trening og åpner rett del \nAktiverte tre prestasjoner\nAktiverte AI til å informere deltager om prestasjoner"
+      type: TextArea
+    - layout_properties: {grid_position: 'YDWXMR,JTPKXU'}
+      name: text_area_13
+      properties: {font_size: 10, text: '17/4 La til badges. Foreløpig to aktive badges, men plass til veldig mange. '}
+      type: TextArea
+    - layout_properties: {grid_position: 'SXEDQY,XELDVM'}
+      name: text_area_12
+      properties:
+        font_size: 10
+        height: 76
+        text: |-
+          16/4 La til Streak og Score. Nattlig oppdatering av streak.
+          Kun redigering av dagens og gårsdagens aktiviteter er tillatt
+          Laget badge placeholdere med hint om hva som kommer
+      type: TextArea
+    - layout_properties: {grid_position: 'RSTXWX,ATBTOS'}
+      name: text_area_11
+      properties:
+        font_size: 10
+        height: 70.5
+        text: "15/4 La til oppmuntrende skrytekommentar ved innlegging av aktivitet. La til vedlikehold av ai-prompt for skryt i admin. \nLa til at den bare skryter når man legge inn aktivitet for samme dag. Ellers blir det for masete."
+      type: TextArea
+    - layout_properties: {grid_position: 'YACQLQ,HZIOYW'}
+      name: text_area_10
+      properties:
+        font_size: 10
+        height: 111
+        text: "14/4 Begrenset mulighet til å oppdatere bakover i tid. Nå kan man oppdatere inneværende uke og hvis det er mandag kan man oppdatere forrige uke. \nLa til liste med supertrekning - de som har klart hver uke.\nLa til link i admin til lykkehjulet\nNy side med regler og brukerveiledning"
+      type: TextArea
+    - layout_properties: {grid_position: 'LMZXMW,JKJKSY'}
+      name: text_area_9
+      properties: {font_size: 10, text: '13/4 La til navn på ikonene som tooltip når man velger ikon. Navnet blir satt inn som beskrivelse på aktiviteten dersom den ikke er fylt ut fra før. '}
+      type: TextArea
+    - layout_properties: {grid_position: 'LGAFYI,CCOHUH'}
+      name: text_area_8
+      properties:
+        font_size: 10
+        height: 141.5
+        text: "12/4 Mulighet til å opprette team selv\npopup-melding når team slettes eller når team ikke slettes fordi det ikke var tomt for medlemmer\npopup-melding når bruker slettes\nKnapp i admin for å slette tomme team. (Vurderer å gjøre den automatisk daglig)\nLagt til hengelås som viser om team er låst. Bruker kan klikke på låsen og låse selv. Dette kan bare gjøre når det er minst tre deltagere på teamet. \nNå kan slå opp alle detaljene for alle via individuell resultatliste."
+      type: TextArea
+    - layout_properties: {grid_position: 'MOGSQP,UEYVNV'}
+      name: text_area_7
+      properties: {font_size: 10, text: 11/4 Fikk endelig til å lage bilde som viser alle ikonene på en gang}
+      type: TextArea
+    - layout_properties: {grid_position: 'JFAYHJ,EVWNIP'}
+      name: text_area_6
+      properties: {font_size: 10, text: '4/4: La inn mer hjelpetekst om team. '}
+      type: TextArea
+    - layout_properties: {grid_position: 'QPJPEQ,XYFIZA'}
+      name: text_area_5
+      properties:
+        font_size: 10
+        height: 98
+        text: "31/3: Nå kan bruker ikke velge team som er låst. Låsing uteføres i teams-bildet i admin. \nLa til tekst \"Hviledag\" på passive dager\nFjernet ukepiler hvis man er på første eller siste uke i konkurransen, for å ikke kunne vise uker utenfor konkurransen. \n"
+      type: TextArea
+    - layout_properties: {grid_position: 'TNZNYY,DKGSDY'}
+      name: text_area_3
+      properties:
+        font_size: 10
+        height: 54.5
+        text: "30/3: La til ikon for aktivitet\nLa til beskrivelse av aktivitet. Den vises som tooltip når musen er over en dag. Vises ikek på mobil da den ikke har mus. "
+      type: TextArea
+    - layout_properties: {grid_position: 'ILDDNC,ZIRYPF'}
+      name: text_area_1
+      properties:
+        font_size: 10
+        height: 81.5
+        text: "29/3-25: Flyttet adminmeny til egen knapp som bare vises for adminbrukere. \nLage en side hvor bruker kan endre eget navn og team. Den kommer når bruker klikker på navnet sitt.\nLaget vindu for å registrere poeng og tekst på en dag, i stedet for å klikke opp ett og ett poeng .Mer logisk tror jeg.  "
+      type: TextArea
+    - layout_properties: {grid_position: 'BHFXMZ,LRACXB'}
+      name: text_area_2
+      properties:
+        font_size: 10
+        height: 137
+        text: "28/3-25: La inn checkboks på brukerliste i admin for å kunne gi admintilgang til brukere\nLaget endringslogg\nLink til innmeldingsskjema i siden med Regler\nRettet feil i trekningsliste. Den inkluderte deltagere som hadde hatt fem dager og avregistrert dager sånn at de ikke skal være med likevel. \nVisuelle enringer\n"
+      type: TextArea
+    - layout_properties: {grid_position: 'LAFSXU,NDNNGT'}
+      name: label_2
+      properties: {role: headline, text: Kjente feil og planlagte endringer}
+      type: Label
+    - layout_properties: {grid_position: 'ZHCDTP,UZQHEX'}
+      name: text_area_4
+      properties:
+        font_size: 10
+        height: 216
+        text: |+
+          Slette tomme team hver natt
+          Slette team med færre enn tre hver helg
+          Registrere vinnere i databasen for at AI skal vite det
+          resultatliste for team bør ta hensyn til teamets lengste streak
+          Flere badges
+          Merke som viser at de er med i supertrekning
+          slette en aktivitet
+          Vise egne poeng mm i headeren
+          team må ha snittpoeng
+          Lås for innmelding?
 
-    type: TextArea
-  - event_bindings: {click: button_1_click}
-    layout_properties: {grid_position: 'RUNMFH,GYRFVX'}
-    name: button_1
-    properties: {role: filled-button, text: Lukk}
-    type: Button
-  layout_properties: {grid_position: 'WKFCDP,BRSNDL'}
-  name: column_panel_1
-  properties: {role: tonal-card}
-  type: ColumnPanel
-container: {type: ColumnPanel}
+      type: TextArea
+    - event_bindings: {click: button_1_click}
+      layout_properties: {grid_position: 'RUNMFH,GYRFVX'}
+      name: button_1
+      properties: {role: filled-button, text: Lukk}
+      type: Button
+    layout_properties: {}
+    name: column_panel_1
+    properties: {role: tonal-card}
+    type: ColumnPanel
 is_package: true
+layout: {type: 'form:Homepage'}
