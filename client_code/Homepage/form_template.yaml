@@ -1,25 +1,35 @@
 components_by_slot:
   content: []
   navigation:
-  - event_bindings: {click: navigation_link_1_click}
+  - event_bindings: {click: loggbok_button_click}
     layout_properties: {}
-    name: navigation_link_1
+    name: loggbok_button
     properties: {text: Loggbok}
     type: form:dep_91t3sowbnwbk:_Components.NavigationLink
-  - event_bindings: {click: navigation_link_2_click}
+  - event_bindings: {click: reusltater_button_click}
     layout_properties: {}
-    name: navigation_link_2
+    name: reusltater_button
     properties: {text: Resultater}
     type: form:dep_91t3sowbnwbk:_Components.NavigationLink
-  - event_bindings: {click: regler_click}
+  - event_bindings: {click: regler_button_click}
     layout_properties: {}
-    name: regler
+    name: regler_button
     properties: {text: Regler}
     type: form:dep_91t3sowbnwbk:_Components.NavigationLink
   - event_bindings: {click: trekninger_click}
     layout_properties: {}
     name: trekninger
     properties: {text: Trekninger}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+  - event_bindings: {click: admin_button_click}
+    layout_properties: {}
+    name: admin_button
+    properties: {text: Admin}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+  - event_bindings: {click: logout_button_click}
+    layout_properties: {}
+    name: logout_button
+    properties: {text: Logg ut}
     type: form:dep_91t3sowbnwbk:_Components.NavigationLink
 is_package: true
 layout: {type: 'form:dep_91t3sowbnwbk:Layouts.NavigationRailLayout'}

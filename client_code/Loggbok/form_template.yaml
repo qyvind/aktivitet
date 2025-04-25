@@ -588,34 +588,6 @@ components_by_slot:
       name: week_row_panel
       properties: {}
       type: DataRowPanel
-    - components:
-      - event_bindings: {click: individuell_button_click}
-        layout_properties: {}
-        name: individuell_button
-        properties:
-          background: theme:Secondary Container
-          role: elevated-button
-          text: |
-            Poengstilling
-        type: Button
-      - event_bindings: {click: trekning_button_click}
-        layout_properties: {}
-        name: trekning_button
-        properties: {background: 'theme:Secondary Container', role: elevated-button, text: Trekning}
-        type: Button
-      - event_bindings: {click: admin_button_click}
-        name: admin_button
-        properties: {background: 'theme:Secondary Container', role: elevated-button, text: Admin, visible: false}
-        type: Button
-      - event_bindings: {click: logout_click}
-        layout_properties: {}
-        name: logout
-        properties: {align: center, background: 'theme:Secondary Container', role: elevated-button, text: Logg ut}
-        type: Button
-      layout_properties: {grid_position: 'ZPVSNA,WTSZQB'}
-      name: flow_panel_7
-      properties: {align: center}
-      type: FlowPanel
     layout_properties: {}
     name: loggbok_card
     properties: {background: '', role: tonal-card, visible: true}

@@ -422,10 +422,10 @@ class Loggbok(LoggbokTemplate):
 
     def sjekk_bruker(self):
         user = Globals.bruker
-        if Globals.admin:
-          self.admin_button.visible = True
-        else:
-          self.admin_button.visible = False
+        # if Globals.admin:
+        #   self.admin_button.visible = True
+        # else:
+        #   self.admin_button.visible = False
         
         if user:
             # Hent oppdaterte brukerdata fra UserInfo-tabellen
