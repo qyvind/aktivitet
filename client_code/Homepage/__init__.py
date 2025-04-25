@@ -68,3 +68,8 @@ class Homepage(HomepageTemplate):
   def logout_button_click(self, **event_args):
     anvil.users.logout()
     open_form('Login')
+
+  def menu_item_2_click(self, **event_args):
+    open_form('Resultat_individuell')
+
+

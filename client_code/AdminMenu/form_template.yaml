@@ -1,0 +1,24 @@
+components_by_slot:
+  app_bar_title:
+  - layout_properties: {}
+    name: button_menu_3
+    properties: {}
+    type: form:dep_91t3sowbnwbk:_Components.ButtonMenu
+  - components: []
+    layout_properties: {}
+    name: button_menu_1
+    properties: {}
+    type: form:dep_91t3sowbnwbk:_Components.ButtonMenu
+  - components: []
+    event_bindings: {click: button_menu_2_click}
+    layout_properties: {}
+    name: button_menu_2
+    properties: {text: Tilbake}
+    type: form:dep_91t3sowbnwbk:_Components.ButtonMenu
+is_package: true
+layout: {type: 'form:dep_91t3sowbnwbk:Layouts.NavigationDrawerLayout'}
+slots:
+  content:
+    index: 0
+    set_layout_properties: {}
+    target: {name: content, type: slot}

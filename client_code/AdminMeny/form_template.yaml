@@ -20,7 +20,8 @@ components_by_slot:
     type: form:dep_91t3sowbnwbk:_Components.NavigationLink
 is_package: true
 layout:
-  properties: {show_sidesheet: false}
+  data_bindings: []
+  properties: {background_color: '', navigation_drawer_color: blue, show_sidesheet: false}
   type: form:dep_91t3sowbnwbk:Layouts.NavigationDrawerLayout
 slots:
   content:

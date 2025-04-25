@@ -28,4 +28,4 @@ components_by_slot:
     properties: {role: outlined-card}
     type: ColumnPanel
 is_package: true
-layout: {type: 'form:AdminMeny'}
+layout: {type: 'form:AdminMeny_old'}
