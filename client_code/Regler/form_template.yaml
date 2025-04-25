@@ -1,73 +1,35 @@
-components:
-- components:
-  - layout_properties: {grid_position: 'KDKVGG,CXLXKV'}
-    name: label_1
-    properties: {role: headline, text: Konkurranseregler}
-    type: Label
-  - layout_properties: {grid_position: 'VXATUB,SOBLWX'}
-    name: text_area_1
-    properties:
-      enabled: false
-      foreground: black
-      height: 104.45455932617188
-      text: |
-        Hvem kan delta?
-        Alle medlemmer i Framo BIL er invitert til å delta.
-    type: TextArea
-  - layout_properties: {grid_position: 'UYHMCL,XVTQIG'}
-    name: link_2
-    properties: {align: center, role: headline, text: Her finner du innmeldingsskjema}
-    type: Link
-  - layout_properties: {grid_position: 'SOEHOG,EQTGKX'}
-    name: text_area_2
-    properties:
-      enabled: false
-      foreground: black
-      height: 589.6666564941406
-      text: "Premier\nHver uke blir det trukket ut tre premier, hver på 1000 kroner. De to første vinnerne trekkes ut blant de som har klart å få ett eller flere poeng fem forskjellige dager i løpet av uken. Den tredje premien trekkes ut blant de som har klart dette hver uke så langt.\n\nPoengsystem\nAlle idrettsaktiviteter teller. Deltakerne logger poeng via vårt program, med mulighet til å opptjene inntil 3 poeng per dag. Poeng gis etter følgende kriterier:\n\n1 poeng: 0,5 time aktiv trening eller 8000 skritt\n2 poeng: 1 time aktiv trening\n3 poeng: 1,5 time aktiv trening\nDet er tilstrekkelig med 1 poeng i fem dager for å være med i trekningen i den uken. Poeng utover dette påvirker ikke trekningen, men vil hjelpe laget ditt, og din personlige plassering.\n\nStreak: \nStreak er antall påfølgende dager du har registrert aktiviteter. Din lengste streak blir benyttet til å skille deltagere som ellers har like mye poeng. \n\nKonkurranseformer\nIndividuell konkurranse: Resultatlisten føres for hver deltaker.\n\nLagkonkurranse: Det er mulig å melde seg på som lag (minimum 3 personer). Lagene føres på en egen resultatliste. Det blir trukket ut premier til deltagerne i vinnende lag i siste trekening."
-    type: TextArea
-  layout_properties: {grid_position: 'GMGFNB,WFPWMF'}
-  name: column_panel_1
-  properties: {role: tonal-card}
-  type: ColumnPanel
-- components:
-  - layout_properties: {grid_position: 'KDKVGG,CXLXKV'}
-    name: label_1_copy
-    properties: {role: display, text: Brukerveiledning}
-    type: Label
-  - layout_properties: {grid_position: 'RLCWOS,WCNFUE'}
-    name: text_area_3
-    properties:
-      enabled: false
-      foreground: black
-      height: 480.2727355957031
-      text: "Hovedbildet viser innværende uke, når konkurransen er i gang. \n\nDu kan hoppe fra uke til uke med pilene til høyre og venstre.\n\nDet er en knapp for hver dag. Du registrerer poeng på en dag ved å klikke på knappen. Du markerer da hvor mange poeng du fortjener den dagen, og kan velge et ikon. Du kan la teksten stå., eller tilpasse den. Du kan også skrive en lengre beskrivelse av økten. \nDu kan bare registrere aktiviteter for i dag og i går. \nHvis du klikker på navnet ditt kommer du inn i et bilde der du kan korrigere navnet du har skrevet. Det er lurt å bruke ekte navn hvis du vil ha premie. \nI det samme bildet kan du velge å bli med i et eksisterende lag, elelr du kan opprette et nytt lag. Et lag må ha tre deltagere for å være med i konkurransen.  Lag som blir stående tomme blir slettet. \nMedlemmene i et lag kan velge å låse for nye medlemmer i laget. De kan da ikke bytte lag, og dette laget blir ikke med i listene over lag som andre kan velge. \nNår konkurransen er ca tre uker på vei blir alle lagene låst. \nKonkurransen er åpen, på den måten at alle deltagere kan se hva andre har registrert., Når du viser individuell resultatliste får de frem et øye-ikon for hver deltager. Hvis du klikker på det kan du se alle dagsøktene som den personen har registrert.\nRegistreringen av poeng er basert på tillit. Les avsnittet om poengberegning nøye. "
-    type: TextArea
+components_by_slot:
+  content:
   - components:
     - layout_properties: {grid_position: 'KDKVGG,CXLXKV'}
-      name: label_1_copy_copy
-      properties: {role: display, text: Poengberegning}
+      name: label_1
+      properties: {role: headline, text: Konkurranseregler}
       type: Label
-    - layout_properties: {grid_position: 'QSCRAV,MSCIXK'}
-      name: text_area_3_copy
+    - layout_properties: {grid_position: 'VXATUB,SOBLWX'}
+      name: text_area_1
       properties:
         enabled: false
         foreground: black
-        height: 448.08331298828125
-        text: "Skritt\nHvis du har skritteller og den viser 8000 skritt på en dag kan du få ett poeng. Hvis du går lengre enn 8000 skritt på en dag har det ingen innvirkning på poeng. \n\nTreningsøkter\nHvis du registrerer annen form for trening kan du ikke registrere poeng for skritt. Du kan få ett poeng for hver halve time med aktiv trening, og maksimalt tre poeng per. dag.\n\nBadges\nBadges blir gitt når du oppfyller kravene til hver enkelt badge. Når du får en badge får du bonuspoeng. Kravene til badgene oppdager deltagerne i løpet av konkurransen.\n\nLigaer\nDet er 10 ligaer.Etter en uke tildels du en liga etter hvilken score du har. Hver helg går de beste 20 % opp i neste liga, og de dårligse 20% rykker ned. De som rykker opp får bonuspoeng for det.\n\nHvis du synes dette er mye å tenke på kan du bare glemme det. Det går av seg selv når du registrering trenigen og skrittene dine."
+        height: 104.45455932617188
+        text: |
+          Hvem kan delta?
+          Alle medlemmer i Framo BIL er invitert til å delta.
       type: TextArea
-    - event_bindings: {click: button_1_click}
-      layout_properties: {grid_position: 'NPDRUE,NVTGLG'}
-      name: button_1
-      properties: {role: filled-button, text: Lukk}
-      type: Button
-    layout_properties: {grid_position: 'PXGGAF,ARLPSP'}
-    name: column_panel_1_copy_copy
+    - layout_properties: {grid_position: 'UYHMCL,XVTQIG'}
+      name: link_2
+      properties: {align: center, role: headline, text: Her finner du innmeldingsskjema}
+      type: Link
+    - layout_properties: {grid_position: 'SOEHOG,EQTGKX'}
+      name: text_area_2
+      properties:
+        enabled: false
+        foreground: black
+        height: 589.6666564941406
+        text: "Premier\nHver uke blir det trukket ut tre premier, hver på 1000 kroner. De to første vinnerne trekkes ut blant de som har klart å få ett eller flere poeng fem forskjellige dager i løpet av uken. Den tredje premien trekkes ut blant de som har klart dette hver uke så langt.\n\nPoengsystem\nAlle idrettsaktiviteter teller. Deltakerne logger poeng via vårt program, med mulighet til å opptjene inntil 3 poeng per dag. Poeng gis etter følgende kriterier:\n\n1 poeng: 0,5 time aktiv trening eller 8000 skritt\n2 poeng: 1 time aktiv trening\n3 poeng: 1,5 time aktiv trening\nDet er tilstrekkelig med 1 poeng i fem dager for å være med i trekningen i den uken. Poeng utover dette påvirker ikke trekningen, men vil hjelpe laget ditt, og din personlige plassering.\n\nStreak: \nStreak er antall påfølgende dager du har registrert aktiviteter. Din lengste streak blir benyttet til å skille deltagere som ellers har like mye poeng. \n\nKonkurranseformer\nIndividuell konkurranse: Resultatlisten føres for hver deltaker.\n\nLagkonkurranse: Det er mulig å melde seg på som lag (minimum 3 personer). Lagene føres på en egen resultatliste. Det blir trukket ut premier til deltagerne i vinnende lag i siste trekening."
+      type: TextArea
+    layout_properties: {}
+    name: column_panel_1
     properties: {role: tonal-card}
     type: ColumnPanel
-  layout_properties: {grid_position: 'FAOPLV,GJTPCG'}
-  name: column_panel_1_copy
-  properties: {role: tonal-card}
-  type: ColumnPanel
-container: {type: ColumnPanel}
 is_package: true
+layout: {type: 'form:Homepage'}

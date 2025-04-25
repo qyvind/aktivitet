@@ -11,6 +11,16 @@ components_by_slot:
     name: navigation_link_2
     properties: {text: Resultater}
     type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+  - event_bindings: {click: regler_click}
+    layout_properties: {}
+    name: regler
+    properties: {text: Regler}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+  - event_bindings: {click: trekninger_click}
+    layout_properties: {}
+    name: trekninger
+    properties: {text: Trekninger}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
 is_package: true
 layout: {type: 'form:dep_91t3sowbnwbk:Layouts.NavigationRailLayout'}
 layout_metadata: {title: Framskritt}

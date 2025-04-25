@@ -1,4 +1,4 @@
-from ._anvil_designer import SupertrekningTemplate
+from ._anvil_designer import Regler_oldTemplate
 from anvil import *
 import anvil.server
 import anvil.facebook.auth
@@ -10,7 +10,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
-class Supertrekning(SupertrekningTemplate):
+class Regler_old(Regler_oldTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
@@ -18,4 +18,9 @@ class Supertrekning(SupertrekningTemplate):
     # Any code you write here will run before the form opens.
 
   def button_1_click(self, **event_args):
-    open_form('Trekninger')
+    """This method is called when the button is clicked"""
+    open_form("Loggbok")
+
+
+
+

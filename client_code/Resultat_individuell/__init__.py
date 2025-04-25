@@ -11,7 +11,7 @@ from anvil.tables import app_tables
 from ..Utils import Utils
 
 
-class Resultat_Individuell(Resultat_individuellTemplate):
+class Resultat_individuell(Resultat_individuellTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)

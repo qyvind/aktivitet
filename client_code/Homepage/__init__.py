@@ -14,6 +14,7 @@ class Homepage(HomepageTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    self.layout.show_sidesheet = False
 
     # Any code you write here will run before the form opens.
 
@@ -22,3 +23,9 @@ class Homepage(HomepageTemplate):
 
   def navigation_link_2_click(self, **event_args):
     open_form('Resultat_individuell')
+
+  def regler_click(self, **event_args):
+    open_form('Regler')
+
+  def trekninger_click(self, **event_args):
+    open_form('Trekninger')
