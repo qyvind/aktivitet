@@ -12,7 +12,7 @@ components_by_slot:
       type: Button
     - components:
       - name: team_resultat_repeating_panel
-        properties: {item_template: Resultat_team_old.RowTemplate5}
+        properties: {item_template: Resultat_team.RowTemplate5}
         type: RepeatingPanel
       layout_properties: {grid_position: 'ZLRLJD,SBUBFU'}
       name: data_grid_1
