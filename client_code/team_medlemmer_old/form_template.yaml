@@ -1,0 +1,36 @@
+components:
+- components:
+  - components:
+    - layout_properties: {}
+      name: label_1
+      properties: {text: Team}
+      type: Label
+    - name: team_label
+      properties: {}
+      type: Label
+    layout_properties: {grid_position: 'JYMXGO,PPIDVR'}
+    name: flow_panel_1
+    properties: {align: left}
+    type: FlowPanel
+  - components:
+    - name: team_medl_repeating_panel
+      properties: {item_template: team_medlemmer_old.RowTemplate4}
+      type: RepeatingPanel
+    layout_properties: {grid_position: 'CSGQGC,UEIOJP'}
+    name: data_grid_1
+    properties:
+      columns:
+      - {data_key: column_1, id: JKSDUP, title: Teammedlemmer}
+      - {data_key: column_1, id: MHDFRT, title: Poeng}
+    type: DataGrid
+  - event_bindings: {click: button_1_click}
+    layout_properties: {grid_position: 'XNTNUE,WCTYOF'}
+    name: button_1
+    properties: {role: filled-button, text: Lukk}
+    type: Button
+  layout_properties: {grid_position: 'JGWVRR,GGHDGL'}
+  name: outlined_card_1
+  properties: {role: tonal-card}
+  type: ColumnPanel
+container: {type: ColumnPanel}
+is_package: true

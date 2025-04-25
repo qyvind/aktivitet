@@ -1,0 +1,48 @@
+components_by_slot:
+  content: []
+  navigation:
+  - data_bindings: []
+    event_bindings: {click: loggbok_button_click}
+    layout_properties: {}
+    name: loggbok_button
+    properties: {icon: 'mi:book_5', navigate_to: Loggbok, selected: true, text: Loggbok}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+  - event_bindings: {click: reusltater_button_click}
+    layout_properties: {}
+    name: reusltater_button
+    properties: {icon: 'mi:counter_1', navigate_to: Resultat_individuell, text: Resultater}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+  - event_bindings: {click: regler_button_click}
+    layout_properties: {}
+    name: regler_button
+    properties: {icon: 'mi:format_paragraph', navigate_to: Regler, text: Regler}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+  - event_bindings: {click: trekninger_button_click}
+    layout_properties: {}
+    name: trekninger_button
+    properties: {icon: 'mi:add_reaction', navigate_to: Trekninger, text: Trekninger}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+  - event_bindings: {click: admin_button_click}
+    layout_properties: {}
+    name: admin_button
+    properties: {navigate_to: admin, text: Admin}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+  - event_bindings: {click: logout_button_click}
+    layout_properties: {}
+    name: logout_button
+    properties: {icon: 'mi:lock', text: Logg ut}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+is_package: true
+layout:
+  properties: {navigation_rail_collapse_to: bottom_app_bar, navigation_rail_vertical_align: top}
+  type: form:dep_91t3sowbnwbk:Layouts.NavigationRailLayout
+layout_metadata: {title: Framskritt}
+slots:
+  content:
+    index: 0
+    set_layout_properties: {}
+    target: {name: content, type: slot}
+  sidesheet:
+    index: 0
+    set_layout_properties: {}
+    target: {name: sidesheet, type: slot}

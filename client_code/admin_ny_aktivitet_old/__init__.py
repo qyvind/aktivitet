@@ -1,4 +1,4 @@
-from ._anvil_designer import SupertrekningTemplate
+from ._anvil_designer import admin_ny_aktivitet_oldTemplate
 from anvil import *
 import anvil.server
 import anvil.facebook.auth
@@ -8,14 +8,13 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from ..Utils import Utils
 
 
-class Supertrekning(SupertrekningTemplate):
+class admin_ny_aktivitet_old(admin_ny_aktivitet_oldTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-
-    # Any code you write here will run before the form opens.
-
-  def button_1_click(self, **event_args):
-    open_form('Trekninger')
+    resultat = Utils.hent_ny_aktivitet()
+    print(resultat)
+    self.repeating_panel_1.items = resultat

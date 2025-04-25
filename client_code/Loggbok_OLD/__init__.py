@@ -1,4 +1,4 @@
-from ._anvil_designer import LoggbokTemplate
+from ._anvil_designer import Loggbok_OLDTemplate
 from anvil import *
 import anvil.server
 import anvil.facebook.auth
@@ -15,10 +15,9 @@ from .. import Globals
 
 
 
-class Loggbok(LoggbokTemplate):
+class Loggbok_OLD(Loggbok_OLDTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
-        
         self.vis_nye_badges(Globals.bruker)
         Globals.week_offset = 0
         #self.hent_week_offset() 
@@ -423,10 +422,10 @@ class Loggbok(LoggbokTemplate):
 
     def sjekk_bruker(self):
         user = Globals.bruker
-        # if Globals.admin:
-        #   self.admin_button.visible = True
-        # else:
-        #   self.admin_button.visible = False
+        if Globals.admin:
+          self.admin_button.visible = True
+        else:
+          self.admin_button.visible = False
         
         if user:
             # Hent oppdaterte brukerdata fra UserInfo-tabellen
