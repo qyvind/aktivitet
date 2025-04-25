@@ -1,7 +1,10 @@
 components:
 - layout_properties: {column: JKSDUP}
   name: navn_label
-  properties: {}
+  properties:
+    spacing:
+      margin: ['0', null, '0', null]
+      padding: ['4', null, '4', null]
   type: Label
 container: {type: DataRowPanel}
 is_package: true

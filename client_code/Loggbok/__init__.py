@@ -269,7 +269,17 @@ class Loggbok(LoggbokTemplate):
               self.oppdater_dag(knapp, panel, label, akt_data, dato, today_date, ikon_komponent,skritt_komponent, ColumnPanel)
 
   
-      self.lykkehjul.visible = self.sjekk_lykkehjul()
+      progress = self.sjekk_lykkehjul()
+      if progress >=100:
+        self.lykke_bw_image.visible = False
+        self.lykke_color_image.visible = True 
+        self.lykke_indikator.progress_color = "green"
+      else:
+        self.lykke_bw_image.visible = True
+        self.lykke_color_image.visible = False
+        self.lykke_indikator.progress_color = "red"
+      self.lykke_indikator.progress = progress
+      
       #user = anvil.users.get_user()
       self.vis_tildelte_badges(Globals.bruker)
 
@@ -394,7 +404,7 @@ class Loggbok(LoggbokTemplate):
           # Her antas det at feltet 'poeng' er et tall, eventuelt konvertert til int.
           if any(int(activity['poeng']) >= 1 for activity in week_activities.get(day, [])):
               count_days += 1
-      return count_days >= 5
+      return count_days *20
 
     def spor_om_navn(self):
         # Opprett en TextBox for å hente inn navnet
