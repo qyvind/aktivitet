@@ -12,15 +12,15 @@ components_by_slot:
     name: reusltater_button
     properties: {icon: 'mi:counter_1', navigate_to: Resultat_individuell, text: Resultater}
     type: form:dep_91t3sowbnwbk:_Components.NavigationLink
-  - event_bindings: {click: regler_button_click}
-    layout_properties: {}
-    name: regler_button
-    properties: {icon: 'mi:format_paragraph', navigate_to: Regler, text: Regler}
-    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
   - event_bindings: {click: trekninger_button_click}
     layout_properties: {}
     name: trekninger_button
     properties: {icon: 'mi:add_reaction', navigate_to: Trekninger, text: Trekninger}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+  - event_bindings: {click: regler_button_click}
+    layout_properties: {}
+    name: regler_button
+    properties: {icon: 'mi:format_paragraph', navigate_to: Regler, text: Regler}
     type: form:dep_91t3sowbnwbk:_Components.NavigationLink
   - event_bindings: {click: admin_button_click}
     layout_properties: {}
