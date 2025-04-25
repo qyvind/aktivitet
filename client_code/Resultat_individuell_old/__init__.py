@@ -1,4 +1,4 @@
-from ._anvil_designer import Resultat_individuellTemplate
+from ._anvil_designer import Resultat_individuell_oldTemplate
 from anvil import *
 import anvil.server
 import anvil.facebook.auth
@@ -11,7 +11,7 @@ from anvil.tables import app_tables
 from ..Utils import Utils
 
 
-class Resultat_Individuell(Resultat_individuellTemplate):
+class Resultat_individuell_old(Resultat_individuell_oldTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)

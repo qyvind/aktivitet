@@ -1,4 +1,25 @@
+components_by_slot:
+  content: []
+  navigation:
+  - event_bindings: {click: navigation_link_1_click}
+    layout_properties: {}
+    name: navigation_link_1
+    properties: {text: Loggbok}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+  - event_bindings: {click: navigation_link_2_click}
+    layout_properties: {}
+    name: navigation_link_2
+    properties: {text: Resultater}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
 is_package: true
 layout: {type: 'form:dep_91t3sowbnwbk:Layouts.NavigationRailLayout'}
 layout_metadata: {title: Framskritt}
-slots: {}
+slots:
+  content:
+    index: 0
+    set_layout_properties: {}
+    target: {name: content, type: slot}
+  sidesheet:
+    index: 0
+    set_layout_properties: {}
+    target: {name: sidesheet, type: slot}

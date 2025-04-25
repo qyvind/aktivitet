@@ -1,0 +1,86 @@
+components:
+- components:
+  - components:
+    - layout_properties: {grid_position: 'WNEDIZ,WTMWPC'}
+      name: label_1
+      properties: {align: center, role: headline, text: 'Poengstilling Individuell '}
+      type: Label
+    layout_properties: {grid_position: 'FWQDZV,ILXBQB'}
+    name: column_panel_1
+    properties: {}
+    type: ColumnPanel
+  - event_bindings: {click: button_1_click}
+    layout_properties: {grid_position: 'EXHGXJ,AEWIPX'}
+    name: button_1
+    properties: {role: filled-button, text: 'Poengstilling Team '}
+    type: Button
+  - components:
+    - layout_properties: {}
+      name: resultat_repeat_panel
+      properties: {item_template: Resultat_individuell_old.RowTemplate2}
+      type: RepeatingPanel
+    layout_properties: {grid_position: 'QHWAEX,RKEPZN'}
+    name: data_grid_1
+    properties:
+      columns:
+      - {data_key: column_1, expand: false, id: JKSDUP, title: Deltager, width: 237.99996948242188}
+      - {data_key: column_1, id: PJNLQL, title: Score, width: '60'}
+      - {data_key: column_1, expand: false, id: LSHEHV, title: Team, width: 87}
+      - {data_key: column_1, id: PFFFKV, title: Utmerkelser}
+    type: DataGrid
+  - event_bindings: {click: lukk_button_click}
+    layout_properties: {grid_position: 'KKGEWN,NSQFGW'}
+    name: lukk_button
+    properties: {align: center, role: filled-button, text: Lukk}
+    type: Button
+  - components:
+    - layout_properties: {grid_position: 'FHRIMM,XYECDR'}
+      name: label_2_copy
+      properties:
+        align: center
+        font_size: 8
+        spacing:
+          margin: ['0', null, '0', null]
+          padding: ['0', null, '0', null]
+        text: 'Streak er den lengste sammehnegnende perioden deltageren har registrert aktivitet hver dag. Dagens aktivitet påvirker ikke streak enda. Streak benyttes for å skille mellom deltagere med ellers like mye poeng. '
+      type: Label
+    - layout_properties: {grid_position: 'HKNYRD,ECOEGL'}
+      name: label_2_copy_2
+      properties:
+        align: center
+        font_size: 8
+        spacing:
+          margin: ['0', null, '0', null]
+          padding: ['0', null, '0', null]
+        text: Bonus oppnås ved å vinne badges - kravene for disse er hemmelige og dukker opp etter hvert
+      type: Label
+    - layout_properties: {grid_position: 'KEKTFQ,YQCGFF'}
+      name: label_2_copy_copy
+      properties:
+        align: center
+        font_size: 8
+        spacing:
+          margin: ['0', null, '0', null]
+          padding: ['0', null, '0', null]
+        text: Score = ((poeng + bonus)  x 100)  + streak
+      type: Label
+    - layout_properties: {grid_position: 'XQGGRO,NPWPOT'}
+      name: label_2_copy_copy_copy
+      properties:
+        align: center
+        font_size: 8
+        spacing:
+          margin: ['0', null, '0', null]
+          padding: ['0', null, '0', null]
+        text: Pek på score for å se utregningen
+      type: Label
+    layout_properties: {grid_position: 'UADQNT,KYRNWY'}
+    name: outlined_card_2
+    properties: {role: outlined-card}
+    type: ColumnPanel
+  layout_properties: {grid_position: 'VHIKZP,ZCJBQF'}
+  name: outlined_card_1
+  properties: {role: tonal-card}
+  type: ColumnPanel
+container: {type: ColumnPanel}
+is_package: true

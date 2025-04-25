@@ -16,3 +16,9 @@ class Homepage(HomepageTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+
+  def navigation_link_1_click(self, **event_args):
+    open_form('Loggbok')
+
+  def navigation_link_2_click(self, **event_args):
+    open_form('Resultat_individuell')

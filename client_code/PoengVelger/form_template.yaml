@@ -1,159 +1,160 @@
-components:
-- components:
-  - layout_properties: {grid_position: 'IJXHKK,KEXAUF'}
-    name: ukedag_label
-    properties: {role: headline}
-    type: Label
+components_by_slot:
+  content:
   - components:
+    - layout_properties: {grid_position: 'IJXHKK,KEXAUF'}
+      name: ukedag_label
+      properties: {role: headline}
+      type: Label
     - components:
-      - components:
-        - components:
-          - layout_properties: {}
-            name: image_1
-            properties: {height: 41.5, source: _/theme/icons8-walk-80.png}
-            type: Image
-          - name: label_5
-            properties: {align: center, font_size: 12, text: '8000 skritt, eller flere, gir 1 poeng. Du må ha minst 1 poeng i fem dager for å delta i ukens trekning.'}
-            type: Label
-          layout_properties: {grid_position: 'HRHEEE,JTQHYJ'}
-          name: flow_panel_3
-          properties: {}
-          type: FlowPanel
-        layout_properties: {grid_position: 'JLRANF,QMOXES'}
-        name: skritt_panel_1
-        properties: {}
-        type: ColumnPanel
-      - components:
-        - components:
-          - components:
-            - layout_properties: {grid_position: 'RKEJMH,KFHEJC'}
-              name: label_1
-              properties: {text: Lengde på treningsøkt}
-              type: Label
-            - data_bindings:
-              - {code: '', property: items, writeback: false}
-              layout_properties: {grid_position: 'HWYDVE,DMAWYC'}
-              name: poeng_drop
-              properties: {}
-              type: DropDown
-            layout_properties: {width: 166}
-            name: velg_lengde_panel
-            properties: {}
-            type: ColumnPanel
-          - components:
-            - event_bindings: {mouse_down: ikon_preview_click, mouse_enter: ikon_preview_mouse_enter, mouse_leave: ikon_preview_mouse_leave}
-              layout_properties: {grid_position: 'VJBWVC,KSQHVW'}
-              name: ikon_preview
-              properties: {height: '60', source: _/theme/treninger.png}
-              type: Image
-            - layout_properties: {grid_position: 'UMZAJC,LNVVRA'}
-              name: velg_aktivitet_label
-              properties:
-                align: center
-                font_size: 8
-                spacing:
-                  margin: ['0', null, '0', null]
-                  padding: ['0', null, '0', null]
-                text: Velg trening
-              type: Label
-            layout_properties: {width: 104.99993896484375}
-            name: outlined_card_2
-            properties: {role: outlined-card}
-            type: ColumnPanel
-          layout_properties: {}
-          name: flow_panel_1
-          properties: {vertical_align: middle}
-          type: FlowPanel
-        layout_properties: {grid_position: 'RHFXDS,SKNNKF'}
-        name: trening_panel_1
-        properties: {align: center, visible: false}
-        type: FlowPanel
       - components:
         - components:
           - components:
             - layout_properties: {}
-              name: label_2
-              properties: {text: 'Aktivitet:', visible: false}
+              name: image_1
+              properties: {height: 41.5, source: _/theme/icons8-walk-80.png}
+              type: Image
+            - name: label_5
+              properties: {align: center, font_size: 12, text: '8000 skritt, eller flere, gir 1 poeng. Du må ha minst 1 poeng i fem dager for å delta i ukens trekning.'}
               type: Label
-            - layout_properties: {width: 132.14285278320312}
-              name: aktivitet_box
-              properties: {visible: false}
-              type: TextBox
-            layout_properties: {grid_position: 'YISWBH,BAXIOP'}
-            name: flow_panel_2
+            layout_properties: {grid_position: 'HRHEEE,JTQHYJ'}
+            name: flow_panel_3
             properties: {}
             type: FlowPanel
-          name: column_panel_2
+          layout_properties: {grid_position: 'JLRANF,QMOXES'}
+          name: skritt_panel_1
           properties: {}
           type: ColumnPanel
-        layout_properties: {grid_position: 'ZFFFAT,TWLSIX'}
-        name: gammel_aktivitet_panel
-        properties: {align: center, visible: false}
-        type: FlowPanel
-      - components:
-        - layout_properties: {grid_position: 'VZQZVR,ZKWIOM'}
-          name: label_4
-          properties: {text: 'Beskrivelse:'}
-          type: Label
-        - layout_properties: {grid_position: 'SSGWTO,FIHUKR'}
-          name: beskrivelse
-          properties: {height: 49.7142333984375}
-          type: TextArea
-        layout_properties: {grid_position: 'HLMYBC,AIRTPG'}
-        name: beskrivelse_panel
-        properties: {}
+        - components:
+          - components:
+            - components:
+              - layout_properties: {grid_position: 'RKEJMH,KFHEJC'}
+                name: label_1
+                properties: {text: Lengde på treningsøkt}
+                type: Label
+              - data_bindings:
+                - {code: '', property: items, writeback: false}
+                layout_properties: {grid_position: 'HWYDVE,DMAWYC'}
+                name: poeng_drop
+                properties: {}
+                type: DropDown
+              layout_properties: {width: 166}
+              name: velg_lengde_panel
+              properties: {}
+              type: ColumnPanel
+            - components:
+              - event_bindings: {mouse_down: ikon_preview_click, mouse_enter: ikon_preview_mouse_enter, mouse_leave: ikon_preview_mouse_leave}
+                layout_properties: {grid_position: 'VJBWVC,KSQHVW'}
+                name: ikon_preview
+                properties: {height: '60', source: _/theme/treninger.png}
+                type: Image
+              - layout_properties: {grid_position: 'UMZAJC,LNVVRA'}
+                name: velg_aktivitet_label
+                properties:
+                  align: center
+                  font_size: 8
+                  spacing:
+                    margin: ['0', null, '0', null]
+                    padding: ['0', null, '0', null]
+                  text: Velg trening
+                type: Label
+              layout_properties: {width: 104.99993896484375}
+              name: outlined_card_2
+              properties: {role: outlined-card}
+              type: ColumnPanel
+            layout_properties: {}
+            name: flow_panel_1
+            properties: {vertical_align: middle}
+            type: FlowPanel
+          layout_properties: {grid_position: 'RHFXDS,SKNNKF'}
+          name: trening_panel_1
+          properties: {align: center, visible: false}
+          type: FlowPanel
+        - components:
+          - components:
+            - components:
+              - layout_properties: {}
+                name: label_2
+                properties: {text: 'Aktivitet:', visible: false}
+                type: Label
+              - layout_properties: {width: 132.14285278320312}
+                name: aktivitet_box
+                properties: {visible: false}
+                type: TextBox
+              layout_properties: {grid_position: 'YISWBH,BAXIOP'}
+              name: flow_panel_2
+              properties: {}
+              type: FlowPanel
+            name: column_panel_2
+            properties: {}
+            type: ColumnPanel
+          layout_properties: {grid_position: 'ZFFFAT,TWLSIX'}
+          name: gammel_aktivitet_panel
+          properties: {align: center, visible: false}
+          type: FlowPanel
+        - components:
+          - layout_properties: {grid_position: 'VZQZVR,ZKWIOM'}
+            name: label_4
+            properties: {text: 'Beskrivelse:'}
+            type: Label
+          - layout_properties: {grid_position: 'SSGWTO,FIHUKR'}
+            name: beskrivelse
+            properties: {height: 49.7142333984375}
+            type: TextArea
+          layout_properties: {grid_position: 'HLMYBC,AIRTPG'}
+          name: beskrivelse_panel
+          properties: {}
+          type: ColumnPanel
+        layout_properties: {grid_position: 'RVIUTL,JORSMI'}
+        name: outlined_card_1_copy_copy
+        properties: {background: 'theme:Secondary Container', role: elevated-card}
         type: ColumnPanel
-      layout_properties: {grid_position: 'RVIUTL,JORSMI'}
-      name: outlined_card_1_copy
-      properties: {background: 'theme:Secondary Container', role: elevated-card}
+      layout_properties: {grid_position: 'TVCGWZ,XIXEAY'}
+      name: column_panel_1
+      properties: {}
       type: ColumnPanel
-    layout_properties: {grid_position: 'TVCGWZ,XIXEAY'}
-    name: column_panel_1
-    properties: {}
+    - components:
+      - event_bindings: {click: angre_button_click}
+        layout_properties: {}
+        name: angre_skritt_button
+        properties: {role: filled-button, text: Angre}
+        type: Button
+      - event_bindings: {click: bytt_til_trening_click}
+        layout_properties: {}
+        name: bytt_til_trening
+        properties: {role: filled-button, text: Bytt til trening}
+        type: Button
+      - event_bindings: {click: lagre_skritt_click}
+        layout_properties: {}
+        name: lagre_skritt
+        properties: {role: filled-button, text: Jeg har gått minst 8000 skritt i dag}
+        type: Button
+      layout_properties: {grid_position: 'JDJKYU,DKDGBP'}
+      name: skritt_panel_2
+      properties: {align: right}
+      type: FlowPanel
+    - components:
+      - event_bindings: {click: angre_button_click}
+        layout_properties: {}
+        name: angre_trening_button
+        properties: {role: filled-button, text: Angre}
+        type: Button
+      - event_bindings: {click: nytt_til_skritt_button_click}
+        layout_properties: {}
+        name: nytt_til_skritt_button
+        properties: {role: filled-button, text: Bytt til skritt}
+        type: Button
+      - event_bindings: {click: lagre_trening_button_click}
+        layout_properties: {}
+        name: lagre_trening_button
+        properties: {align: right, role: filled-button, text: Lagre trening}
+        type: Button
+      layout_properties: {grid_position: 'LDAPRP,OKEEXD'}
+      name: trening_panel_2
+      properties: {align: right, visible: false}
+      type: FlowPanel
+    layout_properties: {}
+    name: outlined_card_1_copy
+    properties: {background: 'theme:Secondary Container', col_widths: '{"OKEEXD":30}', role: outlined-card}
     type: ColumnPanel
-  - components:
-    - event_bindings: {click: angre_button_click}
-      layout_properties: {}
-      name: angre_skritt_button
-      properties: {role: filled-button, text: Angre}
-      type: Button
-    - event_bindings: {click: bytt_til_trening_click}
-      layout_properties: {}
-      name: bytt_til_trening
-      properties: {role: filled-button, text: Bytt til trening}
-      type: Button
-    - event_bindings: {click: lagre_skritt_click}
-      layout_properties: {}
-      name: lagre_skritt
-      properties: {role: filled-button, text: Jeg har gått minst 8000 skritt i dag}
-      type: Button
-    layout_properties: {grid_position: 'JDJKYU,DKDGBP'}
-    name: skritt_panel_2
-    properties: {align: right}
-    type: FlowPanel
-  - components:
-    - event_bindings: {click: angre_button_click}
-      layout_properties: {}
-      name: angre_trening_button
-      properties: {role: filled-button, text: Angre}
-      type: Button
-    - event_bindings: {click: nytt_til_skritt_button_click}
-      layout_properties: {}
-      name: nytt_til_skritt_button
-      properties: {role: filled-button, text: Bytt til skritt}
-      type: Button
-    - event_bindings: {click: lagre_trening_button_click}
-      layout_properties: {}
-      name: lagre_trening_button
-      properties: {align: right, role: filled-button, text: Lagre trening}
-      type: Button
-    layout_properties: {grid_position: 'LDAPRP,OKEEXD'}
-    name: trening_panel_2
-    properties: {align: right, visible: false}
-    type: FlowPanel
-  layout_properties: {grid_position: 'EKYBVU,PBCROG'}
-  name: outlined_card_1
-  properties: {background: 'theme:Secondary Container', col_widths: '{"OKEEXD":30}', role: outlined-card}
-  type: ColumnPanel
-container: {type: ColumnPanel}
 is_package: true
+layout: {type: 'form:Homepage'}
