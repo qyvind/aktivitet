@@ -1,4 +1,4 @@
-from ._anvil_designer import minsideTemplate
+from ._anvil_designer import minside_oldTemplate
 from anvil import *
 import anvil.server
 import anvil.facebook.auth
@@ -12,7 +12,7 @@ from ..Utils import Utils
 from .. import Globals
 
 
-class minside(minsideTemplate):
+class minside_old(minside_oldTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
@@ -64,4 +64,3 @@ class minside(minsideTemplate):
       alert(resultat)
       self.fyll_minside()
     
-

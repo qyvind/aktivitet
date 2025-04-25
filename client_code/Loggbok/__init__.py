@@ -18,6 +18,7 @@ from .. import Globals
 class Loggbok(LoggbokTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
+        
         self.vis_nye_badges(Globals.bruker)
         Globals.week_offset = 0
         #self.hent_week_offset() 

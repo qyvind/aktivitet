@@ -25,20 +25,46 @@ class Homepage(HomepageTemplate):
     # Any code you write here will run before the form opens.
 
   def loggbok_button_click(self, **event_args):
-    open_form('Loggbok')
+#    open_form('Loggbok')
+    self.loggbok_button.selected = True
+    self.reusltater_button.selected = False
+    self.admin_button.selected = False
+    self.trekninger_button.selected = False
+    self.regler_button.selected = False
+    
 
   def reusltater_button_click(self, **event_args):
-    open_form('Resultat_individuell')
+    #open_form('Resultat_individuell')
+    self.loggbok_button.selected = False
+    self.reusltater_button.selected = True
+    self.admin_button.selected = False
+    self.trekninger_button.selected = False
+    self.regler_button.selected = False
 
   def regler_button_click(self, **event_args):
-    open_form('Regler')
+    #open_form('Regler')
+    self.loggbok_button.selected = False
+    self.reusltater_button.selected = False
+    self.admin_button.selected = False
+    self.trekninger_button.selected = False
+    self.regler_button.selected = True
 
-  def trekninger_click(self, **event_args):
-    open_form('Trekninger')
-
+  def trekninger_button_click(self, **event_args):
+    #open_form('Trekninger')
+    self.loggbok_button.selected = False
+    self.reusltater_button.selected = False
+    self.admin_button.selected = False
+    self.trekninger_button.selected = True
+    self.regler_button.selected = False
+    
   def admin_button_click(self, **event_args):
-    open_form('admin')
-
+#    open_form('admin')
+    self.loggbok_button.selected = False
+    self.reusltater_button.selected = False
+    self.admin_button.selected = True
+    self.trekninger_button.selected = False
+    self.regler_button.selected = False
+    
   def logout_button_click(self, **event_args):
     anvil.users.logout()
     open_form('Login')

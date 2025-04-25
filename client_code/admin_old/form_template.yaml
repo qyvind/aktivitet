@@ -1,0 +1,333 @@
+components:
+- components:
+  - components:
+    - layout_properties: {}
+      name: label_3
+      properties: {role: headline, text: Admin-meny}
+      type: Label
+    layout_properties: {grid_position: 'OAPUZC,WYSKWU'}
+    name: flow_panel_2
+    properties: {align: center}
+    type: FlowPanel
+  - components:
+    - event_bindings: {click: brukere_click}
+      name: brukere
+      properties: {role: tonal-button, text: Brukere}
+      type: Button
+    - event_bindings: {click: teams_button_click}
+      layout_properties: {}
+      name: teams_button
+      properties: {role: tonal-button, text: Teams}
+      type: Button
+    - event_bindings: {click: konk_button_click}
+      layout_properties: {}
+      name: konk_button
+      properties: {role: tonal-button, text: Konkurranse}
+      type: Button
+    - event_bindings: {click: button_7_click}
+      layout_properties: {}
+      name: button_7
+      properties: {role: tonal-button, text: Nytt ikon}
+      type: Button
+    - event_bindings: {click: button_5_click}
+      layout_properties: {}
+      name: button_5
+      properties: {role: tonal-button, text: Endringslogg}
+      type: Button
+    - event_bindings: {click: button_3_click}
+      layout_properties: {}
+      name: button_3
+      properties: {role: tonal-button, text: Lykkehjul}
+      type: Button
+    - event_bindings: {click: sjekk_badges_click}
+      layout_properties: {}
+      name: sjekk_badges
+      properties: {role: tonal-button, text: sjekk badges}
+      type: Button
+    - event_bindings: {click: button_6_click}
+      name: button_6
+      properties: {role: tonal-button, text: test ai}
+      type: Button
+    - event_bindings: {click: button_8_click}
+      layout_properties: {}
+      name: button_8
+      properties: {role: tonal-button, text: Recalc streak}
+      type: Button
+    - event_bindings: {click: ai_click}
+      name: ai
+      properties: {role: tonal-button, text: AI-prompt}
+      type: Button
+    - event_bindings: {click: ailogg_click}
+      layout_properties: {}
+      name: ailogg
+      properties: {role: tonal-button, text: AI Logg}
+      type: Button
+    - event_bindings: {click: button_1_click}
+      name: button_1
+      properties: {role: tonal-button, text: Lukk}
+      type: Button
+    layout_properties: {grid_position: 'PDOHFX,TLMROV'}
+    name: flow_panel_1
+    properties: {align: center}
+    type: FlowPanel
+  - components:
+    - components:
+      - layout_properties: {}
+        name: label_5
+        properties: {text: 'epost:'}
+        type: Label
+      - layout_properties: {width: 173.428822265625}
+        name: epost_box
+        properties: {}
+        type: TextBox
+      layout_properties: {grid_position: 'DRKIIO,EHSVQD'}
+      name: flow_panel_5
+      properties: {align: center}
+      type: FlowPanel
+    - components:
+      - name: label_6
+        properties: {text: 'Navn:'}
+        type: Label
+      - layout_properties: {}
+        name: navn_box
+        properties: {align: left}
+        type: TextBox
+      layout_properties: {grid_position: 'JYOBJZ,NHVYHH'}
+      name: flow_panel_6
+      properties: {align: center}
+      type: FlowPanel
+    - components:
+      - name: label_7
+        properties: {text: 'Passord:'}
+        type: Label
+      - layout_properties: {}
+        name: passord_box
+        properties: {align: left}
+        type: TextBox
+      layout_properties: {grid_position: 'OOITBL,ZLMYUH'}
+      name: flow_panel_7
+      properties: {align: center}
+      type: FlowPanel
+    - components:
+      - name: team_label
+        properties: {}
+        type: Label
+      - name: team_drop
+        properties: {}
+        type: DropDown
+      layout_properties: {grid_position: 'DLEEJM,DVCZEV'}
+      name: flow_panel_8
+      properties: {align: center}
+      type: FlowPanel
+    - event_bindings: {click: button_2_click}
+      layout_properties: {grid_position: 'OCPVSN,WTZQKK'}
+      name: button_2
+      properties: {role: tonal-button, text: Lag bruker, visible: true}
+      type: Button
+    layout_properties: {grid_position: 'SYZSGX,SXLCKE'}
+    name: enkeltbruker_card
+    properties: {role: tonal-card, visible: true}
+    type: ColumnPanel
+  - components:
+    - components:
+      - layout_properties: {}
+        name: label_1
+        properties:
+          text: |
+            Paste inn en brukerliste på dette formatet:
+            [{"email": "abc@framo.no", "navn": "Ole Olsen", "password": "123123"}, {"email": "def@framo.no", "navn": "Hans Hansen", "password": "345345"}]
+        type: Label
+      layout_properties: {grid_position: 'JQQQJK,TMVFDG'}
+      name: flow_panel_3
+      properties: {}
+      type: FlowPanel
+    - layout_properties: {grid_position: 'XZJZNR,CIEUFV'}
+      name: users_label
+      properties: {}
+      type: TextBox
+    - event_bindings: {click: button_4_click}
+      layout_properties: {grid_position: 'KXWUJW,LUZKXG'}
+      name: button_4
+      properties: {role: tonal-button, text: Opprett mange på en gang}
+      type: Button
+    layout_properties: {grid_position: 'LDOKBZ,TKAIJG'}
+    name: import_mang_card
+    properties: {role: tonal-card, visible: true}
+    type: ColumnPanel
+  - components:
+    - components:
+      - components:
+        - event_bindings: {click: label1_click}
+          layout_properties: {}
+          name: label1
+          properties: {text: 'Nytt team:'}
+          type: Button
+        - layout_properties: {}
+          name: nytt_team_box
+          properties: {background: 'theme:On Secondary'}
+          type: TextBox
+        - event_bindings: {click: Opprett_team_button_click}
+          layout_properties: {}
+          name: Opprett_team_button
+          properties: {role: tonal-button, text: Opprett}
+          type: Button
+        - event_bindings: {click: autoslett_click}
+          name: autoslett
+          properties: {role: tonal-button, text: Slett tomme team}
+          type: Button
+        layout_properties: {grid_position: 'POAQXO,WOYTVC'}
+        name: flow_panel_10
+        properties:
+          align: center
+          spacing:
+            margin: ['0', null, '0', null]
+        type: FlowPanel
+      layout_properties: {grid_position: 'GSKBTL,EUDELP'}
+      name: outlined_card_2
+      properties: {role: outlined-card}
+      type: ColumnPanel
+    - components:
+      - name: team_repeating_panel
+        properties: {item_template: admin_old.RowTemplate6}
+        type: RepeatingPanel
+      layout_properties: {grid_position: 'POGSJB,RPVVVR'}
+      name: data_grid_1
+      properties:
+        columns:
+        - {data_key: column_1, expand: false, id: JKSDUP, title: Team, width: 194.5714111328125}
+        - {data_key: column_3, expand: false, id: OJLQEN, title: Poeng, width: 92.85711669921875}
+        - {data_key: column_1, expand: false, id: VWDYMO, title: Låst, width: 81}
+        - {data_key: column_1, id: KFHMOZ, title: ''}
+      type: DataGrid
+    data_bindings:
+    - {code: '', property: border, writeback: false}
+    layout_properties: {grid_position: 'UHGLLN,TNHBNW'}
+    name: team_card
+    properties: {role: tonal-card, visible: true}
+    type: ColumnPanel
+  - components:
+    - components:
+      - name: bruker_repeating_panel
+        properties: {item_template: admin_old.RowTemplate7}
+        type: RepeatingPanel
+      layout_properties: {grid_position: 'LAJQGS,XBPYDT'}
+      name: data_grid_2
+      properties:
+        columns:
+        - {data_key: column_1, expand: false, id: JKSDUP, title: email, width: 135.5714111328125}
+        - {data_key: column_2, expand: false, id: VJQQOR, title: Navn, width: 176.42855834960938}
+        - {data_key: column_3, expand: false, id: OJLQEN, title: Poeng, width: 67.5}
+        - {data_key: column_1, id: PJMSOR, title: Team}
+        - {data_key: column_4, expand: false, id: YKRMUE, title: Admin, width: 86.20001220703125}
+        - {data_key: column_1, id: TTMEJE, title: ''}
+      type: DataGrid
+    layout_properties: {grid_position: 'LUWZDT,FGYWHF'}
+    name: bruker_card
+    properties: {role: tonal-card, visible: true}
+    type: ColumnPanel
+  - components:
+    - components:
+      - components:
+        - name: label_4
+          properties: {text: 'Konkurransenavn:'}
+          type: Label
+        - layout_properties: {width: 222.142822265625}
+          name: konkurransenavn_label
+          properties: {}
+          type: TextBox
+        layout_properties: {grid_position: 'QMTDQB,MPOSRR'}
+        name: flow_panel_4
+        properties: {align: center}
+        type: FlowPanel
+      - components:
+        - name: label_9
+          properties: {text: 'Fra dato:'}
+          type: Label
+        - layout_properties: {width: 159.5}
+          name: fra_date_picker
+          properties: {}
+          type: DatePicker
+        layout_properties: {grid_position: 'VKMMBC,ZXHMSF'}
+        name: flow_panel_9
+        properties: {align: center}
+        type: FlowPanel
+      - components:
+        - layout_properties: {}
+          name: label_10
+          properties: {text: 'Til dato:'}
+          type: Label
+        - layout_properties: {width: 163.5}
+          name: til_date_picker
+          properties: {}
+          type: DatePicker
+        layout_properties: {grid_position: 'JYZYNB,GJRRES'}
+        name: flow_panel_11
+        properties: {align: center}
+        type: FlowPanel
+      - event_bindings: {click: endre_konkurranse_click}
+        layout_properties: {grid_position: 'TZKFGB,LPXXMU'}
+        name: endre_konkurranse
+        properties: {role: filled-button, text: Endre konkurranse}
+        type: Button
+      - components:
+        - event_bindings: {change: korrigering_check_change}
+          layout_properties: {}
+          name: korrigering_check
+          properties: {background: lightgray, text: Åpne for korrigering lengre tilbake enn en dag}
+          type: CheckBox
+        layout_properties: {grid_position: 'SRBAOE,QVOPDB'}
+        name: flow_panel_13
+        properties: {align: center}
+        type: FlowPanel
+      layout_properties: {grid_position: 'HSKZOU,ZOOUPO'}
+      name: outlined_card_3
+      properties: {role: outlined-card}
+      type: ColumnPanel
+    layout_properties: {grid_position: 'NWYMHD,ASANKT'}
+    name: konk_card
+    properties: {role: tonal-card, visible: true}
+    type: ColumnPanel
+  - components:
+    - components:
+      - components:
+        - name: label_2
+          properties: {text: 'Nytt prompt:'}
+          type: Label
+        - layout_properties: {width: 648.333}
+          name: nytt_prompt
+          properties: {height: 100.66665649414062}
+          type: TextArea
+        - event_bindings: {click: nytt_prompt_button_click}
+          layout_properties: {}
+          name: nytt_prompt_button
+          properties: {icon: 'fa:save', text: ''}
+          type: Button
+        layout_properties: {grid_position: 'EPUOAG,SEBUDQ'}
+        name: flow_panel_12
+        properties: {}
+        type: FlowPanel
+      - components:
+        - name: ai_repeating_panel_1
+          properties: {item_template: admin_old.RowTemplate1}
+          type: RepeatingPanel
+        layout_properties: {grid_position: 'SMZMTL,VFQVPH'}
+        name: data_grid_3
+        properties:
+          columns:
+          - {data_key: column_1, expand: false, id: JKSDUP, title: AI prompt, width: 747.333251953125}
+          - {data_key: column_2, id: VJQQOR, title: ''}
+        type: DataGrid
+      layout_properties: {grid_position: 'JFYJVW,NOOXLH'}
+      name: outlined_card_5
+      properties: {role: outlined-card}
+      type: ColumnPanel
+    layout_properties: {grid_position: 'GGATNX,TQRQNU'}
+    name: ai_card
+    properties: {role: outlined-card, visible: false}
+    type: ColumnPanel
+  layout_properties: {grid_position: 'DJZTTS,OKSYEP'}
+  name: outlined_card_1
+  properties: {role: outlined-card}
+  type: ColumnPanel
+container: {type: ColumnPanel}
+is_package: true
