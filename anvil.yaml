@@ -264,16 +264,21 @@ db_schema:
       type: string
     server: full
     title: Users
-dependencies: []
+dependencies:
+- dep_id: dep_91t3sowbnwbk
+  resolution_hints: {app_id: 4UK6WHQ6UX7AKELK, name: Material 3 Theme, package_name: m3}
+  version: {version_tag: v1.2.3}
 metadata: {description: For Framo BIL, logo_img: 'asset:walking.svg', title: Framskritt}
 name: Aktivitet
+native_deps: null
 package_name: Aktivitet
 renamed: true
 runtime_options:
   client_version: '3'
+  legacy_features: {__dict__: true, bootstrap3: true, class_names: true, root_container: true}
   server_spec: {base: python310-standard}
   server_version: python3-sandbox
-  version: 2
+  version: 3
 scheduled_tasks:
 - job_id: GGPDYCYJ
   task_name: nightly_streak_recalc
