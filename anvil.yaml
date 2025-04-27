@@ -164,10 +164,13 @@ db_schema:
       name: bonus
       type: number
     - admin_ui: {order: 4, width: 200}
-      name: longest_strike
+      name: longest_streak
       type: number
     - admin_ui: {order: 5, width: 200}
       name: score
+      type: number
+    - admin_ui: {order: 6, width: 200}
+      name: members
       type: number
     server: full
     title: team
