@@ -220,7 +220,7 @@ def hent_brukernavn():
     }
 
 
-def hent_poengsummer_old():
+def hent_poengsummer():
     #print('hent_poengsummer')
     poeng_dict = {}
 
@@ -876,6 +876,7 @@ def legg_til_prompt(prompt_tekst):
 def nightly_streak_recalc():
     anvil.server.call('tildel_badges_for_alle_brukere')
     anvil.server.call('oppdater_poeng_og_score_for_alle')
+    anvil.server.call('oppdater_team_poengsummer')
     
   
 
@@ -1249,3 +1250,40 @@ def oppdater_poeng_og_score_for_alle():
         )
 
 
+@anvil.server.callable
+def oppdater_team_poengsummer():
+    # Lag en mapping fra team til medlemmer
+    team_medlemmer = {}
+
+    for userinfo in app_tables.userinfo.search():
+        team = userinfo['team']
+        if team:
+            if team not in team_medlemmer:
+                team_medlemmer[team] = []
+            team_medlemmer[team].append(userinfo)
+
+    # Oppdater hvert team
+    for team, medlemmer in team_medlemmer.items():
+        if not medlemmer:
+            continue
+
+        total_poeng = sum(m['poeng'] or 0 for m in medlemmer)
+        total_bonus = sum(m['bonus'] or 0 for m in medlemmer)
+        longest_streak = max((m['longest_streak'] or 0) for m in medlemmer)
+        antall_medlemmer = len(medlemmer)
+
+        if antall_medlemmer < 3:
+            score = 0
+        else:
+            score = round(((total_poeng + total_bonus) *100+ longest_streak) / antall_medlemmer)
+
+        # Oppdater team-raden med ALLE verdier, inkludert members
+        team.update(
+            poeng=total_poeng,
+            bonus=total_bonus,
+            longest_streak=longest_streak,
+            score=score,
+            members=antall_medlemmer  # 👈 Ny linje!
+        )
+
+    return "Team-poengsummer og medlemstall oppdatert!"
