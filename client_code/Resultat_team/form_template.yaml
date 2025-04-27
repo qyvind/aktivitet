@@ -20,6 +20,10 @@ components_by_slot:
         columns:
         - {data_key: column_1, id: JKSDUP, title: Team}
         - {data_key: column_2, id: VJQQOR, title: Poeng}
+        - {data_key: column_1, id: SERNKO, title: Bonus}
+        - {data_key: column_1, id: ESMKDP, title: Lengste streak}
+        - {data_key: column_1, id: MRJBSJ, title: Antall deltagere}
+        - {data_key: column_1, id: GOVPWM, title: Score}
       type: DataGrid
     layout_properties: {}
     name: outlined_card_1_copy

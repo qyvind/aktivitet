@@ -17,4 +17,9 @@ class RowTemplate5(RowTemplate5Template):
     self.team_label.text = self.item['team']
     self.poeng_label.text = self.item['poengsum']
 
+    if self.item['members'] < 3:
+      self.members_label.foreground = "red"  # Sett tekstfargen til rød
+    else:
+      self.members_label.foreground = "black"  # Vanlig farge
+
     # Any code you write here will run before the form opens.
