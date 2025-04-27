@@ -211,10 +211,10 @@ db_schema:
     - admin_ui: {width: 107}
       name: week_offset
       type: number
-    - admin_ui: {width: 200}
+    - admin_ui: {order: 9.75, width: 200}
       name: longest_streak
       type: number
-    - admin_ui: {order: 6, width: 200}
+    - admin_ui: {order: 9.5, width: 200}
       name: bonus
       type: number
     - admin_ui: {width: 200}
