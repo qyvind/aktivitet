@@ -1265,3 +1265,47 @@ def sjekk_badge_6(bruker):
 
     return False
 
+
+
+
+# Sett API-nøkkelen din her (du kan gjerne hente den fra app_tables eller Anvil Secrets også)
+GODKJENT_API_NOKKEL = "minhemmeligeapikey123"
+
+@anvil.server.http_endpoint("/hent_team_poengsummer", methods=["GET"])
+def hent_team_poengsummer_api(**params):
+    # Sjekk at riktig API-nøkkel er sendt med i URL-parametrene
+    api_nokkel = params.get("api_nokkel")
+    if api_nokkel != GODKJENT_API_NOKKEL:
+        return anvil.server.HttpResponse(403, "Ugyldig API-nøkkel")
+
+    team_poeng = {}
+    team_lock_map = {}
+
+    for team in app_tables.team.search():
+        team_navn = team['team']
+        team_poeng[team_navn] = 0
+        team_lock_map[team_navn] = team['lock']
+
+    for userinfo in app_tables.userinfo.search():
+        team = userinfo['team']
+        bruker = userinfo['user']
+        longest_streak = userinfo['longest_streak']
+        bonus = userinfo['bonus']
+        if team and bruker:
+            team_navn = team['team']
+            bruker_poeng = sum(rad['poeng'] for rad in app_tables.aktivitet.search(deltager=bruker))
+            team_poeng[team_navn] += bruker_poeng
+
+    resultat = [
+        {
+            "team": team,
+            "poengsum": poeng,
+            "longest_streak": longest_streak,
+            "bonus": bonus,
+            "lock": team_lock_map.get(team, False)
+        }
+        for team, poeng in team_poeng.items()
+    ]
+
+    resultat.sort(key=lambda x: x["poengsum"], reverse=True)
+    return resultat
