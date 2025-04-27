@@ -70,6 +70,16 @@ components_by_slot:
             padding: ['0', null, '0', null]
           text: Pek på score for å se utregningen
         type: Label
+      - layout_properties: {grid_position: 'FJCLHM,JPKMYX'}
+        name: label_2_copy_copy_copy_copy
+        properties:
+          align: center
+          font_size: 8
+          spacing:
+            margin: ['0', null, '0', null]
+            padding: ['0', null, '0', null]
+          text: Poeng beregnes om natten  og blir ikke påvirket av hva du har gjort i dag.
+        type: Label
       layout_properties: {grid_position: 'UADQNT,KYRNWY'}
       name: outlined_card_2
       properties: {role: outlined-card}

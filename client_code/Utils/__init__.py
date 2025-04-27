@@ -56,49 +56,43 @@ class Utils:
             "leage": leage_navn,
             "leage_ikon": ikon_url
         }
-
+    
     @staticmethod
     def hent_poengsummer():
-        poeng_dict = {}
+        resultat = []
     
         for userinfo_rad in app_tables.userinfo.search():
             deltager = userinfo_rad['user']
-            if deltager:
-                poeng_dict[deltager] = 0
     
-        for rad in app_tables.aktivitet.search():
-            deltager = rad['deltager']
-            poeng = rad['poeng']
-            if deltager:
-                poeng_dict[deltager] = poeng_dict.get(deltager, 0) + poeng
+            if not deltager:
+                continue
     
-        resultat = []
-        for deltager, poeng in poeng_dict.items():
-            userinfo_rad = app_tables.userinfo.get(user=deltager)
-            navn = userinfo_rad['navn'] if userinfo_rad else None
+            navn = userinfo_rad['navn'] or deltager['email']
             email = deltager['email']
-            admin = userinfo_rad['admin'] if userinfo_rad else False
-            longest_streak = userinfo_rad['longest_streak'] if userinfo_rad and userinfo_rad['longest_streak'] is not None else 0
-            bonus = userinfo_rad['bonus'] if userinfo_rad and userinfo_rad['bonus'] is not None else 0
-            score = ((poeng + bonus) * 100) + longest_streak
+            poeng = userinfo_rad['poeng'] or 0
+            bonus = userinfo_rad['bonus'] or 0
+            longest_streak = userinfo_rad['longest_streak'] or 0
+            score = userinfo_rad['score'] or 0
+            admin = userinfo_rad['admin'] or False
     
-            team = userinfo_rad['team']['team'] if userinfo_rad and userinfo_rad['team'] else "Ingen team"
+            team = "Ingen team"
+            if userinfo_rad['team']:
+                team = userinfo_rad['team']['team']
     
-            # Hent fra leage riktig
             leage_navn = ""
             ikon = ""
-            if userinfo_rad and userinfo_rad['leage']:
+            if userinfo_rad['leage']:
                 leage_row = userinfo_rad['leage']
-                leage_navn = leage_row['leage']  # <-- FELTNAVN må stemme!
+                leage_navn = leage_row['leage']
                 ikon = leage_row['ikon']
     
             resultat.append({
-                "deltager": navn if navn else email,
+                "deltager": navn,
                 "navn": navn,
                 "email": email,
                 "poeng": poeng,
-                "longest_streak": longest_streak,
                 "bonus": bonus,
+                "longest_streak": longest_streak,
                 "score": score,
                 "team": team,
                 "admin": admin,
@@ -108,10 +102,9 @@ class Utils:
             })
     
         resultat.sort(key=lambda x: x["score"], reverse=True)
-        #print(resultat)
         return resultat
 
-      
+          
 
     @staticmethod
     def hent_poengsummer_uten_null():
