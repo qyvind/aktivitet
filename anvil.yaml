@@ -157,6 +157,18 @@ db_schema:
     - admin_ui: {width: 200}
       name: lock
       type: bool
+    - admin_ui: {order: 2, width: 200}
+      name: poeng
+      type: number
+    - admin_ui: {order: 3, width: 200}
+      name: bonus
+      type: number
+    - admin_ui: {order: 4, width: 200}
+      name: longest_strike
+      type: number
+    - admin_ui: {order: 5, width: 200}
+      name: score
+      type: number
     server: full
     title: team
   trekningsliste:
