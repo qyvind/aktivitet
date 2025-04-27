@@ -7,5 +7,29 @@ components:
   name: poeng_label
   properties: {}
   type: Label
+- data_bindings:
+  - {code: 'self.item[''longest_streak'']', property: text, writeback: false}
+  layout_properties: {column: ESMKDP}
+  name: streak_label
+  properties: {}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''members'']', property: text, writeback: false}
+  layout_properties: {column: MRJBSJ}
+  name: members_label
+  properties: {}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''score'']', property: text, writeback: false}
+  layout_properties: {column: GOVPWM}
+  name: score_label
+  properties: {}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''bonus'']', property: text, writeback: false}
+  layout_properties: {column: SERNKO}
+  name: bonus_label
+  properties: {}
+  type: Label
 container: {type: DataRowPanel}
 is_package: true

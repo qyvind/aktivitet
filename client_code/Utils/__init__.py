@@ -113,38 +113,31 @@ class Utils:
 
     @staticmethod
     def hent_team_poengsummer():
-        team_poeng = {}
-        team_lock_map = {}
-
+        resultat = []
+    
         for team in app_tables.team.search():
             team_navn = team['team']
-            team_poeng[team_navn] = 0
-            team_lock_map[team_navn] = team['lock']
-
-        for userinfo in app_tables.userinfo.search():
-            team = userinfo['team']
-            bruker = userinfo['user']
-            #score = userinfo['score']
-            longest_streak = userinfo['longest_streak']
-            bonus = userinfo['bonus']
-            if team and bruker:
-                team_navn = team['team']
-                bruker_poeng = sum(rad['poeng'] for rad in app_tables.aktivitet.search(deltager=bruker))
-                team_poeng[team_navn] += bruker_poeng
-
-        resultat = [
-            {
-                "team": team,
+            poeng = team['poeng'] or 0
+            bonus = team['bonus'] or 0
+            longest_streak = team['longest_streak'] or 0
+            score = team['score'] or 0
+            members = team['members'] or 0
+            lock = team['lock'] or False
+    
+            resultat.append({
+                "team": team_navn,
                 "poengsum": poeng,
                 "longest_streak": longest_streak,
                 "bonus": bonus,
-                "lock": team_lock_map.get(team, False)
-            }
-            for team, poeng in team_poeng.items()
-        ]
-
-        resultat.sort(key=lambda x: x["poengsum"], reverse=True)
+                "score": score,
+                "members": members,
+                "lock": lock
+            })
+    
+        # Sorter på score, høyest først
+        resultat.sort(key=lambda x: x["score"], reverse=True)
         return resultat
+
 
     @staticmethod
     def hent_teammedlemmer(team_navn):
