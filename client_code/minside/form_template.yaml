@@ -78,10 +78,21 @@ components_by_slot:
           name: lagre_button
           properties: {role: filled-button, text: Lagre}
           type: Button
-        layout_properties: {grid_position: 'XPDUEN,DKHMMN'}
+        layout_properties: {grid_position: 'OIYBEQ,ELPCXS'}
         name: flow_panel_4
         properties: {align: center}
         type: FlowPanel
+      - components:
+        - name: team_medl_repeating_panel
+          properties: {item_template: team_medlemmer.RowTemplate4}
+          type: RepeatingPanel
+        layout_properties: {grid_position: 'TNOUQA,BIUGBG'}
+        name: data_grid_1
+        properties:
+          columns:
+          - {data_key: column_1, id: JKSDUP, title: Teammedlemmer}
+          - {data_key: column_1, id: MHDFRT, title: Poeng}
+        type: DataGrid
       layout_properties: {grid_position: 'HEYYWW,CQSZEU'}
       name: outlined_card_2
       properties: {role: elevated-card}
