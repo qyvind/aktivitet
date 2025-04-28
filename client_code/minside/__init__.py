@@ -19,6 +19,10 @@ class minside(minsideTemplate):
     
     self.fyll_minside()
 
+    team_medl = Utils.hent_teammedlemmer(teamnavn)
+    self.team_label.text = teamnavn
+    self.team_medl_repeating_panel.items = [{"navn": member["navn"], "poeng": member["poeng"]} for member in team_medl]
+
   def fyll_minside(self, **properties): 
     user = Globals.bruker
     deltagerdata= anvil.server.call("hent_brukernavn")
@@ -39,6 +43,10 @@ class minside(minsideTemplate):
       self.team_drop_down.selected_value = mitt_team
       self.team_medlem.visible = False
       self.team_drop_down.visible = True
+    
+    team_medl = Utils.hent_teammedlemmer(teamnavn)
+    self.team_label.text = teamnavn
+    self.team_medl_repeating_panel.items = [{"navn": member["navn"], "poeng": member["poeng"]} for member in team_medl]
     
     
 

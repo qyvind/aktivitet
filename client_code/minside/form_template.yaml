@@ -82,6 +82,29 @@ components_by_slot:
         name: flow_panel_4
         properties: {align: center}
         type: FlowPanel
+      - components:
+        - layout_properties: {}
+          name: label_1_copy
+          properties: {text: Team}
+          type: Label
+        - name: team_label
+          properties: {}
+          type: Label
+        layout_properties: {grid_position: 'OXRGDH,MQVLIP'}
+        name: flow_panel_1_copy
+        properties: {align: left}
+        type: FlowPanel
+      - components:
+        - name: team_medl_repeating_panel
+          properties: {item_template: minside.RowTemplate4}
+          type: RepeatingPanel
+        layout_properties: {grid_position: 'FDSXJB,XICKFV'}
+        name: data_grid_1
+        properties:
+          columns:
+          - {data_key: column_1, id: JKSDUP, title: Teammedlemmer}
+          - {data_key: column_1, id: MHDFRT, title: Poeng}
+        type: DataGrid
       layout_properties: {grid_position: 'HEYYWW,CQSZEU'}
       name: outlined_card_2
       properties: {role: elevated-card}
