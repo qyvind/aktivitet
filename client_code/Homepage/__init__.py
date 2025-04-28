@@ -68,3 +68,11 @@ class Homepage(HomepageTemplate):
   def logout_button_click(self, **event_args):
     anvil.users.logout()
     open_form('Login')
+
+  def navigation_link_1_click(self, **event_args):
+    """This method is called when the component is clicked"""
+    open_form(('minside'))
+
+  def navigation_link_2_click(self, **event_args):
+    """This method is called when the component is clicked"""
+    open_form('team_medlemmer')
