@@ -17,6 +17,16 @@ components_by_slot:
     name: trekninger_button
     properties: {icon: 'mi:add_reaction', navigate_to: Trekninger, text: Trekninger}
     type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+  - event_bindings: {click: navigation_link_1_click}
+    layout_properties: {}
+    name: navigation_link_1
+    properties: {text: Min side}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
+  - event_bindings: {click: navigation_link_2_click}
+    layout_properties: {}
+    name: navigation_link_2
+    properties: {text: Mitt lag}
+    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
   - event_bindings: {click: regler_button_click}
     layout_properties: {}
     name: regler_button
