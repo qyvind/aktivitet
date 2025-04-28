@@ -30,7 +30,7 @@ components_by_slot:
   - event_bindings: {click: regler_button_click}
     layout_properties: {}
     name: regler_button
-    properties: {icon: 'mi:forward_media', navigate_to: Regler, text: Regler}
+    properties: {icon: 'mi:keep_pin', navigate_to: Regler, text: Regler}
     type: form:dep_91t3sowbnwbk:_Components.NavigationLink
   - event_bindings: {click: admin_button_click}
     layout_properties: {}
