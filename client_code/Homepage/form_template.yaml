@@ -15,22 +15,22 @@ components_by_slot:
   - event_bindings: {click: trekninger_button_click}
     layout_properties: {}
     name: trekninger_button
-    properties: {icon: 'mi:add_reaction', navigate_to: Trekninger, text: Trekninger}
+    properties: {icon: 'mi:money_bag', navigate_to: Trekninger, text: Trekninger}
     type: form:dep_91t3sowbnwbk:_Components.NavigationLink
-  - event_bindings: {click: navigation_link_1_click}
+  - event_bindings: {click: min_side_link_click}
     layout_properties: {}
-    name: navigation_link_1
-    properties: {text: Min side}
+    name: min_side_link
+    properties: {icon: 'mi:tag_faces', navigate_to: minside, text: Min side}
     type: form:dep_91t3sowbnwbk:_Components.NavigationLink
-  - event_bindings: {click: navigation_link_2_click}
+  - event_bindings: {click: mitt_lag_link_click}
     layout_properties: {}
-    name: navigation_link_2
-    properties: {text: Mitt lag}
+    name: mitt_lag_link
+    properties: {icon: 'mi:supervisor_account', navigate_to: team_medlemmer, text: Mitt lag}
     type: form:dep_91t3sowbnwbk:_Components.NavigationLink
   - event_bindings: {click: regler_button_click}
     layout_properties: {}
     name: regler_button
-    properties: {icon: 'mi:format_paragraph', navigate_to: Regler, text: Regler}
+    properties: {icon: 'mi:forward_media', navigate_to: Regler, text: Regler}
     type: form:dep_91t3sowbnwbk:_Components.NavigationLink
   - event_bindings: {click: admin_button_click}
     layout_properties: {}

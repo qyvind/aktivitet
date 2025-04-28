@@ -25,54 +25,64 @@ class Homepage(HomepageTemplate):
     # Any code you write here will run before the form opens.
 
   def loggbok_button_click(self, **event_args):
-#    open_form('Loggbok')
     self.loggbok_button.selected = True
     self.reusltater_button.selected = False
     self.admin_button.selected = False
     self.trekninger_button.selected = False
     self.regler_button.selected = False
+    self.mitt_lag_link.selected = False
+    self.min_side_link.selected = False
     
 
   def reusltater_button_click(self, **event_args):
-    #open_form('Resultat_individuell')
     self.loggbok_button.selected = False
     self.reusltater_button.selected = True
     self.admin_button.selected = False
     self.trekninger_button.selected = False
     self.regler_button.selected = False
+    self.mitt_lag_link.selected = False
+    self.min_side_link.selected = False
 
   def regler_button_click(self, **event_args):
-    #open_form('Regler')
     self.loggbok_button.selected = False
     self.reusltater_button.selected = False
     self.admin_button.selected = False
     self.trekninger_button.selected = False
     self.regler_button.selected = True
+    self.mitt_lag_link.selected = False
+    self.min_side_link.selected = False
 
   def trekninger_button_click(self, **event_args):
-    #open_form('Trekninger')
     self.loggbok_button.selected = False
     self.reusltater_button.selected = False
     self.admin_button.selected = False
     self.trekninger_button.selected = True
     self.regler_button.selected = False
+    self.mitt_lag_link.selected = False
+    self.min_side_link.selected = False
     
   def admin_button_click(self, **event_args):
-#    open_form('admin')
     self.loggbok_button.selected = False
     self.reusltater_button.selected = False
     self.admin_button.selected = True
     self.trekninger_button.selected = False
     self.regler_button.selected = False
+    self.mitt_lag_link.selected = False
+    self.min_side_link.selected = False
     
   def logout_button_click(self, **event_args):
     anvil.users.logout()
     open_form('Login')
 
-  def navigation_link_1_click(self, **event_args):
+  def min_side_link_click(self, **event_args):
+    self.loggbok_button.selected = False
+    self.reusltater_button.selected = False
+    self.admin_button.selected = False
+    self.trekninger_button.selected = False
+    self.regler_button.selected = False
+    self.mitt_lag_link.selected = False
+    self.min_side_link.selected = True
+  def mitt_lag_link_click(self, **event_args):
     """This method is called when the component is clicked"""
-    open_form(('minside'))
-
-  def navigation_link_2_click(self, **event_args):
-    """This method is called when the component is clicked"""
-    open_form('team_medlemmer')
+    
+    
