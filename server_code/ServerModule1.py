@@ -1218,15 +1218,18 @@ def calculate_longest_streak(user_row):
     return longest
 
 
+
+
 @anvil.server.callable
 def oppdater_poeng_og_score_for_alle():
     today = date.today()
     
+    # Først oppdaterer vi poeng, streak, bonus og score
     for userinfo in app_tables.userinfo.search():
-        user_row = userinfo['user']  # Dette er raden i Users-tabellen!
+        user_row = userinfo['user']  # Raden i Users-tabellen
 
         if not user_row:
-            continue  # Hopper over hvis user er None, for sikkerhetsskyld
+            continue  # Hopper over hvis user er None
         
         aktiviteter = app_tables.aktivitet.search(deltager=user_row)
         
@@ -1235,19 +1238,38 @@ def oppdater_poeng_og_score_for_alle():
         )
         
         longest_streak = calculate_longest_streak(user_row)
-        
-        # 👇 Endret her fra .get() til vanlig []-oppslag
         bonus = userinfo['bonus'] or 0
         
-        score = ((total_poeng + bonus) *100) + longest_streak
+        score = ((total_poeng + bonus) * 100) + longest_streak
         
-        # Oppdater feltene i userinfo
         userinfo.update(
             poeng=total_poeng,
             longest_streak=longest_streak,
             bonus=bonus,
             score=score
         )
+
+    # Nå lager vi en liste over alle brukere, sortert etter score
+    userinfo_list = list(app_tables.userinfo.search())
+    userinfo_list.sort(key=lambda u: u['score'] or 0, reverse=True)  # Sorter synkende på score
+
+    # Deretter setter vi plasseringer
+    plassering = 1
+    for idx, userinfo in enumerate(userinfo_list):
+        if idx == 0:
+            current_rank = plassering
+        else:
+            previous_user = userinfo_list[idx - 1]
+            if userinfo['score'] == previous_user['score']:
+                # Hvis samme score som forrige, samme plassering
+                pass
+            else:
+                # Ellers oppdaterer vi plasseringen basert på antall foran
+                plassering = idx + 1
+            current_rank = plassering
+        
+        userinfo.update(plassering=current_rank)
+
 
 
 @anvil.server.callable
