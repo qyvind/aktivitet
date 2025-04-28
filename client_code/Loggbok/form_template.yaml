@@ -66,7 +66,7 @@ components_by_slot:
               text: ''
               visible: false
             type: Button
-          - event_bindings: {}
+          - event_bindings: {click: deltager_label_click}
             layout_properties: {}
             name: deltager_label
             properties: {text: Donald Duck}
@@ -78,7 +78,7 @@ components_by_slot:
           - name: label_2
             properties: {text: 'Team: '}
             type: Label
-          - event_bindings: {}
+          - event_bindings: {click: team_label_click}
             layout_properties: {}
             name: team_label
             properties: {text: teamnavn}
