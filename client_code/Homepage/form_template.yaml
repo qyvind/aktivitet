@@ -22,11 +22,6 @@ components_by_slot:
     name: min_side_link
     properties: {icon: 'mi:tag_faces', navigate_to: minside, text: Min side}
     type: form:dep_91t3sowbnwbk:_Components.NavigationLink
-  - event_bindings: {click: mitt_lag_link_click}
-    layout_properties: {}
-    name: mitt_lag_link
-    properties: {icon: 'mi:supervisor_account', navigate_to: team_medlemmer, text: Mitt lag}
-    type: form:dep_91t3sowbnwbk:_Components.NavigationLink
   - event_bindings: {click: regler_button_click}
     layout_properties: {}
     name: regler_button
@@ -44,7 +39,7 @@ components_by_slot:
     type: form:dep_91t3sowbnwbk:_Components.NavigationLink
 is_package: true
 layout:
-  properties: {navigation_rail_collapse_to: bottom_app_bar, navigation_rail_vertical_align: top}
+  properties: {navigation_rail_collapse_to: bottom_app_bar, navigation_rail_vertical_align: top, show_sidesheet: false}
   type: form:dep_91t3sowbnwbk:Layouts.NavigationRailLayout
 layout_metadata: {title: Framskritt}
 slots:
