@@ -84,7 +84,7 @@ components:
     type: Image
   - layout_properties: {width: 19}
     name: badge_7
-    properties: {height: '20', source: _/theme/grey badge.png, tooltip: '', visible: false}
+    properties: {height: '20', source: _/theme/icons8-first-48.png, tooltip: '', visible: false}
     type: Image
   - name: email
     properties:
@@ -93,6 +93,14 @@ components:
         padding: [0, null, 0, null]
       visible: false
     type: Label
+  - layout_properties: {}
+    name: badge_8
+    properties: {height: '20', source: _/theme/icons8-second-place-ribbon-48.png, tooltip: '', visible: false}
+    type: Image
+  - layout_properties: {}
+    name: badge_9
+    properties: {height: '20', source: _/theme/icons8-third-64.png, tooltip: '', visible: false}
+    type: Image
   layout_properties: {column: PFFFKV}
   name: badge_flow_panel
   properties: {align: left, visible: true}

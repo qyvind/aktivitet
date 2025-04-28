@@ -916,7 +916,18 @@ def sjekk_og_tildel_badges(bruker):
     if sjekk_badge_6(bruker):
       badge=6
       tildel_badge(bruker,badge)
+      
+    if sjekk_badge_7(bruker):
+      badge=7
+      tildel_badge(bruker,badge)
 
+    if sjekk_badge_8(bruker):
+      badge=8
+      tildel_badge(bruker,badge)
+
+    if sjekk_badge_9(bruker):
+      badge=9
+      tildel_badge(bruker,badge)
 
 
 def tildel_badge(bruker, badge_id):
@@ -1175,6 +1186,8 @@ def sjekk_badge_6(bruker):
 
         ukedag = dato.weekday()  # 0 = mandag, 6 = søndag
 
+
+
         if ukedag in [4, 5, 6]:  # fredag–søndag
             antall_dager_tilbake = ukedag - 4
             fredag_dato = dato - timedelta(days=antall_dager_tilbake)
@@ -1189,6 +1202,46 @@ def sjekk_badge_6(bruker):
             return True
 
     return False
+
+def sjekk_badge_7(bruker):
+    from datetime import date
+    today = date.today()
+    if today.weekday() != 4:  # 0 = mandag, 4 = fredag
+        return False
+    userinfo = app_tables.userinfo.get(user=bruker)
+    if not userinfo:
+        return False
+    plassering = userinfo['plassering']
+    if plassering == 1:
+        return True
+    return False
+
+def sjekk_badge_8(bruker):
+    from datetime import date
+    today = date.today()
+    if today.weekday() != 4:  # 0 = mandag, 4 = fredag
+        return False
+    userinfo = app_tables.userinfo.get(user=bruker)
+    if not userinfo:
+        return False
+    plassering = userinfo['plassering']
+    if plassering == 2:
+        return True
+    return False
+
+def sjekk_badge_9(bruker):
+    from datetime import date
+    today = date.today()
+    if today.weekday() != 4:  # 0 = mandag, 4 = fredag
+        return False
+    userinfo = app_tables.userinfo.get(user=bruker)
+    if not userinfo:
+        return False
+    plassering = userinfo['plassering']
+    if plassering == 3:
+        return True
+    return False
+  
 
 def calculate_longest_streak(user_row):
     today = date.today()
@@ -1297,15 +1350,34 @@ def oppdater_team_poengsummer():
         if antall_medlemmer < 3:
             score = 0
         else:
-            score = round(((total_poeng + total_bonus) *100+ longest_streak) / antall_medlemmer)
+            score = round(((total_poeng + total_bonus) * 100 + longest_streak) / antall_medlemmer)
 
-        # Oppdater team-raden med ALLE verdier, inkludert members
+        # Oppdater team-raden med alle verdier, inkludert members
         team.update(
             poeng=total_poeng,
             bonus=total_bonus,
             longest_streak=longest_streak,
             score=score,
-            members=antall_medlemmer  # 👈 Ny linje!
+            members=antall_medlemmer
         )
 
-    return "Team-poengsummer og medlemstall oppdatert!"
+    # --- NY DEL: Sett plassering basert på score ---
+    team_list = list(app_tables.team.search())
+    team_list.sort(key=lambda t: t['score'] or 0, reverse=True)
+
+    plassering = 1
+    for idx, team in enumerate(team_list):
+        if idx == 0:
+            current_rank = plassering
+        else:
+            previous_team = team_list[idx - 1]
+            if team['score'] == previous_team['score']:
+                # Samme score = delt plassering
+                pass
+            else:
+                plassering = idx + 1
+            current_rank = plassering
+
+        team.update(plassering=current_rank)
+
+    return "Team-poengsummer, medlemstall og plasseringer oppdatert!"
