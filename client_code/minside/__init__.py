@@ -36,10 +36,16 @@ class minside(minsideTemplate):
       self.locked.icon = 'fa:unlock'
       team_list = [row['team'] for row in app_tables.team.search() if row['team'] and not row['lock']]
       self.team_drop_down.items = [("", "")] + [(team, team) for team in team_list]
+      
       self.team_drop_down.selected_value = mitt_team
       self.team_medlem.visible = False
       self.team_drop_down.visible = True
-    
+      team_medl = Utils.hent_teammedlemmer(mitt_team)
+      #print(team_medl)
+      #self.team_label.text = teamnavn
+      # Sett inn data i et Repeating Panel hvis du har et
+      self.team_medl_repeating_panel.items = [{"navn": member["navn"], "poeng": member["poeng"]} for member in team_medl]
+      
     
 
   def angre_button_click(self, **event_args):
