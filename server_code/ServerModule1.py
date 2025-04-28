@@ -1294,6 +1294,7 @@ def oppdater_poeng_og_score_for_alle():
         bonus = userinfo['bonus'] or 0
         
         score = ((total_poeng + bonus) * 100) + longest_streak
+        print('score ',score, total_poeng, bonus, longest_streak)
         
         userinfo.update(
             poeng=total_poeng,
