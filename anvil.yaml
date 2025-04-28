@@ -151,16 +151,16 @@ db_schema:
   team:
     client: search
     columns:
-    - admin_ui: {width: 200}
+    - admin_ui: {order: 0, width: 99}
       name: team
       type: string
     - admin_ui: {width: 200}
       name: lock
       type: bool
-    - admin_ui: {order: 2, width: 200}
+    - admin_ui: {order: 2, width: 87}
       name: poeng
       type: number
-    - admin_ui: {order: 3, width: 200}
+    - admin_ui: {order: 3, width: 115}
       name: bonus
       type: number
     - admin_ui: {order: 4, width: 200}
@@ -171,6 +171,9 @@ db_schema:
       type: number
     - admin_ui: {order: 6, width: 200}
       name: members
+      type: number
+    - admin_ui: {order: 7, width: 200}
+      name: plassering
       type: number
     server: full
     title: team
@@ -244,6 +247,9 @@ db_schema:
       type: number
     - admin_ui: {order: 10, width: 200}
       name: score
+      type: number
+    - admin_ui: {order: 11, width: 200}
+      name: plassering
       type: number
     server: full
     title: userinfo

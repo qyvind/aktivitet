@@ -180,44 +180,44 @@ def oppdater_brukernavn(nytt_navn):
 
 
 
-@anvil.server.callable
-def hent_brukernavn():
-    print('hent_brukernavn')
-    user = anvil.users.get_user()
-    if not user:
-        raise Exception("Bruker ikke logget inn")
+# @anvil.server.callable
+# def hent_brukernavn():
+#     print('hent_brukernavn')
+#     user = anvil.users.get_user()
+#     if not user:
+#         raise Exception("Bruker ikke logget inn")
     
-    record = app_tables.userinfo.get(user=user)
+#     record = app_tables.userinfo.get(user=user)
     
-    if record is None:
-        return {"navn": "", "team": "", "lock": False, "leage": "", "ikon": ""}
+#     if record is None:
+#         return {"navn": "", "team": "", "lock": False, "leage": "", "ikon": ""}
 
-    record_dict = dict(record)
-    navn = record_dict.get('navn', "")
+#     record_dict = dict(record)
+#     navn = record_dict.get('navn', "")
 
-    team_navn = ""
-    lock_status = False
+#     team_navn = ""
+#     lock_status = False
 
-    if record_dict.get('team'):
-        team_row = record['team']
-        team_navn = team_row['team']
-        lock_status = team_row['lock']
+#     if record_dict.get('team'):
+#         team_row = record['team']
+#         team_navn = team_row['team']
+#         lock_status = team_row['lock']
 
-    leage_navn = ""
-    ikon_url = ""
+#     leage_navn = ""
+#     ikon_url = ""
 
-    if record_dict.get('leage'):
-        leage_row = record['leage']
-        leage_navn = leage_row['leage']  # eller 'navn' hvis det er navnet på ligaen
-        ikon_url = leage_row['ikon']     # for eksempel en URL eller media-objekt
+#     if record_dict.get('leage'):
+#         leage_row = record['leage']
+#         leage_navn = leage_row['leage']  # eller 'navn' hvis det er navnet på ligaen
+#         ikon_url = leage_row['ikon']     # for eksempel en URL eller media-objekt
 
-    return {
-        "navn": navn,
-        "team": team_navn,
-        "lock": lock_status,
-        "leage": leage_navn,
-        "leage_ikon": ikon_url
-    }
+#     return {
+#         "navn": navn,
+#         "team": team_navn,
+#         "lock": lock_status,
+#         "leage": leage_navn,
+#         "leage_ikon": ikon_url
+#     }
 
 
 def hent_poengsummer():
@@ -916,7 +916,18 @@ def sjekk_og_tildel_badges(bruker):
     if sjekk_badge_6(bruker):
       badge=6
       tildel_badge(bruker,badge)
+      
+    if sjekk_badge_7(bruker):
+      badge=7
+      tildel_badge(bruker,badge)
 
+    if sjekk_badge_8(bruker):
+      badge=8
+      tildel_badge(bruker,badge)
+
+    if sjekk_badge_9(bruker):
+      badge=9
+      tildel_badge(bruker,badge)
 
 
 def tildel_badge(bruker, badge_id):
@@ -1175,6 +1186,8 @@ def sjekk_badge_6(bruker):
 
         ukedag = dato.weekday()  # 0 = mandag, 6 = søndag
 
+
+
         if ukedag in [4, 5, 6]:  # fredag–søndag
             antall_dager_tilbake = ukedag - 4
             fredag_dato = dato - timedelta(days=antall_dager_tilbake)
@@ -1189,6 +1202,46 @@ def sjekk_badge_6(bruker):
             return True
 
     return False
+
+def sjekk_badge_7(bruker):
+    from datetime import date
+    today = date.today()
+    if today.weekday() != 4:  # 0 = mandag, 4 = fredag
+        return False
+    userinfo = app_tables.userinfo.get(user=bruker)
+    if not userinfo:
+        return False
+    plassering = userinfo['plassering']
+    if plassering == 1:
+        return True
+    return False
+
+def sjekk_badge_8(bruker):
+    from datetime import date
+    today = date.today()
+    if today.weekday() != 4:  # 0 = mandag, 4 = fredag
+        return False
+    userinfo = app_tables.userinfo.get(user=bruker)
+    if not userinfo:
+        return False
+    plassering = userinfo['plassering']
+    if plassering == 2:
+        return True
+    return False
+
+def sjekk_badge_9(bruker):
+    from datetime import date
+    today = date.today()
+    if today.weekday() != 4:  # 0 = mandag, 4 = fredag
+        return False
+    userinfo = app_tables.userinfo.get(user=bruker)
+    if not userinfo:
+        return False
+    plassering = userinfo['plassering']
+    if plassering == 3:
+        return True
+    return False
+  
 
 def calculate_longest_streak(user_row):
     today = date.today()
@@ -1218,15 +1271,18 @@ def calculate_longest_streak(user_row):
     return longest
 
 
+
+
 @anvil.server.callable
 def oppdater_poeng_og_score_for_alle():
     today = date.today()
     
+    # Først oppdaterer vi poeng, streak, bonus og score
     for userinfo in app_tables.userinfo.search():
-        user_row = userinfo['user']  # Dette er raden i Users-tabellen!
+        user_row = userinfo['user']  # Raden i Users-tabellen
 
         if not user_row:
-            continue  # Hopper over hvis user er None, for sikkerhetsskyld
+            continue  # Hopper over hvis user er None
         
         aktiviteter = app_tables.aktivitet.search(deltager=user_row)
         
@@ -1235,19 +1291,38 @@ def oppdater_poeng_og_score_for_alle():
         )
         
         longest_streak = calculate_longest_streak(user_row)
-        
-        # 👇 Endret her fra .get() til vanlig []-oppslag
         bonus = userinfo['bonus'] or 0
         
-        score = ((total_poeng + bonus) *100) + longest_streak
+        score = ((total_poeng + bonus) * 100) + longest_streak
         
-        # Oppdater feltene i userinfo
         userinfo.update(
             poeng=total_poeng,
             longest_streak=longest_streak,
             bonus=bonus,
             score=score
         )
+
+    # Nå lager vi en liste over alle brukere, sortert etter score
+    userinfo_list = list(app_tables.userinfo.search())
+    userinfo_list.sort(key=lambda u: u['score'] or 0, reverse=True)  # Sorter synkende på score
+
+    # Deretter setter vi plasseringer
+    plassering = 1
+    for idx, userinfo in enumerate(userinfo_list):
+        if idx == 0:
+            current_rank = plassering
+        else:
+            previous_user = userinfo_list[idx - 1]
+            if userinfo['score'] == previous_user['score']:
+                # Hvis samme score som forrige, samme plassering
+                pass
+            else:
+                # Ellers oppdaterer vi plasseringen basert på antall foran
+                plassering = idx + 1
+            current_rank = plassering
+        
+        userinfo.update(plassering=current_rank)
+
 
 
 @anvil.server.callable
@@ -1275,15 +1350,34 @@ def oppdater_team_poengsummer():
         if antall_medlemmer < 3:
             score = 0
         else:
-            score = round(((total_poeng + total_bonus) *100+ longest_streak) / antall_medlemmer)
+            score = round(((total_poeng + total_bonus) * 100 + longest_streak) / antall_medlemmer)
 
-        # Oppdater team-raden med ALLE verdier, inkludert members
+        # Oppdater team-raden med alle verdier, inkludert members
         team.update(
             poeng=total_poeng,
             bonus=total_bonus,
             longest_streak=longest_streak,
             score=score,
-            members=antall_medlemmer  # 👈 Ny linje!
+            members=antall_medlemmer
         )
 
-    return "Team-poengsummer og medlemstall oppdatert!"
+    # --- NY DEL: Sett plassering basert på score ---
+    team_list = list(app_tables.team.search())
+    team_list.sort(key=lambda t: t['score'] or 0, reverse=True)
+
+    plassering = 1
+    for idx, team in enumerate(team_list):
+        if idx == 0:
+            current_rank = plassering
+        else:
+            previous_team = team_list[idx - 1]
+            if team['score'] == previous_team['score']:
+                # Samme score = delt plassering
+                pass
+            else:
+                plassering = idx + 1
+            current_rank = plassering
+
+        team.update(plassering=current_rank)
+
+    return "Team-poengsummer, medlemstall og plasseringer oppdatert!"
