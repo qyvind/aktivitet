@@ -30,7 +30,6 @@ class Homepage(HomepageTemplate):
     self.admin_button.selected = False
     self.trekninger_button.selected = False
     self.regler_button.selected = False
-    self.mitt_lag_link.selected = False
     self.min_side_link.selected = False
     
 
@@ -40,7 +39,6 @@ class Homepage(HomepageTemplate):
     self.admin_button.selected = False
     self.trekninger_button.selected = False
     self.regler_button.selected = False
-    self.mitt_lag_link.selected = False
     self.min_side_link.selected = False
 
   def regler_button_click(self, **event_args):
@@ -49,7 +47,6 @@ class Homepage(HomepageTemplate):
     self.admin_button.selected = False
     self.trekninger_button.selected = False
     self.regler_button.selected = True
-    self.mitt_lag_link.selected = False
     self.min_side_link.selected = False
 
   def trekninger_button_click(self, **event_args):
@@ -58,7 +55,6 @@ class Homepage(HomepageTemplate):
     self.admin_button.selected = False
     self.trekninger_button.selected = True
     self.regler_button.selected = False
-    self.mitt_lag_link.selected = False
     self.min_side_link.selected = False
     
   def admin_button_click(self, **event_args):
@@ -67,7 +63,6 @@ class Homepage(HomepageTemplate):
     self.admin_button.selected = True
     self.trekninger_button.selected = False
     self.regler_button.selected = False
-    self.mitt_lag_link.selected = False
     self.min_side_link.selected = False
     
   def logout_button_click(self, **event_args):
@@ -80,7 +75,6 @@ class Homepage(HomepageTemplate):
     self.admin_button.selected = False
     self.trekninger_button.selected = False
     self.regler_button.selected = False
-    self.mitt_lag_link.selected = False
     self.min_side_link.selected = True
   def mitt_lag_link_click(self, **event_args):
     """This method is called when the component is clicked"""
