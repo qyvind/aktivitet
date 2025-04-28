@@ -4,6 +4,10 @@ components:
     name: label_1
     properties: {role: headline, text: Endringslogg}
     type: Label
+  - layout_properties: {grid_position: 'CKYAQZ,ZKDBAY'}
+    name: text_area_17_copy_copy_copy
+    properties: {font_size: 10, height: 55, text: 28/4 Menyvalg for minside og mitt lag. Slettet alle data og begynte ny test.}
+    type: TextArea
   - layout_properties: {grid_position: 'ESIRGB,ERSOYM'}
     name: text_area_17_copy_copy
     properties: {font_size: 10, height: 55, text: 27/4 Lagrer poeng og score i tabell om natten for raskere resultatlister. Også for team. Vi ser mer detaljer på team-resultatliste.}
