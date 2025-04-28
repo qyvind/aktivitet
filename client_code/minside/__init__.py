@@ -21,7 +21,7 @@ class minside(minsideTemplate):
 
   def fyll_minside(self, **properties): 
     user = Globals.bruker
-    deltagerdata= anvil.server.call("hent_brukernavn")
+    deltagerdata= Utils.hent_brukernavn()
     
     navn=deltagerdata['navn']
     mitt_team=deltagerdata['team']
