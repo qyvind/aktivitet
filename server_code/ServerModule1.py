@@ -180,44 +180,44 @@ def oppdater_brukernavn(nytt_navn):
 
 
 
-@anvil.server.callable
-def hent_brukernavn():
-    print('hent_brukernavn')
-    user = anvil.users.get_user()
-    if not user:
-        raise Exception("Bruker ikke logget inn")
+# @anvil.server.callable
+# def hent_brukernavn():
+#     print('hent_brukernavn')
+#     user = anvil.users.get_user()
+#     if not user:
+#         raise Exception("Bruker ikke logget inn")
     
-    record = app_tables.userinfo.get(user=user)
+#     record = app_tables.userinfo.get(user=user)
     
-    if record is None:
-        return {"navn": "", "team": "", "lock": False, "leage": "", "ikon": ""}
+#     if record is None:
+#         return {"navn": "", "team": "", "lock": False, "leage": "", "ikon": ""}
 
-    record_dict = dict(record)
-    navn = record_dict.get('navn', "")
+#     record_dict = dict(record)
+#     navn = record_dict.get('navn', "")
 
-    team_navn = ""
-    lock_status = False
+#     team_navn = ""
+#     lock_status = False
 
-    if record_dict.get('team'):
-        team_row = record['team']
-        team_navn = team_row['team']
-        lock_status = team_row['lock']
+#     if record_dict.get('team'):
+#         team_row = record['team']
+#         team_navn = team_row['team']
+#         lock_status = team_row['lock']
 
-    leage_navn = ""
-    ikon_url = ""
+#     leage_navn = ""
+#     ikon_url = ""
 
-    if record_dict.get('leage'):
-        leage_row = record['leage']
-        leage_navn = leage_row['leage']  # eller 'navn' hvis det er navnet på ligaen
-        ikon_url = leage_row['ikon']     # for eksempel en URL eller media-objekt
+#     if record_dict.get('leage'):
+#         leage_row = record['leage']
+#         leage_navn = leage_row['leage']  # eller 'navn' hvis det er navnet på ligaen
+#         ikon_url = leage_row['ikon']     # for eksempel en URL eller media-objekt
 
-    return {
-        "navn": navn,
-        "team": team_navn,
-        "lock": lock_status,
-        "leage": leage_navn,
-        "leage_ikon": ikon_url
-    }
+#     return {
+#         "navn": navn,
+#         "team": team_navn,
+#         "lock": lock_status,
+#         "leage": leage_navn,
+#         "leage_ikon": ikon_url
+#     }
 
 
 def hent_poengsummer():
