@@ -4,6 +4,10 @@ components:
     name: label_1
     properties: {role: headline, text: Endringslogg}
     type: Label
+  - layout_properties: {grid_position: 'DVOSAK,KDDOER'}
+    name: text_area_17_copy_copy_copy_copy
+    properties: {font_size: 10, height: 55, text: 29/4 Laget bilde for vedlikehold av badges og propt til disse}
+    type: TextArea
   - layout_properties: {grid_position: 'CKYAQZ,ZKDBAY'}
     name: text_area_17_copy_copy_copy
     properties:
