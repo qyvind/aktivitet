@@ -45,7 +45,9 @@ class PoengVelger(PoengVelgerTemplate):
         self.poeng_drop.selected_value = valgt_poeng
         self.aktivitet_box.text = aktivitet
         #self.antall_skritt.text = skritt.text
-        
+
+        self.skritt_drop.items = [ ("8000 skritt", 1), ("16000 skritt", 2), ("24000 skritt eller mer", 3)]
+        self.skritt_drop.selected_value = valgt_poeng
 
         self.beskrivelse.text = beskrivelse
         self.ikon_preview.source = "_/theme/treninger.png"
@@ -118,17 +120,8 @@ class PoengVelger(PoengVelgerTemplate):
 
     def lagre_skritt_click(self, **event_args):
         skritt_rad = app_tables.files.get(path = "Skritt")
-        #if not skritt_rad or not skritt_rad['file']:
-        #  alert("Fant ikke ikon for skritt – kontakt admin")
-        #  return
-        #tekst = self.antall_skritt.text
-        #antall = 0
-        #if tekst and tekst.isdigit():
-        #    antall = int(tekst)
-        #    
-        #else:
-        #    #alert("Du må skrive inn et gyldig tall for skritt.")
-        poeng=1
+        
+        poeng=self.skritt_drop.selected_value
      
         aktivitet = "Skritt"
         
