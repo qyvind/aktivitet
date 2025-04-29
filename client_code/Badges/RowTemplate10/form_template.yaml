@@ -1,0 +1,39 @@
+components:
+- data_bindings:
+  - {code: 'self.item[''id'']', property: text, writeback: false}
+  layout_properties: {column: IPHAMZ}
+  name: badge_id
+  properties: {}
+  type: form:dep_91t3sowbnwbk:_Components.Text
+- data_bindings:
+  - {code: 'self.item[''prompt'']', property: text, writeback: false}
+  event_bindings: {}
+  layout_properties: {column: UZUZCY}
+  name: badge_prompt
+  properties: {}
+  type: form:dep_91t3sowbnwbk:_Components.TextInput.TextArea
+- data_bindings:
+  - {code: 'self.item[''name'']', property: label, writeback: false}
+  layout_properties: {column: WGJJDJ}
+  name: badge_name
+  properties: {}
+  type: form:dep_91t3sowbnwbk:_Components.TextInput.TextBox
+- data_bindings:
+  - {code: 'self.item[''description'']', property: label, writeback: false}
+  layout_properties: {column: RRSJWR}
+  name: badge_description
+  properties: {}
+  type: form:dep_91t3sowbnwbk:_Components.TextInput.TextBox
+- data_bindings:
+  - {code: 'self.item[''bonus'']', property: label, writeback: false}
+  layout_properties: {column: KBSYOX}
+  name: badge_bonus
+  properties: {}
+  type: form:dep_91t3sowbnwbk:_Components.TextInput.TextBox
+- event_bindings: {click: badge_prompt_change}
+  layout_properties: {column: OVZNRE}
+  name: icon_button_1
+  properties: {appearance: filled, icon: 'mi:save'}
+  type: form:dep_91t3sowbnwbk:_Components.IconButton
+container: {type: DataRowPanel}
+is_package: true

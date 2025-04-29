@@ -1,0 +1,23 @@
+components_by_slot:
+  content:
+  - layout_properties: {}
+    name: text_1
+    properties: {text: Badges}
+    type: form:dep_91t3sowbnwbk:_Components.Text
+  - components:
+    - name: badges_repeating_panel
+      properties: {item_template: Badges.RowTemplate10}
+      type: RepeatingPanel
+    layout_properties: {}
+    name: data_grid_1
+    properties:
+      columns:
+      - {data_key: column_1, expand: false, id: IPHAMZ, title: Badge nr, width: 78.66665649414062}
+      - {data_key: column_2, expand: false, id: WGJJDJ, title: Navn, width: 79.66665649414062}
+      - {data_key: column_3, expand: false, id: RRSJWR, title: Beskrivelse, width: 175.33331298828125}
+      - {data_key: column_1, expand: false, id: KBSYOX, title: Bonus, width: 70.33331298828125}
+      - {data_key: column_1, expand: false, id: UZUZCY, title: Prompt, width: 530.6666259765625}
+      - {data_key: column_1, id: OVZNRE, title: Column 1}
+    type: DataGrid
+is_package: true
+layout: {type: 'form:Homepage'}

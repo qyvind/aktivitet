@@ -35,33 +35,32 @@ components_by_slot:
         name: button_5
         properties: {role: tonal-button, text: Endringslogg}
         type: Button
+      - event_bindings: {click: ailogg_click}
+        name: ailogg
+        properties: {role: tonal-button, text: AI Logg}
+        type: Button
       - event_bindings: {click: button_3_click}
         layout_properties: {}
         name: button_3
         properties: {role: tonal-button, text: Lykkehjul}
-        type: Button
-      - event_bindings: {click: sjekk_badges_click}
-        layout_properties: {}
-        name: sjekk_badges
-        properties: {role: tonal-button, text: sjekk badges}
-        type: Button
-      - event_bindings: {click: button_6_click}
-        name: button_6
-        properties: {role: tonal-button, text: test ai}
         type: Button
       - event_bindings: {click: button_8_click}
         layout_properties: {}
         name: button_8
         properties: {role: tonal-button, text: Recalc streak}
         type: Button
-      - event_bindings: {click: ai_click}
-        name: ai
-        properties: {role: tonal-button, text: AI-prompt}
+      - event_bindings: {click: sjekk_badges_click}
+        name: sjekk_badges
+        properties: {role: tonal-button, text: sjekk badges}
         type: Button
       - event_bindings: {click: ailogg_click}
         layout_properties: {}
-        name: ailogg
-        properties: {role: tonal-button, text: AI Logg}
+        name: badges_button
+        properties: {role: tonal-button, text: Badges}
+        type: Button
+      - event_bindings: {click: button_6_click}
+        name: button_6
+        properties: {role: tonal-button, text: test ai}
         type: Button
       layout_properties: {grid_position: 'PDOHFX,TLMROV'}
       name: flow_panel_1

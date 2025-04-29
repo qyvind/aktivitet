@@ -1382,3 +1382,26 @@ def oppdater_team_poengsummer():
         team.update(plassering=current_rank)
 
     return "Team-poengsummer, medlemstall og plasseringer oppdatert!"
+
+@anvil.server.callable
+def update_badge(item):
+    badge_id = item['id']  # <-- bruker [] ikke .get()
+    if not badge_id:
+        raise ValueError("Item must contain an 'id' field.")
+    
+    # Finn eksisterende badge med riktig id
+    badges = app_tables.badges.search(id=badge_id)
+    
+    if not badges:
+        raise ValueError(f"No badge found with id {badge_id}")
+    
+    badge = badges[0]
+
+    # Oppdater feltene
+    badge['name'] = item['name']
+    badge['description'] = item['description']
+    badge['bonus'] = item['bonus']
+    badge['prompt'] = item['prompt']
+
+    return badge
+

@@ -220,8 +220,7 @@ class admin(adminTemplate):
     self.korrigering_check.checked = anvil.server.call(('toggle_korrigering'))
 
   def ailogg_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    open_form(('AI_logg'))
+    open_form('Badges')
 
   def button_7_click(self, **event_args):
     open_form(('admin_ny_aktivitet'))
