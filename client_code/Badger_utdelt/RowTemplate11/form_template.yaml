@@ -1,0 +1,27 @@
+components:
+- data_bindings:
+  - {code: 'self.item[''email'']', property: text, writeback: false}
+  layout_properties: {column: JRSSIH}
+  name: text_1
+  properties: {}
+  type: form:dep_91t3sowbnwbk:_Components.Text
+- data_bindings:
+  - {code: 'self.item[''badge_name'']', property: text, writeback: false}
+  layout_properties: {column: ZWXOIV}
+  name: text_2
+  properties: {}
+  type: form:dep_91t3sowbnwbk:_Components.Text
+- data_bindings:
+  - {code: 'self.item[''awarded_date'']', property: text, writeback: false}
+  layout_properties: {column: OQVJUJ}
+  name: text_3
+  properties: {}
+  type: form:dep_91t3sowbnwbk:_Components.Text
+- data_bindings:
+  - {code: 'self.item[''informert'']', property: text, writeback: false}
+  layout_properties: {column: UPKLKG}
+  name: checkbox_1
+  properties: {allow_indeterminate: true, text: ''}
+  type: form:dep_91t3sowbnwbk:_Components.Checkbox
+container: {type: DataRowPanel}
+is_package: true
