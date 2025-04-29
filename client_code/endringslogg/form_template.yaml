@@ -13,6 +13,7 @@ components:
         29/4 Laget adminbilde for vedlikehold av badges og propt til disse
         La inn mulighet for poeng pr. 8000 skritt
         Laget adminbilde for å se utdelte badges
+        La til plassering i laget i info som sendes til AI
     type: TextArea
   - layout_properties: {grid_position: 'CKYAQZ,ZKDBAY'}
     name: text_area_17_copy_copy_copy
