@@ -1,0 +1,21 @@
+components_by_slot:
+  content:
+  - layout_properties: {}
+    name: text_1
+    properties: {text: Badger som er utdelt}
+    type: form:dep_91t3sowbnwbk:_Components.Text
+  - components:
+    - name: repeating_panel_1
+      properties: {item_template: Badger_utdelt.RowTemplate11}
+      type: RepeatingPanel
+    layout_properties: {}
+    name: data_grid_1
+    properties:
+      columns:
+      - {data_key: column_1, id: JRSSIH, title: User}
+      - {data_key: column_1, id: ZWXOIV, title: Badge}
+      - {data_key: column_1, id: OQVJUJ, title: Date}
+      - {data_key: column_1, id: UPKLKG, title: Informert}
+    type: DataGrid
+is_package: true
+layout: {type: 'form:Homepage'}

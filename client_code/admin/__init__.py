@@ -220,7 +220,7 @@ class admin(adminTemplate):
     self.korrigering_check.checked = anvil.server.call(('toggle_korrigering'))
 
   def ailogg_click(self, **event_args):
-    open_form('Badges')
+    open_form('AI_logg')
 
   def button_7_click(self, **event_args):
     open_form(('admin_ny_aktivitet'))
@@ -232,6 +232,12 @@ class admin(adminTemplate):
 
   def button_8_click(self, **event_args):
     anvil.server.call('nightly_streak_recalc_test')
+
+  def badges_button_click(self, **event_args):
+    open_form('Badges')
+
+  def user_badges_click(self, **event_args):
+    open_form('Badger_utdelt')
 
 
 
