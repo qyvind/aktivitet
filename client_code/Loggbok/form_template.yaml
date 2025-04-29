@@ -594,47 +594,47 @@ components_by_slot:
         name: flow_panel_6
         properties: {align: center}
         type: FlowPanel
-      - components:
-        - components:
-          - layout_properties: {expand: true}
-            name: lykke_indikator
-            properties:
-              margin: ['28', null, null, null]
-              progress: 80
-              type: determinate
-            type: form:dep_91t3sowbnwbk:_Components.LinearProgressIndicator
-          - layout_properties: {}
-            name: lykke_bw_image
-            properties:
-              height: '50'
-              margin: ['0', null, '0', null]
-              source: _/theme/lykke_b_w.png
-              visible: true
-            type: Image
-          - layout_properties: {}
-            name: lykke_color_image
-            properties:
-              height: '50'
-              margin: ['0', null, '0', null]
-              source: _/theme/lykkehjul-transparant.png
-              visible: false
-            type: Image
-          layout_properties: {grid_position: 'DFXOBV,RBFAZX'}
-          name: flow_panel_5
-          properties: {align: center}
-          type: FlowPanel
-        layout_properties: {}
-        name: outlined_card_1
-        properties:
-          background: theme:Secondary Container
-          role: elevated-card
-          spacing:
-            padding: ['5', null, 0.5714285714285715, null]
-        type: ColumnPanel
       layout_properties: {grid_position: 'LVOPXY,MUNUHX'}
       name: week_row_panel
       properties: {}
       type: DataRowPanel
+    - components:
+      - components:
+        - layout_properties: {expand: true}
+          name: lykke_indikator
+          properties:
+            margin: ['28', null, null, null]
+            progress: 80
+            type: determinate
+          type: form:dep_91t3sowbnwbk:_Components.LinearProgressIndicator
+        - layout_properties: {}
+          name: lykke_bw_image
+          properties:
+            height: '50'
+            margin: ['0', null, '0', null]
+            source: _/theme/lykke_b_w.png
+            visible: true
+          type: Image
+        - layout_properties: {}
+          name: lykke_color_image
+          properties:
+            height: '50'
+            margin: ['0', null, '0', null]
+            source: _/theme/lykkehjul-transparant.png
+            visible: false
+          type: Image
+        layout_properties: {grid_position: 'DFXOBV,RBFAZX'}
+        name: flow_panel_5
+        properties: {align: center}
+        type: FlowPanel
+      layout_properties: {grid_position: 'GNBEBU,VSYDAR'}
+      name: outlined_card_1
+      properties:
+        background: theme:Secondary Container
+        role: elevated-card
+        spacing:
+          padding: ['5', null, 0.5714285714285715, null]
+      type: ColumnPanel
     layout_properties: {}
     name: loggbok_card
     properties: {background: '', role: tonal-card, visible: true}
