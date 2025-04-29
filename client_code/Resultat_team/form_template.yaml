@@ -25,6 +25,10 @@ components_by_slot:
         - {data_key: column_1, id: MRJBSJ, title: Antall deltagere}
         - {data_key: column_1, id: GOVPWM, title: Score}
       type: DataGrid
+    - layout_properties: {grid_position: 'AVRRRJ,DXXQJB'}
+      name: text_1
+      properties: {align: center, text: Score = ((Poeng + Bonus) *100 + lengste streak på teamet)/antall personer i teamet}
+      type: form:dep_91t3sowbnwbk:_Components.Text
     layout_properties: {}
     name: outlined_card_1_copy
     properties: {role: tonal-card}
