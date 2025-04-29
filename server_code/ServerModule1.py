@@ -708,13 +708,8 @@ def hent_user_fra_email(email):
 # ----- Plasser denne koden i en Server Module (f.eks. ServerModule1.py) -----
 
 
-
-
-
-
 @anvil.server.callable
 def lag_status_for_bruker():
-    print('lag_status_for_bruker')
     bruker = anvil.users.get_user()
     if not bruker:
         return "Ingen bruker logget inn."
@@ -722,6 +717,9 @@ def lag_status_for_bruker():
     # Hent brukernavn og lag
     userinfo = app_tables.userinfo.get(user=bruker)
     navn = userinfo['navn'] if userinfo else bruker['email']
+    plassering = userinfo['plassering']
+    plassering_i_team = userinfo['team_plassering']
+    
     lag_obj = userinfo['team'] if userinfo else None
     lag_navn = lag_obj['team'] if lag_obj else "Ingen lag"
 
@@ -752,31 +750,94 @@ def lag_status_for_bruker():
 
         statuslinjer.append(f"uke {uke_nr}: {aktiviteter_tekst} (poeng: {total_poeng})")
         if beskrivelse_tekst:
-            statuslinjer.append(f"beskrivelser uke {uke_nr}: {beskrivelse_tekst}")
+            statuslinjer.append(f"beskrivelser uke {uke_nr}: {beskrivelse_tekst}")        
+          
+        antall_deltagere = len(app_tables.userinfo.search())
+        
+        plassering_tekst = f"\nplassering totalt: {plassering} av {antall_deltagere}" if plassering else "\nplassering ikke funnet"
+        
+        team_record = app_tables.team.get(team=lag_navn)
+        lag_plassering = team_record['plassering']
+        
+        antall_lag = len(app_tables.team.search())
     
+        lag_tekst = f"\nlag: {lag_navn} (Lagets plassering: {lag_plassering} av {antall_lag} lag)" if lag_navn != "Ingen lag" else ""
     
-    # Finn brukerens plassering basert på ny score
-    alle_poeng = hent_poengsummer()
+        # 👇 Dette er nytt
+        team_plassering_tekst = f"\nplassering innenfor eget lag: {plassering_i_team}" if plassering_i_team else "\nplassering i laget ikke tilgjengelig"
     
-    # Beregn score for hver bruker
-    for d in alle_poeng:
-        d["score"] = (100 * (d.get("poeng", 0) + d.get("bonus", 0))) + d.get("longest_streak", 0)
+        # Sett sammen alt – og fiks join-feil
+        status = f"navn: {navn}{plassering_tekst}{lag_tekst}{team_plassering_tekst}\n" + "\n".join(statuslinjer)
     
-    # Sorter etter score, høyest først
-    alle_poeng.sort(key=lambda d: d["score"], reverse=True)
-    
-    # Finn brukerens plassering
-    plassering = next((i + 1 for i, d in enumerate(alle_poeng) if d["email"] == bruker["email"]), None)
-    plassering_tekst = f"\nplassering totalt: {plassering} av {len(alle_poeng)}" if plassering else "\nplassering ikke funnet"
+        return status
 
-    # Finn lagets plassering
-    lag_resultater = hent_team_poengsummer()
-    lag_plassering = next((i + 1 for i, d in enumerate(lag_resultater) if d["team"] == lag_navn), None)
-    lag_tekst = f"\nlag: {lag_navn} (plassering: {lag_plassering} av {len(lag_resultater)})" if lag_navn != "Ingen lag" else ""
 
-    # Sett sammen alt
-    status = f"navn: {navn}{plassering_tekst}{lag_tekst}\n" + "\n".join(statuslinjer)
-    return status
+
+# @anvil.server.callable
+# def lag_status_for_bruker():
+#     print('lag_status_for_bruker')
+#     bruker = anvil.users.get_user()
+#     if not bruker:
+#         return "Ingen bruker logget inn."
+
+#     # Hent brukernavn og lag
+#     userinfo = app_tables.userinfo.get(user=bruker)
+#     navn = userinfo['navn'] if userinfo else bruker['email']
+#     lag_obj = userinfo['team'] if userinfo else None
+#     lag_navn = lag_obj['team'] if lag_obj else "Ingen lag"
+
+#     # Hent konkurransen
+#     konkurranse = app_tables.konkurranse.get()
+#     startdato = konkurranse['fradato']
+#     slutt_dato = konkurranse['tildato']
+    
+#     idag = datetime.date.today()
+#     antall_uker = ((slutt_dato - startdato).days + 1) // 7
+#     nåværende_uke = ((idag - startdato).days) // 7 + 1
+
+#     statuslinjer = []
+
+#     for uke_nr in range(1, nåværende_uke + 1):
+#         uke_start = startdato + datetime.timedelta(days=(uke_nr - 1) * 7)
+#         uke_slutt = uke_start + datetime.timedelta(days=6)
+        
+#         rader = app_tables.aktivitet.search(deltager=bruker,
+#                                             dato=q.between(uke_start, uke_slutt))
+        
+#         aktiviteter = [rad['aktivitet'] for rad in rader]
+#         beskrivelser = [rad['beskrivelse'] for rad in rader if rad['beskrivelse']]
+#         total_poeng = sum(rad['poeng'] for rad in rader)
+
+#         aktiviteter_tekst = ", ".join(a for a in aktiviteter if a) if aktiviteter else "ingen"
+#         beskrivelse_tekst = "; ".join(beskrivelser) if beskrivelser else ""
+
+#         statuslinjer.append(f"uke {uke_nr}: {aktiviteter_tekst} (poeng: {total_poeng})")
+#         if beskrivelse_tekst:
+#             statuslinjer.append(f"beskrivelser uke {uke_nr}: {beskrivelse_tekst}")
+    
+    
+#     # Finn brukerens plassering basert på ny score
+#     alle_poeng = hent_poengsummer()
+    
+#     # Beregn score for hver bruker
+#     for d in alle_poeng:
+#         d["score"] = (100 * (d.get("poeng", 0) + d.get("bonus", 0))) + d.get("longest_streak", 0)
+    
+#     # Sorter etter score, høyest først
+#     alle_poeng.sort(key=lambda d: d["score"], reverse=True)
+    
+#     # Finn brukerens plassering
+#     plassering = next((i + 1 for i, d in enumerate(alle_poeng) if d["email"] == bruker["email"]), None)
+#     plassering_tekst = f"\nplassering totalt: {plassering} av {len(alle_poeng)}" if plassering else "\nplassering ikke funnet"
+
+#     # Finn lagets plassering
+#     lag_resultater = hent_team_poengsummer()
+#     lag_plassering = next((i + 1 for i, d in enumerate(lag_resultater) if d["team"] == lag_navn), None)
+#     lag_tekst = f"\nlag: {lag_navn} (plassering: {lag_plassering} av {len(lag_resultater)})" if lag_navn != "Ingen lag" else ""
+
+#     # Sett sammen alt
+#     status = f"navn: {navn}{plassering_tekst}{lag_tekst}\n" + "\n".join(statuslinjer)
+#     return status
 
 @anvil.server.callable
 def beregn_plassering(email):
@@ -877,6 +938,7 @@ def nightly_streak_recalc():
     anvil.server.call('tildel_badges_for_alle_brukere')
     anvil.server.call('oppdater_poeng_og_score_for_alle')
     anvil.server.call('oppdater_team_poengsummer')
+    anvil.server.call('update_team_placements')
     
   
 
@@ -1405,3 +1467,43 @@ def update_badge(item):
 
     return badge
 
+@anvil.server.callable
+def update_team_placements():
+    from anvil.tables import app_tables
+
+    all_users = list(app_tables.userinfo.search())
+
+    # Grupper brukerne etter lag
+    teams = {}
+    for user in all_users:
+        team = user['team']
+        if team not in teams:
+            teams[team] = []
+        teams[team].append(user)
+
+    # Gå gjennom hvert lag
+    for team, members in teams.items():
+        if len(members) < 3:
+            # Mindre enn 3 medlemmer: Sett plassering 0
+            for user in members:
+                user['team_plassering'] = 0
+            continue  # Hopp til neste lag
+
+        # Ellers: sorter og gi vanlig plassering
+        sorted_members = sorted(members, key=lambda u: u['score'] or 0, reverse=True)
+
+        placement = 1
+        previous_score = None
+
+        for idx, user in enumerate(sorted_members, start=1):
+            user_score = user['score'] or 0
+
+            if user_score == previous_score:
+                # Samme score som forrige: beholder plassering
+                pass
+            else:
+                # Ny score: oppdater plassering
+                placement = idx
+
+            user['team_plassering'] = placement
+            previous_score = user_score

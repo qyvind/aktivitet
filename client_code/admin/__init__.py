@@ -239,6 +239,10 @@ class admin(adminTemplate):
   def user_badges_click(self, **event_args):
     open_form('Badger_utdelt')
 
+  def test_user_status_click(self, **event_args):
+    status = anvil.server.call('lag_status_for_bruker')
+    print(status)
+
 
 
 
