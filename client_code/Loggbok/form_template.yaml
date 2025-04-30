@@ -144,6 +144,11 @@ components_by_slot:
           name: badge_10
           properties: {height: '30', source: _/theme/icons8-trophy-80.png, tooltip: '', visible: false}
           type: Image
+        - event_bindings: {}
+          layout_properties: {}
+          name: badge_11
+          properties: {height: '30', source: _/theme/icons8-terminator-24.png, tooltip: '', visible: false}
+          type: Image
         layout_properties: {grid_position: 'IRRDUT,AHFGFP FIYLJB,VPKGHN'}
         name: badge_flow_panel
         properties: {align: center, visible: false}

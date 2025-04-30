@@ -995,6 +995,9 @@ def sjekk_og_tildel_badges(bruker):
       badge=10
       tildel_badge(bruker,badge)
 
+    if sjekk_badge_11(bruker):
+      badge=11
+      tildel_badge(bruker,badge)
 
 def tildel_badge(bruker, badge_id):
     badge = app_tables.badges.get(id=badge_id)
@@ -1349,6 +1352,29 @@ def sjekk_badge_10(bruker):
         return True
 
     print('end of routine')
+    return False
+
+def sjekk_badge_11(bruker): #Comeback
+    from datetime import timedelta
+    from anvil import app_tables
+
+    # Hent alle datoer med poeng for brukeren, sortert stigende
+    aktivitetsdatoer = sorted([
+        rad['dato'] for rad in app_tables.aktivitet.search(deltager=bruker)
+        if rad['poeng'] and rad['dato']
+    ])
+
+    if len(aktivitetsdatoer) < 2:
+        # Må ha minst én pause etter tidligere aktivitet
+        return False
+
+    # Gå gjennom datoene og se om det finnes en pause på minst 3 dager
+    for i in range(1, len(aktivitetsdatoer)):
+        forrige = aktivitetsdatoer[i - 1]
+        nåværende = aktivitetsdatoer[i]
+        if (nåværende - forrige).days >= 3:
+            return True  # Fant et comeback!
+
     return False
 
 
