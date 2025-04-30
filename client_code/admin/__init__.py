@@ -179,7 +179,13 @@ class admin(adminTemplate):
     self.team_repeating_panel.items = team_resultater
 
   def endre_konkurranse_click(self, **event_args):
-    anvil.server.call('lagre_konkurranse',self.konkurransenavn_label.text,self.fra_date_picker.date,self.til_date_picker.date)
+    svar = alert("Er du sikker på at du vil endre denne konkurransen.",
+                 buttons=["Ja", "Nei"], title="Bekreft endring")
+
+    if svar != "Ja":
+      alert("ingenting endret", title="Avbrutt") 
+    else:
+      anvil.server.call('lagre_konkurranse',self.konkurransenavn_label.text,self.fra_date_picker.date,self.til_date_picker.date)
 
   def button_3_click(self, **event_args):
     url_to_open = "https://wheelofnames.com/" 
@@ -226,12 +232,23 @@ class admin(adminTemplate):
     open_form(('admin_ny_aktivitet'))
 
   def sjekk_badges_click(self, **event_args):
-      print('sjekker badges')
+    svar = alert("Er du sikker på at du vil dele ut badges akkurat nå?",
+          buttons=["Ja", "Nei"], title="Bekreft kjøring av badgesjekk")
+
+    if svar != "Ja":
+      alert("Ingenting utført", title="Avbrutt")
+    else:
       anvil.server.call('start_badge_sjekk_manually')
       alert("Badgesjekk fullført!", title="Suksess")
 
   def button_8_click(self, **event_args):
-    anvil.server.call('nightly_streak_recalc_test')
+    svar = alert("Er du sikker på at du vil kjøre natt-rutinen akkurat nå. Den justerer poeng, badges, ligaer og regner ut score og plasseringer.",
+                 buttons=["Ja", "Nei"], title="Bekreft nattkjøring nå")
+
+    if svar != "Ja":
+      alert("ingenting endret", title="Avbrutt")  
+    else:
+      anvil.server.call('nightly_streak_recalc_test')
 
   def badges_button_click(self, **event_args):
     open_form('Badges')
@@ -242,6 +259,16 @@ class admin(adminTemplate):
   def test_user_status_click(self, **event_args):
     status = anvil.server.call('lag_status_for_bruker')
     print(status)
+
+  def test_user_status_copy_click(self, **event_args):
+    svar = alert("Er du sikker på at du vil fordele ligaer nå? Dette vil overskrive eksisterende leage-verdier.",
+                 buttons=["Ja", "Nei"], title="Bekreft fordeling")
+
+    if svar != "Ja":
+        alert("Liga-fordeling avbrutt.", title="Avbrutt")
+        return
+    anvil.server.call('fordel_league')
+    
 
 
 

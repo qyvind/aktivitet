@@ -44,15 +44,6 @@ components_by_slot:
         name: button_3
         properties: {role: tonal-button, text: Lykkehjul}
         type: Button
-      - event_bindings: {click: button_8_click}
-        layout_properties: {}
-        name: button_8
-        properties: {role: tonal-button, text: Recalc streak}
-        type: Button
-      - event_bindings: {click: sjekk_badges_click}
-        name: sjekk_badges
-        properties: {role: tonal-button, text: sjekk badges}
-        type: Button
       - event_bindings: {click: badges_button_click}
         layout_properties: {}
         name: badges_button
@@ -62,20 +53,55 @@ components_by_slot:
         name: button_6
         properties: {role: tonal-button, text: test ai}
         type: Button
-      - event_bindings: {click: user_badges_click}
-        layout_properties: {}
-        name: user_badges
-        properties: {role: tonal-button, text: Utdelte badges}
-        type: Button
       - event_bindings: {click: test_user_status_click}
         layout_properties: {}
         name: test_user_status
         properties: {role: tonal-button, text: test user status}
         type: Button
+      - event_bindings: {click: user_badges_click}
+        name: user_badges
+        properties: {role: tonal-button, text: Utdelte badges}
+        type: Button
       layout_properties: {grid_position: 'PDOHFX,TLMROV'}
       name: flow_panel_1
       properties: {align: center}
       type: FlowPanel
+    - layout_properties: {grid_position: 'JULROP,BWGUUF'}
+      name: divider_1
+      properties: {}
+      type: form:dep_91t3sowbnwbk:_Components.Divider
+    - components:
+      - components:
+        - layout_properties: {}
+          name: text_1
+          properties:
+            scale: medium
+            spacing:
+              padding: ['12', null, null, null]
+            style: label
+            text: 'Ikke rør disse uten å vite hvorfor:'
+          type: form:dep_91t3sowbnwbk:_Components.Text
+        - event_bindings: {click: test_user_status_copy_click}
+          name: test_user_status_copy
+          properties: {role: tonal-button, text: Liga-fordeling}
+          type: Button
+        - event_bindings: {click: button_8_click}
+          name: button_8
+          properties: {role: tonal-button, text: Recalc streak}
+          type: Button
+        - event_bindings: {click: sjekk_badges_click}
+          layout_properties: {}
+          name: sjekk_badges
+          properties: {align: center, role: tonal-button, text: Recalc badges}
+          type: Button
+        layout_properties: {grid_position: 'JJWONP,QJPKHW'}
+        name: flow_panel_14
+        properties: {align: center}
+        type: FlowPanel
+      layout_properties: {grid_position: 'CDDCXG,RTWLVG'}
+      name: outlined_card_1
+      properties: {role: outlined-card}
+      type: ColumnPanel
     - components:
       - components:
         - layout_properties: {}

@@ -1555,3 +1555,54 @@ def update_team_placements():
 
             user['team_plassering'] = placement
             previous_score = user_score
+
+@anvil.server.callable
+def fordel_league():
+    
+    from collections import defaultdict
+
+    # Hent league-rader 4 til 7
+    # Hent league-rader for level 4 til 7
+    leagues = app_tables.leages.search()
+    league_map = {l['level']: l for l in leagues if l['level'] in range(4, 8)}
+
+
+    # Hent alle brukere med plassering
+    brukere = [b for b in app_tables.userinfo.search() if b['plassering'] is not None]
+
+    # Grupper brukere etter plassering
+    grupper = defaultdict(list)
+    for bruker in brukere:
+        grupper[bruker['plassering']].append(bruker)
+
+    # Sorter plasseringer stigende
+    sorterte_plasseringer = sorted(grupper.keys())
+
+    total = len(brukere)
+    kvote = total / 4
+    tildelt = 0
+    league_index = 0
+    league_nivåer = [4, 5, 6, 7]
+
+    print(f"Totalt {total} brukere – ca {kvote:.1f} per league")
+
+    # Fordel gruppevis etter plassering
+    for plassering in sorterte_plasseringer:
+        gruppe = grupper[plassering]
+
+        if league_index >= len(league_nivåer):
+            print("Alle leagues fylt – resten legges i siste league")
+            league_index = len(league_nivåer) - 1
+
+        current_league = league_map[league_nivåer[league_index]]
+
+        for bruker in gruppe:
+            bruker['leage'] = current_league
+
+        tildelt += len(gruppe)
+        print(f"Tildelt {len(gruppe)} brukere med plassering {plassering} til {current_league['leage']}")
+
+        if tildelt >= (league_index + 1) * kvote:
+            league_index += 1
+
+    print("League-fordeling fullført.")
