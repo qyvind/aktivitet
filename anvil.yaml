@@ -29,7 +29,7 @@ db_schema:
   aktivitet:
     client: search
     columns:
-    - admin_ui: {width: 200}
+    - admin_ui: {order: 0, width: 100}
       name: aktivitet
       type: string
     - admin_ui: {width: 200}
