@@ -13,6 +13,7 @@ components:
         30/4 Laget en badge nr 10.
         Laget rutine for initiell liga-fordeling
         Lage en bedre Min Side med deetaljer om plassering og team.
+        Laget badge 11
     type: TextArea
   - layout_properties: {grid_position: 'DVOSAK,KDDOER'}
     name: text_area_17_copy_copy_copy_copy

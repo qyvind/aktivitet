@@ -1314,29 +1314,22 @@ def sjekk_badge_9(bruker):
 
 
 def sjekk_badge_10(bruker):
-    print('beginning of routine')
+    
     today = date.today()
-    if today.weekday() != 2:  # 6 = søndag, 2 = onsdag for testing
-        print('wrong weekday')
+    if today.weekday() != 6:  # 6 = søndag, 2 = onsdag for testing    
         return False
-
     userinfo = app_tables.userinfo.get(user=bruker)
-    if not userinfo:
-        print('No userinfo available')
+    if not userinfo:    
         return False
-
     lag = userinfo['team']
-    if not lag:
-        print('No team available')
+    if not lag:    
         return False
-
     # Bruk get_id() for å sammenligne lag
     lag_id = lag.get_id()
     medlemmer = [m for m in app_tables.userinfo.search() if m['team'] and m['team'].get_id() == lag_id]
-    print('Team:', lag['team'], '| Antall medlemmer:', len(medlemmer))
     
-    if len(medlemmer) < 3:
-        print('not 3 members in team', lag['team'])
+    
+    if len(medlemmer) < 3:    
         return False
 
     topp_plassering = [m for m in medlemmer if m['team_plassering'] == 1]
@@ -1355,8 +1348,7 @@ def sjekk_badge_10(bruker):
     return False
 
 def sjekk_badge_11(bruker): #Comeback
-    from datetime import timedelta
-    from anvil import app_tables
+
 
     # Hent alle datoer med poeng for brukeren, sortert stigende
     aktivitetsdatoer = sorted([

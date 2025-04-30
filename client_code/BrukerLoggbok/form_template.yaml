@@ -60,11 +60,27 @@ components_by_slot:
           type: Image
         - layout_properties: {width: 30}
           name: image_6
-          properties: {height: '30', source: _/theme/grey badge.png, tooltip: '', visible: false}
+          properties: {height: '30', source: _/theme/icons8-weekend-48.png, tooltip: '', visible: false}
           type: Image
         - layout_properties: {width: 30}
           name: image_7
-          properties: {height: '30', source: _/theme/grey badge.png, tooltip: '', visible: false}
+          properties: {height: '30', source: _/theme/icons8-first-48.png, tooltip: '', visible: false}
+          type: Image
+        - layout_properties: {}
+          name: image_8
+          properties: {height: '30', source: _/theme/icons8-second-place-ribbon-48.png, tooltip: '', visible: false}
+          type: Image
+        - layout_properties: {}
+          name: image_9
+          properties: {height: '30', source: _/theme/icons8-third-64.png, tooltip: '', visible: false}
+          type: Image
+        - layout_properties: {}
+          name: image_10
+          properties: {height: '30', source: _/theme/icons8-trophy-80.png, tooltip: '', visible: false}
+          type: Image
+        - layout_properties: {}
+          name: image_11
+          properties: {height: '30', source: _/theme/icons8-terminator-24.png, tooltip: '', visible: false}
           type: Image
         layout_properties: {grid_position: 'VAYYHW,KDSGPP'}
         name: badge_flow_panel
