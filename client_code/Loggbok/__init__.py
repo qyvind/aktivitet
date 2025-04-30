@@ -312,23 +312,7 @@ class Loggbok(LoggbokTemplate):
       self.vis_tildelte_badges(Globals.bruker)
 
   
-    # def vis_tildelte_badges(self, bruker):
-    #   # Skjul alle badges først
-    #   self.badge_flow_panel.visible = False
-    #   for i in range(1, 10):  # Tilpass til maks antall badges du har
-    #       badge_komponent = getattr(self, f"badge_{i}", None)
-    #       if badge_komponent:
-    #           badge_komponent.visible = False
-  
-    #   # Vis badges som brukeren har fått
-    #   user_badger = app_tables.user_badges.search(user=bruker)
-    #   for rad in user_badger:
-    #       badge = rad['badge']
-    #       badge_id = badge['id']
-    #       badge_komponent = getattr(self, f"badge_{badge_id}", None)
-    #       if badge_komponent:
-    #           self.badge_flow_panel.visible = True
-    #           badge_komponent.visible = True
+
 
     def vis_tildelte_badges(self, bruker):
         #print("▶️ Viser badges for:", bruker['email'])
@@ -611,64 +595,18 @@ class Loggbok(LoggbokTemplate):
       """This method is called when the button is clicked"""
       open_form('admin')
 
-    # def man_ikon_click(self, **event_args):
-    #   """This method is called when the button is clicked"""
-    #   print(self.man_ikon.source)
-    #   print(self.tir_ikon.source)
-    #   print(self.ons_ikon.source)
-      
 
-
-    # def velg_ikon(self, **event_args):
-    #   def mottatt_ikon(source):
-    #     self.man_ikon.source = source  # 
-    
-    #   open_form("EgendefinertIkonVelger", callback=mottatt_ikon)
 
     def button_3_click(self, **event_args):
       """This method is called when the button is clicked"""
       self.image_1.source = app_files.swimming.png
 
 
-    # def hent_week_offset(self):
-    #     user = anvil.users.get_user()
-    #     if user:
-    #         userinfo = app_tables.userinfo.get(user=user)
-    #         if userinfo and userinfo['week_offset'] is not None:
-    #             self.week_offset_label.text = userinfo['week_offset']
-    
-    # def lagre_week_offset(self):
-    #     try:
-    #         anvil.server.call("lagre_week_offset", self.week_offset_label.text)
-    #     except Exception as e:
-    #         print(f"Feil ved lagring av ukevalg: {e}")
-
     def button_1_click(self, **event_args):
       """This method is called when the button is clicked"""
       open_form(('Supertrekning'))
 
-    # def badge_1_mouse_enter(self, x, y, **event_args):
-    #   """This method is called when the mouse cursor enters this component"""
-    #   self.badge_1.source = '_/theme/icons8-three-leaf-clover-48.png'
 
-    # def badge_1_mouse_leave(self, x, y, **event_args):
-    #   """This method is called when the mouse cursor leaves this component"""
-    #   self.badge_1.source = '_/theme/icons8-three-leaf-clover-48 BW.png'
-
-    # def badge_2_mouse_enter(self, x, y, **event_args):
-    #   """This method is called when the mouse cursor enters this component"""
-    #   self.badge_2.source = '_/theme/icons8-777-48.png'
-
-    # def badge_2_mouse_leave(self, x, y, **event_args):
-    #   """This method is called when the mouse cursor leaves this component"""
-    #   self.badge_2.source = '_/theme/icons8-777-48 BW.png'
-
-    # def badge_3_mouse_enter(self, x, y, **event_args):
-    #   self.badge_3.source='_/theme/icons8-triathlon-64.png'
-
-    # def badge_3_mouse_leave(self, x, y, **event_args):
-    #   """This method is called when the mouse cursor leaves this component"""
-    #   self.badge_3.source = '_/theme/icons8-triathlon-64 BW.png'
 
     def vis_nye_badges(self,bruker):
         nye_badger = app_tables.user_badges.search(user=bruker, informert=False)
