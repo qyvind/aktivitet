@@ -995,6 +995,9 @@ def sjekk_og_tildel_badges(bruker):
       badge=10
       tildel_badge(bruker,badge)
 
+    if sjekk_badge_11(bruker):
+      badge=11
+      tildel_badge(bruker,badge)
 
 def tildel_badge(bruker, badge_id):
     badge = app_tables.badges.get(id=badge_id)
@@ -1311,29 +1314,22 @@ def sjekk_badge_9(bruker):
 
 
 def sjekk_badge_10(bruker):
-    print('beginning of routine')
+    
     today = date.today()
-    if today.weekday() != 2:  # 6 = søndag, 2 = onsdag for testing
-        print('wrong weekday')
+    if today.weekday() != 6:  # 6 = søndag, 2 = onsdag for testing    
         return False
-
     userinfo = app_tables.userinfo.get(user=bruker)
-    if not userinfo:
-        print('No userinfo available')
+    if not userinfo:    
         return False
-
     lag = userinfo['team']
-    if not lag:
-        print('No team available')
+    if not lag:    
         return False
-
     # Bruk get_id() for å sammenligne lag
     lag_id = lag.get_id()
     medlemmer = [m for m in app_tables.userinfo.search() if m['team'] and m['team'].get_id() == lag_id]
-    print('Team:', lag['team'], '| Antall medlemmer:', len(medlemmer))
     
-    if len(medlemmer) < 3:
-        print('not 3 members in team', lag['team'])
+    
+    if len(medlemmer) < 3:    
         return False
 
     topp_plassering = [m for m in medlemmer if m['team_plassering'] == 1]
@@ -1349,6 +1345,28 @@ def sjekk_badge_10(bruker):
         return True
 
     print('end of routine')
+    return False
+
+def sjekk_badge_11(bruker): #Comeback
+
+
+    # Hent alle datoer med poeng for brukeren, sortert stigende
+    aktivitetsdatoer = sorted([
+        rad['dato'] for rad in app_tables.aktivitet.search(deltager=bruker)
+        if rad['poeng'] and rad['dato']
+    ])
+
+    if len(aktivitetsdatoer) < 2:
+        # Må ha minst én pause etter tidligere aktivitet
+        return False
+
+    # Gå gjennom datoene og se om det finnes en pause på minst 3 dager
+    for i in range(1, len(aktivitetsdatoer)):
+        forrige = aktivitetsdatoer[i - 1]
+        nåværende = aktivitetsdatoer[i]
+        if (nåværende - forrige).days >= 3:
+            return True  # Fant et comeback!
+
     return False
 
 
