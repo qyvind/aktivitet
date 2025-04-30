@@ -1,11 +1,42 @@
 components:
-- layout_properties: {column: JKSDUP}
+- data_bindings:
+  - {code: 'self.item[''navn'']', property: text, writeback: false}
+  layout_properties: {column: JKSDUP}
   name: navn_label
   properties: {}
   type: Label
-- layout_properties: {column: MHDFRT}
+- data_bindings:
+  - {code: 'self.item[''poeng'']', property: text, writeback: false}
+  layout_properties: {column: MHDFRT}
   name: poeng_label
   properties: {}
   type: Label
+- data_bindings:
+  - {code: 'self.item[''bonus'']', property: text, writeback: false}
+  layout_properties: {column: JXEGFN}
+  name: bonus_label
+  properties: {}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''lengste_streak'']', property: text, writeback: false}
+  layout_properties: {column: ALHQYW}
+  name: longest_streak_label
+  properties: {}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''score'']', property: text, writeback: false}
+  layout_properties: {column: CSRZJF}
+  name: score_label
+  properties: {}
+  type: Label
+- event_bindings: {click: kikk_click}
+  layout_properties: {column: BGCHQZ}
+  name: kikk
+  properties:
+    appearance: standard
+    icon: mi:remove_red_eye
+    icon_color: blue
+    margin: ['0', '0', '0', '0']
+  type: form:dep_91t3sowbnwbk:_Components.IconButton
 container: {type: DataRowPanel}
 is_package: true

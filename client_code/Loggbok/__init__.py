@@ -474,7 +474,7 @@ class Loggbok(LoggbokTemplate):
             navn=deltagerdata['navn']
             team=deltagerdata['team']
             if deltagerdata['leage']:
-              leage_ikon = deltagerdata['leage_ikon']
+              #leage_ikon = deltagerdata['leage_ikon']
               leage = deltagerdata['leage']
             else:
               leage_ikon = " "
@@ -482,7 +482,7 @@ class Loggbok(LoggbokTemplate):
             # print(navn, team)
             self.deltager_label.text = deltagerdata['navn']
             self.team_label.text = deltagerdata['team']
-            self.leage_ikon.text = leage_ikon
+            #self.leage_ikon.text = leage_ikon
             self.leage_ikon.tooltip = f"Liga: {leage}"
 
               
