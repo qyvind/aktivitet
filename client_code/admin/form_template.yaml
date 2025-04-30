@@ -86,8 +86,9 @@ components_by_slot:
           properties: {role: tonal-button, text: Liga-fordeling}
           type: Button
         - event_bindings: {click: button_8_click}
+          layout_properties: {}
           name: button_8
-          properties: {role: tonal-button, text: Recalc streak}
+          properties: {role: tonal-button, text: Full natt-recalc}
           type: Button
         - event_bindings: {click: sjekk_badges_click}
           layout_properties: {}
