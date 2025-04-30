@@ -991,6 +991,10 @@ def sjekk_og_tildel_badges(bruker):
       badge=9
       tildel_badge(bruker,badge)
 
+    if sjekk_badge_10(bruker):
+      badge=10
+      tildel_badge(bruker,badge)
+
 
 def tildel_badge(bruker, badge_id):
     badge = app_tables.badges.get(id=badge_id)
@@ -1303,7 +1307,51 @@ def sjekk_badge_9(bruker):
     if plassering == 3:
         return True
     return False
-  
+
+
+
+def sjekk_badge_10(bruker):
+    print('beginning of routine')
+    today = date.today()
+    if today.weekday() != 2:  # 6 = søndag, 2 = onsdag for testing
+        print('wrong weekday')
+        return False
+
+    userinfo = app_tables.userinfo.get(user=bruker)
+    if not userinfo:
+        print('No userinfo available')
+        return False
+
+    lag = userinfo['team']
+    if not lag:
+        print('No team available')
+        return False
+
+    # Bruk get_id() for å sammenligne lag
+    lag_id = lag.get_id()
+    medlemmer = [m for m in app_tables.userinfo.search() if m['team'] and m['team'].get_id() == lag_id]
+    print('Team:', lag['team'], '| Antall medlemmer:', len(medlemmer))
+    
+    if len(medlemmer) < 3:
+        print('not 3 members in team', lag['team'])
+        return False
+
+    topp_plassering = [m for m in medlemmer if m['team_plassering'] == 1]
+    print(f"Antall med 1. plass: {len(topp_plassering)}")
+    for m in topp_plassering:
+        print(f"1.plass bruker: {m['user']['email']}")
+
+    bruker_epost = bruker['email']
+    brukere_med_epost = [m['user']['email'] for m in topp_plassering]
+
+    if brukere_med_epost.count(bruker_epost) == 1 and len(topp_plassering) == 1:
+        print('bingo')
+        return True
+
+    print('end of routine')
+    return False
+
+
 
 def calculate_longest_streak(user_row):
     today = date.today()

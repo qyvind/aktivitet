@@ -4,6 +4,10 @@ components:
     name: label_1
     properties: {role: headline, text: Endringslogg}
     type: Label
+  - layout_properties: {grid_position: 'ZKRXXP,THLMNF'}
+    name: text_area_17_copy_copy_copy_copy_copy
+    properties: {font_size: 10, height: 30.818206787109375, text: 30/4 Laget en badge nr 10.}
+    type: TextArea
   - layout_properties: {grid_position: 'DVOSAK,KDDOER'}
     name: text_area_17_copy_copy_copy_copy
     properties:
