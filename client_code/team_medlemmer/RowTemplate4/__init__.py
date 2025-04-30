@@ -14,8 +14,7 @@ class RowTemplate4(RowTemplate4Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    self.navn_label.text = self.item['navn']
-    self.poeng_label.text = self.item['poeng']
+
     
 
     # Any code you write here will run before the form opens.
@@ -24,4 +23,9 @@ class RowTemplate4(RowTemplate4Template):
     user = self.item['user'] 
               
     open_form("BrukerLoggbok", enuser=user)
+
+  def kikk_click(self, **event_args):
+    print(self.item)
+    open_form("BrukerLoggbok", enuser=self.item['userrecord'])
+  
     

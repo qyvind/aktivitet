@@ -21,7 +21,13 @@ class Utils:
       
     @staticmethod
     def hent_brukernavn():
-        print('Utils_hent_brukernavn')
+
+        team_plassering = None
+        team_score = None
+        team_poeng = None
+        team_longest_treak = None
+        team_members = 0
+      
         user = Globals.bruker
         if not user:
             raise Exception("Bruker ikke logget inn")
@@ -30,9 +36,15 @@ class Utils:
         
         if record is None:
             return {"navn": "", "team": "", "lock": False, "leage": "", "ikon": ""}
-    
+        
         record_dict = dict(record)
         navn = record_dict.get('navn', "")
+        plassering = record_dict.get('plassering')
+        bonus = record_dict.get('bonus')
+        longest_streak = record_dict.get('longest_streak')
+        score = record_dict.get('score')
+        poeng = record_dict.get('poeng')
+        plassering_i_team = record_dict.get('team_plassering')
     
         team_navn = ""
         lock_status = False
@@ -41,20 +53,36 @@ class Utils:
             team_row = record['team']
             team_navn = team_row['team']
             lock_status = team_row['lock']
+            team_plassering = team_row['plassering']
+            team_longest_treak = team_row['longest_streak']
+            team_score = team_row['score']
+            team_poeng = team_row['poeng']
+            team_members = team_row['members']
     
         leage_navn = ""
-        ikon_url = ""
+        #ikon_url = ""
         if record_dict.get('leage'):
             leage_row = record['leage']
             leage_navn = leage_row['leage']  # eller 'navn' hvis det er navnet på ligaen
-            ikon_url = leage_row['ikon']     # for eksempel en URL eller media-objekt
+            
     
         return {
             "navn": navn,
+            "plassering":plassering,
+            "bonus":bonus,
+            "longest_streak":longest_streak,
+            "poeng":poeng,
+            "score":score,
+            "plassering_i_team":plassering_i_team,
             "team": team_navn,
             "lock": lock_status,
             "leage": leage_navn,
-            "leage_ikon": ikon_url
+            "team_plassering":team_plassering,
+            "team_score":team_score,
+            "team_poeng":team_poeng,
+            "team_longest_streak":team_longest_treak,
+            "team_members":team_members
+            
         }
     
     @staticmethod
@@ -152,8 +180,12 @@ class Utils:
             if not bruker:
                 continue
             navn = member['navn']
-            poengsum = sum(rad['poeng'] for rad in app_tables.aktivitet.search(deltager=bruker))
-            team_liste.append({"navn": navn, "poeng": poengsum, "user": bruker})
+            poeng = member['poeng']
+            bonus = member['bonus']
+            longest_streak = member['longest_streak']
+            score = member['score']
+            
+            team_liste.append({"navn": navn, "poeng": poeng, "user": bruker, "bonus":bonus, "lengste_streak":longest_streak, "score":score,"userrecord":bruker})
 
         return team_liste
 
