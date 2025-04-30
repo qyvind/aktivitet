@@ -101,6 +101,10 @@ components:
     name: badge_9
     properties: {height: '20', source: _/theme/icons8-third-64.png, tooltip: '', visible: false}
     type: Image
+  - layout_properties: {}
+    name: badge_10
+    properties: {height: '20', source: _/theme/icons8-trophy-80.png, tooltip: '', visible: false}
+    type: Image
   layout_properties: {column: PFFFKV}
   name: badge_flow_panel
   properties: {align: left, visible: true}
