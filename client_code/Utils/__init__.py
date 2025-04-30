@@ -172,7 +172,7 @@ class Utils:
         team_record = app_tables.team.get(team=team_navn)
         if not team_record:
             return []
-
+    
         medlemmer = app_tables.userinfo.search(team=team_record)
         team_liste = []
         for member in medlemmer:
@@ -185,14 +185,23 @@ class Utils:
             longest_streak = member['longest_streak']
             score = member['score']
             
-            team_liste.append({"navn": navn, "poeng": poeng, "user": bruker, "bonus":bonus, "lengste_streak":longest_streak, "score":score,"userrecord":bruker})
-
+            team_liste.append({
+                "navn": navn,
+                "poeng": poeng,
+                "user": bruker,
+                "bonus": bonus,
+                "lengste_streak": longest_streak,
+                "score": score,
+                "userrecord": bruker
+            })
+    
+        # 🔽 Sorter listen på 'score' (høyest først), None behandles som lavest
+        team_liste.sort(key=lambda x: x['score'] if x['score'] is not None else -1, reverse=True)
+        
         return team_liste
 
-    # @staticmethod
-    # def hent_prompter():
-    #     return list(app_tables.ai_prompt.search())
 
+  
     @staticmethod
     def hent_skritt_first():
         from anvil.tables import app_tables
