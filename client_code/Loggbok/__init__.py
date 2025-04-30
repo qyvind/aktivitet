@@ -170,10 +170,16 @@ class Loggbok(LoggbokTemplate):
       slide_in = Transition(translateX=["100%", "0%"])
       out_effect = Effect(slide_out, duration=400)
       in_effect = Effect(slide_in, duration=400)
+
+      progress_slide_out = Transition(translateY=["0", "150%"])
+      progress_slide_in = Transition(translateY=["150%", "0%"])
+      down_effect = Effect(progress_slide_out, duration=400)
+      up_effect = Effect(progress_slide_in, duration=400)
       
-      
+      down_effect.animate(self.progress_card)
       out_effect.animate(self.week_row_panel).wait()  # Vent til animasjonen er ferdig
       in_effect.animate(self.week_row_panel)
+      up_effect.animate(self.progress_card)
       
       
       
@@ -183,8 +189,8 @@ class Loggbok(LoggbokTemplate):
 
     def prev_week_button_click(self, **event_args):
       
-      #fixed_animation_height = 650 # Juster denne verdien etter behov
-      #self.loggbok_card.height = fixed_animation_height
+      fixed_animation_height = 250 # Juster denne verdien etter behov
+      self.progress_card.height = fixed_animation_height
     
       # Skjul nåværende uke med en glidende ut-effekt
       slide_out = Transition(translateX=["0%", "100%"])
@@ -192,9 +198,15 @@ class Loggbok(LoggbokTemplate):
       out_effect = Effect(slide_out, duration=400)
       in_effect = Effect(slide_in, duration=400)
       
+      progress_slide_out = Transition(translateY=["0", "150%"])
+      progress_slide_in = Transition(translateY=["150%", "0%"])
+      down_effect = Effect(progress_slide_out, duration=400)
+      up_effect = Effect(progress_slide_in, duration=400)
       
+      down_effect.animate(self.progress_card)
       out_effect.animate(self.week_row_panel).wait()  # Vent til animasjonen er ferdig
       in_effect.animate(self.week_row_panel)
+      up_effect.animate(self.progress_card)
       
       Globals.week_offset -= 1
       
