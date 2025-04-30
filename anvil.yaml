@@ -133,6 +133,25 @@ db_schema:
       type: number
     server: full
     title: leages
+  league_opprykk:
+    client: none
+    columns:
+    - admin_ui: {order: 1, width: 200}
+      name: league
+      target: leages
+      type: link_single
+    - admin_ui: {order: 2, width: 200}
+      name: status
+      type: string
+    - admin_ui: {order: 3, width: 200}
+      name: notified
+      type: bool
+    - admin_ui: {order: 0, width: 200}
+      name: user
+      target: userinfo
+      type: link_single
+    server: full
+    title: league_opprykk
   ny_aktivitet:
     client: search
     columns:
