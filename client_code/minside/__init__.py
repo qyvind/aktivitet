@@ -63,7 +63,7 @@ class minside(minsideTemplate):
     team_medl = Utils.hent_teammedlemmer(mitt_team)
     
     self.team_medl_repeating_panel.items = [{"navn": member["navn"], "poeng": member["poeng"],"bonus": member["bonus"], "lengste_streak":member["lengste_streak"],"score":member["score"],"userrecord":member["userrecord"]} for member in team_medl]
-      
+    self.vis_tildelte_badges(Globals.bruker)  
     
 
   def angre_button_click(self, **event_args):
@@ -114,3 +114,17 @@ class minside(minsideTemplate):
 
   def image_mouse_leave(self, x, y, **event_args):
     anvil.js.window.document.body.style.cursor = 'default'
+
+  def vis_tildelte_badges(self, bruker):
+      #print("▶️ Viser badges for:", bruker['email'])
+  
+      user_badger = app_tables.user_badges.search(user=bruker)
+      for rad in user_badger:
+          badge = rad['badge']
+          badge_id = badge['id']
+          #print(f" - Har badge {badge_id}: {badge['name']}")
+  
+          badge_komponent = getattr(self, f"badge_{badge_id}", None)
+          if badge_komponent:
+              self.badge_flow_panel.visible = True
+              badge_komponent.visible = True
