@@ -1708,7 +1708,7 @@ def beregn_opprykk_og_nedrykk():
             )
 
 # Optimalisert nightly_streak_recalc med cache og logging
-@anvil.server.callable
+@anvil.server.background_task
 def nightly_streak_recalc():
     print("\n🌙 Starter optimalisert nattkjøring...")
     start_total = time.time()
