@@ -1744,7 +1744,16 @@ def nightly_streak_recalc():
             bonus_per_user[bruker] += badge_bonus_map.get(badge_id, 0)
         except Exception as e:
             print(f"⚠️ Feil i bonus-loop: {e}")
+          
+    # Legg til bonus fra liga_opprykk_bonus
+    opprykk_bonus_rows = app_tables.liga_opprykk_bonus.search()
+    for row in opprykk_bonus_rows:
+        bruker = row['user']
+        bonus = row['opprykk_bonus'] or 0
+        bonus_per_user[bruker] += bonus
 
+
+  
     userinfo_per_user = {r['user']: r for r in userinfo_rows if r['user'] is not None}
 
     # 3. Tildel badges
@@ -1767,7 +1776,11 @@ def nightly_streak_recalc():
         aktiviteter = aktivitet_per_user.get(bruker, [])
         total_poeng = sum(a['poeng'] or 0 for a in aktiviteter if a['dato'] and a['dato'] < today)
         longest_streak = calculate_longest_streak_from_aktiviteter(aktiviteter)
+
         bonus = bonus_per_user.get(bruker, 0)
+        userinfo['bonus'] = bonus  # <- Dette manglet tidligere
+
+      
         score = ((total_poeng + bonus) * 100) + longest_streak
         userinfo.update(poeng=total_poeng, longest_streak=longest_streak, bonus=bonus, score=score)
 
