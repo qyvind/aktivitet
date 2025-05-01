@@ -76,7 +76,7 @@ class Utils:
             "plassering_i_team":plassering_i_team,
             "team": team_navn,
             "lock": lock_status,
-            "liga": liga_navn,
+            "liga_navn": liga_navn,
             "team_plassering":team_plassering,
             "team_score":team_score,
             "team_poeng":team_poeng,
