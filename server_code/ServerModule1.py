@@ -1692,7 +1692,7 @@ def beregn_opprykk_og_nedrykk():
             antall_nedrykk = 0
 
         # Emoji-mapping
-        symboler = {'up': '👆', 'same': '👉', 'down': '👇'}
+        symboler = {'up': '⬆️', 'same': '➡️', 'down': '⬇️'}
 
         for bruker in brukere_i_liga[:antall_opprykk]:
             app_tables.league_opprykk.add_row(
