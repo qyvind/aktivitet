@@ -1769,11 +1769,14 @@ def nightly_streak_recalc():
     for bruker in user_rows:
         userinfo = userinfo_per_user.get(bruker)
         if not userinfo:
+            print('not userinfo')
             continue
+        #print(userinfo['navn'])
         aktiviteter = aktivitet_per_user.get(bruker, [])
         total_poeng = sum(a['poeng'] or 0 for a in aktiviteter if a['dato'] and a['dato'] < today)
         longest_streak = calculate_longest_streak_from_aktiviteter(aktiviteter)
-        bonus = bonus_per_user.get(bruker, 0)
+        bonus = userinfo['bonus']
+        print('tot',total_poeng,bonus,)
         score = ((total_poeng + bonus) * 100) + longest_streak
         userinfo.update(poeng=total_poeng, longest_streak=longest_streak, bonus=bonus, score=score)
 
