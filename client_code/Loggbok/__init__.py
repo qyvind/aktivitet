@@ -460,6 +460,7 @@ class Loggbok(LoggbokTemplate):
             if deltagerdata['leage']:
               leage_ikon = deltagerdata['leage_ikon']
               leage = deltagerdata['leage']
+              
             else:
               leage_ikon = " "
               leage = " "
@@ -604,8 +605,7 @@ class Loggbok(LoggbokTemplate):
 
 
     def button_1_click(self, **event_args):
-      """This method is called when the button is clicked"""
-      open_form(('Supertrekning'))
+      self.liga_image.source = "_/theme/rsz_bronse_tr.png"
 
 
 
