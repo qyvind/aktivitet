@@ -85,7 +85,7 @@ class Utils:
             "leage_ikon": ikon,
             
         }
-    
+        
     @staticmethod
     def hent_poengsummer():
         resultat = []
@@ -115,6 +115,12 @@ class Utils:
                 leage_navn = leage_row['leage']
                 ikon = leage_row['ikon']
     
+            # Hent opprykk-symbol fra league_opprykk-tabellen
+            opprykk_rad = app_tables.league_opprykk.get(user=userinfo_rad)
+            opprykk = opprykk_rad['opprykk'] if opprykk_rad else ""
+            Opprykk_status = opprykk_rad['status']
+            
+    
             resultat.append({
                 "deltager": navn,
                 "navn": navn,
@@ -127,6 +133,8 @@ class Utils:
                 "admin": admin,
                 "leage": leage_navn,
                 "leage_ikon": ikon,
+                "opprykk": opprykk,
+                "opprykk_status":Opprykk_status,
                 "user_record": deltager
             })
     

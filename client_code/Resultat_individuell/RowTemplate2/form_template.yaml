@@ -26,7 +26,16 @@ components:
     name: leage_ikon
     properties:
       spacing:
-        padding: [null, '2', null, '2']
+        padding: [null, '0', null, '2']
+      text: ''
+      visible: true
+    type: Button
+  - event_bindings: {click: leage_ikon_click}
+    layout_properties: {}
+    name: opprykk
+    properties:
+      spacing:
+        padding: [null, '2', null, '0']
       text: ''
       visible: true
     type: Button

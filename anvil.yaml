@@ -134,7 +134,7 @@ db_schema:
     server: full
     title: leages
   league_opprykk:
-    client: none
+    client: search
     columns:
     - admin_ui: {order: 1, width: 200}
       name: league
@@ -155,6 +155,18 @@ db_schema:
       type: string
     server: full
     title: league_opprykk
+  liga_opprykk_bonus:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: user
+      target: users
+      type: link_single
+    - admin_ui: {order: 1, width: 200}
+      name: opprykk_bonus
+      type: number
+    server: full
+    title: liga_opprykk_bonus
   ny_aktivitet:
     client: search
     columns:
@@ -335,8 +347,8 @@ scheduled_tasks:
 - job_id: GGPDYCYJ
   task_name: nightly_streak_recalc
   time_spec:
-    at: {hour: 4, minute: 10}
-    every: day
+    at: {minute: 18}
+    every: hour
     n: 1
 secrets:
   openai_key:

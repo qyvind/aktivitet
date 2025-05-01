@@ -20,6 +20,17 @@ class RowTemplate2(RowTemplate2Template):
     self.Deltager_label.text = self.item['deltager']
     self.leage_ikon.text = self.item['leage_ikon']
     self.leage_ikon.tooltip = f"Liga: {self.item['leage']}"
+    self.opprykk.text = self.item['opprykk']
+    opprykk_status = self.item['opprykk_status']
+    if opprykk_status=="up":
+      self.opprykk.tooltip = "Ligger an til å rykke opp i høyere liga etter denne uken"
+    elif opprykk_status == "same":
+        self.opprykk.tooltip = "Ligger ikke an til å endre lige etter denne uken"
+    elif opprykk_status == "down":
+        self.opprykk.tooltip = "Ligger an til nedrykk til lavere liga etter denne uken"
+      
+    
+    
     poeng = self.item['poeng']
     self.team_label.text = self.item['team']
     self.email.text = self.item['email']
