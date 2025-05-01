@@ -151,6 +151,19 @@ db_schema:
     - admin_ui: {order: 1, width: 200}
       name: opprykk_bonus
       type: number
+    - admin_ui: {order: 2, width: 200}
+      name: til_liga
+      target: ligaer
+      type: link_single
+    - admin_ui: {order: 3, width: 200}
+      name: informert
+      type: bool
+    - admin_ui: {order: 4, width: 200}
+      name: date
+      type: datetime
+    - admin_ui: {order: 5, width: 200}
+      name: status
+      type: string
     server: full
     title: liga_opprykk_bonus
   ligaer:

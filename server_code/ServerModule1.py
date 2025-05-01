@@ -1733,7 +1733,9 @@ def nightly_streak_recalc():
         if badge_id is not None:
             badge_bonus_map[badge_id] = b['bonus'] or 0
 
+    # Start beregning av samlet bonus per bruker
     bonus_per_user = defaultdict(int)
+    
     for row in user_badges_rows:
         try:
             bruker = row['user'] if 'user' in row else None
@@ -1741,11 +1743,19 @@ def nightly_streak_recalc():
             if not (bruker and badge and 'id' in badge):
                 continue
             badge_id = badge['id']
-            bonus_per_user[bruker] += badge_bonus_map.get(badge_id, 0)
+            bonus_per_user[bruker.get_id()] += badge_bonus_map.get(badge_id, 0)
         except Exception as e:
-            print(f"⚠️ Feil i bonus-loop: {e}")
+            print(f"⚠️ Feil i badge-bonus-loop: {e}")
+    
+    # Legg til bonus fra liga-opprykk
+    opprykk_rows = list(app_tables.liga_opprykk_bonus.search())
+    for row in opprykk_rows:
+        bruker = row['user']
+        bonus = row['opprykk_bonus'] or 0
+        bonus_per_user[bruker.get_id()] += bonus
 
-    userinfo_per_user = {r['user']: r for r in userinfo_rows if r['user'] is not None}
+    userinfo_per_user = {r['user'].get_id(): r for r in userinfo_rows if r['user'] is not None}
+
 
     # 3. Tildel badges
     print("🏅 Tildeler badges...")
@@ -1757,18 +1767,17 @@ def nightly_streak_recalc():
             print('returnert fra sjekk badges')
 
     # 4. Beregn poeng og score
-    print("📊 Oppdaterer score...")
-    today = date.today()
-
+    today = date.today() 
     for bruker in user_rows:
-        userinfo = userinfo_per_user.get(bruker)
+        userinfo = userinfo_per_user.get(bruker.get_id())
         if not userinfo:
             continue
         aktiviteter = aktivitet_per_user.get(bruker, [])
         total_poeng = sum(a['poeng'] or 0 for a in aktiviteter if a['dato'] and a['dato'] < today)
         longest_streak = calculate_longest_streak_from_aktiviteter(aktiviteter)
-        bonus = bonus_per_user.get(bruker, 0)
+        bonus = bonus_per_user.get(bruker.get_id(), 0)
         score = ((total_poeng + bonus) * 100) + longest_streak
+        print(f"🔢 {bruker['email'] if 'email' in bruker else bruker}: bonus={bonus}, poeng={total_poeng}, score={score}")
         userinfo.update(poeng=total_poeng, longest_streak=longest_streak, bonus=bonus, score=score)
 
     # 5. Sett plasseringer
@@ -1870,3 +1879,41 @@ def calculate_longest_streak_from_aktiviteter(aktiviteter):
     
     return longest
 
+import datetime
+
+@anvil.server.callable
+def gjennomfor_ligabyttene():
+    ligaer = sorted(app_tables.ligaer.search(), key=lambda l: l['level'])  # 1 = lavest, 10 = høyest
+    liga_nivåer = {liga['level']: liga for liga in ligaer}
+    max_level = max(liga_nivåer.keys())
+    nå = datetime.datetime.now()
+
+    for rad in app_tables.liga_opprykk.search():
+        userinfo_row = rad['user']
+        nåværende_liga = rad['liga']
+        status = rad['status']
+
+        if not userinfo_row or not nåværende_liga:
+            continue
+
+        if status != "up":
+            continue  # hopp over 'same' og 'down'
+
+        nåværende_level = nåværende_liga['level']
+        ny_liga = nåværende_liga
+
+        if nåværende_level < max_level:
+            ny_liga = liga_nivåer[nåværende_level + 1]
+
+        # Oppdater liga
+        userinfo_row['liga'] = ny_liga
+
+        # Lag bonus-record
+        app_tables.liga_opprykk_bonus.add_row(
+            user=userinfo_row['user'],       # Link til Users
+            opprykk_bonus=2,
+            informert=False,
+            til_liga=ny_liga,
+            status="up",
+            date=nå
+        )
