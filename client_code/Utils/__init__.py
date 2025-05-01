@@ -129,9 +129,14 @@ class Utils:
             # Hent opprykk-symbol fra liga_opprykk-tabellen
             opprykk_rad = app_tables.liga_opprykk.get(user=userinfo_rad)
             opprykk = opprykk_rad['opprykk'] if opprykk_rad else ""
-            Opprykk_status = opprykk_rad['status']
+            opprykk_status = opprykk_rad['status']  if opprykk_rad else ""
             
-    
+            if opprykk_rad:
+                opprykk_status = opprykk_rad['status']
+                # gjør noe med status...
+            else:
+                opprykk_status = None  # eller hopp over, eller sett default
+                
             resultat.append({
                 "deltager": navn,
                 "navn": navn,
@@ -145,7 +150,7 @@ class Utils:
                 "liga": liga_navn,
                 "liga_ikon": ikon,
                 "opprykk": opprykk,
-                "opprykk_status":Opprykk_status,
+                "opprykk_status":opprykk_status,
                 "user_record": deltager
             })
     
