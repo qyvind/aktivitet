@@ -28,7 +28,7 @@ components:
       spacing:
         padding: [null, '2', null, '2']
       text: ''
-      visible: false
+      visible: true
     type: Button
   - layout_properties: {width: null}
     name: Deltager_label
