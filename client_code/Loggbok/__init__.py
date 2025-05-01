@@ -470,23 +470,17 @@ class Loggbok(LoggbokTemplate):
             self.liga_ikon.text = liga_ikon
             print('liga:',liga_navn)
             if liga_navn == "Diamant":
-              source = "_/theme/liga_images/diamant.png"
-              
+              source = "_/theme/liga_images/diamant.png"              
             elif liga_navn == "Obsidian":
-              source = "_/theme/liga_images/obsidian.png"
-              
+              source = "_/theme/liga_images/obsidian.png"              
             elif liga_navn == "Perle":
               source = "_/theme/liga_images/perle.png"
-              
             elif liga_navn == "Safir":
               source = "_/theme/liga_images/safir.png"
-              
             elif liga_navn == "Sølv":
               source = "_/theme/liga_images/solv.png"
-              
             elif liga_navn == "Ametyst":
-              source = "_/theme/liga_images/ametyst.png"
-              
+              source = "_/theme/liga_images/ametyst.png"  
             elif liga_navn == "Bronse":
               source = "_/theme/liga_images/bronse.png"
             elif liga_navn == "Gull":
@@ -497,6 +491,8 @@ class Loggbok(LoggbokTemplate):
               source = "_/theme/liga_images/smaagd.png"
             self.liga_image.source = source
             self.liga_image_copy.source = source
+            self.liga_image.tooltip = f"Liga: {liga_navn}"
+            self.liga_image_copy.tooltip = f"Liga: {liga_navn}"
               
             self.liga_ikon.tooltip = f"Liga: {liga_navn}"
             

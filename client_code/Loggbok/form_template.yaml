@@ -64,9 +64,6 @@ components_by_slot:
                   text: x
                   visible: false
                 type: Button
-              - name: liga_image_2
-                properties: {height: 48.399993896484375, source: '', visible: true}
-                type: Image
               - layout_properties: {width: 46}
                 name: liga_image_copy
                 properties: {height: '45', source: '', visible: true}
