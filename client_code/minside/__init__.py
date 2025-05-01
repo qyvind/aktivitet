@@ -22,11 +22,14 @@ class minside(minsideTemplate):
   def fyll_minside(self, **properties): 
     user = Globals.bruker
     deltagerdata= Utils.hent_brukernavn()
+
+    
     
     self.poeng.text = deltagerdata['poeng']
     self.bonus.text = deltagerdata['bonus']
     self.longest_streak.text = deltagerdata['longest_streak']
     self.score.text = deltagerdata['score']
+    self.liga_navn.text = deltagerdata['liga_navn']
     antall_deltagere = len(app_tables.userinfo.search())
     self.plassering.text = f"{deltagerdata['plassering']}/{antall_deltagere}"    
     antall_teams =  len(app_tables.team.search())
@@ -38,7 +41,40 @@ class minside(minsideTemplate):
       self.team_card.visible=False 
     else:
       self.team_card.visible = True
-    
+
+    liganavn=self.liga_navn.text
+    if liganavn == "Diamant":
+      source = "_/theme/liga_images/diamant.png"              
+    elif liganavn == "Obsidian":
+      source = "_/theme/liga_images/obsidian.png"              
+    elif liganavn == "Perle":
+      source = "_/theme/liga_images/perle.png"
+    elif liganavn == "Safir":
+      source = "_/theme/liga_images/safir.png"
+    elif liganavn == "Sølv":
+      source = "_/theme/liga_images/solv.png"
+    elif liganavn == "Ametyst":
+      source = "_/theme/liga_images/ametyst.png"  
+    elif liganavn == "Bronse":
+      source = "_/theme/liga_images/bronse.png"
+    elif liganavn == "Gull":
+      source = "_/theme/liga_images/gull.png"
+    elif liganavn == "Rubin":
+      source = "_/theme/liga_images/rubin.png"
+    elif liganavn == "Smaragd":
+      source = "_/theme/liga_images/smaagd.png"
+    self.liga_image.source = source
+    self.liga_image.tooltip = f"Liga: {liganavn}"
+
+    self.opprykk_symbol.text = deltagerdata['opprykk_symbol']
+    status = deltagerdata['opprykk_status']
+    if status == "up":
+      self.opprykk_beskrivelse.text = "Du ligger an til å rykke opp en liga etter denne uken. Det vil gi deg ekstra bonuspoeng"
+    elif status == "down":
+      self.opprykk_beskrivelse.text = "Du risikerer å rykke ned en liga etter denne uken. Kanskje du kan gjøre noe med det?"
+    elif status == "same":
+      self.opprykk_beskrivelse.text = "Du ser ut til å bli værende i denne ligaen etter denne uken."
+
     
     navn=deltagerdata['navn']
     mitt_team=deltagerdata['team']

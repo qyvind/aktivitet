@@ -65,6 +65,16 @@ class Utils:
             liga_row = record['liga']
             liga_navn = liga_row['liga'] 
             ikon = liga_row['ikon']
+
+        # Hent opprykk-status for denne brukeren, hvis den finnes
+        opprykk_row = app_tables.liga_opprykk.get(user=record)
+        status = ""
+        opprykk_symbol = ""
+        if opprykk_row:
+            status = opprykk_row['status']
+            opprykk_symbol = opprykk_row['opprykk'] 
+
+      
     
         return {
             "navn": navn,
@@ -83,7 +93,8 @@ class Utils:
             "team_longest_streak":team_longest_treak,
             "team_members":team_members,
             "liga_ikon": ikon,
-            
+            "opprykk_status": status,
+            "opprykk_symbol": opprykk_symbol,            
         }
         
     @staticmethod

@@ -186,6 +186,7 @@ class BrukerLoggbok(BrukerLoggbokTemplate):
                 if userinfo:
                     self.deltager_label.text = userinfo['navn']
                     self.team_label.text = userinfo['team']['team'] if userinfo['team'] else "Uten team"
+                
 
     def logout_click(self, **event_args):
       """This method is called when the button is clicked"""
