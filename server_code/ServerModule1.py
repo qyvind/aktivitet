@@ -939,6 +939,10 @@ def nightly_streak_recalc():
     anvil.server.call('oppdater_poeng_og_score_for_alle')
     anvil.server.call('oppdater_team_poengsummer')
     anvil.server.call('update_team_placements')
+    anvil.server.call('tildel_badges_for_alle_brukere')
+    anvil.server.call('oppdater_poeng_og_score_for_alle')
+    anvil.server.call('oppdater_team_poengsummer')
+    anvil.server.call('update_team_placements')
     
   
 
