@@ -268,7 +268,10 @@ class admin(adminTemplate):
         alert("Liga-fordeling avbrutt.", title="Avbrutt")
         return
     anvil.server.call('fordel_league')
-    
+
+  def liga_opprykk_click(self, **event_args):
+      anvil.server.call('beregn_opprykk_og_nedrykk')
+
 
 
 

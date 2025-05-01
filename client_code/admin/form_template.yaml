@@ -86,13 +86,19 @@ components_by_slot:
           properties: {role: tonal-button, text: Liga-fordeling}
           type: Button
         - event_bindings: {click: button_8_click}
+          layout_properties: {}
           name: button_8
-          properties: {role: tonal-button, text: Recalc streak}
+          properties: {role: tonal-button, text: Full natt-recalc}
           type: Button
         - event_bindings: {click: sjekk_badges_click}
           layout_properties: {}
           name: sjekk_badges
           properties: {align: center, role: tonal-button, text: Recalc badges}
+          type: Button
+        - event_bindings: {click: liga_opprykk_click}
+          layout_properties: {}
+          name: liga_opprykk
+          properties: {align: center, role: tonal-button, text: Liga opprykk}
           type: Button
         layout_properties: {grid_position: 'JJWONP,QJPKHW'}
         name: flow_panel_14

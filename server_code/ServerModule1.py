@@ -939,6 +939,10 @@ def nightly_streak_recalc():
     anvil.server.call('oppdater_poeng_og_score_for_alle')
     anvil.server.call('oppdater_team_poengsummer')
     anvil.server.call('update_team_placements')
+    anvil.server.call('tildel_badges_for_alle_brukere')
+    anvil.server.call('oppdater_poeng_og_score_for_alle')
+    anvil.server.call('oppdater_team_poengsummer')
+    anvil.server.call('update_team_placements')
     
   
 
@@ -1624,3 +1628,40 @@ def fordel_league():
             league_index += 1
 
     print("League-fordeling fullført.")
+
+@anvil.server.callable
+def beregn_opprykk_og_nedrykk():
+    # Tøm tidligere rader
+    for rad in app_tables.league_opprykk.search():
+        rad.delete()
+
+    # Hent ligaer sortert fra dårligst til best (1 = Bronse, 10 = Diamant)
+    ligaer = sorted(app_tables.leages.search(), key=lambda l: l['level'])
+
+    max_level = max(l['level'] for l in ligaer)
+    min_level = min(l['level'] for l in ligaer)
+
+    for liga in ligaer:
+        brukere_i_liga = [u for u in app_tables.userinfo.search() if u['leage'] == liga]
+        antall = len(brukere_i_liga)
+        if antall < 2:
+            continue
+
+        # Sortér etter plassering: lavest tall = best
+        brukere_i_liga.sort(key=lambda u: u['plassering'])
+
+        antall_opprykk = max(1, round(antall * 0.2))
+        antall_nedrykk = max(1, round(antall * 0.2))
+
+        if liga['level'] == max_level:
+            antall_opprykk = 0  # Ingen over Diamant
+        if liga['level'] == min_level:
+            antall_nedrykk = 0  # Ingen under Bronse
+
+        # Merk brukere
+        for bruker in brukere_i_liga[:antall_opprykk]:
+            app_tables.league_opprykk.add_row(user=bruker, league=liga, status='up', notified=False)
+        for bruker in brukere_i_liga[-antall_nedrykk:]:
+            app_tables.league_opprykk.add_row(user=bruker, league=liga, status='down', notified=False)
+        for bruker in brukere_i_liga[antall_opprykk:-antall_nedrykk]:
+            app_tables.league_opprykk.add_row(user=bruker, league=liga, status='same', notified=False)
