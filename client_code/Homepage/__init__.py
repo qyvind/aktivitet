@@ -23,7 +23,7 @@ class Homepage(HomepageTemplate):
       self.admin_button.visible = False
 
     qf = anvil.users.get_user()
-    if qf['email']=="qyvindf@gmail.com":
+    if qf and qf['email']=="qyvindf@gmail.com":
       self.admin_button.visible = True
       
 
