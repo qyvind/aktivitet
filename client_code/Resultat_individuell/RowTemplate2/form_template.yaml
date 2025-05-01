@@ -15,7 +15,7 @@ components:
       icon: fa:eye
       spacing:
         margin: ['0', null, '0', null]
-        padding: [0, '0', '0', '2']
+        padding: ['8', '0', '0', '2']
       spacing_above: none
       spacing_below: none
       text: ''
