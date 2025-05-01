@@ -150,6 +150,9 @@ db_schema:
       name: user
       target: userinfo
       type: link_single
+    - admin_ui: {order: 4, width: 200}
+      name: opprykk
+      type: string
     server: full
     title: league_opprykk
   ny_aktivitet:
