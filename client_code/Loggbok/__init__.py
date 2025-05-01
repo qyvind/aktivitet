@@ -470,25 +470,33 @@ class Loggbok(LoggbokTemplate):
             self.liga_ikon.text = liga_ikon
             print('liga:',liga_navn)
             if liga_navn == "Diamant":
-              self.liga_image.source = "_/theme/liga_images/diamant.png"
+              source = "_/theme/liga_images/diamant.png"
+              
             elif liga_navn == "Obsidian":
-              self.liga_image.source = "_/theme/liga_images/obsidian.png"
+              source = "_/theme/liga_images/obsidian.png"
+              
             elif liga_navn == "Perle":
-              self.liga_image.source = "_/theme/liga_images/perle.png"
+              source = "_/theme/liga_images/perle.png"
+              
             elif liga_navn == "Safir":
-              self.liga_image.source = "_/theme/liga_images/safir.png"
+              source = "_/theme/liga_images/safir.png"
+              
             elif liga_navn == "Sølv":
-              self.liga_image.source = "_/theme/liga_images/solv.png"
+              source = "_/theme/liga_images/solv.png"
+              
             elif liga_navn == "Ametyst":
-              self.liga_image.source = "_/theme/liga_images/ametyst.png"
+              source = "_/theme/liga_images/ametyst.png"
+              
             elif liga_navn == "Bronse":
-              self.liga_image.source = "_/theme/liga_images/bronse.png"
+              source = "_/theme/liga_images/bronse.png"
             elif liga_navn == "Gull":
-              self.liga_image.source = "_/theme/liga_images/gull.png"
+              source = "_/theme/liga_images/gull.png"
             elif liga_navn == "Rubin":
-              self.liga_image.source = "_/theme/liga_images/rubin.png"
+              source = "_/theme/liga_images/rubin.png"
             elif liga_navn == "Smaragd":
-              self.liga_image.source = "_/theme/liga_images/smaagd.png"
+              source = "_/theme/liga_images/smaagd.png"
+            self.liga_image.source = source
+            self.liga_image_copy.source = source
               
             self.liga_ikon.tooltip = f"Liga: {liga_navn}"
             

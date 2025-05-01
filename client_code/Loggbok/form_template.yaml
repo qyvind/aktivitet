@@ -62,8 +62,15 @@ components_by_slot:
                   spacing:
                     padding: ['4', '2', null, '2']
                   text: x
-                  visible: true
+                  visible: false
                 type: Button
+              - name: liga_image_2
+                properties: {height: 48.399993896484375, source: '', visible: true}
+                type: Image
+              - layout_properties: {width: 46}
+                name: liga_image_copy
+                properties: {height: '45', source: '', visible: true}
+                type: Image
               - event_bindings: {click: deltager_label_click}
                 layout_properties: {}
                 name: deltager_label
@@ -86,7 +93,7 @@ components_by_slot:
               type: FlowPanel
             - layout_properties: {width: 45.5875244140625}
               name: liga_image
-              properties: {height: 48.399993896484375, source: '', visible: true}
+              properties: {height: '45', source: '', visible: true}
               type: Image
             layout_properties: {grid_position: 'KWZNHX,RRCDZN MSMOMO,YMBRMH'}
             name: flow_panel_3
@@ -161,7 +168,7 @@ components_by_slot:
           type: ColumnPanel
         layout_properties: {grid_position: 'LHYWHI,QBMMAK'}
         name: flow_panel_7
-        properties: {}
+        properties: {align: center}
         type: FlowPanel
       layout_properties: {grid_position: 'OBZRZB,EXECSB'}
       name: outlined_card_2
