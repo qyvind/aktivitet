@@ -60,11 +60,11 @@ class Utils:
             team_members = team_row['members']
     
         leage_navn = ""
-        #ikon_url = ""
+        #ikon = ""
         if record_dict.get('leage'):
             leage_row = record['leage']
-            leage_navn = leage_row['leage']  # eller 'navn' hvis det er navnet på ligaen
-            
+            leage_navn = leage_row['leage'] 
+            ikon = leage_row['ikon']
     
         return {
             "navn": navn,
@@ -81,10 +81,11 @@ class Utils:
             "team_score":team_score,
             "team_poeng":team_poeng,
             "team_longest_streak":team_longest_treak,
-            "team_members":team_members
+            "team_members":team_members,
+            "leage_ikon": ikon,
             
         }
-    
+        
     @staticmethod
     def hent_poengsummer():
         resultat = []
@@ -114,6 +115,12 @@ class Utils:
                 leage_navn = leage_row['leage']
                 ikon = leage_row['ikon']
     
+            # Hent opprykk-symbol fra league_opprykk-tabellen
+            opprykk_rad = app_tables.league_opprykk.get(user=userinfo_rad)
+            opprykk = opprykk_rad['opprykk'] if opprykk_rad else ""
+            Opprykk_status = opprykk_rad['status']
+            
+    
             resultat.append({
                 "deltager": navn,
                 "navn": navn,
@@ -126,6 +133,8 @@ class Utils:
                 "admin": admin,
                 "leage": leage_navn,
                 "leage_ikon": ikon,
+                "opprykk": opprykk,
+                "opprykk_status":Opprykk_status,
                 "user_record": deltager
             })
     

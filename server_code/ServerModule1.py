@@ -14,7 +14,9 @@ from datetime import date, timedelta
 import datetime
 import openai
 from anvil.secrets import get_secret
-from datetime import date, timedelta
+import time
+from collections import defaultdict
+
 
 
 @anvil.server.callable
@@ -933,16 +935,14 @@ def legg_til_prompt(prompt_tekst):
 
 
 
-@anvil.server.background_task
-def nightly_streak_recalc():
-    anvil.server.call('tildel_badges_for_alle_brukere')
-    anvil.server.call('oppdater_poeng_og_score_for_alle')
-    anvil.server.call('oppdater_team_poengsummer')
-    anvil.server.call('update_team_placements')
-    anvil.server.call('tildel_badges_for_alle_brukere')
-    anvil.server.call('oppdater_poeng_og_score_for_alle')
-    anvil.server.call('oppdater_team_poengsummer')
-    anvil.server.call('update_team_placements')
+# @anvil.server.background_task
+# def nightly_streak_recalc():
+#     anvil.server.call('tildel_badges_for_alle_brukere')
+#     anvil.server.call('oppdater_poeng_og_score_for_alle')
+#     anvil.server.call('oppdater_team_poengsummer')
+#     anvil.server.call('update_team_placements')
+#     anvil.server.call('beregn_opprykk_og_nedrykk')
+
     
   
 
@@ -958,50 +958,50 @@ def tildel_badges_for_alle_brukere():
     for bruker in app_tables.users.search():
         sjekk_og_tildel_badges(bruker)
 
-def sjekk_og_tildel_badges(bruker):
-    if sjekk_badge_1(bruker):
-        badge=1
-        tildel_badge(bruker,badge)
+# def sjekk_og_tildel_badges(bruker):
+#     if sjekk_badge_1(bruker):
+#         badge=1
+#         tildel_badge(bruker,badge)
 
-    if sjekk_badge_2(bruker):
-      badge=2
-      tildel_badge(bruker,badge)
+#     if sjekk_badge_2(bruker):
+#       badge=2
+#       tildel_badge(bruker,badge)
 
-    if sjekk_badge_3(bruker):
-      badge=3
-      tildel_badge(bruker,badge)
+#     if sjekk_badge_3(bruker):
+#       badge=3
+#       tildel_badge(bruker,badge)
 
-    if sjekk_badge_4(bruker):
-      badge=4
-      tildel_badge(bruker,badge)
+#     if sjekk_badge_4(bruker):
+#       badge=4
+#       tildel_badge(bruker,badge)
 
-    if sjekk_badge_5(bruker):
-      badge=5
-      tildel_badge(bruker,badge)
+#     if sjekk_badge_5(bruker):
+#       badge=5
+#       tildel_badge(bruker,badge)
 
-    if sjekk_badge_6(bruker):
-      badge=6
-      tildel_badge(bruker,badge)
+#     if sjekk_badge_6(bruker):
+#       badge=6
+#       tildel_badge(bruker,badge)
       
-    if sjekk_badge_7(bruker):
-      badge=7
-      tildel_badge(bruker,badge)
+#     if sjekk_badge_7(bruker):
+#       badge=7
+#       tildel_badge(bruker,badge)
 
-    if sjekk_badge_8(bruker):
-      badge=8
-      tildel_badge(bruker,badge)
+#     if sjekk_badge_8(bruker):
+#       badge=8
+#       tildel_badge(bruker,badge)
 
-    if sjekk_badge_9(bruker):
-      badge=9
-      tildel_badge(bruker,badge)
+#     if sjekk_badge_9(bruker):
+#       badge=9
+#       tildel_badge(bruker,badge)
 
-    if sjekk_badge_10(bruker):
-      badge=10
-      tildel_badge(bruker,badge)
+#     if sjekk_badge_10(bruker):
+#       badge=10
+#       tildel_badge(bruker,badge)
 
-    if sjekk_badge_11(bruker):
-      badge=11
-      tildel_badge(bruker,badge)
+#     if sjekk_badge_11(bruker):
+#       badge=11
+#       tildel_badge(bruker,badge)
 
 def tildel_badge(bruker, badge_id):
     badge = app_tables.badges.get(id=badge_id)
@@ -1375,87 +1375,121 @@ def sjekk_badge_11(bruker): #Comeback
 
 
 
-def calculate_longest_streak(user_row):
-    today = date.today()
-    aktiviteter = app_tables.aktivitet.search(deltager=user_row)
-    aktive_dager = {
-        row['dato']
-        for row in aktiviteter
-        if row['poeng'] > 0 and row['dato'] < today
-    }
+# def calculate_longest_streak(user_row):
+#     today = date.today()
+#     aktiviteter = app_tables.aktivitet.search(deltager=user_row)
+#     aktive_dager = {
+#         row['dato']
+#         for row in aktiviteter
+#         if row['poeng'] > 0 and row['dato'] < today
+#     }
 
-    if not aktive_dager:
-        return 0
+#     if not aktive_dager:
+#         return 0
 
-    dager = sorted(aktive_dager, reverse=True)
-    longest = 0
-    current = 0
-    prev_day = None
+#     dager = sorted(aktive_dager, reverse=True)
+#     longest = 0
+#     current = 0
+#     prev_day = None
 
-    for d in dager:
-        if prev_day is None or prev_day - d == timedelta(days=1):
-            current += 1
-        else:
-            current = 1
-        longest = max(longest, current)
-        prev_day = d
+#     for d in dager:
+#         if prev_day is None or prev_day - d == timedelta(days=1):
+#             current += 1
+#         else:
+#             current = 1
+#         longest = max(longest, current)
+#         prev_day = d
 
-    return longest
+#     return longest
 
 
 
+
+# @anvil.server.callable
+# def oppdater_poeng_og_score_for_alle():
+#     today = date.today()
+
+#     anvil.server.call('beregn_bonus_fra_badges')
+#     # Først oppdaterer vi poeng, streak, bonus og score
+#     for userinfo in app_tables.userinfo.search():
+#         user_row = userinfo['user']  # Raden i Users-tabellen
+
+#         if not user_row:
+#             continue  # Hopper over hvis user er None
+        
+#         aktiviteter = app_tables.aktivitet.search(deltager=user_row)
+        
+#         total_poeng = sum(
+#             row['poeng'] for row in aktiviteter if row['dato'] < today
+#         )
+
+
+      
+#         longest_streak = calculate_longest_streak(user_row)
+#         bonus = userinfo['bonus'] or 0
+        
+
+#         bonus = bonus or 0
+#         total_poeng = total_poeng or 0
+#         longest_streak = longest_streak or 0
+#         score = ((total_poeng + bonus) * 100) + longest_streak
+#         print('score ',score, total_poeng, bonus, longest_streak)
+        
+#         userinfo.update(
+#             poeng=total_poeng,
+#             longest_streak=longest_streak,
+#             bonus=bonus,
+#             score=score
+#         )
+
+#     # Nå lager vi en liste over alle brukere, sortert etter score
+#     userinfo_list = list(app_tables.userinfo.search())
+#     userinfo_list.sort(key=lambda u: u['score'] or 0, reverse=True)  # Sorter synkende på score
+
+#     # Deretter setter vi plasseringer
+#     plassering = 1
+#     for idx, userinfo in enumerate(userinfo_list):
+#         if idx == 0:
+#             current_rank = plassering
+#         else:
+#             previous_user = userinfo_list[idx - 1]
+#             if userinfo['score'] == previous_user['score']:
+#                 # Hvis samme score som forrige, samme plassering
+#                 pass
+#             else:
+#                 # Ellers oppdaterer vi plasseringen basert på antall foran
+#                 plassering = idx + 1
+#             current_rank = plassering
+        
+#         userinfo.update(plassering=current_rank)
 
 @anvil.server.callable
-def oppdater_poeng_og_score_for_alle():
-    today = date.today()
-    
-    # Først oppdaterer vi poeng, streak, bonus og score
-    for userinfo in app_tables.userinfo.search():
-        user_row = userinfo['user']  # Raden i Users-tabellen
+def beregn_bonus_fra_badges():
+    print('beregner bonus fra badges')
 
-        if not user_row:
-            continue  # Hopper over hvis user er None
-        
-        aktiviteter = app_tables.aktivitet.search(deltager=user_row)
-        
-        total_poeng = sum(
-            row['poeng'] for row in aktiviteter if row['dato'] < today
-        )
-        
-        longest_streak = calculate_longest_streak(user_row)
-        bonus = userinfo['bonus'] or 0
-        
-        score = ((total_poeng + bonus) * 100) + longest_streak
-        print('score ',score, total_poeng, bonus, longest_streak)
-        
-        userinfo.update(
-            poeng=total_poeng,
-            longest_streak=longest_streak,
-            bonus=bonus,
-            score=score
-        )
+    from collections import defaultdict
 
-    # Nå lager vi en liste over alle brukere, sortert etter score
-    userinfo_list = list(app_tables.userinfo.search())
-    userinfo_list.sort(key=lambda u: u['score'] or 0, reverse=True)  # Sorter synkende på score
+    # Samle badges per bruker
+    bruker_badge_bonus = defaultdict(int)
 
-    # Deretter setter vi plasseringer
-    plassering = 1
-    for idx, userinfo in enumerate(userinfo_list):
-        if idx == 0:
-            current_rank = plassering
+    for rad in app_tables.user_badges.search():
+        bruker = rad['user']
+        badge = rad['badge']
+        if not bruker or not badge:
+            continue
+
+        badge_bonus = badge['bonus'] or 0
+        bruker_badge_bonus[bruker] += badge_bonus
+
+    # Oppdater userinfo-tabellen
+    for bruker, total_bonus in bruker_badge_bonus.items():
+        userinfo = app_tables.userinfo.get(user=bruker)
+        if userinfo:
+            userinfo['bonus'] = total_bonus
         else:
-            previous_user = userinfo_list[idx - 1]
-            if userinfo['score'] == previous_user['score']:
-                # Hvis samme score som forrige, samme plassering
-                pass
-            else:
-                # Ellers oppdaterer vi plasseringen basert på antall foran
-                plassering = idx + 1
-            current_rank = plassering
-        
-        userinfo.update(plassering=current_rank)
+            print(f"Fant ikke userinfo for bruker: {bruker['email']}")
 
+    print(f"Oppdatert bonus for {len(bruker_badge_bonus)} brukere.")
 
 
 @anvil.server.callable
@@ -1635,7 +1669,7 @@ def beregn_opprykk_og_nedrykk():
     for rad in app_tables.league_opprykk.search():
         rad.delete()
 
-    # Hent ligaer sortert fra dårligst til best (1 = Bronse, 10 = Diamant)
+    # Hent ligaer sortert fra dårligst til best
     ligaer = sorted(app_tables.leages.search(), key=lambda l: l['level'])
 
     max_level = max(l['level'] for l in ligaer)
@@ -1647,21 +1681,192 @@ def beregn_opprykk_og_nedrykk():
         if antall < 2:
             continue
 
-        # Sortér etter plassering: lavest tall = best
         brukere_i_liga.sort(key=lambda u: u['plassering'])
 
         antall_opprykk = max(1, round(antall * 0.2))
         antall_nedrykk = max(1, round(antall * 0.2))
 
         if liga['level'] == max_level:
-            antall_opprykk = 0  # Ingen over Diamant
+            antall_opprykk = 0
         if liga['level'] == min_level:
-            antall_nedrykk = 0  # Ingen under Bronse
+            antall_nedrykk = 0
 
-        # Merk brukere
+        # Emoji-mapping
+        symboler = {'up': '👆', 'same': '👉', 'down': '👇'}
+
         for bruker in brukere_i_liga[:antall_opprykk]:
-            app_tables.league_opprykk.add_row(user=bruker, league=liga, status='up', notified=False)
+            app_tables.league_opprykk.add_row(
+                user=bruker, league=liga, status='up', opprykk=symboler['up'], notified=False
+            )
         for bruker in brukere_i_liga[-antall_nedrykk:]:
-            app_tables.league_opprykk.add_row(user=bruker, league=liga, status='down', notified=False)
+            app_tables.league_opprykk.add_row(
+                user=bruker, league=liga, status='down', opprykk=symboler['down'], notified=False
+            )
         for bruker in brukere_i_liga[antall_opprykk:-antall_nedrykk]:
-            app_tables.league_opprykk.add_row(user=bruker, league=liga, status='same', notified=False)
+            app_tables.league_opprykk.add_row(
+                user=bruker, league=liga, status='same', opprykk=symboler['same'], notified=False
+            )
+
+# Optimalisert nightly_streak_recalc med cache og logging
+@anvil.server.callable
+def nightly_streak_recalc():
+    print("\n🌙 Starter optimalisert nattkjøring...")
+    start_total = time.time()
+
+    # 1. Hent alle nødvendige rader
+    user_rows = [u for u in app_tables.users.search() if u is not None]
+    userinfo_rows = list(app_tables.userinfo.search())
+    aktivitet_rows = list(app_tables.aktivitet.search())
+    user_badges_rows = list(app_tables.user_badges.search())
+    badges_rows = list(app_tables.badges.search())
+
+    # 2. Lag oppslag for aktiviteter og badge-bonus
+    aktivitet_per_user = defaultdict(list)
+    for a in aktivitet_rows:
+        deltager = a['deltager']
+        if deltager:
+            aktivitet_per_user[deltager].append(a)
+
+    badge_bonus_map = {}
+    for b in badges_rows:
+        badge_id = b['id'] if 'id' in b else None
+        if badge_id is not None:
+            badge_bonus_map[badge_id] = b['bonus'] or 0
+
+    bonus_per_user = defaultdict(int)
+    for row in user_badges_rows:
+        try:
+            bruker = row['user'] if 'user' in row else None
+            badge = row['badge'] if 'badge' in row else None
+            if not (bruker and badge and 'id' in badge):
+                continue
+            badge_id = badge['id']
+            bonus_per_user[bruker] += badge_bonus_map.get(badge_id, 0)
+        except Exception as e:
+            print(f"⚠️ Feil i bonus-loop: {e}")
+
+    userinfo_per_user = {r['user']: r for r in userinfo_rows if r['user'] is not None}
+
+    # 3. Tildel badges
+    print("🏅 Tildeler badges...")
+    for bruker in user_rows:
+        aktiviteter = aktivitet_per_user.get(bruker, [])
+        userinfo = userinfo_per_user.get(bruker)
+        if userinfo:
+            sjekk_og_tildel_badges_optimalisert(bruker, userinfo, aktiviteter)
+            print('returnert fra sjekk badges')
+
+    # 4. Beregn poeng og score
+    print("📊 Oppdaterer score...")
+    today = date.today()
+
+    for bruker in user_rows:
+        userinfo = userinfo_per_user.get(bruker)
+        if not userinfo:
+            continue
+        aktiviteter = aktivitet_per_user.get(bruker, [])
+        total_poeng = sum(a['poeng'] or 0 for a in aktiviteter if a['dato'] and a['dato'] < today)
+        longest_streak = calculate_longest_streak_from_aktiviteter(aktiviteter)
+        bonus = bonus_per_user.get(bruker, 0)
+        score = ((total_poeng + bonus) * 100) + longest_streak
+        userinfo.update(poeng=total_poeng, longest_streak=longest_streak, bonus=bonus, score=score)
+
+    # 5. Sett plasseringer
+    brukere_med_score = [u for u in userinfo_rows if u['score'] is not None]
+    brukere_med_score.sort(key=lambda u: u['score'], reverse=True)
+    plassering = 1
+    for idx, userinfo in enumerate(brukere_med_score):
+        if idx > 0 and userinfo['score'] != brukere_med_score[idx - 1]['score']:
+            plassering = idx + 1
+        userinfo['plassering'] = plassering
+
+    # 6. Oppdater lag og liga
+    print("➡️ Kaller oppdater_team_poengsummer")
+    anvil.server.call('oppdater_team_poengsummer')
+
+    print("➡️ Kaller beregn bonus fra badges")
+    anvil.server.call('beregn_bonus_fra_badges')
+    
+    print("➡️ Kaller update_team_placements")
+    anvil.server.call('update_team_placements')
+    
+    print("➡️ Kaller beregn_opprykk_og_nedrykk")
+    anvil.server.call('beregn_opprykk_og_nedrykk')
+
+    print(f"✅ Nattkjøring ferdig på {time.time() - start_total:.2f} sekunder.")
+
+
+
+def sjekk_og_tildel_badges_optimalisert(bruker, userinfo, aktiviteter):
+    if not bruker or not userinfo:
+        return
+    print('sjekk badge1')
+    if sjekk_badge_1(bruker): tildel_badge(bruker, 1)
+    print('sjekk badge2')
+    if sjekk_badge_2(bruker): tildel_badge(bruker, 2)
+    print('sjekk badge3')
+    if sjekk_badge_3(aktiviteter): tildel_badge(bruker, 3)
+    print('sjekk badge4')
+    if sjekk_badge_4(aktiviteter): tildel_badge(bruker, 4)
+    print('sjekk badge5')  
+    if sjekk_badge_5(aktiviteter): tildel_badge(bruker, 5)
+    print('sjekk badge6')
+    if sjekk_badge_6(aktiviteter): tildel_badge(bruker, 6)
+
+
+def sjekk_badge_3(aktiviteter):
+    ikoner = {akt['ikon'] for akt in aktiviteter if akt['ikon']}
+    return 'sykling' in ikoner and 'svømming' in ikoner and 'løp' in ikoner
+
+
+def sjekk_badge_4(aktiviteter):
+    teller = defaultdict(int)
+    for akt in aktiviteter:
+        navn = akt['aktivitet']
+        if navn and "Skritt" not in navn:
+            teller[navn] += 1
+    return any(antall >= 8 for antall in teller.values())
+
+
+def sjekk_badge_5(aktiviteter):
+    teller = defaultdict(int)
+    for akt in aktiviteter:
+        navn = akt['aktivitet']
+        if navn and "Skritt" not in navn:
+            teller[navn] += 1
+    return any(antall >= 24 for antall in teller.values())
+
+
+def sjekk_badge_6(aktiviteter):
+    helgepoeng = defaultdict(int)
+    for akt in aktiviteter:
+        dato = akt['dato']
+        poeng = akt['poeng'] if 'poeng' in akt else 0
+        if dato and dato.weekday() in [4, 5, 6]:
+            fredag = dato - timedelta(days=dato.weekday() - 4)
+            helgepoeng[fredag] += poeng
+    return any(poengsum >= 9 for poengsum in helgepoeng.values())
+
+
+def calculate_longest_streak_from_aktiviteter(aktiviteter):
+    today = date.today()
+    aktive_dager = sorted(
+        {a['dato'] for a in aktiviteter if (a['poeng'] or 0) > 0 and a['dato'] and a['dato'] < today},
+        reverse=True
+    )
+    if not aktive_dager:
+        return 0
+
+    longest = current = 0
+    prev_day = None
+
+    for d in aktive_dager:
+        if prev_day is None or (prev_day - d).days == 1:
+            current += 1
+        else:
+            current = 1
+        longest = max(longest, current)
+        prev_day = d
+    
+    return longest
+

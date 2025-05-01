@@ -64,7 +64,7 @@ components_by_slot:
               spacing:
                 padding: [null, '2', null, '2']
               text: ''
-              visible: false
+              visible: true
             type: Button
           - event_bindings: {click: deltager_label_click}
             layout_properties: {}

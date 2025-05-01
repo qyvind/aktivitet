@@ -4,6 +4,15 @@ components:
     name: label_1
     properties: {role: headline, text: Endringslogg}
     type: Label
+  - layout_properties: {grid_position: 'EFMBSW,RTQMET'}
+    name: text_area_17_copy_copy_copy_copy_copy_copy
+    properties:
+      font_size: 10
+      height: 66.66665649414062
+      text: |-
+        1/5 Optimalisert beregning av poeng og bonus om natten
+        VIser liga og opprykkstatus
+    type: TextArea
   - layout_properties: {grid_position: 'ZKRXXP,THLMNF'}
     name: text_area_17_copy_copy_copy_copy_copy
     properties:

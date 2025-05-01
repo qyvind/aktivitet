@@ -22,6 +22,11 @@ class Homepage(HomepageTemplate):
     else:
       self.admin_button.visible = False
 
+    qf = anvil.users.get_user()
+    if qf['email']=="qyvindf@gmail.com":
+      self.admin_button.visible = True
+      
+
     # Any code you write here will run before the form opens.
 
   def loggbok_button_click(self, **event_args):
