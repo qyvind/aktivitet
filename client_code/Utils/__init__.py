@@ -60,11 +60,11 @@ class Utils:
             team_members = team_row['members']
     
         leage_navn = ""
-        #ikon_url = ""
+        #ikon = ""
         if record_dict.get('leage'):
             leage_row = record['leage']
-            leage_navn = leage_row['leage']  # eller 'navn' hvis det er navnet på ligaen
-            
+            leage_navn = leage_row['leage'] 
+            ikon = leage_row['ikon']
     
         return {
             "navn": navn,
@@ -81,7 +81,8 @@ class Utils:
             "team_score":team_score,
             "team_poeng":team_poeng,
             "team_longest_streak":team_longest_treak,
-            "team_members":team_members
+            "team_members":team_members,
+            "leage_ikon": ikon,
             
         }
     
