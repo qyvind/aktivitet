@@ -18,8 +18,8 @@ class RowTemplate2(RowTemplate2Template):
     self.init_components(**properties)
     #print (self.item)
     self.Deltager_label.text = self.item['deltager']
-    self.leage_ikon.text = self.item['leage_ikon']
-    self.leage_ikon.tooltip = f"Liga: {self.item['leage']}"
+    self.liga_ikon.text = self.item['liga_ikon']
+    self.liga_ikon.tooltip = f"Liga: {self.item['liga']}"
     self.opprykk.text = self.item['opprykk']
     opprykk_status = self.item['opprykk_status']
     if opprykk_status=="up":
@@ -73,8 +73,8 @@ class RowTemplate2(RowTemplate2Template):
               self.badge_flow_panel.visible = True
               badge_komponent.visible = True
 
-  def leage_ikon_click(self, **event_args):
-    alert(self.leage_ikon.tooltip)
+  def liga_ikon_click(self, **event_args):
+    alert(self.liga_ikon.tooltip)
 
   def badge_1_mouse_down(self, x, y, button, keys, **event_args):
     alert(self.badge_1.tooltip)

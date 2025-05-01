@@ -54,9 +54,9 @@ components_by_slot:
             type: FlowPanel
           - components:
             - components:
-              - event_bindings: {click: leage_ikon_click}
+              - event_bindings: {click: liga_ikon_click}
                 layout_properties: {}
-                name: leage_ikon
+                name: liga_ikon
                 properties:
                   font_size: 18
                   spacing:

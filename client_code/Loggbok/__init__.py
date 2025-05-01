@@ -457,18 +457,18 @@ class Loggbok(LoggbokTemplate):
             #print(deltagerdata)
             navn=deltagerdata['navn']
             team=deltagerdata['team']
-            if deltagerdata['leage']:
-              leage_ikon = deltagerdata['leage_ikon']
-              leage = deltagerdata['leage']
+            if deltagerdata['liga']:
+              liga_ikon = deltagerdata['liga_ikon']
+              liga = deltagerdata['liga']
               
             else:
-              leage_ikon = " "
-              leage = " "
+              liga_ikon = " "
+              liga = " "
             # print(navn, team)
             self.deltager_label.text = deltagerdata['navn']
             self.team_label.text = deltagerdata['team']
-            self.leage_ikon.text = leage_ikon
-            self.leage_ikon.tooltip = f"Liga: {leage}"
+            self.liga_ikon.text = liga_ikon
+            self.liga_ikon.tooltip = f"Liga: {liga}"
             
 
               
@@ -656,5 +656,5 @@ class Loggbok(LoggbokTemplate):
     def image_mouse_leave(self, x, y, **event_args):
       anvil.js.window.document.body.style.cursor = 'default'
 
-    def leage_ikon_click(self, **event_args):
-      alert(self.leage_ikon.tooltip)
+    def liga_ikon_click(self, **event_args):
+      alert(self.liga_ikon.tooltip)

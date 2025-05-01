@@ -165,8 +165,8 @@ def oppdater_brukernavn(nytt_navn):
         record['navn'] = nytt_navn
     else:
         # Hent ligaen med level = 1
-        leage_record = app_tables.leages.get(level=1)
-        if not leage_record:
+        liga_record = app_tables.ligaer.get(level=1)
+        if not liga_record:
             raise Exception("Fant ikke liga med level = 1")
         
         # Opprett ny userinfo med referanse til liga
@@ -175,7 +175,7 @@ def oppdater_brukernavn(nytt_navn):
             navn=nytt_navn,
             longest_streak=0,
             bonus=0,
-            leage=leage_record
+            liga=liga_record
         )
 
     return "Navn oppdatert"
@@ -192,7 +192,7 @@ def oppdater_brukernavn(nytt_navn):
 #     record = app_tables.userinfo.get(user=user)
     
 #     if record is None:
-#         return {"navn": "", "team": "", "lock": False, "leage": "", "ikon": ""}
+#         return {"navn": "", "team": "", "lock": False, "liga": "", "ikon": ""}
 
 #     record_dict = dict(record)
 #     navn = record_dict.get('navn', "")
@@ -205,20 +205,20 @@ def oppdater_brukernavn(nytt_navn):
 #         team_navn = team_row['team']
 #         lock_status = team_row['lock']
 
-#     leage_navn = ""
+#     liga_navn = ""
 #     ikon_url = ""
 
-#     if record_dict.get('leage'):
-#         leage_row = record['leage']
-#         leage_navn = leage_row['leage']  # eller 'navn' hvis det er navnet på ligaen
-#         ikon_url = leage_row['ikon']     # for eksempel en URL eller media-objekt
+#     if record_dict.get('liga'):
+#         liga_row = record['liga']
+#         liga_navn = liga_row['liga']  # eller 'navn' hvis det er navnet på ligaen
+#         ikon_url = liga_row['ikon']     # for eksempel en URL eller media-objekt
 
 #     return {
 #         "navn": navn,
 #         "team": team_navn,
 #         "lock": lock_status,
-#         "leage": leage_navn,
-#         "leage_ikon": ikon_url
+#         "liga": liga_navn,
+#         "liga_ikon": ikon_url
 #     }
 
 
@@ -1613,14 +1613,14 @@ def update_team_placements():
             previous_score = user_score
 
 @anvil.server.callable
-def fordel_league():
+def fordel_liga():
     
     from collections import defaultdict
 
-    # Hent league-rader 4 til 7
-    # Hent league-rader for level 4 til 7
-    leagues = app_tables.leages.search()
-    league_map = {l['level']: l for l in leagues if l['level'] in range(4, 8)}
+    # Hent liga-rader 4 til 7
+    # Hent liga-rader for level 4 til 7
+    ligaer = app_tables.ligaer.search()
+    liga_map = {l['level']: l for l in ligaer if l['level'] in range(4, 8)}
 
 
     # Hent alle brukere med plassering
@@ -1637,46 +1637,46 @@ def fordel_league():
     total = len(brukere)
     kvote = total / 4
     tildelt = 0
-    league_index = 0
-    league_nivåer = [4, 5, 6, 7]
+    liga_index = 0
+    liga_nivåer = [4, 5, 6, 7]
 
-    print(f"Totalt {total} brukere – ca {kvote:.1f} per league")
+    print(f"Totalt {total} brukere – ca {kvote:.1f} per liga")
 
     # Fordel gruppevis etter plassering
     for plassering in sorterte_plasseringer:
         gruppe = grupper[plassering]
 
-        if league_index >= len(league_nivåer):
-            print("Alle leagues fylt – resten legges i siste league")
-            league_index = len(league_nivåer) - 1
+        if liga_index >= len(liga_nivåer):
+            print("Alle ligaer fylt – resten legges i siste liga")
+            liga_index = len(liga_nivåer) - 1
 
-        current_league = league_map[league_nivåer[league_index]]
+        current_liga = liga_map[liga_nivåer[liga_index]]
 
         for bruker in gruppe:
-            bruker['leage'] = current_league
+            bruker['liga'] = current_liga
 
         tildelt += len(gruppe)
-        print(f"Tildelt {len(gruppe)} brukere med plassering {plassering} til {current_league['leage']}")
+        print(f"Tildelt {len(gruppe)} brukere med plassering {plassering} til {current_liga['liga']}")
 
-        if tildelt >= (league_index + 1) * kvote:
-            league_index += 1
+        if tildelt >= (liga_index + 1) * kvote:
+            liga_index += 1
 
-    print("League-fordeling fullført.")
+    print("Liga-fordeling fullført.")
 
 @anvil.server.callable
 def beregn_opprykk_og_nedrykk():
     # Tøm tidligere rader
-    for rad in app_tables.league_opprykk.search():
+    for rad in app_tables.liga_opprykk.search():
         rad.delete()
 
     # Hent ligaer sortert fra dårligst til best
-    ligaer = sorted(app_tables.leages.search(), key=lambda l: l['level'])
+    ligaer = sorted(app_tables.ligaer.search(), key=lambda l: l['level'])
 
     max_level = max(l['level'] for l in ligaer)
     min_level = min(l['level'] for l in ligaer)
 
     for liga in ligaer:
-        brukere_i_liga = [u for u in app_tables.userinfo.search() if u['leage'] == liga]
+        brukere_i_liga = [u for u in app_tables.userinfo.search() if u['liga'] == liga]
         antall = len(brukere_i_liga)
         if antall < 2:
             continue
@@ -1695,16 +1695,16 @@ def beregn_opprykk_og_nedrykk():
         symboler = {'up': '⬆️', 'same': '➡️', 'down': '⬇️'}
 
         for bruker in brukere_i_liga[:antall_opprykk]:
-            app_tables.league_opprykk.add_row(
-                user=bruker, league=liga, status='up', opprykk=symboler['up'], notified=False
+            app_tables.liga_opprykk.add_row(
+                user=bruker, liga=liga, status='up', opprykk=symboler['up'], notified=False
             )
         for bruker in brukere_i_liga[-antall_nedrykk:]:
-            app_tables.league_opprykk.add_row(
-                user=bruker, league=liga, status='down', opprykk=symboler['down'], notified=False
+            app_tables.liga_opprykk.add_row(
+                user=bruker, liga=liga, status='down', opprykk=symboler['down'], notified=False
             )
         for bruker in brukere_i_liga[antall_opprykk:-antall_nedrykk]:
-            app_tables.league_opprykk.add_row(
-                user=bruker, league=liga, status='same', opprykk=symboler['same'], notified=False
+            app_tables.liga_opprykk.add_row(
+                user=bruker, liga=liga, status='same', opprykk=symboler['same'], notified=False
             )
 
 # Optimalisert nightly_streak_recalc med cache og logging
