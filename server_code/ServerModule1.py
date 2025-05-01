@@ -1464,32 +1464,38 @@ def sjekk_badge_11(bruker): #Comeback
 #         userinfo.update(plassering=current_rank)
 
 @anvil.server.callable
-def beregn_bonus_fra_badges():
-    print('beregner bonus fra badges')
-
+def beregn_bonus_fra_badges_og_ligaopprykk():
+    print('🔄 Beregner bonus fra badges + ligaopprykk...')
     from collections import defaultdict
 
-    # Samle badges per bruker
-    bruker_badge_bonus = defaultdict(int)
-
+    # 1. Samle badge-bonus per bruker
+    badge_bonus_per_user = defaultdict(int)
     for rad in app_tables.user_badges.search():
         bruker = rad['user']
         badge = rad['badge']
-        if not bruker or not badge:
+        if bruker and badge:
+            badge_bonus = badge['bonus'] or 0
+            badge_bonus_per_user[bruker] += badge_bonus
+
+    # 2. Samle opprykksbonus per bruker
+    liga_bonus_per_user = defaultdict(int)
+    for row in app_tables.liga_opprykk_bonus.search():
+        bruker = row['user']
+        bonus = row['opprykk_bonus'] or 0
+        liga_bonus_per_user[bruker] += bonus
+
+    # 3. Summer og oppdater total bonus i userinfo
+    for bruker in app_tables.users.search():
+        userinfo = app_tables.userinfo.get(user=bruker)
+        if not userinfo:
             continue
 
-        badge_bonus = badge['bonus'] or 0
-        bruker_badge_bonus[bruker] += badge_bonus
+        badge_bonus = badge_bonus_per_user.get(bruker, 0)
+        liga_bonus = liga_bonus_per_user.get(bruker, 0)
+        total_bonus = badge_bonus + liga_bonus
 
-    # Oppdater userinfo-tabellen
-    for bruker, total_bonus in bruker_badge_bonus.items():
-        userinfo = app_tables.userinfo.get(user=bruker)
-        if userinfo:
-            userinfo['bonus'] = total_bonus
-        else:
-            print(f"Fant ikke userinfo for bruker: {bruker['email']}")
-
-    print(f"Oppdatert bonus for {len(bruker_badge_bonus)} brukere.")
+        userinfo['bonus'] = total_bonus
+        print(f"🎯 {bruker['email']} – badge: {badge_bonus}, liga: {liga_bonus}, total: {total_bonus}")
 
 
 @anvil.server.callable
@@ -1784,8 +1790,8 @@ def nightly_streak_recalc():
     print("➡️ Kaller oppdater_team_poengsummer")
     anvil.server.call('oppdater_team_poengsummer')
 
-    print("➡️ Kaller beregn bonus fra badges")
-    anvil.server.call('beregn_bonus_fra_badges')
+    print("➡️ Kaller beregn bonus fra badges og ligaopprykk")
+    anvil.server.call('beregn_bonus_fra_badges_og_ligaopprykk')
     
     print("➡️ Kaller update_team_placements")
     anvil.server.call('update_team_placements')
