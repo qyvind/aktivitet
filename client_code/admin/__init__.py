@@ -261,13 +261,13 @@ class admin(adminTemplate):
     print(status)
 
   def test_user_status_copy_click(self, **event_args):
-    svar = alert("Er du sikker på at du vil fordele ligaer nå? Dette vil overskrive eksisterende leage-verdier.",
+    svar = alert("Er du sikker på at du vil fordele ligaer nå? Dette vil overskrive eksisterende liga-verdier.",
                  buttons=["Ja", "Nei"], title="Bekreft fordeling")
 
     if svar != "Ja":
         alert("Liga-fordeling avbrutt.", title="Avbrutt")
         return
-    anvil.server.call('fordel_league')
+    anvil.server.call('fordel_liga')
 
   def liga_opprykk_click(self, **event_args):
       anvil.server.call('beregn_opprykk_og_nedrykk')

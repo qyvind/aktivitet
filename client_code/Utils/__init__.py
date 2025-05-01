@@ -35,7 +35,7 @@ class Utils:
         record = app_tables.userinfo.get(user=user)
         
         if record is None:
-            return {"navn": "", "team": "", "lock": False, "leage": "", "ikon": ""}
+            return {"navn": "", "team": "", "lock": False, "liga": "", "ikon": ""}
         
         record_dict = dict(record)
         navn = record_dict.get('navn', "")
@@ -59,12 +59,12 @@ class Utils:
             team_poeng = team_row['poeng']
             team_members = team_row['members']
     
-        leage_navn = ""
-        #ikon = ""
-        if record_dict.get('leage'):
-            leage_row = record['leage']
-            leage_navn = leage_row['leage'] 
-            ikon = leage_row['ikon']
+        liga_navn = ""
+        ikon = ""
+        if record_dict.get('liga'):
+            liga_row = record['liga']
+            liga_navn = liga_row['liga'] 
+            ikon = liga_row['ikon']
     
         return {
             "navn": navn,
@@ -76,13 +76,13 @@ class Utils:
             "plassering_i_team":plassering_i_team,
             "team": team_navn,
             "lock": lock_status,
-            "leage": leage_navn,
+            "liga": liga_navn,
             "team_plassering":team_plassering,
             "team_score":team_score,
             "team_poeng":team_poeng,
             "team_longest_streak":team_longest_treak,
             "team_members":team_members,
-            "leage_ikon": ikon,
+            "liga_ikon": ikon,
             
         }
         
@@ -108,15 +108,15 @@ class Utils:
             if userinfo_rad['team']:
                 team = userinfo_rad['team']['team']
     
-            leage_navn = ""
+            liga_navn = ""
             ikon = ""
-            if userinfo_rad['leage']:
-                leage_row = userinfo_rad['leage']
-                leage_navn = leage_row['leage']
-                ikon = leage_row['ikon']
+            if userinfo_rad['liga']:
+                liga_row = userinfo_rad['liga']
+                liga_navn = liga_row['liga']
+                ikon = liga_row['ikon']
     
-            # Hent opprykk-symbol fra league_opprykk-tabellen
-            opprykk_rad = app_tables.league_opprykk.get(user=userinfo_rad)
+            # Hent opprykk-symbol fra liga_opprykk-tabellen
+            opprykk_rad = app_tables.liga_opprykk.get(user=userinfo_rad)
             opprykk = opprykk_rad['opprykk'] if opprykk_rad else ""
             Opprykk_status = opprykk_rad['status']
             
@@ -131,8 +131,8 @@ class Utils:
                 "score": score,
                 "team": team,
                 "admin": admin,
-                "leage": leage_navn,
-                "leage_ikon": ikon,
+                "liga": liga_navn,
+                "liga_ikon": ikon,
                 "opprykk": opprykk,
                 "opprykk_status":Opprykk_status,
                 "user_record": deltager

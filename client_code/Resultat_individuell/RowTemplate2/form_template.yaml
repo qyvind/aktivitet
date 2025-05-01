@@ -21,9 +21,9 @@ components:
       text: ''
       tooltip: Slå opp deltagers treningsdata
     type: Button
-  - event_bindings: {click: leage_ikon_click}
+  - event_bindings: {click: liga_ikon_click}
     layout_properties: {}
-    name: leage_ikon
+    name: liga_ikon
     properties:
       spacing:
         padding: [null, '0', null, '2']
