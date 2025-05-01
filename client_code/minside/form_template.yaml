@@ -2,17 +2,17 @@ components_by_slot:
   content:
   - components:
     - components:
-      - name: label_1
-        properties: {text: 'Pålogget deltager:'}
-        type: Label
-      - name: user_email_label
-        properties: {}
-        type: Label
-      layout_properties: {grid_position: 'VUAQLH,OFGDFX'}
-      name: flow_panel_1
-      properties: {align: center}
-      type: FlowPanel
-    - components:
+      - components:
+        - name: label_1
+          properties: {text: 'Pålogget deltager:'}
+          type: Label
+        - name: user_email_label
+          properties: {}
+          type: Label
+        layout_properties: {grid_position: 'VXOUMQ,QSKJZH'}
+        name: flow_panel_1
+        properties: {align: center}
+        type: FlowPanel
       - components:
         - name: label_2
           properties: {text: 'Navn:'}
@@ -169,7 +169,7 @@ components_by_slot:
         type: FlowPanel
       layout_properties: {grid_position: 'ODZXPL,GWISSY'}
       name: outlined_card_4
-      properties: {role: elevated-card}
+      properties: {background: 'theme:Secondary Container', role: elevated-card}
       type: ColumnPanel
     - components:
       - components:
@@ -209,7 +209,7 @@ components_by_slot:
         type: FlowPanel
       layout_properties: {grid_position: 'YJXJLX,EXYMOM'}
       name: liga_card
-      properties: {role: outlined-card, visible: true}
+      properties: {background: 'theme:Secondary Container', role: outlined-card, visible: true}
       type: ColumnPanel
     - components:
       - components:
@@ -312,7 +312,7 @@ components_by_slot:
         type: RichText
       layout_properties: {grid_position: 'SWMNRA,HFVGVU'}
       name: team_card
-      properties: {role: elevated-card}
+      properties: {background: 'theme:Secondary Container', role: elevated-card}
       type: ColumnPanel
     - components:
       - components:
@@ -387,11 +387,11 @@ components_by_slot:
         type: RichText
       layout_properties: {grid_position: 'RVMCJK,BXLFUS'}
       name: lag_team_panel
-      properties: {role: elevated-card}
+      properties: {background: 'theme:Secondary Container', role: elevated-card}
       type: ColumnPanel
     layout_properties: {}
     name: outlined_card_1_copy
-    properties: {role: outlined-card}
+    properties: {background: '', role: tonal-card}
     type: ColumnPanel
 is_package: true
 layout: {type: 'form:Homepage'}
