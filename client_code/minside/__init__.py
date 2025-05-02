@@ -22,6 +22,9 @@ class minside(minsideTemplate):
   def fyll_minside(self, **properties): 
     user = Globals.bruker
     deltagerdata= Utils.hent_brukernavn()
+    framo_selskap_list = [row['navn'] for row in app_tables.team.search() if row['navneam'] and not row['lock']]
+    self.team_drop_down.items = [("", "")] + [(team, team) for team in team_list]
+
 
     
     
