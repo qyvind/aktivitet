@@ -1928,3 +1928,42 @@ def sett_framo_selskap_for_user(selskapsnavn,user):
     # Sett framo_selskap-linken
     userinfo['framo_selskap'] = selskap
     return("Selskap lagret")
+
+
+@anvil.server.callable
+def hent_poengsum_per_selskap():
+  alle_records = app_tables.userinfo.search()
+
+  selskap_data = {}
+
+  for record in alle_records:
+    selskap = record['framo_selskap']
+    score = record['score'] or 0
+
+    if selskap:
+      selskap_navn = selskap['navn']
+      if selskap_navn in selskap_data:
+        selskap_data[selskap_navn]['score_sum'] += score
+        selskap_data[selskap_navn]['antall'] += 1
+      else:
+        selskap_data[selskap_navn] = {
+          'score_sum': score,
+          'antall': 1
+        }
+
+  # Beregn snittscore og legg i en liste
+  resultat_liste = []
+  for selskap_navn, data in selskap_data.items():
+    antall = data['antall']
+    score_sum = data['score_sum']
+    snitt = score_sum / antall if antall > 0 else 0
+    resultat_liste.append({
+      'selskap': selskap_navn,
+      'snittscore': round(snitt, 2),
+      'antall': antall
+    })
+
+  # Sorter listen etter snittscore synkende
+  resultat_liste.sort(key=lambda x: x['snittscore'], reverse=True)
+
+  return resultat_liste

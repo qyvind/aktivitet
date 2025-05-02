@@ -62,6 +62,11 @@ components_by_slot:
         name: user_badges
         properties: {role: tonal-button, text: Utdelte badges}
         type: Button
+      - event_bindings: {click: poeng_pr_selskap_click}
+        layout_properties: {}
+        name: poeng_pr_selskap
+        properties: {role: tonal-button, text: poeng pr selskap}
+        type: Button
       layout_properties: {grid_position: 'PDOHFX,TLMROV'}
       name: flow_panel_1
       properties: {align: center}
