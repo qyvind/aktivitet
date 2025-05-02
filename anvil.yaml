@@ -133,12 +133,16 @@ db_schema:
       name: notified
       type: bool
     - admin_ui: {order: 0, width: 200}
-      name: user
+      name: user_old
       target: userinfo
       type: link_single
     - admin_ui: {order: 4, width: 200}
       name: opprykk
       type: string
+    - admin_ui: {order: -1, width: 200}
+      name: user
+      target: users
+      type: link_single
     server: full
     title: liga_opprykk
   liga_opprykk_bonus:
