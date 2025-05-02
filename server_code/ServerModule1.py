@@ -1375,93 +1375,7 @@ def sjekk_badge_11(bruker): #Comeback
 
 
 
-# def calculate_longest_streak(user_row):
-#     today = date.today()
-#     aktiviteter = app_tables.aktivitet.search(deltager=user_row)
-#     aktive_dager = {
-#         row['dato']
-#         for row in aktiviteter
-#         if row['poeng'] > 0 and row['dato'] < today
-#     }
 
-#     if not aktive_dager:
-#         return 0
-
-#     dager = sorted(aktive_dager, reverse=True)
-#     longest = 0
-#     current = 0
-#     prev_day = None
-
-#     for d in dager:
-#         if prev_day is None or prev_day - d == timedelta(days=1):
-#             current += 1
-#         else:
-#             current = 1
-#         longest = max(longest, current)
-#         prev_day = d
-
-#     return longest
-
-
-
-
-# @anvil.server.callable
-# def oppdater_poeng_og_score_for_alle():
-#     today = date.today()
-
-#     anvil.server.call('beregn_bonus_fra_badges')
-#     # Først oppdaterer vi poeng, streak, bonus og score
-#     for userinfo in app_tables.userinfo.search():
-#         user_row = userinfo['user']  # Raden i Users-tabellen
-
-#         if not user_row:
-#             continue  # Hopper over hvis user er None
-        
-#         aktiviteter = app_tables.aktivitet.search(deltager=user_row)
-        
-#         total_poeng = sum(
-#             row['poeng'] for row in aktiviteter if row['dato'] < today
-#         )
-
-
-      
-#         longest_streak = calculate_longest_streak(user_row)
-#         bonus = userinfo['bonus'] or 0
-        
-
-#         bonus = bonus or 0
-#         total_poeng = total_poeng or 0
-#         longest_streak = longest_streak or 0
-#         score = ((total_poeng + bonus) * 100) + longest_streak
-#         print('score ',score, total_poeng, bonus, longest_streak)
-        
-#         userinfo.update(
-#             poeng=total_poeng,
-#             longest_streak=longest_streak,
-#             bonus=bonus,
-#             score=score
-#         )
-
-#     # Nå lager vi en liste over alle brukere, sortert etter score
-#     userinfo_list = list(app_tables.userinfo.search())
-#     userinfo_list.sort(key=lambda u: u['score'] or 0, reverse=True)  # Sorter synkende på score
-
-#     # Deretter setter vi plasseringer
-#     plassering = 1
-#     for idx, userinfo in enumerate(userinfo_list):
-#         if idx == 0:
-#             current_rank = plassering
-#         else:
-#             previous_user = userinfo_list[idx - 1]
-#             if userinfo['score'] == previous_user['score']:
-#                 # Hvis samme score som forrige, samme plassering
-#                 pass
-#             else:
-#                 # Ellers oppdaterer vi plasseringen basert på antall foran
-#                 plassering = idx + 1
-#             current_rank = plassering
-        
-#         userinfo.update(plassering=current_rank)
 
 @anvil.server.callable
 def beregn_bonus_fra_badges_og_ligaopprykk():
@@ -1680,8 +1594,9 @@ def beregn_opprykk_og_nedrykk():
 
     max_level = max(l['level'] for l in ligaer)
     min_level = min(l['level'] for l in ligaer)
-
+    print('a')
     for liga in ligaer:
+        print('b')
         brukere_i_liga = [u for u in app_tables.userinfo.search() if u['liga'] == liga]
         antall = len(brukere_i_liga)
         if antall < 2:
@@ -1697,22 +1612,42 @@ def beregn_opprykk_og_nedrykk():
         if liga['level'] == min_level:
             antall_nedrykk = 0
 
+      
         # Emoji-mapping
         symboler = {'up': '⬆️', 'same': '➡️', 'down': '⬇️'}
-
+        print('c')
         for bruker in brukere_i_liga[:antall_opprykk]:
+            print('d')
+            users_record = bruker['user']
+            #print('navn ',brukere_i_liga['navn'])
+            #print('email ',users_record['email'])
+            print('e')
+            #bruker_user = bruker['user']
+            bruker_user = users_record
+            print('f')
+            if not bruker_user:
+                continue
             app_tables.liga_opprykk.add_row(
-                user=bruker, liga=liga, status='up', opprykk=symboler['up'], notified=False
+                user=bruker_user, liga=liga, status='up', opprykk=symboler['up'], notified=False
             )
+        
         for bruker in brukere_i_liga[-antall_nedrykk:]:
+            bruker_user = bruker['user']
+            if not bruker_user:
+                continue
             app_tables.liga_opprykk.add_row(
-                user=bruker, liga=liga, status='down', opprykk=symboler['down'], notified=False
+                user=bruker_user, liga=liga, status='down', opprykk=symboler['down'], notified=False
             )
+        
         for bruker in brukere_i_liga[antall_opprykk:-antall_nedrykk]:
+            bruker_user = bruker['user']
+            if not bruker_user:
+                continue
             app_tables.liga_opprykk.add_row(
-                user=bruker, liga=liga, status='same', opprykk=symboler['same'], notified=False
+                user=bruker_user, liga=liga, status='same', opprykk=symboler['same'], notified=False
             )
 
+      
 # Optimalisert nightly_streak_recalc med cache og logging
 @anvil.server.callable
 def nightly_streak_recalc():

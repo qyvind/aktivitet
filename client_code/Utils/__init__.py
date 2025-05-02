@@ -33,6 +33,8 @@ class Utils:
             raise Exception("Bruker ikke logget inn")
         
         record = app_tables.userinfo.get(user=user)
+        user_record = Globals.bruker
+        
         
         if record is None:
             return {"navn": "", "team": "", "lock": False, "liga": "", "ikon": ""}
@@ -65,9 +67,11 @@ class Utils:
             liga_row = record['liga']
             liga_navn = liga_row['liga'] 
             ikon = liga_row['ikon']
-
+  
+        
+      
         # Hent opprykk-status for denne brukeren, hvis den finnes
-        opprykk_row = app_tables.liga_opprykk.get(user=record)
+        opprykk_row = app_tables.liga_opprykk.get(user=user_record)
         status = ""
         opprykk_symbol = ""
         if opprykk_row:
@@ -103,7 +107,8 @@ class Utils:
     
         for userinfo_rad in app_tables.userinfo.search():
             deltager = userinfo_rad['user']
-    
+            user_record = userinfo_rad['user']
+            
             if not deltager:
                 continue
     
@@ -127,7 +132,7 @@ class Utils:
                 ikon = liga_row['ikon']
     
             # Hent opprykk-symbol fra liga_opprykk-tabellen
-            opprykk_rad = app_tables.liga_opprykk.get(user=userinfo_rad)
+            opprykk_rad = app_tables.liga_opprykk.get(user=user_record)
             opprykk = opprykk_rad['opprykk'] if opprykk_rad else ""
             opprykk_status = opprykk_rad['status']  if opprykk_rad else ""
             
