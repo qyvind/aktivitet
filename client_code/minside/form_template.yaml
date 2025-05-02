@@ -20,6 +20,10 @@ components_by_slot:
         - name: navn_textbox
           properties: {}
           type: TextBox
+        - layout_properties: {}
+          name: label_2_copy
+          properties: {text: 'Selskap:'}
+          type: Label
         - event_bindings: {change: framo_selskap_drop_change}
           name: framo_selskap_drop
           properties: {}
