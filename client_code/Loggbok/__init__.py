@@ -488,7 +488,7 @@ class Loggbok(LoggbokTemplate):
             elif liga_navn == "Rubin":
               source = "_/theme/liga_images/rubin.png"
             elif liga_navn == "Smaragd":
-              source = "_/theme/liga_images/smaagd.png"
+              source = "_/theme/liga_images/smaragd.png"
             self.liga_image.source = source
             self.liga_image_copy.source = source
             self.liga_image.tooltip = f"Liga: {liga_navn}"
