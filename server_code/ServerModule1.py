@@ -22,26 +22,26 @@ from collections import defaultdict
 @anvil.server.callable
 
 def add_aktivitet(aktivitet):
-  print('add_aktivitet')
+  #print('add_aktivitet')
   
   if aktivitet.get('dato') and aktivitet.get('aktivitet') and aktivitet.get('poeng') :
     app_tables.aktivitet.add_row(**aktivitet)
 
 @anvil.server.callable
 def update_aktivitet(aktivitet, aktivitet_data):
-  print('update_aktivitet')
+  #print('update_aktivitet')
   
   if aktivitet_data['dato'] and aktivitet_data['aktivitet'] and aktivitet_data['poeng']: 
     aktivitet.update(**aktivitet_data)
 
 @anvil.server.callable
 def delete_aktivitet(aktivitet):
-  print('delete_aktivitet')
+  #print('delete_aktivitet')
   aktivitet.delete()
 
 @anvil.server.callable
 def batch_create_users(user_list):
-    print('batch_create_users')
+    #print('batch_create_users')
 
     if not isinstance(user_list, list):
         #print("Feil: Forventet en liste over brukere, men fikk noe annet.")
@@ -86,7 +86,7 @@ def batch_create_users(user_list):
 @anvil.server.callable
 def lagre_aktivitet(dato, aktivitet, poeng, ikon,beskrivelse,skritt=None):
 
-    print('lagre_aktivitet', skritt)
+    #print('lagre_aktivitet', skritt)
     user = anvil.users.get_user()
     if not user:
         raise Exception("Ingen bruker er pålogget")
@@ -273,7 +273,7 @@ def hent_poengsummer():
 
 @anvil.server.callable
 def hent_ukens_premietrekning(mandag):
-    print('hent_ukens_premietrekning')
+    #print('hent_ukens_premietrekning')
     import datetime
 
     if isinstance(mandag, datetime.datetime):
@@ -414,14 +414,14 @@ def hent_team_poengsummer():
     ]
     resultat.sort(key=lambda x: x["poengsum"], reverse=True)
 
-    print(f"🏆 Totale poengsummer per team: {resultat}")
+    #print(f"🏆 Totale poengsummer per team: {resultat}")
     return resultat
 
 
 
 @anvil.server.callable
 def create_user(email, name, password, team_name=None):
-    print('create_user')
+    #print('create_user')
    # print(f"Oppretter bruker: {email}")
 
     # Sjekk om brukeren allerede finnes
@@ -1352,7 +1352,7 @@ def sjekk_badge_10(bruker):
     brukere_med_epost = [m['user']['email'] for m in topp_plassering]
 
     if brukere_med_epost.count(bruker_epost) == 1 and len(topp_plassering) == 1:
-        print('bingo')
+#        print('bingo')
         return True
 
     print('end of routine')
@@ -1402,7 +1402,8 @@ def beregn_bonus_fra_badges_og_ligaopprykk():
     liga_bonus_per_user = defaultdict(int)
     for row in app_tables.liga_opprykk_bonus.search():
         bruker = row['user']
-        bonus = row['opprykk_bonus'] or 0
+        bonus = row['opprykk_bonus'] 
+      #  print(bruker,bonus)
         liga_bonus_per_user[bruker] += bonus
 
     # 3. Summer og oppdater total bonus i userinfo
@@ -1416,7 +1417,7 @@ def beregn_bonus_fra_badges_og_ligaopprykk():
         total_bonus = badge_bonus + liga_bonus
 
         userinfo['bonus'] = total_bonus
-        print(f"🎯 {bruker['email']} – badge: {badge_bonus}, liga: {liga_bonus}, total: {total_bonus}")
+    #    print(f"🎯 {bruker['email']} – badge: {badge_bonus}, liga: {liga_bonus}, total: {total_bonus}")
 
 
 @anvil.server.callable
@@ -1601,9 +1602,8 @@ def beregn_opprykk_og_nedrykk():
 
     max_level = max(l['level'] for l in ligaer)
     min_level = min(l['level'] for l in ligaer)
-    print('a')
+
     for liga in ligaer:
-        print('b')
         brukere_i_liga = [u for u in app_tables.userinfo.search() if u['liga'] == liga]
         antall = len(brukere_i_liga)
         if antall < 2:
@@ -1622,16 +1622,12 @@ def beregn_opprykk_og_nedrykk():
       
         # Emoji-mapping
         symboler = {'up': '⬆️', 'same': '➡️', 'down': '⬇️'}
-        print('c')
         for bruker in brukere_i_liga[:antall_opprykk]:
-            print('d')
             users_record = bruker['user']
             #print('navn ',brukere_i_liga['navn'])
             #print('email ',users_record['email'])
-            print('e')
             #bruker_user = bruker['user']
             bruker_user = users_record
-            print('f')
             if not bruker_user:
                 continue
             app_tables.liga_opprykk.add_row(
@@ -1694,6 +1690,9 @@ def nightly_streak_recalc():
             print(f"⚠️ Feil i bonus-loop: {e}")
 
     userinfo_per_user = {r['user']: r for r in userinfo_rows if r['user'] is not None}
+
+  # bonus for liga-opprykk
+  
 
     # 3. Tildel badges
     print("🏅 Tildeler badges...")
