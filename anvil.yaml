@@ -132,10 +132,6 @@ db_schema:
     - admin_ui: {order: 3, width: 200}
       name: notified
       type: bool
-    - admin_ui: {order: 0, width: 200}
-      name: user_old
-      target: userinfo
-      type: link_single
     - admin_ui: {order: 4, width: 200}
       name: opprykk
       type: string
