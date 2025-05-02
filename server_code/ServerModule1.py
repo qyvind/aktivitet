@@ -1856,3 +1856,53 @@ def gjennomfor_ligabyttene():
             status="up",
             date=now
         )
+
+@anvil.server.callable
+def generer_liga_opprykk_melding(user):
+    # finn ev. record for user eller heller gjør det i en record som kaller denne
+  
+    record=liga_opprykk_bonus_record
+    print('generer_liga_opprykk_melding')
+    bruker = anvil.users.get_user()
+    if not bruker:
+        return "Fant ikke innlogget bruker."
+
+    # Hent status
+    status = lag_status_for_bruker()
+    if not record[informert]:
+        til_liga = record['til_liga']
+        opprykk_bonus = record['opprykk_bonus']
+        prompt_mal = f"Du skal nå informere deltagere in konkurransen om at de har gjort det så bra at de blir flyttet opp i en bedre liga. Den nye ligaen heter {'til_liga'}. Deltageren får {'opprykk_bonus'} bonuspoeng for dette. Deltageren fortjener litt skryt. Kikk også på hvilke aktiviteter deltageren har utført i statusen: {'status'} "  
+      
+        # Sett sammen prompt
+        if "{status}" in prompt_mal:
+            prompt = prompt_mal.replace("{status}", status)
+        else:
+            prompt = f"{prompt_mal}\n\nStatus:\n{status}"
+        
+        # Sett OpenAI-nøkkel
+        openai.api_key = get_secret("openai_key")
+        print(prompt)
+        try:
+            # Send prompt til OpenAI
+            response = openai.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "Du er en stemmen til og treningscoach i Framo BIL sin aktivitetskonkurranse."},
+                {"role": "system", "content": "Du skal informere brukeren om en hendelser i konkurransen på en inspirerende måte."},
+                {"role": "user", "content": "Konkurransen varer i 10 uker. Deltagerne får poeng for å være aktive, og kan vinne bonus gjennom å oppnå kravene til badges eller ved at de er best i sin liga og flyttes opp i neste liga."},
+                {"role": "user", "content": "Ikke avslutt med spørsmål."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.9,
+            max_tokens=300
+        )
+        
+        melding = response.choices[0].message.content.strip()
+        app_tables.ai_log.add_row(
+            user=bruker,
+            date=datetime.datetime.now(),
+            prompt=prompt,
+            svar=melding
+)
+        return melding
