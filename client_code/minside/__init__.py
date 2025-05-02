@@ -62,7 +62,7 @@ class minside(minsideTemplate):
     elif liganavn == "Rubin":
       source = "_/theme/liga_images/rubin.png"
     elif liganavn == "Smaragd":
-      source = "_/theme/liga_images/smaagd.png"
+      source = "_/theme/liga_images/smaragd.png"
     self.liga_image.source = source
     self.liga_image.tooltip = f"Liga: {liganavn}"
 
