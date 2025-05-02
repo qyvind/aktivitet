@@ -275,6 +275,9 @@ class admin(adminTemplate):
   def gjennomfor_ligabytte_click(self, **event_args):
     anvil.server.call('gjennomfor_ligabyttene')
 
+  def test_opprykk_ai_click(self, **event_args):
+    self.informer
+
 
 
 

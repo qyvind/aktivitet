@@ -1859,57 +1859,47 @@ def gjennomfor_ligabyttene():
 
 
 @anvil.server.callable
-def generer_opprykk_melding(badge_id):
+def generer_opprykk_melding(bruker,til_liga):
     print('generer_opprykk_melding')
     bruker = anvil.users.get_user()
     if not bruker:
         return "Fant ikke innlogget bruker."
+    opprykk=app_tables.liga_opprykk_bonus.get(user=bruker, til_liga=til_liga)
+    if opprykk:
+      # Hent status
+        status = lag_status_for_bruker()
+        # Hent prompt
+        prompt_mal = f"Nå skal du informere deltageren om at hen har oppnådd opprykk til en bedre liga. Den nye ligaen heter {til_liga}. Dette utløser {opprykk[opprykk_bonus]} bonuspoeng. Samtidig kan du kikke på aktivitene deltageren har gjort i stsus som følger, og skryte av de."
 
-    # Hent status
-    status = lag_status_for_bruker()
+        prompt = f"{prompt_mal}\n\nStatus:\n{status}" 
 
-    # Hent badge fra databasen
-    badge_rad = app_tables.badges.get(id=badge_id)
-    if not badge_rad:
-        return f"Fant ikke badge med id {badge_id}"
-
-    # Hent prompt
-    prompt_mal = badge_rad['prompt']
-    if not prompt_mal:
-        return f"Badge {badge_id} har ikke noe prompt."
-
-    # Sett sammen prompt
-    if "{status}" in prompt_mal:
-        prompt = prompt_mal.replace("{status}", status)
-    else:
-        prompt = f"{prompt_mal}\n\nStatus:\n{status}"
-
-    # Sett OpenAI-nøkkel
-    openai.api_key = get_secret("openai_key")
-    print(prompt)
-    try:
-        # Send prompt til OpenAI
-        response = openai.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "Du er en stemmen til og treningscoach i Framo BIL sin aktivitetskonkurranse."},
-                {"role": "system", "content": "Du skal informere brukeren om en badge de har vunnet, og feire det på en inspirerende måte."},
-                {"role": "user", "content": "Konkurransen varer i 10 uker. Deltagerne får poeng for å være aktive, og kan vinne ulike badges basert på innsats."},
-                {"role": "user", "content": "Ikke avslutt med spørsmål."},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.9,
-            max_tokens=300
-        )
+        # Sett OpenAI-nøkkel
+        openai.api_key = get_secret("openai_key")
+        print(prompt)
+        try:
+            # Send prompt til OpenAI
+            response = openai.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": "Du er en stemmen til og treningscoach i Framo BIL sin aktivitetskonkurranse."},
+                    {"role": "system", "content": "Du skal informere brukeren om opprykk i ny og bedre liga og feire det på en inspirerende måte."},
+                    {"role": "user", "content": "Konkurransen varer i 10 uker. Deltagerne får poeng for å være aktive, og kan vinne ulike badges basert på innsats. De er også delt i ligaer og får bonuspoeng for å flyttes i bedsre liga."},
+                    {"role": "user", "content": "Ikke avslutt med spørsmål."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.9,
+                max_tokens=300
+            )
+            
+            melding = response.choices[0].message.content.strip()
+            app_tables.ai_log.add_row(
+                user=bruker,
+                date=datetime.datetime.now(),
+                prompt=prompt,
+                svar=melding              
+              )
         
-        melding = response.choices[0].message.content.strip()
-        app_tables.ai_log.add_row(
-            user=bruker,
-            date=datetime.datetime.now(),
-            prompt=prompt,
-            svar=melding
-)
-        return melding
+            return melding
 
-    except Exception as e:
-        return f"Feil ved henting av AI-melding: {e}"
+        except Exception as e:
+          return f"Feil ved henting av AI-melding: {e}"

@@ -658,13 +658,11 @@ class Loggbok(LoggbokTemplate):
         for rad in nye_opprykk:
             til_liga = rad['til_liga']
             
-            badgenummer = badge['id']
-            beskrivelse = badge['description']
-            poeng = badge['bonus'] or 0
-            alertmessage = anvil.server.call('generer_badge_melding',badgenummer)
+            
+            alertmessage = anvil.server.call('generer_opprykk_melding',bruker, til_liga)
             alert(
                 alertmessage,
-                title="Ny prestasjon oppnådd!",
+                title="Opprykk i høyere liga!",
                 large=True
             )
     

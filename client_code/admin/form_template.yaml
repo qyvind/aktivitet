@@ -105,6 +105,11 @@ components_by_slot:
           name: gjennomfor_ligabytte
           properties: {align: center, role: tonal-button, text: Gjennomfør ligabytte}
           type: Button
+        - event_bindings: {click: test_opprykk_ai_click}
+          layout_properties: {}
+          name: test_opprykk_ai
+          properties: {align: center, role: tonal-button, text: Test opprykk ai}
+          type: Button
         layout_properties: {grid_position: 'JJWONP,QJPKHW'}
         name: flow_panel_14
         properties: {align: center}
