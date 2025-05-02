@@ -652,6 +652,25 @@ class Loggbok(LoggbokTemplate):
     
             rad.update(informert=True)
 
+    def informer_om_opprykk(self,bruker):
+        nye_opprykk = app_tables.liga_opprykk_bonus.search(user=bruker, informert=False)
+    
+        for rad in nye_opprykk:
+            til_liga = rad['til_liga']
+            
+            badgenummer = badge['id']
+            beskrivelse = badge['description']
+            poeng = badge['bonus'] or 0
+            alertmessage = anvil.server.call('generer_badge_melding',badgenummer)
+            alert(
+                alertmessage,
+                title="Ny prestasjon oppnådd!",
+                large=True
+            )
+    
+            rad.update(informert=True)
+
+
 
     
 
