@@ -1856,3 +1856,60 @@ def gjennomfor_ligabyttene():
             status="up",
             date=now
         )
+
+
+@anvil.server.callable
+def generer_opprykk_melding(badge_id):
+    print('generer_opprykk_melding')
+    bruker = anvil.users.get_user()
+    if not bruker:
+        return "Fant ikke innlogget bruker."
+
+    # Hent status
+    status = lag_status_for_bruker()
+
+    # Hent badge fra databasen
+    badge_rad = app_tables.badges.get(id=badge_id)
+    if not badge_rad:
+        return f"Fant ikke badge med id {badge_id}"
+
+    # Hent prompt
+    prompt_mal = badge_rad['prompt']
+    if not prompt_mal:
+        return f"Badge {badge_id} har ikke noe prompt."
+
+    # Sett sammen prompt
+    if "{status}" in prompt_mal:
+        prompt = prompt_mal.replace("{status}", status)
+    else:
+        prompt = f"{prompt_mal}\n\nStatus:\n{status}"
+
+    # Sett OpenAI-nøkkel
+    openai.api_key = get_secret("openai_key")
+    print(prompt)
+    try:
+        # Send prompt til OpenAI
+        response = openai.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "Du er en stemmen til og treningscoach i Framo BIL sin aktivitetskonkurranse."},
+                {"role": "system", "content": "Du skal informere brukeren om en badge de har vunnet, og feire det på en inspirerende måte."},
+                {"role": "user", "content": "Konkurransen varer i 10 uker. Deltagerne får poeng for å være aktive, og kan vinne ulike badges basert på innsats."},
+                {"role": "user", "content": "Ikke avslutt med spørsmål."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.9,
+            max_tokens=300
+        )
+        
+        melding = response.choices[0].message.content.strip()
+        app_tables.ai_log.add_row(
+            user=bruker,
+            date=datetime.datetime.now(),
+            prompt=prompt,
+            svar=melding
+)
+        return melding
+
+    except Exception as e:
+        return f"Feil ved henting av AI-melding: {e}"

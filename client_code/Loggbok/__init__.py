@@ -652,6 +652,9 @@ class Loggbok(LoggbokTemplate):
     
             rad.update(informert=True)
 
+
+    
+
     def sjekk_korrigering(self,**event_args):
         konkurranse = app_tables.konkurranse.search()[0]  # Forutsetter én rad
         return konkurranse['korrigering']
