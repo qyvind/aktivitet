@@ -48,10 +48,10 @@ class Utils:
         score = record_dict.get('score')
         poeng = record_dict.get('poeng')
         plassering_i_team = record_dict.get('team_plassering')
-        #framo_selskap_record = record_dict.get(framo_selskap)
-        #framo_selskap=framo_selskap_record['navn']
-        #print('fant selskap ',framo_selskap)
-    
+        framo_selskap_record = record_dict.get('framo_selskap')
+        if framo_selskap_record:
+          framo_selskap = framo_selskap_record['navn']
+
         team_navn = ""
         lock_status = False
     
@@ -102,7 +102,8 @@ class Utils:
             "team_members":team_members,
             "liga_ikon": ikon,
             "opprykk_status": status,
-            "opprykk_symbol": opprykk_symbol,            
+            "opprykk_symbol": opprykk_symbol,  
+            "framo_selskap": framo_selskap,
         }
         
     @staticmethod
