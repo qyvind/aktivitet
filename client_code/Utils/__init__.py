@@ -27,6 +27,7 @@ class Utils:
         team_poeng = None
         team_longest_treak = None
         team_members = 0
+        framo_selskap = ""
       
         user = Globals.bruker
         if not user:
@@ -47,6 +48,9 @@ class Utils:
         score = record_dict.get('score')
         poeng = record_dict.get('poeng')
         plassering_i_team = record_dict.get('team_plassering')
+        #framo_selskap_record = record_dict.get(framo_selskap)
+        #framo_selskap=framo_selskap_record['navn']
+        #print('fant selskap ',framo_selskap)
     
         team_navn = ""
         lock_status = False
