@@ -272,6 +272,8 @@ class admin(adminTemplate):
   def liga_opprykk_click(self, **event_args):
       anvil.server.call('beregn_opprykk_og_nedrykk')
 
+  def gjennomfor_ligabytte_click(self, **event_args):
+    anvil.server.call('gjennomfor_ligabyttene')
 
 
 

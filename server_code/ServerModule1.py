@@ -1814,3 +1814,45 @@ def calculate_longest_streak_from_aktiviteter(aktiviteter):
     
     return longest
 
+
+
+@anvil.server.callable
+def gjennomfor_ligabyttene():
+    ligaer = sorted(app_tables.ligaer.search(), key=lambda l: l['level'])  # 1 = lavest, 10 = høyest
+    liga_nivåer = {liga['level']: liga for liga in ligaer}
+    max_level = max(liga_nivåer.keys())
+    now = datetime.datetime.now()
+
+    for rad in app_tables.liga_opprykk.search():
+        users_rad = rad['user']
+        userinfo_rad = app_tables.userinfo.get(user=users_rad)
+        
+        nåværende_liga = userinfo_rad['liga']
+        status = rad['status']
+
+        if not userinfo_rad or not nåværende_liga:
+            continue
+
+        if status != "up":
+            continue  # Ignorer "same" og "down"
+
+        nåværende_level = nåværende_liga['level']
+        
+        # Beregn ny liga (selv om det kan være samme)
+        if nåværende_level < max_level:
+            ny_liga = liga_nivåer[nåværende_level + 1]
+        else:
+            ny_liga = nåværende_liga  # Allerede i topp-liga
+
+        # Oppdater brukerens liga uansett
+        userinfo_rad['liga'] = ny_liga
+
+        # Legg inn bonus og flytteinfo
+        app_tables.liga_opprykk_bonus.add_row(
+            user=userinfo_rad['user'],
+            opprykk_bonus=2,
+            informert=False,
+            til_liga=ny_liga,
+            status="up",
+            date=now
+        )
