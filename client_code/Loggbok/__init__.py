@@ -14,6 +14,7 @@ from ..Utils import Utils
 from .. import Globals
 from anvil_extras.animation import Effect, Transition
 import time
+from datetime import date
 
 
 
@@ -23,6 +24,7 @@ class Loggbok(LoggbokTemplate):
         self.init_components(**properties)
         
         self.vis_nye_badges(Globals.bruker)
+        self.informer_om_opprykk(Globals.bruker)
         Globals.week_offset = 0
         #self.hent_week_offset() 
         self.initier_uke(Globals.week_offset)
@@ -651,20 +653,23 @@ class Loggbok(LoggbokTemplate):
             )
     
             rad.update(informert=True)
-
+      
     def informer_om_opprykk(self,bruker):
+        # # bare på en mandag:
+        # today = date.today()
+        # print('weeekday',today.weekday())
+        # if today.weekday() != 0:  # 6 = søndag, 2 = onsdag for testing    
+        #    return 
         nye_opprykk = app_tables.liga_opprykk_bonus.search(user=bruker, informert=False)
     
         for rad in nye_opprykk:
             til_liga = rad['til_liga']
             
-            badgenummer = badge['id']
-            beskrivelse = badge['description']
-            poeng = badge['bonus'] or 0
-            alertmessage = anvil.server.call('generer_badge_melding',badgenummer)
+            
+            alertmessage = anvil.server.call('generer_opprykk_melding',bruker, til_liga)
             alert(
                 alertmessage,
-                title="Ny prestasjon oppnådd!",
+                title="Opprykk i høyere liga!",
                 large=True
             )
     

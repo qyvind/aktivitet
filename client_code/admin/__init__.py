@@ -276,6 +276,9 @@ class admin(adminTemplate):
     anvil.server.call('gjennomfor_ligabyttene')
 
 
+    
+
+
 
 
 
