@@ -275,6 +275,9 @@ class admin(adminTemplate):
   def gjennomfor_ligabytte_click(self, **event_args):
     anvil.server.call('gjennomfor_ligabyttene')
 
+  def gjennomfor_ligabytte_copy_click(self, **event_args):
+    anvil.server.call('beregn_bonus_fra_badges_og_ligaopprykk')
+
 
     
 
