@@ -21,7 +21,11 @@ class minside(minsideTemplate):
 
   def fyll_minside(self, **properties): 
     user = Globals.bruker
+    print(user)
     deltagerdata= Utils.hent_brukernavn()
+    framo_selskap_list = [row['navn'] for row in app_tables.framo_selskap.search() if row['navn'] ]
+    self.framo_selskap_drop.items = [("", "")] + [(navn, navn) for navn in framo_selskap_list]
+
 
     
     
@@ -164,3 +168,6 @@ class minside(minsideTemplate):
           if badge_komponent:
               self.badge_flow_panel.visible = True
               badge_komponent.visible = True
+
+  def framo_selskap_drop_change(self, **event_args):
+    alert(anvil.server.call('sett_framo_selskap_for_user',self.framo_selskap_drop.selected_value,Globals.bruker))

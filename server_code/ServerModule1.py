@@ -1910,3 +1910,21 @@ def generer_opprykk_melding(bruker,til_liga):
 
         except Exception as e:
           return f"Feil ved henting av AI-melding: {e}"
+
+@anvil.server.callable
+def sett_framo_selskap_for_user(selskapsnavn,user):
+    
+    # Finn selskaps-record basert på navn
+    selskap = app_tables.framo_selskap.get(navn=selskapsnavn)
+    
+    if not selskap:
+       raise ValueError(f"Ingen selskap funnet med navn: {selskapsnavn}")
+    
+    # Finn userinfo-record basert på row-id
+    userinfo = app_tables.userinfo.get(user=user)
+    if not userinfo:
+      return("Fikk ikke til å lagre selskap")
+    
+    # Sett framo_selskap-linken
+    userinfo['framo_selskap'] = selskap
+    return("Selskap lagret")
