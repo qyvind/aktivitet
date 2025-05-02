@@ -41,6 +41,7 @@ class minside(minsideTemplate):
     self.plassering_i_team.text = f"{deltagerdata['plassering_i_team']}/{deltagerdata['team_members']}"
     self.team_score.text = deltagerdata['team_score']
     self.team.text = deltagerdata['team']
+    self.framo_selskap_drop.selected_value = deltagerdata['framo_selskap']
     if self.team.text == "" :
       self.team_card.visible=False 
     else:
