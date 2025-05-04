@@ -21,7 +21,7 @@ class Resultat_individuell(Resultat_individuellTemplate):
     
     team_resultater = Utils.hent_team_poengsummer()
     self.team_resultat_repeating_panel.items = team_resultater
-    self.tabs_1.active_background = "#2196F344"
+    self.tabs_1.active_background = "#dbe4e6"
 
     framo_liste = anvil.server.call('hent_poengsum_per_selskap')
     self.framo_repeating_panel.items = framo_liste
