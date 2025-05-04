@@ -466,6 +466,7 @@ class Loggbok(LoggbokTemplate):
             else:
               liga_ikon = " "
               liga = " "
+              liga_navn = " "
             # print(navn, team)
             self.deltager_label.text = deltagerdata['navn']
             self.team_label.text = deltagerdata['team']

@@ -282,6 +282,9 @@ class admin(adminTemplate):
     liste = anvil.server.call('hent_poengsum_per_selskap')
     print(liste)
 
+  def lag_en_bruker_click(self, **event_args):
+    self.enkeltbruker_card.visible = True
+
     
 
 
