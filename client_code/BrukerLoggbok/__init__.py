@@ -179,6 +179,47 @@ class BrukerLoggbok(BrukerLoggbokTemplate):
             if userinfo:
                 self.deltager_label.text = userinfo['navn']
                 self.team_label.text = userinfo['team']['team'] if userinfo['team'] else "Uten team"
+
+          # setter liga_ikon
+              if deltagerdata['liga_navn']:
+                  liga_ikon = deltagerdata['liga_ikon']
+                  liga_navn = deltagerdata['liga_navn']
+
+              else:
+                liga_ikon = " "
+                liga = " "
+              
+          self.deltager_label.text = deltagerdata['navn']
+          self.team_label.text = deltagerdata['team']
+          self.liga_ikon.text = liga_ikon
+          print('liga:',liga_navn)
+          if liga_navn == "Diamant":
+            source = "_/theme/liga_images/diamant.png"              
+          elif liga_navn == "Obsidian":
+            source = "_/theme/liga_images/obsidian.png"              
+          elif liga_navn == "Perle":
+            source = "_/theme/liga_images/perle.png"
+          elif liga_navn == "Safir":
+            source = "_/theme/liga_images/safir.png"
+          elif liga_navn == "Sølv":
+            source = "_/theme/liga_images/solv.png"
+          elif liga_navn == "Ametyst":
+            source = "_/theme/liga_images/ametyst.png"  
+          elif liga_navn == "Bronse":
+            source = "_/theme/liga_images/bronse.png"
+          elif liga_navn == "Gull":
+            source = "_/theme/liga_images/gull.png"
+          elif liga_navn == "Rubin":
+            source = "_/theme/liga_images/rubin.png"
+          elif liga_navn == "Smaragd":
+            source = "_/theme/liga_images/smaragd.png"
+            self.liga_image.source = source
+          self.liga_image_copy.source = source
+          self.liga_image.tooltip = f"Liga: {liga_navn}"
+          self.liga_image_copy.tooltip = f"Liga: {liga_navn}"
+              
+
+              
         else:
             user = anvil.users.get_user()
             if user:
