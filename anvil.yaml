@@ -318,10 +318,13 @@ db_schema:
     - admin_ui: {order: 2.5, width: 119}
       name: team_plassering
       type: number
-    - admin_ui: {order: 11, width: 200}
+    - admin_ui: {order: 0.5, width: 200}
       name: framo_selskap
       target: framo_selskap
       type: link_single
+    - admin_ui: {width: 200}
+      name: aktivitet_hash
+      type: string
     server: full
     title: userinfo
   users:
@@ -375,12 +378,6 @@ runtime_options:
   server_version: python3-sandbox
   version: 3
 scheduled_tasks:
-- job_id: GPDHMARM
-  task_name: nightly_badge_check
-  time_spec:
-    at: {minute: 0}
-    every: hour
-    n: 8
 - job_id: DAHMFDBX
   task_name: nightly_streak_recalc
   time_spec:

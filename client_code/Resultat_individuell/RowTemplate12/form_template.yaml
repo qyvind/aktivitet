@@ -1,0 +1,21 @@
+components:
+- data_bindings:
+  - {code: 'self.item[''selskap'']', property: text, writeback: false}
+  layout_properties: {column: ZRPWSD}
+  name: selskap
+  properties: {}
+  type: form:dep_91t3sowbnwbk:_Components.Text
+- data_bindings:
+  - {code: 'self.item[''antall'']', property: text, writeback: false}
+  layout_properties: {column: EUESHV}
+  name: antall
+  properties: {}
+  type: form:dep_91t3sowbnwbk:_Components.Text
+- data_bindings:
+  - {code: 'self.item[''snittscore'']', property: text, writeback: false}
+  layout_properties: {column: PYAORK}
+  name: score
+  properties: {}
+  type: form:dep_91t3sowbnwbk:_Components.Text
+container: {type: DataRowPanel}
+is_package: true

@@ -16,14 +16,34 @@ class Resultat_individuell(Resultat_individuellTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     liste = Utils.hent_poengsummer_uten_null()
-    
-    
     self.resultat_repeat_panel.items = liste
+    
+    
+    team_resultater = Utils.hent_team_poengsummer()
+    self.team_resultat_repeating_panel.items = team_resultater
+    self.tabs_1.active_background = "#dbe4e6"
 
-    # Any code you write here will run before the form opens.
+    framo_liste = anvil.server.call('hent_poengsum_per_selskap')
+    self.framo_repeating_panel.items = framo_liste
+
+    
+
 
 
 
   def button_1_click(self, **event_args):
     open_form('Resultat_team')
 
+  def tabs_1_tab_click(self, tab_index, tab_title, **event_args):
+    if tab_title == "Individuell":
+      self.individuell_card.visible = True 
+      self.team_card.visible=False 
+      self.framo_card.visible = False
+    elif tab_title == "Team":
+      self.team_card.visible=True       
+      self.individuell_card.visible = False 
+      self.framo_card.visible = False
+    elif tab_title == "Framo-selskap":
+      self.team_card.visible=False       
+      self.individuell_card.visible = False 
+      self.framo_card.visible = True

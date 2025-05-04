@@ -20,14 +20,6 @@ components_by_slot:
         - name: navn_textbox
           properties: {}
           type: TextBox
-        - layout_properties: {}
-          name: label_2_copy
-          properties: {text: 'Selskap:'}
-          type: Label
-        - event_bindings: {change: framo_selskap_drop_change}
-          name: framo_selskap_drop
-          properties: {}
-          type: DropDown
         layout_properties: {grid_position: 'BKGLUF,WHBSER'}
         name: flow_panel_3
         properties: {align: center}
@@ -36,6 +28,18 @@ components_by_slot:
         name: text_1
         properties: {align: center, text: Bruk ditt ekte navn hvis du vil ha gevinst}
         type: form:dep_91t3sowbnwbk:_Components.Text
+      - components:
+        - name: label_2_copy
+          properties: {text: 'Selskap:'}
+          type: Label
+        - event_bindings: {change: framo_selskap_drop_change}
+          name: framo_selskap_drop
+          properties: {}
+          type: DropDown
+        layout_properties: {grid_position: 'QQXJXD,LHFLCC'}
+        name: flow_panel_13
+        properties: {align: center}
+        type: FlowPanel
       - components:
         - components:
           - components:
