@@ -6,7 +6,7 @@ components_by_slot:
         - components:
           - layout_properties: {width: 45}
             name: liga_image_copy
-            properties: {height: '45', source: '', visible: true}
+            properties: {height: '45', source: '', visible: false}
             type: Image
           - event_bindings: {}
             layout_properties: {}
@@ -30,7 +30,7 @@ components_by_slot:
           type: FlowPanel
         - layout_properties: {width: 45}
           name: liga_image
-          properties: {height: '45', source: '', visible: true}
+          properties: {height: '45', source: '', visible: false}
           type: Image
         layout_properties: {grid_position: 'RFCGDJ,QULDBO'}
         name: flow_panel_3
