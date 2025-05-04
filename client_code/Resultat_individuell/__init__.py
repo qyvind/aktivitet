@@ -18,10 +18,15 @@ class Resultat_individuell(Resultat_individuellTemplate):
     liste = Utils.hent_poengsummer_uten_null()
     self.resultat_repeat_panel.items = liste
     
+    
     team_resultater = Utils.hent_team_poengsummer()
     self.team_resultat_repeating_panel.items = team_resultater
     self.tabs_1.active_background = "#2196F344"
-  
+
+    framo_liste = anvil.server.call('hent_poengsum_per_selskap')
+    self.framo_repeating_panel.items = framo_liste
+
+    
 
 
 
@@ -33,7 +38,12 @@ class Resultat_individuell(Resultat_individuellTemplate):
     if tab_title == "Individuell":
       self.individuell_card.visible = True 
       self.team_card.visible=False 
+      self.framo_card.visible = False
     elif tab_title == "Team":
-
       self.team_card.visible=True       
       self.individuell_card.visible = False 
+      self.framo_card.visible = False
+    elif tab_title == "Framo-selskap":
+      self.team_card.visible=False       
+      self.individuell_card.visible = False 
+      self.framo_card.visible = True
