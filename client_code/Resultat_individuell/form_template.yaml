@@ -4,12 +4,13 @@ components_by_slot:
     layout_properties: {}
     name: tabs_1
     properties:
+      active_background: '#dbe4e6'
       active_tab_index: 0
       tab_titles: [Individuell, Team, Framo-selskap]
     type: form:dep_f5o4wvd4wmhr6n:Tabs
   - layout_properties: {}
     name: divider_1
-    properties: {}
+    properties: {color: '#dbe4e6', type: inset, visible: false}
     type: form:dep_91t3sowbnwbk:_Components.Divider
   - components:
     - components:
