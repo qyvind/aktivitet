@@ -380,7 +380,7 @@ scheduled_tasks:
   time_spec:
     at: {minute: 30}
     every: hour
-    n: 8
+    n: 5
 secrets:
   openai_key:
     type: secret

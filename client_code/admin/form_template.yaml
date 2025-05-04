@@ -95,11 +95,6 @@ components_by_slot:
           name: button_8
           properties: {role: tonal-button, text: Full natt-recalc}
           type: Button
-        - event_bindings: {click: sjekk_badges_click}
-          layout_properties: {}
-          name: sjekk_badges
-          properties: {align: center, role: tonal-button, text: Recalc badges}
-          type: Button
         - event_bindings: {click: liga_opprykk_click}
           layout_properties: {}
           name: liga_opprykk
