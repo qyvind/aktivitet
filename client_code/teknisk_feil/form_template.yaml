@@ -1,0 +1,11 @@
+components:
+- layout_properties: {grid_position: 'WLYCQA,LBBXTT'}
+  name: image_1
+  properties: {height: 439.79998779296875, source: _/theme/teknisk-feil-nrk-retro-logo-png_seeklogo-237277.png}
+  type: Image
+- layout_properties: {grid_position: 'BKBXKU,GLAESD'}
+  name: text_1
+  properties: {align: center, style: body, text: Vi må ta en liten pause i testingen. Dere får en mail når vi er i gang igjen. Men ikke ta pause i treningen likevel.}
+  type: form:dep_91t3sowbnwbk:_Components.Text
+container: {type: ColumnPanel}
+is_package: true
