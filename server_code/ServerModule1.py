@@ -1591,64 +1591,7 @@ def fordel_liga():
 
     print("Liga-fordeling fullført.")
 
-@anvil.server.callable
-def beregn_opprykk_og_nedrykk():
-    # Tøm tidligere rader
-    for rad in app_tables.liga_opprykk.search():
-        rad.delete()
 
-    # Hent ligaer sortert fra dårligst til best
-    ligaer = sorted(app_tables.ligaer.search(), key=lambda l: l['level'])
-
-    max_level = max(l['level'] for l in ligaer)
-    min_level = min(l['level'] for l in ligaer)
-
-    for liga in ligaer:
-        brukere_i_liga = [u for u in app_tables.userinfo.search() if u['liga'] == liga]
-        antall = len(brukere_i_liga)
-        if antall < 2:
-            continue
-
-        brukere_i_liga.sort(key=lambda u: u['plassering'])
-
-        antall_opprykk = max(1, round(antall * 0.2))
-        antall_nedrykk = max(1, round(antall * 0.2))
-
-        if liga['level'] == max_level:
-            antall_opprykk = 0
-        if liga['level'] == min_level:
-            antall_nedrykk = 0
-
-      
-        # Emoji-mapping
-        symboler = {'up': '⬆️', 'same': '➡️', 'down': '⬇️'}
-        for bruker in brukere_i_liga[:antall_opprykk]:
-            users_record = bruker['user']
-            #print('navn ',brukere_i_liga['navn'])
-            #print('email ',users_record['email'])
-            #bruker_user = bruker['user']
-            bruker_user = users_record
-            if not bruker_user:
-                continue
-            app_tables.liga_opprykk.add_row(
-                user=bruker_user, liga=liga, status='up', opprykk=symboler['up'], notified=False
-            )
-        
-        for bruker in brukere_i_liga[-antall_nedrykk:]:
-            bruker_user = bruker['user']
-            if not bruker_user:
-                continue
-            app_tables.liga_opprykk.add_row(
-                user=bruker_user, liga=liga, status='down', opprykk=symboler['down'], notified=False
-            )
-        
-        for bruker in brukere_i_liga[antall_opprykk:-antall_nedrykk]:
-            bruker_user = bruker['user']
-            if not bruker_user:
-                continue
-            app_tables.liga_opprykk.add_row(
-                user=bruker_user, liga=liga, status='same', opprykk=symboler['same'], notified=False
-            )
 
       
 # Optimalisert nightly_streak_recalc med cache og logging
