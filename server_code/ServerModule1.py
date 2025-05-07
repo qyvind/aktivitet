@@ -1910,3 +1910,74 @@ def hent_poengsum_per_selskap():
   resultat_liste.sort(key=lambda x: x['snittscore'], reverse=True)
 
   return resultat_liste
+
+@anvil.server.callable
+def beregn_opprykk_og_nedrykk():
+  print("🔄 Starter beregning av opprykk og nedrykk...")
+
+  # 1. Tøm gamle opprykk-rader
+  for rad in app_tables.liga_opprykk.search():
+    try:
+      rad.delete()
+    except Exception as e:
+      print(f"⚠️ Klarte ikke slette rad: {e}")
+
+  # 2. Hent ligaer
+  ligaer = list(app_tables.ligaer.search())
+  if not ligaer:
+    print("❌ Ingen ligaer funnet.")
+    return
+
+  ligaer = sorted(ligaer, key=lambda l: l['level'])
+  max_level = max(l['level'] for l in ligaer)
+  min_level = min(l['level'] for l in ligaer)
+
+  # 3. Sett opp emoji-symboler
+  symboler = {'up': '⬆️', 'same': '➡️', 'down': '⬇️'}
+
+  # 4. Gå gjennom hver liga
+  for liga in ligaer:
+    # Hent userinfo med denne ligaen, og bygg en map med én rad per bruker
+    userinfo_rader = [u for u in app_tables.userinfo.search() if u['liga'] == liga and u['user']]
+    user_map = {}
+    for row in userinfo_rader:
+      user_map[row['user']] = row  # overskriver duplikater
+
+    brukere_i_liga = list(user_map.values())
+    antall = len(brukere_i_liga)
+
+    if antall < 2:
+      print(f"⏭️ Hopper over liga '{liga['liga']}' – kun {antall} bruker(e).")
+      continue
+
+    # Sorter etter plassering
+    brukere_i_liga.sort(key=lambda u: u['plassering'])
+
+    # Beregn opprykk/nedrykk
+    antall_opprykk = 0 if liga['level'] == max_level else max(1, round(antall * 0.2))
+    antall_nedrykk = 0 if liga['level'] == min_level else max(1, round(antall * 0.2))
+
+    # Del inn i grupper
+    opp = brukere_i_liga[:antall_opprykk]
+    ned = brukere_i_liga[-antall_nedrykk:] if antall_nedrykk > 0 else []
+    same = brukere_i_liga[antall_opprykk:-antall_nedrykk] if antall_opprykk + antall_nedrykk < antall else []
+
+    # Legg til opprykk-rader
+    def legg_til(gruppe, status):
+      for rad in gruppe:
+        user = rad['user']
+        app_tables.liga_opprykk.add_row(
+          user=user,
+          liga=liga,
+          status=status,
+          opprykk=symboler[status],
+          notified=False
+        )
+
+    legg_til(opp, 'up')
+    legg_til(ned, 'down')
+    legg_til(same, 'same')
+
+    print(f"✅ Liga '{liga['liga']}' – opp:{len(opp)}, ned:{len(ned)}, same:{len(same)}")
+
+  print("🏁 Beregning fullført.")
