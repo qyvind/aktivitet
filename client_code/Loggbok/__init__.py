@@ -591,6 +591,7 @@ class Loggbok(LoggbokTemplate):
 
         # Knappen skal være aktivert hvis det IKKE er fremtid OG uken er redigerbar
         knapp.enabled = (not er_fremtid) and er_redigerbar_uke
+        column_panel.enabled = (not er_fremtid) and er_redigerbar_uke
         # --- SLUTT: Logikk for å bestemme om dagen er redigerbar ---
 
 
